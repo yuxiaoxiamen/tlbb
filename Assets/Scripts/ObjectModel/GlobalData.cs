@@ -5,14 +5,13 @@ using UnityEngine;
 
 public class GlobalData
 {
-    public static Person Player { get; set; }
     public static List<Person> Persons { get; set; } //所有人物实例
     private static List<AttackStyleFixData> StyleFixDatas { get; set; } //招式的固定数据
     private static List<AttackStyleEffect> StyleEffects { get; set; } //所有招式的效果数据
     public static List<InnerGong> InnerGongs { get; set; } //所有内功数据
     public static List<Good> Items { get; set; } //所有物品数据
     public static List<FirstPlace> FirstPlaces { get; set; } //所有一级地图中地点数据
-    private static List<SecondPlace> SecondPlaces { get; set; } //所有场所的数据
+    public static List<SecondPlace> SecondPlaces { get; set; } //所有场所的数据
     public static Dictionary<string, List<Conversation>> MainConversations { get; set; } //主线剧情对话
 
     static GlobalData()
@@ -26,10 +25,6 @@ public class GlobalData
         ReadStyleData();
         ReadPersonData();
         ReadMainDialogueData();
-
-
-        GameRunningData.GetRunningData().date = new GameDate(1, 1, 1, 0);
-        Player = Persons[0];
     }
 
     public static void Init()
@@ -67,14 +62,11 @@ public class GlobalData
         foreach(var conversation in conversations)
         {
             var key = conversation.PlaceString + "/" + conversation.DateString;
-            if (MainConversations.ContainsKey(key))
-            {
-                MainConversations[key].Add(conversation);
-            }
-            else
+            if (!MainConversations.ContainsKey(key))
             {
                 MainConversations.Add(key, new List<Conversation>());
             }
+            MainConversations[key].Add(conversation);
         }
     }
 

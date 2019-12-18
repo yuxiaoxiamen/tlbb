@@ -40,8 +40,7 @@ public class FirstMapMain : MonoBehaviour
             }
         }
 
-        player = GlobalData.Persons[0];
-        player.RowCol = new Vector2Int(30, 39);
+        player = GameRunningData.GetRunningData().player;
         player.PersonObject = Instantiate(personPrefab);
         player.PersonObject.transform.position = gridDataToObject[player.RowCol].transform.position;
     }
@@ -95,7 +94,13 @@ public class FirstMapMain : MonoBehaviour
             {
                 DOTween.Clear(true);
                 GameRunningData.GetRunningData().currentPlace = place;
-                SceneManager.LoadScene("SecondMap");
+                if(place.Sites == null)
+                {
+                    SceneManager.LoadScene("ThridMap");
+                }
+                else{
+                    SceneManager.LoadScene("SecondMap");
+                }
             }
         }
     }

@@ -45,7 +45,7 @@ public class FightMain : MonoBehaviour
         RotateEnemys();
         FightGUI.SetBattleControlPanel();
         FightGridClick.SetColor();
-        FightPersonClick.SelectAPerson(GlobalData.Player);
+        FightPersonClick.SelectAPerson(GameRunningData.GetRunningData().player);
     }
 
     void RotateEnemys()

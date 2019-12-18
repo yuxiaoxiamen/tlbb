@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +11,10 @@ public class ControlDialogue : MonoBehaviour
     private Text rightName;
     private Text leftName;
     private Text content;
+    private int conversationIndex = 0;
+    private bool isClickToDisplayText = false;
+    private bool isConversationOver = false;
+    public List<Conversation> Conversations { get; set; }
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +39,7 @@ public class ControlDialogue : MonoBehaviour
             rightHead.sprite = Resources.Load<Sprite>("head/"+conversation.People.BaseData.HeadPortrait);
             rightName.text = conversation.People.BaseData.Name;
         }
-        content.text = conversation.Content;
+        StartCoroutine(SetContentText(conversation.Content));
     }
 
     void ShowOneSide(bool conversationIsLeft)
@@ -65,9 +70,54 @@ public class ControlDialogue : MonoBehaviour
         }
     }
 
+    IEnumerator SetContentText(string text)
+    {
+        isConversationOver = false;
+        for (int i = 1; i < text.Length + 1; ++i)
+        {
+            if (isClickToDisplayText)
+            {
+                content.text = text;
+                isClickToDisplayText = false;
+                break;
+            }
+           content.text = text.Substring(0, i);
+           yield return new WaitForSeconds(0.1f);
+        }
+        isConversationOver = true;
+    }
+
+    public void HideDialogue()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void ShowDialogue()
+    {
+        gameObject.SetActive(true);
+    }
+
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (!isConversationOver)
+            {
+                isClickToDisplayText = true;
+            }
+            else
+            {
+                ++conversationIndex;
+                if (conversationIndex < Conversations.Count)
+                {
+                    SetConversation(Conversations[conversationIndex]);
+                }
+                else
+                {
+                    HideDialogue();
+                }
+            }
+        }
     }
 }

@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Fight.unity
     guid: b43c7efe4a3e65b46b68a314e1d6cdb2
+  - enabled: 1
+    path: Assets/Scenes/ThridMap.unity
+    guid: ff5f5d27e0075e847833a05d78e08cc3
   m_configObjects: {}

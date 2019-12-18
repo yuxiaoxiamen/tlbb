@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ControlInfoPanel : MonoBehaviour
+public class ControlBottomPanel : MonoBehaviour
 {
     public RectTransform showPosition;
     public RectTransform hidePosition;

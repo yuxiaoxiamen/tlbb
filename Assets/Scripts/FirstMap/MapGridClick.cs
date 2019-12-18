@@ -14,7 +14,7 @@ public class MapGridClick : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (!ControlInfoPanel.isMouseInPane)
+        if (!ControlBottomPanel.isMouseInPane)
         {
             FirstPlace firstPlace = GridInPlace(FirstMapMain.gridObjectToData[gameObject]);
             var endRc = FirstMapMain.gridObjectToData[gameObject];
@@ -31,17 +31,17 @@ public class MapGridClick : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        if (!ControlInfoPanel.isMouseInPane)
+        if (!ControlBottomPanel.isMouseInPane)
         {
-FirstPlace place = GridInPlace(FirstMapMain.gridObjectToData[gameObject]);
-        if(place != null)
-        {
-            textObject = Instantiate(textPrefab);
-            textObject.transform.position = FirstMapMain.gridDataToObject[place.Entry].transform.position + new Vector3(0, -0.2f, 0);
-            textObject.transform.Find("text").GetComponent<TextMesh>().text = place.Name;
+            FirstPlace place = GridInPlace(FirstMapMain.gridObjectToData[gameObject]);
+            if (place != null)
+            {
+                textObject = Instantiate(textPrefab);
+                textObject.transform.position = FirstMapMain.gridDataToObject[place.Entry].transform.position + new Vector3(0, -0.2f, 0);
+                textObject.transform.Find("text").GetComponent<TextMesh>().text = place.Name;
+            }
         }
-        }
-            
+
     }
 
     private void OnMouseExit()
