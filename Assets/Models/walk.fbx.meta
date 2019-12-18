@@ -1,0 +1,466 @@
+fileFormatVersion: 2
+guid: ea0bc6f268e0f584ea7afdc865df7d0b
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: eyeDig26:pSphere1
+    100002: group
+    100004: group1
+    100006: group2
+    100008: group3
+    100010: group4
+    100012: Head
+    100014: Hips
+    100016: LeftArm
+    100018: LeftFoot
+    100020: LeftForeArm
+    100022: LeftHand
+    100024: LeftLeg
+    100026: LeftShoulder
+    100028: LeftToeBase
+    100030: LeftUpLeg
+    100032: Neck
+    100034: pasted__group
+    100036: pasted__group1
+    100038: pasted__group2
+    100040: pasted__group3
+    100042: pasted__group4
+    100044: pasted__group5
+    100046: pasted__group6
+    100048: pasted__pasted__body_Grp
+    100050: pasted__pasted__body_Grp 1
+    100052: pasted__pasted__body_Grp 2
+    100054: pasted__pasted__body_Grp 3
+    100056: pasted__pasted__body_Grp 4
+    100058: pasted__pasted__Ebrow
+    100060: pasted__pasted__Elash
+    100062: pasted__pasted__EyeGrp_L
+    100064: pasted__pasted__EyeGrp_R
+    100066: pasted__pasted__Face
+    100068: pasted__pasted__Face 1
+    100070: pasted__pasted__ffd19Base
+    100072: pasted__pasted__ffd19Lattice
+    100074: pasted__pasted__ffd1Base
+    100076: pasted__pasted__ffd1Lattice
+    100078: pasted__pasted__Gum_D
+    100080: pasted__pasted__head_Grp1
+    100082: pasted__pasted__pSphere1
+    100084: pasted__pasted__shoe_Grp
+    100086: pasted__pasted__Son50_Belt_01_OBJ
+    100088: pasted__pasted__Son50_L_arm_OBJ
+    100090: pasted__pasted__Son50_pant_OBJ
+    100092: pasted__pasted__Son50_R_arm_OBJ
+    100094: pasted__pasted__Son50_shoe_L_OBJ
+    100096: pasted__pasted__Son50_shoe_R_OBJ
+    100098: pasted__pasted__Son50_upper_OBJ
+    100100: pasted__pasted__Son_All_Grp
+    100102: pasted__pasted__Son_All_Grp 1
+    100104: pasted__pasted__Son_All_Grp 2
+    100106: pasted__pasted__Son_All_Grp 3
+    100108: pasted__pasted__Son_All_Grp 4
+    100110: pasted__pasted__Son_All_Grp 5
+    100112: pasted__pasted__Son_OBJ
+    100114: pasted__pasted__Son_OBJ 1
+    100116: pasted__pasted__Son_OBJ 2
+    100118: pasted__pasted__Son_OBJ 3
+    100120: pasted__pasted__Son_OBJ 4
+    100122: pasted__pasted__Son_OBJ 5
+    100124: pasted__pasted__Tth_D
+    100126: pasted__pasted__Tth_D 1
+    100128: pasted__pasted__Tth_U
+    100130: pasted__pasted__Up_shirt
+    100132: pasted__pit
+    100134: pasted__pit 1
+    100136: pasted__pit01
+    100138: pasted__pit01 1
+    100140: pasted__pit13
+    100142: QuickRigCharacter_Ctrl_ChestEndEffector
+    100144: QuickRigCharacter_Ctrl_ChestOriginEffector
+    100146: QuickRigCharacter_Ctrl_Head
+    100148: QuickRigCharacter_Ctrl_HeadEffector
+    100150: QuickRigCharacter_Ctrl_Hips
+    100152: QuickRigCharacter_Ctrl_HipsEffector
+    100154: QuickRigCharacter_Ctrl_LeftAnkleEffector
+    100156: QuickRigCharacter_Ctrl_LeftArm
+    100158: QuickRigCharacter_Ctrl_LeftElbowEffector
+    100160: QuickRigCharacter_Ctrl_LeftFoot
+    100162: QuickRigCharacter_Ctrl_LeftFootEffector
+    100164: QuickRigCharacter_Ctrl_LeftForeArm
+    100166: QuickRigCharacter_Ctrl_LeftHand
+    100168: QuickRigCharacter_Ctrl_LeftHipEffector
+    100170: QuickRigCharacter_Ctrl_LeftKneeEffector
+    100172: QuickRigCharacter_Ctrl_LeftLeg
+    100174: QuickRigCharacter_Ctrl_LeftShoulder
+    100176: QuickRigCharacter_Ctrl_LeftShoulderEffector
+    100178: QuickRigCharacter_Ctrl_LeftToeBase
+    100180: QuickRigCharacter_Ctrl_LeftUpLeg
+    100182: QuickRigCharacter_Ctrl_LeftWristEffector
+    100184: QuickRigCharacter_Ctrl_Neck
+    100186: QuickRigCharacter_Ctrl_Reference
+    100188: QuickRigCharacter_Ctrl_RightAnkleEffector
+    100190: QuickRigCharacter_Ctrl_RightArm
+    100192: QuickRigCharacter_Ctrl_RightElbowEffector
+    100194: QuickRigCharacter_Ctrl_RightFoot
+    100196: QuickRigCharacter_Ctrl_RightFootEffector
+    100198: QuickRigCharacter_Ctrl_RightForeArm
+    100200: QuickRigCharacter_Ctrl_RightHand
+    100202: QuickRigCharacter_Ctrl_RightHipEffector
+    100204: QuickRigCharacter_Ctrl_RightKneeEffector
+    100206: QuickRigCharacter_Ctrl_RightLeg
+    100208: QuickRigCharacter_Ctrl_RightShoulder
+    100210: QuickRigCharacter_Ctrl_RightShoulderEffector
+    100212: QuickRigCharacter_Ctrl_RightToeBase
+    100214: QuickRigCharacter_Ctrl_RightUpLeg
+    100216: QuickRigCharacter_Ctrl_RightWristEffector
+    100218: QuickRigCharacter_Ctrl_Spine
+    100220: QuickRigCharacter_Ctrl_Spine1
+    100222: QuickRigCharacter_Ctrl_Spine2
+    100224: QuickRigCharacter_Guides
+    100226: QuickRigCharacter_Head
+    100228: QuickRigCharacter_Hips
+    100230: QuickRigCharacter_LeftArm
+    100232: QuickRigCharacter_LeftFoot
+    100234: QuickRigCharacter_LeftForeArm
+    100236: QuickRigCharacter_LeftHand
+    100238: QuickRigCharacter_LeftLeg
+    100240: QuickRigCharacter_LeftShoulder
+    100242: QuickRigCharacter_LeftToeBase
+    100244: QuickRigCharacter_LeftUpLeg
+    100246: QuickRigCharacter_Neck
+    100248: QuickRigCharacter_Reference
+    100250: QuickRigCharacter_RightArm
+    100252: QuickRigCharacter_RightFoot
+    100254: QuickRigCharacter_RightForeArm
+    100256: QuickRigCharacter_RightHand
+    100258: QuickRigCharacter_RightLeg
+    100260: QuickRigCharacter_RightShoulder
+    100262: QuickRigCharacter_RightToeBase
+    100264: QuickRigCharacter_RightUpLeg
+    100266: QuickRigCharacter_Spine
+    100268: QuickRigCharacter_Spine1
+    100270: QuickRigCharacter_Spine2
+    100272: Reference
+    100274: RightArm
+    100276: RightFoot
+    100278: RightForeArm
+    100280: RightHand
+    100282: RightLeg
+    100284: RightShoulder
+    100286: RightToeBase
+    100288: RightUpLeg
+    100290: Spine
+    100292: Spine1
+    100294: Spine2
+    100296: //RootNode
+    400000: eyeDig26:pSphere1
+    400002: group
+    400004: group1
+    400006: group2
+    400008: group3
+    400010: group4
+    400012: Head
+    400014: Hips
+    400016: LeftArm
+    400018: LeftFoot
+    400020: LeftForeArm
+    400022: LeftHand
+    400024: LeftLeg
+    400026: LeftShoulder
+    400028: LeftToeBase
+    400030: LeftUpLeg
+    400032: Neck
+    400034: pasted__group
+    400036: pasted__group1
+    400038: pasted__group2
+    400040: pasted__group3
+    400042: pasted__group4
+    400044: pasted__group5
+    400046: pasted__group6
+    400048: pasted__pasted__body_Grp
+    400050: pasted__pasted__body_Grp 1
+    400052: pasted__pasted__body_Grp 2
+    400054: pasted__pasted__body_Grp 3
+    400056: pasted__pasted__body_Grp 4
+    400058: pasted__pasted__Ebrow
+    400060: pasted__pasted__Elash
+    400062: pasted__pasted__EyeGrp_L
+    400064: pasted__pasted__EyeGrp_R
+    400066: pasted__pasted__Face
+    400068: pasted__pasted__Face 1
+    400070: pasted__pasted__ffd19Base
+    400072: pasted__pasted__ffd19Lattice
+    400074: pasted__pasted__ffd1Base
+    400076: pasted__pasted__ffd1Lattice
+    400078: pasted__pasted__Gum_D
+    400080: pasted__pasted__head_Grp1
+    400082: pasted__pasted__pSphere1
+    400084: pasted__pasted__shoe_Grp
+    400086: pasted__pasted__Son50_Belt_01_OBJ
+    400088: pasted__pasted__Son50_L_arm_OBJ
+    400090: pasted__pasted__Son50_pant_OBJ
+    400092: pasted__pasted__Son50_R_arm_OBJ
+    400094: pasted__pasted__Son50_shoe_L_OBJ
+    400096: pasted__pasted__Son50_shoe_R_OBJ
+    400098: pasted__pasted__Son50_upper_OBJ
+    400100: pasted__pasted__Son_All_Grp
+    400102: pasted__pasted__Son_All_Grp 1
+    400104: pasted__pasted__Son_All_Grp 2
+    400106: pasted__pasted__Son_All_Grp 3
+    400108: pasted__pasted__Son_All_Grp 4
+    400110: pasted__pasted__Son_All_Grp 5
+    400112: pasted__pasted__Son_OBJ
+    400114: pasted__pasted__Son_OBJ 1
+    400116: pasted__pasted__Son_OBJ 2
+    400118: pasted__pasted__Son_OBJ 3
+    400120: pasted__pasted__Son_OBJ 4
+    400122: pasted__pasted__Son_OBJ 5
+    400124: pasted__pasted__Tth_D
+    400126: pasted__pasted__Tth_D 1
+    400128: pasted__pasted__Tth_U
+    400130: pasted__pasted__Up_shirt
+    400132: pasted__pit
+    400134: pasted__pit 1
+    400136: pasted__pit01
+    400138: pasted__pit01 1
+    400140: pasted__pit13
+    400142: QuickRigCharacter_Ctrl_ChestEndEffector
+    400144: QuickRigCharacter_Ctrl_ChestOriginEffector
+    400146: QuickRigCharacter_Ctrl_Head
+    400148: QuickRigCharacter_Ctrl_HeadEffector
+    400150: QuickRigCharacter_Ctrl_Hips
+    400152: QuickRigCharacter_Ctrl_HipsEffector
+    400154: QuickRigCharacter_Ctrl_LeftAnkleEffector
+    400156: QuickRigCharacter_Ctrl_LeftArm
+    400158: QuickRigCharacter_Ctrl_LeftElbowEffector
+    400160: QuickRigCharacter_Ctrl_LeftFoot
+    400162: QuickRigCharacter_Ctrl_LeftFootEffector
+    400164: QuickRigCharacter_Ctrl_LeftForeArm
+    400166: QuickRigCharacter_Ctrl_LeftHand
+    400168: QuickRigCharacter_Ctrl_LeftHipEffector
+    400170: QuickRigCharacter_Ctrl_LeftKneeEffector
+    400172: QuickRigCharacter_Ctrl_LeftLeg
+    400174: QuickRigCharacter_Ctrl_LeftShoulder
+    400176: QuickRigCharacter_Ctrl_LeftShoulderEffector
+    400178: QuickRigCharacter_Ctrl_LeftToeBase
+    400180: QuickRigCharacter_Ctrl_LeftUpLeg
+    400182: QuickRigCharacter_Ctrl_LeftWristEffector
+    400184: QuickRigCharacter_Ctrl_Neck
+    400186: QuickRigCharacter_Ctrl_Reference
+    400188: QuickRigCharacter_Ctrl_RightAnkleEffector
+    400190: QuickRigCharacter_Ctrl_RightArm
+    400192: QuickRigCharacter_Ctrl_RightElbowEffector
+    400194: QuickRigCharacter_Ctrl_RightFoot
+    400196: QuickRigCharacter_Ctrl_RightFootEffector
+    400198: QuickRigCharacter_Ctrl_RightForeArm
+    400200: QuickRigCharacter_Ctrl_RightHand
+    400202: QuickRigCharacter_Ctrl_RightHipEffector
+    400204: QuickRigCharacter_Ctrl_RightKneeEffector
+    400206: QuickRigCharacter_Ctrl_RightLeg
+    400208: QuickRigCharacter_Ctrl_RightShoulder
+    400210: QuickRigCharacter_Ctrl_RightShoulderEffector
+    400212: QuickRigCharacter_Ctrl_RightToeBase
+    400214: QuickRigCharacter_Ctrl_RightUpLeg
+    400216: QuickRigCharacter_Ctrl_RightWristEffector
+    400218: QuickRigCharacter_Ctrl_Spine
+    400220: QuickRigCharacter_Ctrl_Spine1
+    400222: QuickRigCharacter_Ctrl_Spine2
+    400224: QuickRigCharacter_Guides
+    400226: QuickRigCharacter_Head
+    400228: QuickRigCharacter_Hips
+    400230: QuickRigCharacter_LeftArm
+    400232: QuickRigCharacter_LeftFoot
+    400234: QuickRigCharacter_LeftForeArm
+    400236: QuickRigCharacter_LeftHand
+    400238: QuickRigCharacter_LeftLeg
+    400240: QuickRigCharacter_LeftShoulder
+    400242: QuickRigCharacter_LeftToeBase
+    400244: QuickRigCharacter_LeftUpLeg
+    400246: QuickRigCharacter_Neck
+    400248: QuickRigCharacter_Reference
+    400250: QuickRigCharacter_RightArm
+    400252: QuickRigCharacter_RightFoot
+    400254: QuickRigCharacter_RightForeArm
+    400256: QuickRigCharacter_RightHand
+    400258: QuickRigCharacter_RightLeg
+    400260: QuickRigCharacter_RightShoulder
+    400262: QuickRigCharacter_RightToeBase
+    400264: QuickRigCharacter_RightUpLeg
+    400266: QuickRigCharacter_Spine
+    400268: QuickRigCharacter_Spine1
+    400270: QuickRigCharacter_Spine2
+    400272: Reference
+    400274: RightArm
+    400276: RightFoot
+    400278: RightForeArm
+    400280: RightHand
+    400282: RightLeg
+    400284: RightShoulder
+    400286: RightToeBase
+    400288: RightUpLeg
+    400290: Spine
+    400292: Spine1
+    400294: Spine2
+    400296: //RootNode
+    2100000: lambert6
+    2100002: Teeth0625a15_Teeth1_chen_tooth
+    2100004: Teeth0625a15_Teeth1_chen_blinn8
+    2100006: lambert11
+    2100008: lambert5
+    2100010: lambert7
+    2100012: lambert9
+    2100014: lambert8
+    2100016: lambert10
+    2100018: lambert12
+    2300000: eyeDig26:pSphere1
+    2300002: pasted__pasted__Ebrow
+    2300004: pasted__pasted__Elash
+    2300006: pasted__pasted__Gum_D
+    2300008: pasted__pasted__pSphere1
+    2300010: pasted__pasted__Tth_D 1
+    2300012: pasted__pit13
+    3300000: eyeDig26:pSphere1
+    3300002: pasted__pasted__Ebrow
+    3300004: pasted__pasted__Elash
+    3300006: pasted__pasted__Gum_D
+    3300008: pasted__pasted__pSphere1
+    3300010: pasted__pasted__Tth_D 1
+    3300012: pasted__pit13
+    4300000: pasted__pasted__Ebrow
+    4300002: pasted__pasted__Elash
+    4300004: pasted__pasted__Tth_D
+    4300006: pasted__pasted__Gum_D
+    4300008: pasted__pasted__pSphere1
+    4300010: eyeDig26:pSphere1
+    4300012: pasted__pasted__Face
+    4300014: pasted__pasted__Son50_R_arm_OBJ
+    4300016: pasted__pasted__Son50_L_arm_OBJ
+    4300018: pasted__pasted__Son50_upper_OBJ
+    4300020: pasted__pasted__Son50_Belt_01_OBJ
+    4300022: pasted__pasted__Son50_pant_OBJ
+    4300024: pasted__pasted__Son50_shoe_R_OBJ
+    4300026: pasted__pasted__Son50_shoe_L_OBJ
+    4300028: pasted__pit13
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: pasted__pasted__Face
+    13700002: pasted__pasted__Son50_Belt_01_OBJ
+    13700004: pasted__pasted__Son50_L_arm_OBJ
+    13700006: pasted__pasted__Son50_pant_OBJ
+    13700008: pasted__pasted__Son50_R_arm_OBJ
+    13700010: pasted__pasted__Son50_shoe_L_OBJ
+    13700012: pasted__pasted__Son50_shoe_R_OBJ
+    13700014: pasted__pasted__Son50_upper_OBJ
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 38
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
