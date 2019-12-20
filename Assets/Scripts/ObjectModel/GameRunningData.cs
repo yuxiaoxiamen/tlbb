@@ -11,10 +11,10 @@ public class GameRunningData
 
     private GameRunningData()
     {
-        date = new GameDate(1, 1, 1, 0);
+        date = new GameDate(1, 1, 1, 1);
         player = GlobalData.Persons[0];
         player.RowCol = new Vector2Int(30, 39);
-        currentPlace = null;
+        currentPlace = GlobalData.FirstPlaces[3];
     }
 
     public static GameRunningData GetRunningData()

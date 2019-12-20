@@ -38,15 +38,15 @@ public class ControlTopPanel : MonoBehaviour
         });
     }
 
-    string GetSoltString(TimeSlot solt)
+    string GetSoltString(int solt)
     {
         switch (solt)
         {
-            case TimeSlot.Morning:
+            case 1:
                 return "早晨";
-            case TimeSlot.Noon:
+            case 2:
                 return "中午";
-            case TimeSlot.Night:
+            case 3:
                 return "晚上";
         }
         return "";
