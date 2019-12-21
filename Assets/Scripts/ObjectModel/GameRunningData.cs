@@ -13,7 +13,6 @@ public class GameRunningData
     {
         date = new GameDate(1, 1, 1, 1);
         player = GlobalData.Persons[0];
-        player.RowCol = new Vector2Int(30, 39);
         currentPlace = GlobalData.FirstPlaces[3];
     }
 

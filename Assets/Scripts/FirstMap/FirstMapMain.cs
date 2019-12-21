@@ -41,6 +41,7 @@ public class FirstMapMain : MonoBehaviour
         }
 
         player = GameRunningData.GetRunningData().player;
+        player.RowCol = new Vector2Int(30, 39);
         player.PersonObject = Instantiate(personPrefab);
         player.PersonObject.transform.position = gridDataToObject[player.RowCol].transform.position;
     }
