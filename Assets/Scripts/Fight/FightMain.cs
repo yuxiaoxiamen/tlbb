@@ -43,8 +43,6 @@ public class FightMain : MonoBehaviour
         SetFightPerson(friendQueue);
         SetFightPerson(enemyQueue);
         RotateEnemys();
-        FightGUI.SetBattleControlPanel();
-        FightGridClick.SetColor();
         FightPersonClick.SelectAPerson(GameRunningData.GetRunningData().player);
     }
 
@@ -115,6 +113,7 @@ public class FightMain : MonoBehaviour
             person.PersonObject = personObject;
             positionToPerson.Add(person.RowCol, person);
             SetPersonHPSplider(person);
+            person.InitAttribute();
         }
         
     }
@@ -163,6 +162,7 @@ public class FightMain : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
         ResumePersonState();
+        DOTween.Clear();
         SelectNextPerson();
     }
 

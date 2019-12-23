@@ -245,6 +245,7 @@ public class GlobalData
             {
                 BaseData = p,
                 SelectedAttackStyle = attackStyleDatas[0],
+                SelectedInnerGong = InnerGongs[0],
                 CurrentHP = p.HP,
                 CurrentMP = p.MP,
                 CurrentEnergy = p.Energy,

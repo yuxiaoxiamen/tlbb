@@ -69,7 +69,7 @@ public class FightAI
         {
             AttackTool.CountAttackRange(list[0].Key, person, FightMain.enemyQueue);
             AttackTool.ShowAttackRange();
-            AttackTool.AttackEnemys(Enemys);
+            AttackTool.AttackEnemys(person, Enemys);
             foreach (var gridObject in AttackTool.attackRange)
             {
                 gridObject.GetComponent<Renderer>().material.DOColor(FightGridClick.defaultColor, 1f);

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using DG.Tweening;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class FightGridClick : MonoBehaviour
@@ -16,12 +17,13 @@ public class FightGridClick : MonoBehaviour
     public static Quaternion movePreQuaternion;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         defaultColor = gameObject.GetComponent<Renderer>().material.color;
+        SetColor();
     }
 
-    public static void SetColor()
+    private void SetColor()
     {
         selectColor = new Color(0, 1, 0, defaultA);
         pathColor = new Color(1, 0, 1, defaultA);
@@ -35,8 +37,11 @@ public class FightGridClick : MonoBehaviour
         if (FightPersonClick.currentPerson != null && FightPersonClick.currentPerson.ControlState == BattleControlState.Attacking 
             && AttackTool.attackRange.Count > 0)
         {
-            if (AttackTool.AttackEnemys(FightMain.enemyQueue))
+            if (AttackTool.AttackEnemys(FightPersonClick.currentPerson, FightMain.enemyQueue))
             {
+                FightMain.RotatePerson(FightPersonClick.currentPerson, 
+                    PersonMoveTool.GetAngle(
+                        FightPersonClick.currentPerson.PersonObject.transform.position, transform.position));
                 FightMain.PlayerFinished();
             }
         }

@@ -118,7 +118,7 @@ public class PersonMoveTool
         }
     }
 
-    static float GetAngle(Vector3 current, Vector3 next)
+    public static float GetAngle(Vector3 current, Vector3 next)
     {
         if(current.z == next.z)
         {

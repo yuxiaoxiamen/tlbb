@@ -6,6 +6,7 @@ public class FightPersonClick : MonoBehaviour
 {
     public static Person prePerson;
     public static Person currentPerson;
+    private bool isMouseInPerson;
 
     // Start is called before the first frame update
     void Start()
@@ -13,10 +14,61 @@ public class FightPersonClick : MonoBehaviour
         
     }
 
+    private void Update()
+    {
+        if (isMouseInPerson &&Input.GetMouseButtonDown(1))
+        {
+            Person p = GlobalData.Persons[int.Parse(gameObject.name)];
+            FightGUI.SetInfoPanel(p);
+        }
+
+        if(FightGUI.isLookingInfo && Input.GetMouseButtonDown(0))
+        {
+            FightGUI.HideInfoPanel();
+        }
+    }
+
     private void OnMouseDown()
     {
         Person p = GlobalData.Persons[int.Parse(gameObject.name)];
-        SelectAPerson(p);
+        if (currentPerson != null && currentPerson.ControlState == BattleControlState.Attacking
+            && AttackTool.attackRange.Count > 0)
+        {
+            if (AttackTool.AttackEnemys(currentPerson, FightMain.enemyQueue))
+            {
+                FightMain.RotatePerson(currentPerson,
+                    PersonMoveTool.GetAngle(
+                        currentPerson.PersonObject.transform.position, transform.position));
+                FightMain.PlayerFinished();
+            }
+        }
+        else
+        {
+            SelectAPerson(p);
+        }
+    }
+
+    private void OnMouseEnter()
+    {
+        isMouseInPerson = true;
+        GameObject gridObject = FightMain.gridDataToObject[GlobalData.Persons[int.Parse(gameObject.name)].RowCol];
+        if (currentPerson != null && currentPerson.ControlState == BattleControlState.Attacking &&
+            AttackTool.attackDistance.Contains(gridObject))
+        {
+            AttackTool.CountAttackRange(gridObject, currentPerson, FightMain.friendQueue);
+            AttackTool.ShowAttackRange();
+        }
+    }
+
+    private void OnMouseExit()
+    {
+        isMouseInPerson = false;
+        GameObject gridObject = FightMain.gridDataToObject[GlobalData.Persons[int.Parse(gameObject.name)].RowCol];
+        if (currentPerson != null && currentPerson.ControlState == BattleControlState.Attacking &&
+            AttackTool.attackDistance.Contains(gridObject))
+        {
+            AttackTool.ClearAttackRange();
+        }
     }
 
     public static void SelectAPerson(Person p)
