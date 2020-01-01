@@ -14,7 +14,10 @@ public class PersonBaseData
     public int HP { get; set; }
     public int MP { get; set; }
     public int Energy { get; set; }
+    public string InitPlaceString { get; set; }
     public int HeadPortrait { get; set; }
+    public List<Interaction> Interactions { get; set; }
+    public List<ChatConversation> ChatConversations { get; set; }
     public List<AttackStyle> AttackStyles { get; set; }
     public List<InnerGong> InnerGongs { get; set; }
 }

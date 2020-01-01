@@ -8,20 +8,49 @@ public class GameDate
     public int Year { get; set; }
     public int Month { get; set; }
     public int Day { get; set; }
-    public TimeSlot Slot { get; set; }
+    public int Slot { get; set; }
 
     public GameDate(int year, int month, int day, int slot)
     {
         Year = year;
         Month = month;
         Day = day;
-        Slot = (TimeSlot)Enum.ToObject(typeof(TimeSlot), slot);
+        Slot = slot;
     }
 
     public string GetDateString()
     {
-        return Year + "-" + Month + "-" + Day + "-" + ((int)Slot);
+        return Year + "-" + Month + "-" + Day + "-" + Slot;
+    }
+
+    public void GoByTime(int space)
+    {
+        if ((Slot + space) / 3 == 0)
+        {
+            Slot = Slot + space;
+        }
+        else
+        {
+            int addDay = (Slot + space) / 3;
+            Slot = (Slot + space) % 3;
+            if(addDay + Day / 30 == 0)
+            {
+                Day = addDay + Day;
+            }
+            else
+            {
+                int addMonth = (addDay + Day) / 30;
+                Day = (addDay + Day) % 30;
+                if(addMonth + Month / 12 == 0)
+                {
+                    Month = addMonth + Month;
+                }
+                else
+                {
+                    Year = Year + (addMonth + Month) / 12;
+
+                }
+            }
+        }
     }
 }
-
-public enum TimeSlot { Morning , Noon, Night}

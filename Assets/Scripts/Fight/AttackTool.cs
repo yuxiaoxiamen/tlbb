@@ -57,7 +57,7 @@ public class AttackTool
         }
     }
 
-    public static bool AttackEnemys(List<Person> enemys)
+    public static bool AttackEnemys(Person attacker, List<Person> enemys)
     {
         HashSet<Person> canAttackEnemys = new HashSet<Person>();
         foreach (Person enemy in enemys)
@@ -74,6 +74,9 @@ public class AttackTool
             {
                 enemy.CurrentHP -= 1;
                 FightMain.SetPersonHPSplider(enemy);
+                float angle = PersonMoveTool.GetAngle(enemy.PersonObject.transform.position, 
+                    attacker.PersonObject.transform.position);
+                FightMain.RotatePerson(enemy, angle);
             }
             return true;
         }

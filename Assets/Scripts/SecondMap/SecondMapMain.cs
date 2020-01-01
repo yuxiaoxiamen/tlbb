@@ -5,33 +5,26 @@ using UnityEngine.SceneManagement;
 
 public class SecondMapMain : MonoBehaviour
 {
-    public GameObject dialogueObject;
     public GameObject sitePrefab;
 
     // Start is called before the first frame update
     void Start()
     {
-        //GameRunningData.GetRunningData().currentPlace = GlobalData.FirstPlaces[6];
-        var key = GameRunningData.GetRunningData().currentPlace.GetPlaceString() + "/"
-            + GameRunningData.GetRunningData().date.GetDateString();
-        ControlDialogue dialogueScript = dialogueObject.GetComponent<ControlDialogue>();
-        if (GlobalData.MainConversations.ContainsKey(key))
+        ControlDialogue.instance.CheckMainConversation(()=>
         {
-            dialogueScript.Conversations = GlobalData.MainConversations[key];
-            dialogueScript.SetConversation(dialogueScript.Conversations[0]);
-        }
-        else
-        {
-            dialogueScript.HideDialogue();
-        }
+            SetSites();
+        });
+    }
 
+    void SetSites()
+    {
         var secondPlaces = ((FirstPlace)GameRunningData.GetRunningData().currentPlace).Sites;
         float width = sitePrefab.GetComponent<Renderer>().bounds.size.x;
         for (int i = 0; i < secondPlaces.Count; ++i)
         {
             SecondPlace secondPlace = secondPlaces[i];
             GameObject siteObject = Instantiate(sitePrefab);
-            siteObject.name = secondPlace.Id+"";
+            siteObject.name = secondPlace.Id + "";
             siteObject.transform.Find("siteName").GetComponent<TextMesh>().text = GetVerticalString(secondPlace.Name);
             siteObject.transform.position = sitePrefab.transform.position + new Vector3((-0.5f - width) * i, 0, 0);
         }
@@ -45,16 +38,5 @@ public class SecondMapMain : MonoBehaviour
             result = result + System.Environment.NewLine + text[i];
         }
         return result;
-    }
-
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        //if (Input.GetMouseButtonDown(1))
-        //{
-        //    SceneManager.LoadScene("FirstMap");
-        //}
     }
 }

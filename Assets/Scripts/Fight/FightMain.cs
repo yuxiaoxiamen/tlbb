@@ -26,8 +26,8 @@ public class FightMain : MonoBehaviour
     {
         GlobalData.Init();
         CreateMap();
-        Person test = GlobalData.Persons[0];
-        test.RowCol = new Vector2Int(12, 3);
+        Person player = GlobalData.Persons[0];
+        player.RowCol = new Vector2Int(12, 3);
         Person friend1 = GlobalData.Persons[1];
         friend1.RowCol = new Vector2Int(12, 6);
         Person enemy1 = GlobalData.Persons[2];
@@ -35,7 +35,7 @@ public class FightMain : MonoBehaviour
         Person enemy2 = GlobalData.Persons[3];
         enemy2.RowCol = new Vector2Int(0, 9);
 
-        friendQueue.Add(test);
+        friendQueue.Add(player);
         friendQueue.Add(friend1);
         enemyQueue.Add(enemy1);
         enemyQueue.Add(enemy2);
@@ -43,8 +43,6 @@ public class FightMain : MonoBehaviour
         SetFightPerson(friendQueue);
         SetFightPerson(enemyQueue);
         RotateEnemys();
-        FightGUI.SetBattleControlPanel();
-        FightGridClick.SetColor();
         FightPersonClick.SelectAPerson(GameRunningData.GetRunningData().player);
     }
 
@@ -115,6 +113,7 @@ public class FightMain : MonoBehaviour
             person.PersonObject = personObject;
             positionToPerson.Add(person.RowCol, person);
             SetPersonHPSplider(person);
+            person.InitAttribute();
         }
         
     }
@@ -163,6 +162,7 @@ public class FightMain : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
         ResumePersonState();
+        DOTween.Clear();
         SelectNextPerson();
     }
 
