@@ -105,6 +105,7 @@ public class PersonMoveTool
     static public void MovePerson(List<Vector2Int> movePath, Person person, float speed, Action<Person> finishAction)
     {
         List<Vector3> realPath = new List<Vector3>();
+        Vector2Int preRc = person.RowCol;
         foreach (var point in movePath)
         {
             var gridObject = FightMain.gridDataToObject[point];
@@ -115,6 +116,7 @@ public class PersonMoveTool
         if(movePath.Count > 0)
         {
             person.RowCol = movePath[movePath.Count - 1];
+            GongBuffTool.HaloPersonMoveListener(person, preRc, person.RowCol);
         }
     }
 
@@ -164,6 +166,7 @@ public class PersonMoveTool
             person.PersonObject.transform.DOMove(path[pathIndex], speed).OnComplete(() =>
             {
                 ++pathIndex;
+                CameraFollow.cameraFollowInstance.SetCameraFollowTarget(person);
                 Move(person, path, speed, finishAction);
             });
         }

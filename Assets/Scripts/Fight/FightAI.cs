@@ -7,36 +7,82 @@ using UnityEngine;
 public class FightAI
 {
     public static List<Person> Enemys { get; set; }
+    public static bool AIEnd;
     public static void NPCAI(Person person, List<Person> enemys)
     {
-        Person closestEnemy = new Person();
-        Enemys = enemys;
-        float minDistance = float.MaxValue;
-        foreach (Person enemy in enemys)
+        if (!AttackBuffTool.IsPersonHasSkipBuff(person))
         {
-            float d = PathFinding.GetDistanceSix(person.RowCol, enemy.RowCol);
-            if (d < minDistance)
+            Person closestEnemy = new Person();
+            Enemys = enemys;
+            float minDistance = float.MaxValue;
+            foreach (Person enemy in enemys)
             {
-                minDistance = d;
-                closestEnemy = enemy;
+                float d = PathFinding.GetDistanceSix(person.RowCol, enemy.RowCol);
+                if (d < minDistance)
+                {
+                    minDistance = d;
+                    closestEnemy = enemy;
+                }
+            }
+
+            var obstacles = PersonMoveTool.GetObstacles();
+            obstacles.Remove(closestEnemy.RowCol);
+            HashSet<Vector2Int> moveRangeGrids = PersonMoveTool.GenerateMoveRange(person.RowCol, person.MoveRank);
+            List<Vector2Int> realPath = new List<Vector2Int>();
+            if (CanFight(person))
+            {
+                List<Vector2Int> path = PersonMoveTool.FindPath(person.RowCol, closestEnemy.RowCol, FightMain.GetGrids(), obstacles, true);
+                foreach (Vector2Int rc in path)
+                {
+                    if (moveRangeGrids.Contains(rc))
+                    {
+                        realPath.Add(rc);
+                    }
+                }
+                PersonMoveTool.MovePerson(realPath, person, FightMain.speed, NPCFight);
+            }
+            else
+            {
+                float maxDistance = 0;
+                Vector2Int furthestRc = person.RowCol;
+                foreach (Vector2Int rc in moveRangeGrids)
+                {
+                    float d = PathFinding.GetDistanceSix(rc, closestEnemy.RowCol);
+                    if (d > maxDistance)
+                    {
+                        maxDistance = d;
+                        furthestRc = rc;
+                    }
+                }
+                realPath = PersonMoveTool.FindPath(person.RowCol, furthestRc, FightMain.GetGrids(), obstacles, true);
+                PersonMoveTool.MovePerson(realPath, person, FightMain.speed, NPCRest);
             }
         }
-
-        var obstacles = PersonMoveTool.GetObstacles();
-        obstacles.Remove(closestEnemy.RowCol);
-        List<Vector2Int> path = PersonMoveTool.FindPath(person.RowCol, closestEnemy.RowCol, FightMain.GetGrids(), obstacles, true);
-        HashSet<Vector2Int> moveRangeGrids = PersonMoveTool.GenerateMoveRange(person.RowCol, person.MoveRank);
-        List<Vector2Int> realPath = new List<Vector2Int>();
-        foreach (Vector2Int rc in path)
+        else
         {
-            if (moveRangeGrids.Contains(rc))
+            AIEnd = true;
+        }
+    }
+
+    static bool CanFight(Person person)
+    {
+        if(person.CurrentHP * 1.0f / person.BaseData.HP < 0.2)
+        {
+            return false;
+        }
+        int maxAttackPower = 0;
+        foreach(AttackStyle style in person.BaseData.AttackStyles)
+        {
+            if(style.GetRealMPCost() <= person.CurrentMP)
             {
-                realPath.Add(rc);
+                if (style.GetRealBasePower() > maxAttackPower)
+                {
+                    maxAttackPower = style.GetRealBasePower();
+                    person.SelectedAttackStyle = style;
+                }
             }
         }
-
-        PersonMoveTool.MovePerson(realPath, person, FightMain.speed, NPCFight);
-
+        return maxAttackPower != 0;
     }
 
     static void NPCFight(Person person)
@@ -72,8 +118,21 @@ public class FightAI
             AttackTool.AttackEnemys(person, Enemys);
             foreach (var gridObject in AttackTool.attackRange)
             {
-                gridObject.GetComponent<Renderer>().material.DOColor(FightGridClick.defaultColor, 1f);
+                gridObject.GetComponent<Renderer>().material.DOColor(FightGridClick.defaultColor, 0.5f).OnComplete(()=>
+                {
+                    AIEnd = true;
+                });
             }
         }
+        else
+        {
+            AIEnd = true;
+        }
+    }
+
+    static void NPCRest(Person person)
+    {
+        FightMain.OneRoundOver(person);
+        AIEnd = true;
     }
 }

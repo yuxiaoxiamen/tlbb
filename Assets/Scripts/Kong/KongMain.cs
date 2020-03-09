@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class KongMain : MonoBehaviour
 {
-    public static List<InnerGong> gong = new List<InnerGong>();     //内功读取接口
+    public static List<InnerGongFixData> gong = new List<InnerGongFixData>();     //内功读取接口
     public static List<string> order = new List<string>();      //用于存储功法顺序
     public static int center = 0;
     int i = 0;
@@ -51,12 +51,12 @@ public class KongMain : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gong.Add(GlobalData.InnerGongs[0]);
-        gong.Add(GlobalData.InnerGongs[1]);
-        gong.Add(GlobalData.InnerGongs[2]);
-        gong.Add(GlobalData.InnerGongs[3]);
-        gong.Add(GlobalData.InnerGongs[4]);
-        gong.Add(GlobalData.InnerGongs[5]);
+        gong.Add(GlobalData.InnerGongFixDatas[0]);
+        gong.Add(GlobalData.InnerGongFixDatas[1]);
+        gong.Add(GlobalData.InnerGongFixDatas[2]);
+        gong.Add(GlobalData.InnerGongFixDatas[3]);
+        gong.Add(GlobalData.InnerGongFixDatas[4]);
+        gong.Add(GlobalData.InnerGongFixDatas[5]);
 
         order.Add("待\n学\n习");
         order.Add("待\n学\n习");

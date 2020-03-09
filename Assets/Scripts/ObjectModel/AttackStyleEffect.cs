@@ -12,4 +12,4 @@ public class AttackStyleEffect
     public EffectType Type { get; set; }
 }
 
-public enum EffectType { DeBuff, Buff}
+public enum EffectType { DeBuff, Buff }

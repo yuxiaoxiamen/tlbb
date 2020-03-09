@@ -17,6 +17,7 @@ public class FirstMapMain : MonoBehaviour
     {
         gridDataToObject.Clear();
         gridObjectToData.Clear();
+        Time.timeScale = 1;
         float mapWidth = gameObject.GetComponent<Renderer>().bounds.size.x;
         float mapHeight = gameObject.GetComponent<Renderer>().bounds.size.y;
 
@@ -41,7 +42,7 @@ public class FirstMapMain : MonoBehaviour
         }
 
         player = GameRunningData.GetRunningData().player;
-        player.RowCol = new Vector2Int(30, 39);
+
         player.PersonObject = Instantiate(personPrefab);
         player.PersonObject.transform.position = gridDataToObject[player.RowCol].transform.position;
     }

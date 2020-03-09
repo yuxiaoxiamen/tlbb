@@ -42,6 +42,14 @@ public class FightPersonClick : MonoBehaviour
                 FightMain.PlayerFinished();
             }
         }
+        else if(currentPerson != null && currentPerson.ControlState == BattleControlState.Treating)
+        {
+            int value = currentPerson.MedicalSkillResumeHP();
+            AttackTool.PersonChangeHP(p, value, true);
+            TreatTool.ResumeGrid();
+            FightMain.OneRoundOver(currentPerson);
+            FightMain.PlayerFinished();
+        }
         else
         {
             SelectAPerson(p);
@@ -93,14 +101,14 @@ public class FightPersonClick : MonoBehaviour
                 }
                 FightGridClick.moveRange = PersonMoveTool.GenerateMoveRange(currentPerson.RowCol, currentPerson.MoveRank);
                 FightGridClick.ChangeMoveRangeColor(currentPerson, FightGridClick.rangeColor);
+                CameraFollow.cameraFollowInstance.SetCameraFollowTarget(p);
             }
             else if (p.ControlState == BattleControlState.Moved)
             {
                 FightGUI.ShowBattlePane(p);
             }
-
+            
             FightGridClick.SwitchGridColor(FightMain.gridDataToObject[currentPerson.RowCol], FightGridClick.selectColor);
-            CameraFollow.cameraFollowInstance.SetCameraFollowTarget(currentPerson);
         }
     }
 }

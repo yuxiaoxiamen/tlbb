@@ -4,20 +4,50 @@ using UnityEngine;
 
 public class InnerGong
 {
-    public int Id { get; set; }
-    public string Name { get; set; }
-    public string DefaultEffect { get; set; }
-    public string FirstEffect { get; set; }
-    public string SixthEffect { get; set; }
-    public string TenthEffect { get; set; }
-    public int PerHPGain { get; set; }
-    public int PerMPGain { get; set; }
-    public List<Talent> PerTalentGain { get; set; }
-    public int FullHPGain { get; set; }
-    public int FullMPGain { get; set; }
-    public List<Talent> FullTalentGain { get; set; }
-    public int FirstMaxProficiency { get; set; }
-    public int NextMaxRatio { get; set; }
-}
+    public InnerGongFixData FixData { get; set; }
+    public int Rank { get; set; }
+    public int Proficiency { get; set; }
 
-public enum Talent { Bi, Gen, Wu, Shen, Jing}
+    public int GetGrade()
+    {
+        if (FixData.Id == 0 || FixData.Id == 1 || FixData.Id == 2 ||
+            FixData.Id == 3 || FixData.Id == 4 || FixData.Id == 5 ||
+            FixData.Id == 6 || FixData.Id == 7)
+        {
+            return 3;
+        }else if(FixData.Id == 8 || FixData.Id == 9 || FixData.Id == 10 ||
+            FixData.Id == 11 || FixData.Id == 12 || FixData.Id == 13 ||
+            FixData.Id == 14 || FixData.Id == 15 || FixData.Id == 16)
+        {
+            return 2;
+        }
+        else
+        {
+            return 1;
+        }
+    }
+
+    public InnerGong()
+    {
+        Rank = 1;
+        Proficiency = 0;
+    }
+
+    public int GetMaxProFiciency()
+    {
+        return (int)(FixData.FirstMaxProficiency * Mathf.Pow(1 + FixData.NextMaxRatio / 100f, Rank - 1));
+    }
+
+    public void AddExperience(int e)
+    {
+        if (Rank < 10)
+        {
+            Proficiency += e;
+            if (Proficiency >= GetMaxProFiciency())
+            {
+                ++Rank;
+                Proficiency = 0;
+            }
+        }
+    }
+}

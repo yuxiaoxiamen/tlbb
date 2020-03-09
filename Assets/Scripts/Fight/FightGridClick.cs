@@ -10,6 +10,7 @@ public class FightGridClick : MonoBehaviour
     public static Color selectColor;
     public static Color attackDistanceColor;
     public static Color attackRangeColor;
+    public static Color treatColor;
     public static float defaultA = 1.0f;
     private static List<Vector2Int> movePath = new List<Vector2Int>();
     public static HashSet<Vector2Int> moveRange = new HashSet<Vector2Int>();
@@ -30,6 +31,7 @@ public class FightGridClick : MonoBehaviour
         rangeColor = new Color(0, 1, 1, defaultA);
         attackDistanceColor = new Color(147 / 255f, 112 / 255f, 219 / 255f, defaultA);
         attackRangeColor = new Color(1, 0, 0, defaultA);
+        treatColor = new Color(1, 165 / 255f, 0, defaultA);
     }
 
     private void OnMouseDown()

@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ThridMap.unity
     guid: ff5f5d27e0075e847833a05d78e08cc3
+  - enabled: 1
+    path: Assets/Scenes/Forge.unity
+    guid: 990eba9a24c65cf43b6683b166462143
   m_configObjects: {}
