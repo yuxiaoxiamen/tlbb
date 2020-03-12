@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class KongMain : MonoBehaviour
 {
-    public static List<InnerGongFixData> gong = new List<InnerGongFixData>();     //内功读取接口
+    public static List<InnerGongFixData> gong = new List<InnerGongFixData>();     //内功固定数据读取接口
+    //public List<InnerGong> inners = new List<InnerGong>();      //内功读取接口
     public static List<string> order = new List<string>();      //用于存储功法顺序
     public static int center = 0;
     int i = 0;
@@ -45,8 +46,6 @@ public class KongMain : MonoBehaviour
     {
 
     }
-
-
 
     // Start is called before the first frame update
     void Start()
@@ -124,9 +123,27 @@ public class KongMain : MonoBehaviour
 
         //显示功法信息
         GameObject.Find("KongName").GetComponent<TextMesh>().text = gong[center].Name;
-        GameObject.Find("RankValue").GetComponent<TextMesh>().text = "没找到这个数据";
-        GameObject.Find("ProficiencyValue").GetComponent<TextMesh>().text = "n/100";
+        InnerGong inner = new InnerGong();
+        GameObject.Find("RankValue").GetComponent<TextMesh>().text = inner.Rank.ToString();
+        //GameObject.Find("RankValue").GetComponent<TextMesh>().text = "没找到这个数据";
+        GameObject.Find("ProficiencyValue").GetComponent<TextMesh>().text = inner.Proficiency.ToString()+"/100";
+
+
+        //进度条
+        var v = GameObject.Find("ProficiencyActual").transform;
+        //真实数据
+        //float parcent = (float)inner.Proficiency/100;
+        //测试数据进度条60%
+        float parcent = 0.6F;
+        float xlen = GameObject.Find("ProficiencyBackground").transform.localScale.x;
+        float prex = v.localScale.x;
+        float actualx = xlen * parcent;
+        GameObject.Find("ProficiencyActual").transform.localScale = new Vector3(xlen * parcent, v.localScale.y, v.localScale.z);
+        GameObject.Find("ProficiencyActual").transform.localPosition = new Vector3(v.localPosition.x - (prex - actualx) / 2, v.localPosition.y, v.localPosition.z);
+
+
         GameObject.Find("KongDetail").GetComponent<TextMesh>().text = "默认效果：\n"+ Textnumchange(gong[center].DefaultEffect,25)+"\n"+ "第一重效果：\n"+ Textnumchange(gong[center].FirstEffect,25) + "\n"+ "第六重效果：\n"+ Textnumchange(gong[center].SixthEffect,25) + "\n"+ "第十重效果：\n"+ Textnumchange(gong[center].TenthEffect,25) ;
+
     }
 
     // Update is called once per frame
