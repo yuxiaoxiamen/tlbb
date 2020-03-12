@@ -36,7 +36,7 @@ public class HookControl : MonoBehaviour
 
     void Update()
     {
-        if (MineralControl.isGameStart && !CountDown.isGameOver)
+        if (MineralControl.isGameStart && !MiningCountDown.isGameOver)
         {
             UpdataLine();
             if (!isMove && !isBack)
@@ -58,7 +58,7 @@ public class HookControl : MonoBehaviour
             }
             if(copperNumber + ironNumber + silverNumber + goldNumber == MineralControl.sum)
             {
-                CountDown.GameOver();
+                MiningCountDown.GameOver();
             }
         }
     }

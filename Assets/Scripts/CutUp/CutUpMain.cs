@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CutUpMain : MonoBehaviour
 {
@@ -8,18 +9,77 @@ public class CutUpMain : MonoBehaviour
     public GameObject foodPrefab;
     public static float minY;
     public static FoodManual manual;
+    public static bool isGameStart;
+    public static GameObject scorePanel;
+    public static int fruitNum;
+    public static int vegetableNum;
+    public static int meatNum;
 
     // Start is called before the first frame update
     void Start()
     {
         minY = foodPrefab.transform.position.y - 3;
+        isGameStart = false;
+        fruitNum = 0;
+        vegetableNum = 0;
+        meatNum = 0;
         manual = new FoodManual()
         {
-            FruitNum = 10,
-            VegetableNum = 15,
-            MeatNum = 20
+            FruitNum = 1,
+            VegetableNum = 1,
+            MeatNum = 1,
+            Item = GlobalData.Items[7]
         };
-        StartCoroutine(CreateFoods());
+        GameObject startPanel = GameObject.Find("startPanel");
+        scorePanel = GameObject.Find("scorePanel");
+        Button startButton = startPanel.GetComponentInChildren<Button>();
+        startButton.onClick.AddListener(() =>
+        {
+            isGameStart = true;
+            StartCoroutine(CreateFoods());
+            startPanel.SetActive(false);
+        });
+        SetScorePanel();
+    }
+
+    private void Update()
+    {
+        if(fruitNum >= manual.FruitNum && vegetableNum >= manual.VegetableNum && meatNum >= manual.MeatNum)
+        {
+            CutUpCountDown.isGameOver = true;
+            isGameStart = false;
+            CutUpCountDown.isSuccess = true;
+        }
+    }
+
+    void SetScorePanel()
+    {
+        Transform manualNameTans = scorePanel.transform.Find("manualName");
+        manualNameTans.GetComponent<Text>().text += manual.Item.Name;
+        Transform needTextTans = scorePanel.transform.Find("needText");
+        needTextTans.Find("fruit").GetComponent<Text>().text += manual.FruitNum;
+        needTextTans.Find("vegetable").GetComponent<Text>().text += manual.VegetableNum;
+        needTextTans.Find("meat").GetComponent<Text>().text += manual.MeatNum;
+    }
+
+    public static void SetAlreadyText(char type)
+    {
+        Transform alreadyTextTans = scorePanel.transform.Find("alreadyText");
+        switch (type)
+        {
+            case 'f':
+                ++fruitNum;
+                alreadyTextTans.Find("fruit").GetComponent<Text>().text = fruitNum+"";
+                break;
+            case 'v':
+                ++vegetableNum;
+                alreadyTextTans.Find("vegetable").GetComponent<Text>().text = vegetableNum+"";
+                break;
+            case 'm':
+                ++meatNum;
+                alreadyTextTans.Find("meat").GetComponent<Text>().text = meatNum+"";
+                break;
+        }
     }
 
     IEnumerator CreateFoods()
@@ -27,6 +87,10 @@ public class CutUpMain : MonoBehaviour
         int sum = manual.FruitNum + manual.VegetableNum + manual.MeatNum + 3 * 10;
         for (int i = 0; i < sum; ++i)
         {
+            if (CutUpCountDown.isGameOver)
+            {
+                break;
+            }
             int randomType = Random.Range(1, 4);
             CreateFood(randomType);
             yield return new WaitForSeconds(0.5f);

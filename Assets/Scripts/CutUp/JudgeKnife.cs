@@ -49,12 +49,14 @@ public class JudgeKnife : MonoBehaviour
             case 'f':
                 CreateDamagedGreens();
                 gameObject.transform.position = new Vector3(100, 10, 0);
+                CutUpMain.SetAlreadyText(type);
                 break;
             case 'v':
                 if(cutCount == 2)
                 {
                     CreateDamagedGreens();
                     gameObject.transform.position = new Vector3(100, 10, 0);
+                    CutUpMain.SetAlreadyText(type);
                 }
                 break;
             case 'm':
@@ -62,6 +64,7 @@ public class JudgeKnife : MonoBehaviour
                 {
                     CreateDamagedGreens();
                     gameObject.transform.position = new Vector3(100, 10, 0);
+                    CutUpMain.SetAlreadyText(type);
                 }
                 break;
         }

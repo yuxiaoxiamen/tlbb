@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class CountDown : MonoBehaviour
+public class MiningCountDown : MonoBehaviour
 {
     public GameObject text;
     public int TotalTime;
