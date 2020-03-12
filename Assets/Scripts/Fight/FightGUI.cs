@@ -30,6 +30,7 @@ public class FightGUI : MonoBehaviour
     public static GameObject buffPanel;
 
     public static GameObject successPanel;
+    public static GameObject settlementText;
 
     // Start is called before the first frame update
     void Awake()
@@ -43,7 +44,8 @@ public class FightGUI : MonoBehaviour
         detailPanel.SetActive(false);
         successPanel = GameObject.Find("successPanel");
         successPanel.SetActive(false);
-        SetSuccessAction();
+        settlementText = GameObject.Find("settlement");
+        settlementText.SetActive(false);
         SetBattleControlPanel();
         SetButtonListener();
         buffIconPrefab = iconPrefab;
@@ -353,18 +355,23 @@ public class FightGUI : MonoBehaviour
         isSwitching = false;
     }
 
-    public static void ShowSuccessPanel()
+    public static IEnumerator ShowSuccessPanel()
     {
         successPanel.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        GameRunningData.GetRunningData().date.GoByTime(100);
+        GameRunningData.GetRunningData().ReturnToMap();
     }
 
-    public void SetSuccessAction()
+    public static void SetSettlement(List<Good> rewards, int experience, int money)
     {
-        Button button = successPanel.transform.Find("Button").GetComponent<Button>();
-        button.onClick.AddListener(() =>
+        settlementText.SetActive(true);
+        string text = "江湖阅历增长 " + experience + Environment.NewLine;
+        text += "获得金钱 " + money + Environment.NewLine;
+        foreach (Good good in rewards)
         {
-            GameRunningData.GetRunningData().date.GoByTime(100);
-            GameRunningData.GetRunningData().ReturnToMap();
-        });
+            text += "获得物品  " + good.Name + Environment.NewLine;
+        }
+        settlementText.GetComponent<Text>().text = text;
     }
 }

@@ -7,7 +7,7 @@ using UnityEngine;
 public class GlobalData
 {
     public static List<Person> Persons { get; set; } //所有人物实例
-    private static List<AttackStyleFixData> StyleFixDatas { get; set; } //招式的固定数据
+    public static List<AttackStyleFixData> StyleFixDatas { get; set; } //招式的固定数据
     public static List<AttackStyleEffect> StyleEffects { get; set; } //所有招式的效果数据
     public static List<InnerGongFixData> InnerGongFixDatas { get; set; } //所有内功固定数据
     public static List<Good> Items { get; set; } //所有物品数据
@@ -31,6 +31,13 @@ public class GlobalData
         ReadChatDialogueData();
         ReadMainDialogueData();
         ReadMainLineConflictData();
+        foreach(Person person in Persons)
+        {
+            if(person.BaseData.Id < 65)
+            {
+                TimeGoSubject.GetTimeSubject().Attach(person);
+            }
+        }
     }
 
     public static void Init()

@@ -79,6 +79,7 @@ public class AttackTool
 
             //PersonChangeMP(attacker, mpCost, false);
 
+            PromoteStyleProficiency(attacker);
             AttackBuffTool.PersonGetBuff(attacker);
             AttackBuffTool.TriggerValueBuff(attacker);
 
@@ -114,6 +115,11 @@ public class AttackTool
         {
             return false;
         }
+    }
+
+    private static void PromoteStyleProficiency(Person person)
+    {
+        person.SelectedAttackStyle.AddExperience(person.CountStyleExperience());
     }
 
     private static bool ComputeProbability(float probability)
@@ -187,7 +193,7 @@ public class AttackTool
             if(person.CurrentHP <= 0)
             {
                 person.CurrentHP = 0;
-                //PersonDead(person);
+                PersonDead(person);
                 return true;
             }
         }
@@ -211,7 +217,7 @@ public class AttackTool
             FightMain.friendQueue.Remove(person);
             if(FightMain.friendQueue.Count == 0)
             {
-                FightLose();
+                FightMain.isFail = true;
             }
         }
         if (FightMain.enemyQueue.Contains(person))
@@ -219,20 +225,9 @@ public class AttackTool
             FightMain.enemyQueue.Remove(person);
             if (FightMain.enemyQueue.Count == 0)
             {
-                FightWin();
+                FightMain.isSuccess = true;
             }
         }
-    }
-
-    private static void FightWin()
-    {
-        FightMain.isGameOver = true;
-        FightGUI.ShowSuccessPanel();
-    }
-
-    private static void FightLose()
-    {
-        FightMain.isGameOver = true;
     }
 
     public static void ShowAttackRange()

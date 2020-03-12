@@ -13,6 +13,10 @@ public class GameConfig
     public static int PerGongExperience { get; set; }
     public static int WuXingAddition { get; set; }
     public static int MaxRank { get; set; }
+    public static List<Conversation> MapEventConversation { get; set; }
+    public static int MapEventProbability { get; set; }
+    public static List<int> ConsultCost { get; set; }
+    public static int RewardMaxIndex { get; set; }
 
     static GameConfig()
     {
@@ -21,9 +25,24 @@ public class GameConfig
         MaxDefend = 100;
         PerMedicalSkillResume = 10;
         MaxMedicalSkill = 100;
-        PerStyleExperience = 100;
-        PerGongExperience = 100;
+        PerStyleExperience = 20;
+        PerGongExperience = 5;
         WuXingAddition = 2;
         MaxRank = 10;
+        MapEventConversation = new List<Conversation>
+        {
+            new Conversation()
+            {
+                People = GameRunningData.GetRunningData().player,
+                Content = "路遇匪徒，进行反击",
+                IsLeft = true
+            }
+        };
+        MapEventProbability = 30;
+        ConsultCost = new List<int>
+        {
+            10,50,100
+        };
+        RewardMaxIndex = 21;
     }
 }

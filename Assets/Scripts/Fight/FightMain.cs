@@ -19,7 +19,9 @@ public class FightMain : MonoBehaviour
     public static bool isEnemyRound = false;
     public static readonly float speed = 0.1f;
     public static int finished = 0;
-    public static bool isGameOver;
+    public static bool isSuccess;
+    public static bool isFail;
+    private static bool isCreateReward;
     public static FightSource source;
     public static Person contestEnemy;
 
@@ -27,12 +29,14 @@ public class FightMain : MonoBehaviour
     void Start()
     {
         CreateMap();
-        isGameOver = false;
+        isFail = false;
+        isSuccess = false;
+        isCreateReward = false;
 
         //GetFriendsAndEnemys();
         //SetPersonRowCol(friendQueue, false);
         //SetPersonRowCol(enemyQueue, true);
-        
+
         TestData();
 
         positionToPerson = new Dictionary<Vector2Int, Person>();
@@ -86,7 +90,12 @@ public class FightMain : MonoBehaviour
         }
         else if(source == FightSource.Encounter)
         {
-
+            friendQueue = GameRunningData.GetRunningData().teammates;
+            enemyQueue = new List<Person>();
+            for(int i = 1; i <= (friendQueue.Count + 1) * 2; ++i)
+            {
+                enemyQueue.Add((Person)GlobalData.Persons[2].Clone());
+            }
         }
         
         friendQueue.Add(GameRunningData.GetRunningData().player);
@@ -226,17 +235,35 @@ public class FightMain : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isGameOver)
+        if (isFail || isSuccess)
         {
-            Time.timeScale = 0;
+            foreach(Person person in friendQueue)
+            {
+                person.PersonObject.GetComponent<FightPersonClick>().enabled = false;
+            }
             FightGUI.HideBattlePane();
             FightGridClick.ClearPathAndRange();
         }
-        if (finished == friendQueue.Count)
+        if (isSuccess)
         {
-            finished = 0;
-            FightPersonClick.currentPerson = null;
-            StartCoroutine(EnemyRound());
+            StartCoroutine(FightGUI.ShowSuccessPanel());
+            if(source != FightSource.Contest)
+            {
+                CreateReward();
+            }
+        }
+        if(isFail)
+        {
+            
+        }
+        else
+        {
+            if (finished == friendQueue.Count)
+            {
+                finished = 0;
+                FightPersonClick.currentPerson = null;
+                StartCoroutine(EnemyRound());
+            }
         }
     }
 
@@ -284,8 +311,44 @@ public class FightMain : MonoBehaviour
         }
     }
 
+    public static void CreateReward()
+    {
+        if (!isCreateReward)
+        {
+            isCreateReward = true;
+            Random.InitState((int)System.DateTime.Now.Ticks);
+            int x = Random.Range(1, 101);
+            List<Good> rewards = new List<Good>();
+            if (x > 50)
+            {
+                int i = Random.Range(0, GameConfig.RewardMaxIndex + 1);
+                rewards.Add(GlobalData.Items[i]);
+                x = Random.Range(1, 101);
+                if (x >= 30)
+                {
+                    i = Random.Range(0, GameConfig.RewardMaxIndex + 1);
+                    rewards.Add(GlobalData.Items[i]);
+                }
+                else
+                {
+                    i = Random.Range(0, GameConfig.RewardMaxIndex + 1);
+                    rewards.Add(GlobalData.Items[i]);
+                }
+            }
+            GameRunningData.GetRunningData().belongings.AddRange(rewards);
+            int money = Random.Range(100, 201);
+            int experspance = 5 + Random.Range(-2, 3);
+            if(source == FightSource.MainLine)
+            {
+                experspance = 20 + Random.Range(-5, 5);
+            }
+            FightGUI.SetSettlement(rewards, experspance, money);
+        }
+    }
+
     void TestData()
     {
+        source = FightSource.Encounter;
         friendQueue = new List<Person>();
         enemyQueue = new List<Person>();
         Person player = GameRunningData.GetRunningData().player;
@@ -302,7 +365,7 @@ public class FightMain : MonoBehaviour
         friendQueue.Add(player);
         friendQueue.Add(friend1);
         enemyQueue.Add(enemy1);
-        enemyQueue.Add(enemy2);
+        //enemyQueue.Add(enemy2);
     }
 }
 

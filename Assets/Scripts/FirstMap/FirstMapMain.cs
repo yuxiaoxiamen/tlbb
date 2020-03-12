@@ -11,6 +11,11 @@ public class FirstMapMain : MonoBehaviour
     public static Dictionary<Vector2Int, GameObject> gridDataToObject = new Dictionary<Vector2Int, GameObject>();
     public static Dictionary<GameObject, Vector2Int> gridObjectToData = new Dictionary<GameObject, Vector2Int>();
     public static Person player;
+    private Direction direction;
+    public GameObject arrowObject;
+    public float moveSpeed = 0.2f;
+    private bool lastMoveOver = true;
+    private bool isInConversation = false;
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +50,88 @@ public class FirstMapMain : MonoBehaviour
 
         player.PersonObject = Instantiate(personPrefab);
         player.PersonObject.transform.position = gridDataToObject[player.RowCol].transform.position;
+
+        ControlDialogue.instance.HideDialogue();
+    }
+
+    private void Update()
+    {
+        if (!ControlBottomPanel.isMouseInPane && !isInConversation)
+        {
+            HideCursor();
+            SetDirection();
+            if (Input.GetMouseButton(0))
+            {
+                StartCoroutine(Move());
+            }
+            if (Input.GetMouseButtonUp(0))
+            {
+                StopAllCoroutines();
+                player.PersonObject.GetComponent<Animator>().SetBool("IsMoving", false);
+            }
+
+            FirstPlace place = GridInPlaceEnter(player.RowCol);
+            if (place != null)
+            {
+                Cursor.visible = true;
+                GameRunningData.GetRunningData().currentPlace = place;
+                if (place.Sites == null)
+                {
+                    SceneManager.LoadScene("ThridMap");
+                }
+                else
+                {
+                    SceneManager.LoadScene("SecondMap");
+                }
+            }
+        }
+        else
+        {
+            ShowCursor();
+            player.PersonObject.GetComponent<Animator>().SetBool("IsMoving", false);
+        }
+    }
+
+    FirstPlace GridInPlaceEnter(Vector2Int grid)
+    {
+        foreach (var place in GlobalData.FirstPlaces)
+        {
+            if (place.IsGridInEnter(grid))
+            {
+                return place;
+            }
+        }
+        return null;
+    }
+
+    void SetDirection()
+    {
+        var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        var position = new Vector3(mousePosition.x, mousePosition.y, 0);
+        var vector = position - player.PersonObject.transform.position;
+        float upAngle = Vector3.Angle(player.PersonObject.transform.up, vector);
+        float rightAngle = Vector3.Angle(player.PersonObject.transform.right, vector);
+        if (upAngle <= 10)
+        {
+            direction = Direction.Up;
+            arrowObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("ui/up");
+        }
+        if (upAngle >= 170)
+        {
+            direction = Direction.Down;
+            arrowObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("ui/down");
+        }
+        if (rightAngle <= 10)
+        {
+            direction = Direction.Right;
+            arrowObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("ui/right");
+        }
+        if (rightAngle >= 170)
+        {
+            direction = Direction.Left;
+            arrowObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("ui/left");
+        }
+        arrowObject.transform.position = position;
     }
 
     public static HashSet<Vector2Int> GetAllGrids()
@@ -57,73 +144,112 @@ public class FirstMapMain : MonoBehaviour
         return grids;
     }
 
-    static public void MovePerson(List<Vector2Int> movePath, Person person, float speed, FirstPlace place)
+    HashSet<Vector2Int> GetMapObstacles()
     {
-        List<GameObject> realPath = new List<GameObject>();
-        foreach (var point in movePath)
+        HashSet<Vector2Int> obstacles = new HashSet<Vector2Int>();
+        foreach (var place in GlobalData.FirstPlaces)
         {
-            var gridObject = gridDataToObject[point];
-            realPath.Add(gridObject);
+            obstacles.UnionWith(place.Hold);
         }
-        Move(person, realPath, speed, place);
-        if (movePath.Count > 0)
-        {
-            person.RowCol = movePath[movePath.Count - 1];
-        }
+        return obstacles;
     }
 
-    public static int pathIndex = 0;
-    static private void Move(Person person, List<GameObject> path, float speed, FirstPlace place)
+    private IEnumerator Move()
     {
-        if (pathIndex < path.Count)
+        yield return new WaitUntil(() => lastMoveOver);
+        lastMoveOver = false;
+        GameObject nextGridObject = GetNextGridObject();
+        if (nextGridObject != null)
         {
-            person.PersonObject.GetComponent<Animator>().SetInteger("Direction", 
-                GetDirectionNumber(person.PersonObject.transform.position, path[pathIndex].transform.position));
-            person.PersonObject.GetComponent<Animator>().SetBool("IsMoving",true);
-            person.PersonObject.transform.DOMove(path[pathIndex].transform.position, speed).OnComplete(() =>
+            player.PersonObject.GetComponent<Animator>().SetInteger("Direction", GetDirectionNumber());
+            player.PersonObject.GetComponent<Animator>().SetBool("IsMoving",true);
+            player.PersonObject.transform.DOMove(nextGridObject.transform.position, moveSpeed).OnComplete(() =>
             {
-                person.RowCol = gridObjectToData[path[pathIndex]];
-                ++pathIndex;
-                Move(person, path, speed, place);
+                player.RowCol = gridObjectToData[nextGridObject];
+                RandomEvent();
             });
         }
         else
         {
-            pathIndex = 0;
-            person.PersonObject.GetComponent<Animator>().SetBool("IsMoving", false);
-
-            if (place != null)
-            {
-                DOTween.Clear(true);
-                GameRunningData.GetRunningData().currentPlace = place;
-                if(place.Sites == null)
-                {
-                    SceneManager.LoadScene("ThridMap");
-                }
-                else{
-                    SceneManager.LoadScene("SecondMap");
-                }
-            }
+            lastMoveOver = true;
         }
     }
 
-    static int GetDirectionNumber(Vector3 current, Vector3 next)
+    void RandomEvent()
     {
-        if(current.y > next.y)
+        Random.InitState((int)System.DateTime.Now.Ticks);
+        int x = Random.Range(100, 101);
+        if (x <= GameConfig.MapEventProbability)
         {
-            return 0;
-        }
-        else if(current.y < next.y)
-        {
-            return 1;
-        }
-        else if(current.x > next.x)
-        {
-            return 3;
+            isInConversation = true;
+            GameRunningData.GetRunningData().playerPreRc = player.RowCol;
+            ControlDialogue.instance.StartConversation(GameConfig.MapEventConversation, ()=>
+            {
+                FightMain.source = FightSource.Encounter;
+                SceneManager.LoadScene("Fight");
+            });
         }
         else
         {
-            return 2;
+            lastMoveOver = true;
         }
     }
+
+    void ShowCursor()
+    {
+        Cursor.visible = true;
+        arrowObject.SetActive(false);
+    }
+
+    void HideCursor()
+    {
+        Cursor.visible = false;
+        arrowObject.SetActive(true);
+    }
+
+    GameObject GetNextGridObject()
+    {
+        Vector2Int nextRc = player.RowCol;
+        switch (direction)
+        {
+            case Direction.Up:
+                nextRc.x -= 1;
+                break;
+            case Direction.Down:
+                nextRc.x += 1;
+                break;
+            case Direction.Left:
+                nextRc.y -= 1;
+                break;
+            case Direction.Right:
+                nextRc.y += 1;
+                break;
+        }
+        if (!GetMapObstacles().Contains(nextRc) && GetAllGrids().Contains(nextRc))
+        {
+            return gridDataToObject[nextRc];
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    int GetDirectionNumber()
+    {
+        switch (direction)
+        {
+            case Direction.Up:
+                return 1;
+            case Direction.Down:
+                return 0;
+            case Direction.Left:
+                return 3;
+            case Direction.Right:
+                return 2;
+        }
+        return 0;
+    }
 }
+
+enum Direction { Up, Right, Down, Left}

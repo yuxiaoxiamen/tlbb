@@ -11,12 +11,14 @@ public class GameRunningData
     public Place currentPlace;
     public List<Person> teammates;
     public List<Good> belongings;
+    public Vector2Int playerPreRc;
 
     private GameRunningData()
     {
         date = new GameDate(1, 1, 1, 1);
         player = GlobalData.Persons[0];
         player.RowCol = new Vector2Int(30, 39);
+        playerPreRc = new Vector2Int(30, 39);
         currentPlace = null;
         teammates = new List<Person>();
         belongings = new List<Good>();
@@ -59,7 +61,7 @@ public class GameRunningData
         }
         else
         {
-            player.RowCol = ((FirstPlace)currentPlace).Entry;
+            player.RowCol = playerPreRc;
             SceneManager.LoadScene("FirstMap");
         }
     }

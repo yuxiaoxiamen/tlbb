@@ -13,6 +13,18 @@ public class FirstPlace : Place
         return Id + "";
     }
 
+    public bool IsGridInEnter(Vector2Int grid)
+    {
+        if (Entry == grid)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public bool IsGridInPlace(Vector2Int grid)
     {
         if (Hold.Contains(grid) || Entry == grid)
