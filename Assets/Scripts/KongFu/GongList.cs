@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class GongList : MonoBehaviour
 {
 
-    public static List<InnerGong> gong = new List<InnerGong>();     //内功读取接口
+    public static List<InnerGongFixData> gong = new List<InnerGongFixData>();     //内功读取接口
     public GameObject gongButtonPrefab;
 
     List<GameObject> temp = new List<GameObject>();
@@ -21,12 +21,12 @@ public class GongList : MonoBehaviour
     void Start()
     {
 
-        gong.Add(GlobalData.InnerGongs[0]);
-        gong.Add(GlobalData.InnerGongs[1]);
-        gong.Add(GlobalData.InnerGongs[2]);
-        gong.Add(GlobalData.InnerGongs[3]);
-        gong.Add(GlobalData.InnerGongs[4]);
-        gong.Add(GlobalData.InnerGongs[5]);
+        gong.Add(GlobalData.InnerGongFixDatas[0]);
+        gong.Add(GlobalData.InnerGongFixDatas[1]);
+        gong.Add(GlobalData.InnerGongFixDatas[2]);
+        gong.Add(GlobalData.InnerGongFixDatas[3]);
+        gong.Add(GlobalData.InnerGongFixDatas[4]);
+        gong.Add(GlobalData.InnerGongFixDatas[5]);
         for (int i = 0; i < gong.Count; ++i)
         {
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Interaction
 {
@@ -18,6 +19,9 @@ public class Interaction
                 ChatListener(person);
                 break;
             case 1: //切磋
+                FightMain.source = FightSource.Contest;
+                FightMain.contestEnemy = person;
+                SceneManager.LoadScene("Fight");
                 break;
             case 2: //交易
                 break;
@@ -56,6 +60,10 @@ public class Interaction
             {
                 ThridMapMain.ShowAllHeads();
             });
+        }
+        else
+        {
+            ThridMapMain.ShowAllHeads();
         }
     }
 }

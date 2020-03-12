@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class FightGUI : MonoBehaviour
@@ -21,8 +23,13 @@ public class FightGUI : MonoBehaviour
 
     private static GameObject infoPanel;
     private static GameObject detailPanel;
-    private static Person lookingPerson;
+    public static Person lookingPerson;
     public static bool isLookingInfo = false;
+    public static GameObject buffIconPrefab;
+    public GameObject iconPrefab;
+    public static GameObject buffPanel;
+
+    public static GameObject successPanel;
 
     // Start is called before the first frame update
     void Awake()
@@ -30,11 +37,16 @@ public class FightGUI : MonoBehaviour
         scrollPanel = GameObject.Find("scrollPanel");
         scrollPanel.SetActive(false);
         infoPanel = GameObject.Find("infoPanel");
+        buffPanel = infoPanel.transform.Find("buffPanel").gameObject;
         infoPanel.SetActive(false);
         detailPanel = GameObject.Find("detailPanel");
         detailPanel.SetActive(false);
+        successPanel = GameObject.Find("successPanel");
+        successPanel.SetActive(false);
+        SetSuccessAction();
         SetBattleControlPanel();
         SetButtonListener();
+        buffIconPrefab = iconPrefab;
     }
 
     public static void SetDetailPanel(string name)
@@ -59,9 +71,38 @@ public class FightGUI : MonoBehaviour
         detailPanel.SetActive(false);
     }
 
+    public static void AddBuffIcon(Person person)
+    {
+        for (int i = 0; i < person.AttackBuffs.Count; ++i)
+        {
+            AttackBuff buff = person.AttackBuffs[i];
+            GameObject iconObject = Instantiate(buffIconPrefab);
+            RectTransform rectTransform = iconObject.GetComponent<RectTransform>();
+            rectTransform.SetParent(buffPanel.GetComponent<RectTransform>());
+            rectTransform.localPosition = Vector3.zero;
+            rectTransform.localRotation = Quaternion.identity;
+            rectTransform.localScale = Vector3.one;
+            iconObject.name = i+"";
+        }
+    }
+
+    private static void DestoryBuffIcon()
+    {
+        for (int i = 0; i < buffPanel.transform.childCount; ++i)
+        {
+            Transform child = buffPanel.transform.GetChild(i);
+            if(child.tag == "Buff")
+            {
+                Destroy(child.gameObject);
+            }
+        }
+    }
+
     public static void SetInfoPanel(Person person)
     {
         infoPanel.SetActive(true);
+        DestoryBuffIcon();
+        AddBuffIcon(person);
         isLookingInfo = true;
         lookingPerson = person;
         Transform head = infoPanel.transform.Find("head");
@@ -83,6 +124,7 @@ public class FightGUI : MonoBehaviour
         Transform fjTransform = attributeTexts.Find("fj");
         Transform sbTransform = attributeTexts.Find("sb");
         Transform fyTransform = attributeTexts.Find("fy");
+        Transform mzTransform = attributeTexts.Find("mz");
         Transform ydTransform = attributeTexts.Find("yd");
 
         hpTransform.Find("value").GetComponent<Text>().text = person.CurrentHP + "/" + person.BaseData.HP;
@@ -91,9 +133,10 @@ public class FightGUI : MonoBehaviour
         fjTransform.Find("value").GetComponent<Text>().text = person.Counterattack + "";
         sbTransform.Find("value").GetComponent<Text>().text = person.Dodge + "";
         fyTransform.Find("value").GetComponent<Text>().text = person.Defend + "";
+        mzTransform.Find("value").GetComponent<Text>().text = person.Accuracy + "";
         ydTransform.Find("value").GetComponent<Text>().text = person.MoveRank + "";
 
-        gongText.GetComponent<Text>().text = person.SelectedInnerGong.Name;
+        gongText.GetComponent<Text>().text = person.SelectedInnerGong.FixData.Name;
 
         List<AttackStyle> styles = person.BaseData.AttackStyles;
         int max = 4;
@@ -137,9 +180,15 @@ public class FightGUI : MonoBehaviour
             AttackTool.CountAttackDistance(FightPersonClick.currentPerson, FightMain.friendQueue);
             AttackTool.ShowAttackDistance();
         });
-        restButton.GetComponent<Button>().onClick.AddListener(FightMain.PlayerFinished);
+        restButton.GetComponent<Button>().onClick.AddListener(delegate {
+            FightMain.OneRoundOver(FightPersonClick.currentPerson);
+            FightMain.PlayerFinished();
+        });
         switchStyleButton.GetComponent<Button>().onClick.AddListener(SwitchStyleListener);
         switchInnerButton.GetComponent<Button>().onClick.AddListener(SwitchGongListener);
+        treatButotn.GetComponent<Button>().onClick.AddListener(delegate {
+            TreatTool.ShowTreatPersons(FightPersonClick.currentPerson);
+        });
     }
 
 
@@ -192,8 +241,40 @@ public class FightGUI : MonoBehaviour
     {
         List<AttackStyle> styles = FightPersonClick.currentPerson.BaseData.AttackStyles;
         for (int i = 0; i < styles.Count; ++i)
-        {   
-            AddButtonInScrollPane(styleButtonPrefab, GetStyleText(styles[i]), i);
+        {
+            if(FightPersonClick.currentPerson.EquippedWeapon != null)
+            {
+                switch (FightPersonClick.currentPerson.EquippedWeapon.Type)
+                {
+                    case ItemKind.Sword:
+                        if (styles[i].FixData.WeaponKind == AttackWeaponKind.Sword)
+                        {
+                            AddButtonInScrollPane(styleButtonPrefab, GetStyleText(styles[i]), i);
+                        }
+                        break;
+                    case ItemKind.Knife:
+                        if (styles[i].FixData.WeaponKind == AttackWeaponKind.Knife)
+                        {
+                            AddButtonInScrollPane(styleButtonPrefab, GetStyleText(styles[i]), i);
+                        }
+                        break;
+                    case ItemKind.Rod:
+                        if (styles[i].FixData.WeaponKind == AttackWeaponKind.Rod)
+                        {
+                            AddButtonInScrollPane(styleButtonPrefab, GetStyleText(styles[i]), i);
+                        }
+                        break;
+                }
+            }
+            else
+            {
+                if (styles[i].FixData.WeaponKind == AttackWeaponKind.Finger ||
+                    styles[i].FixData.WeaponKind == AttackWeaponKind.Palm ||
+                    styles[i].FixData.WeaponKind == AttackWeaponKind.Fist)
+                {
+                    AddButtonInScrollPane(styleButtonPrefab, GetStyleText(styles[i]), i);
+                }
+            }
         }
     }
 
@@ -220,20 +301,21 @@ public class FightGUI : MonoBehaviour
 
     static string GetGongText(InnerGong gong)
     {
+        InnerGongFixData gongFixData = gong.FixData;
         string effect = "";
-        if (!gong.FirstEffect.Equals("无"))
+        if (!gongFixData.FirstEffect.Equals("无") && gong.Rank >= 1)
         {
-            effect += gong.FirstEffect + System.Environment.NewLine;
+            effect += gongFixData.FirstEffect + System.Environment.NewLine;
         }
-        if (!gong.SixthEffect.Equals("无"))
+        if (!gongFixData.SixthEffect.Equals("无") && gong.Rank >= 6)
         {
-            effect += gong.SixthEffect + System.Environment.NewLine;
+            effect += gongFixData.SixthEffect + System.Environment.NewLine;
         }
-        if (!gong.TenthEffect.Equals("无"))
+        if (!gongFixData.TenthEffect.Equals("无") && gong.Rank >= 10)
         {
-            effect += gong.TenthEffect + System.Environment.NewLine;
+            effect += gongFixData.TenthEffect + System.Environment.NewLine;
         }
-        string text = gong.Name + System.Environment.NewLine + gong.DefaultEffect + System.Environment.NewLine + effect;
+        string text = gongFixData.Name + System.Environment.NewLine + gongFixData.DefaultEffect + System.Environment.NewLine + effect;
         return text;
     }
 
@@ -269,5 +351,20 @@ public class FightGUI : MonoBehaviour
     {
         scrollPanel.SetActive(false);
         isSwitching = false;
+    }
+
+    public static void ShowSuccessPanel()
+    {
+        successPanel.SetActive(true);
+    }
+
+    public void SetSuccessAction()
+    {
+        Button button = successPanel.transform.Find("Button").GetComponent<Button>();
+        button.onClick.AddListener(() =>
+        {
+            GameRunningData.GetRunningData().date.GoByTime(100);
+            GameRunningData.GetRunningData().ReturnToMap();
+        });
     }
 }

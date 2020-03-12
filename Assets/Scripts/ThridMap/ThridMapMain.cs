@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ThridMapMain : MonoBehaviour
 {
@@ -14,12 +15,27 @@ public class ThridMapMain : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ControlDialogue.instance.CheckMainConversation(() =>
+        Time.timeScale = 1;
+        bool hasDialogue = ControlDialogue.instance.CheckMainConversation(() =>
+        {
+            var key = GameRunningData.GetRunningData().GetPlaceDateKey();
+            if (GlobalData.MainLineConflicts[key].ConflictForm == ConflictKind.Battle)
+            {
+                FightMain.source = FightSource.MainLine;
+                SceneManager.LoadScene("Fight");
+            }
+        });
+        if (!hasDialogue)
         {
             GeneratePersonHead(FindPerson());
-        });
+        }
         peopleObject = Instantiate(peoplePrefab);
         HidePeople();
+    }
+
+    void OnDestroy()
+    {
+        headObjects.Clear();
     }
 
     public static void ShowPeople(Person person)

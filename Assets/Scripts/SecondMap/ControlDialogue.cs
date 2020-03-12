@@ -23,6 +23,7 @@ public class ControlDialogue : MonoBehaviour
     private List<Conversation> Justices = new List<Conversation>();
     private List<Conversation> Evils = new List<Conversation>();
     private bool isInChooice = false;
+    private string key;
 
     public GameObject optionButtonPrefab;
 
@@ -40,10 +41,9 @@ public class ControlDialogue : MonoBehaviour
         HideOptionPanel();
     }
 
-    public void CheckMainConversation(Action action)
+    public bool CheckMainConversation(Action action)
     {
-        var key = GameRunningData.GetRunningData().currentPlace.GetPlaceString() + "/"
-            + GameRunningData.GetRunningData().date.GetDateString();
+        key = GameRunningData.GetRunningData().GetPlaceDateKey();
         if (GlobalData.MainConversations.ContainsKey(key))
         {
             var mainConversations = GlobalData.MainConversations[key];
@@ -77,11 +77,12 @@ public class ControlDialogue : MonoBehaviour
             {
                 StartConversation(Asides, action);
             }
+            return true;
         }
         else
         {
             HideDialogue();
-            action();
+            return false;
         }
     }
 
@@ -97,15 +98,18 @@ public class ControlDialogue : MonoBehaviour
             optionObject.transform.localScale = Vector3.one;
             optionObject.transform.Find("Text").GetComponent<Text>().text = option;
             optionObject.name = i + "";
+            var conflict = GlobalData.MainLineConflicts[key];
             optionObject.GetComponent<Button>().onClick.AddListener(() =>
             {
                 int type = int.Parse(optionObject.name);
                 if (type == 0)
                 {
+                    conflict.IsZ = true;
                     StartConversation(Justices, finishA);
                 }
                 else if(type == 1)
                 {
+                    conflict.IsZ = false;
                     StartConversation(Evils, finishA);
                 }
                 HideOptionPanel();

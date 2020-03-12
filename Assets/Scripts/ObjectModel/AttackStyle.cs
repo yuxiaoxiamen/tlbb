@@ -14,14 +14,32 @@ public class AttackStyle
         Proficiency = 0;
     }
 
+    public int GetRealMPCost()
+    {
+        return (int)(FixData.MPCost * Mathf.Pow(1 + FixData.CostIncrease / 100f, Rank - 1));
+    }
+
     public int GetMaxProFiciency()
     {
-        return (int)(FixData.FirstMaxProficiency * Mathf.Pow((1 + FixData.NextMaxRatio / 100f), Rank - 1));
+        return (int)(FixData.FirstMaxProficiency * Mathf.Pow(1 + FixData.NextMaxRatio / 100f, Rank - 1));
     }
 
     public int GetRealBasePower()
     {
-        return (int)(FixData.BasePower * Mathf.Pow((1 + FixData.PowerIncrease / 100f), Rank - 1));
+        return (int)(FixData.BasePower * Mathf.Pow(1 + FixData.PowerIncrease / 100f, Rank - 1));
+    }
+
+    public void AddExperience(int e)
+    {
+        if(Rank < 10)
+        {
+            Proficiency += e;
+            if (Proficiency >= GetMaxProFiciency())
+            {
+                ++Rank;
+                Proficiency = 0;
+            }
+        }
     }
 }
 

@@ -24,7 +24,6 @@ public class CameraFollow : MonoBehaviour
     {
         if(target != null)
         {
-            
             if (Input.GetKey(KeyCode.Q))
             {
                 transform.RotateAround(target.transform.position, target.transform.up, 60 * Time.deltaTime);
@@ -38,8 +37,11 @@ public class CameraFollow : MonoBehaviour
 
     public void SetCameraFollowTarget(Person person)
     {
-        target = person.PersonObject.transform;
-        transform.rotation = defaultQuaternion;
-        transform.DOMove(target.position - offset, speed);
+        if(person != null)
+        {
+            target = person.PersonObject.transform;
+            transform.rotation = defaultQuaternion;
+            transform.DOMove(target.position - offset, speed);
+        }
     }
 }

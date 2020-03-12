@@ -10,10 +10,20 @@ public class SecondMapMain : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ControlDialogue.instance.CheckMainConversation(()=>
+        Time.timeScale = 1;
+        bool hasDialogue = ControlDialogue.instance.CheckMainConversation(() =>
+        {
+            var key = GameRunningData.GetRunningData().GetPlaceDateKey();
+            if (GlobalData.MainLineConflicts[key].ConflictForm == ConflictKind.Battle)
+            {
+                FightMain.source = FightSource.MainLine;
+                SceneManager.LoadScene("Fight");
+            }
+        });
+        if (!hasDialogue)
         {
             SetSites();
-        });
+        }
     }
 
     void SetSites()

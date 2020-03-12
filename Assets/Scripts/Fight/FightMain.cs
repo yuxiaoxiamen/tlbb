@@ -12,38 +12,117 @@ public class FightMain : MonoBehaviour
     public static Dictionary<GameObject, Vector2Int> gridObjectToData; //通过格子对象获取格子的行列
     public static Dictionary<Vector2Int, GameObject> gridDataToObject; //通过格子的行列获取格子对象
     public static Dictionary<Vector2Int, Person> positionToPerson; //通过人物在战斗场景中的位置获取人物实例
-    public static List<Person> friendQueue = new List<Person>();//友方战斗的人
-    public static List<Person> enemyQueue = new List<Person>(); //敌方战斗的人
+    public static List<Person> friendQueue;//友方战斗的人
+    public static List<Person> enemyQueue;//敌方战斗的人
     public static int mapWidth = 21; //地图的最大列数
     public static int mapHeight = 13; //地图的最大行数
     public static bool isEnemyRound = false;
     public static readonly float speed = 0.1f;
     public static int finished = 0;
-
+    public static bool isGameOver;
+    public static FightSource source;
+    public static Person contestEnemy;
 
     // Start is called before the first frame update
     void Start()
     {
-        GlobalData.Init();
         CreateMap();
-        Person player = GlobalData.Persons[0];
-        player.RowCol = new Vector2Int(12, 3);
-        Person friend1 = GlobalData.Persons[1];
-        friend1.RowCol = new Vector2Int(12, 6);
-        Person enemy1 = GlobalData.Persons[2];
-        enemy1.RowCol = new Vector2Int(0, 6);
-        Person enemy2 = GlobalData.Persons[3];
-        enemy2.RowCol = new Vector2Int(0, 9);
+        isGameOver = false;
 
-        friendQueue.Add(player);
-        friendQueue.Add(friend1);
-        enemyQueue.Add(enemy1);
-        enemyQueue.Add(enemy2);
+        //GetFriendsAndEnemys();
+        //SetPersonRowCol(friendQueue, false);
+        //SetPersonRowCol(enemyQueue, true);
+        
+        TestData();
+
         positionToPerson = new Dictionary<Vector2Int, Person>();
         SetFightPerson(friendQueue);
         SetFightPerson(enemyQueue);
         RotateEnemys();
         FightPersonClick.SelectAPerson(GameRunningData.GetRunningData().player);
+        foreach (Person person in friendQueue)
+        {
+            GongBuffTool.EffectValueBuff(person);
+            GongBuffTool.HPBuffTrigger(person);
+            GongBuffTool.SevenTen(person);
+        }
+        foreach (Person person in enemyQueue)
+        {
+            GongBuffTool.EffectValueBuff(person);
+            GongBuffTool.HPBuffTrigger(person);
+            GongBuffTool.SevenTen(person);
+        }
+        GongBuffTool.EightennTen(friendQueue, enemyQueue, false);
+        GongBuffTool.EightennTen(enemyQueue, friendQueue, true);
+        GongBuffTool.CreateAllHalo(friendQueue, enemyQueue);
+        GongBuffTool.CreateAllHalo(enemyQueue, friendQueue);
+    }
+
+    void GetFriendsAndEnemys()
+    {
+        if(source == FightSource.MainLine)
+        {
+            var key = GameRunningData.GetRunningData().GetPlaceDateKey();
+            var conflict = GlobalData.MainLineConflicts[key];
+            if (conflict.IsZ)
+            {
+                friendQueue = conflict.ZFriends;
+                enemyQueue = conflict.ZEnemys;
+            }
+            else
+            {
+                friendQueue = conflict.FFriends;
+                enemyQueue = conflict.FEnemys;
+            }
+            friendQueue.AddRange(GameRunningData.GetRunningData().teammates);
+        }
+        else if(source == FightSource.Contest)
+        {
+            friendQueue = new List<Person>();
+            enemyQueue = new List<Person>
+            {
+                contestEnemy
+            };
+        }
+        else if(source == FightSource.Encounter)
+        {
+
+        }
+        
+        friendQueue.Add(GameRunningData.GetRunningData().player);
+    }
+
+    void SetPersonRowCol(List<Person> persons, bool isEnemy)
+    {
+        int maxPersonNum = persons.Count + 4;
+        int maxColNum = maxPersonNum / 2 + (maxPersonNum % 2);
+        int minCol = (mapWidth - maxColNum) / 2;
+        int maxCol = minCol + maxColNum;
+        HashSet<Vector2Int> rcSet = new HashSet<Vector2Int>();
+        for(int i = 0; i < persons.Count; ++i)
+        {
+            int row = 0;
+            if (isEnemy)
+            {
+                row = Random.Range(0, 2);
+            }
+            else
+            {
+                row = Random.Range(mapHeight - 2, mapHeight); 
+            }
+            int col = Random.Range(minCol, maxCol);
+            var rc = new Vector2Int(row, col);
+            if (!rcSet.Contains(rc))
+            {
+                persons[i].RowCol = rc;
+                rcSet.Add(rc);
+            }
+            else
+            {
+                --i;
+            }
+        }
+        
     }
 
     void RotateEnemys()
@@ -82,6 +161,15 @@ public class FightMain : MonoBehaviour
         }
     }
 
+    public static void OneRoundOver(Person person)
+    {
+       // AttackBuffTool.TriggerValueBuff(FightPersonClick.currentPerson);
+        AttackBuffTool.ReduceBuffDuration(person);
+        GongBuffTool.EffectDefaultBuff(person);
+        GongBuffTool.GongBuffRevertHPMP(person);
+        GongBuffTool.EffectRecoverHalo(person);
+    }
+
     public static void PlayerFinished()
     {
         CountPlayerOver();
@@ -93,6 +181,7 @@ public class FightMain : MonoBehaviour
         FightGUI.HideBattlePane();
 
         SelectNextPerson();
+        
     }
 
     public static void SetPersonHPSplider(Person person)
@@ -101,6 +190,12 @@ public class FightMain : MonoBehaviour
         RectTransform hpTransform = hPSpliderScript.HPObjectClone.transform.Find("HP").gameObject.GetComponent<RectTransform>();
         hpTransform.DOScale(new Vector3(person.CurrentHP * 1.0f / person.BaseData.HP,
             1, 1), 0.5f);
+    }
+
+    public static void DestoryHPSplider(Person person)
+    {
+        HPSplider hPSpliderScript = person.PersonObject.GetComponent<HPSplider>();
+        Destroy(hPSpliderScript.HPObjectClone);
     }
 
     void SetFightPerson(List<Person> personQueue)
@@ -131,9 +226,16 @@ public class FightMain : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isGameOver)
+        {
+            Time.timeScale = 0;
+            FightGUI.HideBattlePane();
+            FightGridClick.ClearPathAndRange();
+        }
         if (finished == friendQueue.Count)
         {
             finished = 0;
+            FightPersonClick.currentPerson = null;
             StartCoroutine(EnemyRound());
         }
     }
@@ -142,8 +244,11 @@ public class FightMain : MonoBehaviour
     {
         foreach(var person in friendQueue)
         {
-            person.ControlState = BattleControlState.Moving;
-            person.IsMoved = false;
+            if (!AttackBuffTool.IsPersonHasSkipBuff(person))
+            {
+                person.ControlState = BattleControlState.Moving;
+                person.IsMoved = false;
+            }
         }
         FightPersonClick.currentPerson = null;
     }
@@ -158,8 +263,9 @@ public class FightMain : MonoBehaviour
         foreach (Person enemy in enemyQueue)
         {
             CameraFollow.cameraFollowInstance.SetCameraFollowTarget(enemy);
+            FightAI.AIEnd = false;
             FightAI.NPCAI(enemy, friendQueue);
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitUntil(()=>FightAI.AIEnd);
         }
         ResumePersonState();
         DOTween.Clear();
@@ -176,6 +282,31 @@ public class FightMain : MonoBehaviour
                 break;
             }
         }
-
     }
+
+    void TestData()
+    {
+        friendQueue = new List<Person>();
+        enemyQueue = new List<Person>();
+        Person player = GameRunningData.GetRunningData().player;
+        player.RowCol = new Vector2Int(12, 3);
+        Person friend1 = GlobalData.Persons[1];
+        friend1.RowCol = new Vector2Int(12, 6);
+        Person enemy1 = GlobalData.Persons[2];
+        enemy1.RowCol = new Vector2Int(0, 6);
+        enemy1.CurrentMP = 10000;
+        Person enemy2 = GlobalData.Persons[3];
+        enemy2.RowCol = new Vector2Int(0, 9);
+        enemy2.CurrentMP = 10000;
+
+        friendQueue.Add(player);
+        friendQueue.Add(friend1);
+        enemyQueue.Add(enemy1);
+        enemyQueue.Add(enemy2);
+    }
+}
+
+public enum FightSource
+{
+    MainLine, Contest, Encounter
 }

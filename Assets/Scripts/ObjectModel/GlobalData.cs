@@ -1,19 +1,21 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 public class GlobalData
 {
     public static List<Person> Persons { get; set; } //所有人物实例
     private static List<AttackStyleFixData> StyleFixDatas { get; set; } //招式的固定数据
-    private static List<AttackStyleEffect> StyleEffects { get; set; } //所有招式的效果数据
-    public static List<InnerGong> InnerGongs { get; set; } //所有内功数据
+    public static List<AttackStyleEffect> StyleEffects { get; set; } //所有招式的效果数据
+    public static List<InnerGongFixData> InnerGongFixDatas { get; set; } //所有内功固定数据
     public static List<Good> Items { get; set; } //所有物品数据
     public static List<FirstPlace> FirstPlaces { get; set; } //所有一级地图中地点数据
     public static List<SecondPlace> SecondPlaces { get; set; } //所有场所的数据
     public static Dictionary<string, List<MainConversation>> MainConversations { get; set; } //主线剧情对话
     public static List<Interaction> Interactions { get; set; }//交互选项
+    public static Dictionary<string, MainLineConflict> MainLineConflicts { get; set; }
 
     static GlobalData()
     {
@@ -28,11 +30,63 @@ public class GlobalData
         ReadPersonData();
         ReadChatDialogueData();
         ReadMainDialogueData();
+        ReadMainLineConflictData();
     }
 
     public static void Init()
     {
 
+    }
+
+    static void ReadMainLineConflictData()
+    {
+        var jsonData = Resources.Load<TextAsset>("jsonData/主线冲突");
+        List<MainLineConflict> mainLineConflicts = JsonConvert.DeserializeObject<List<MainLineConflict>>(jsonData.text);
+        List<MainLineConflictJson> conflictJsons = JsonConvert.DeserializeObject<List<MainLineConflictJson>>(jsonData.text);
+        MainLineConflicts = new Dictionary<string, MainLineConflict>();
+        for (int i = 0; i < conflictJsons.Count; ++i)
+        {
+            var mainLineConflict = mainLineConflicts[i];
+            mainLineConflict.ZFriends = RevertConflictString(conflictJsons[i].ZFriendsString);
+            mainLineConflict.ZEnemys = RevertConflictString(conflictJsons[i].ZEnemysString);
+            mainLineConflict.FFriends = RevertConflictString(conflictJsons[i].FFriendsString);
+            mainLineConflict.FEnemys = RevertConflictString(conflictJsons[i].FEnemysString);
+            var key = conflictJsons[i].PlaceString + "/" + conflictJsons[i].DateString;
+            MainLineConflicts.Add(key, mainLineConflict);
+        }
+    }
+
+    private static List<Person> RevertConflictString(string s)
+    {
+        List<Person> persons = new List<Person>();
+        if(s != "")
+        {
+            string[] ss = s.Split(',');
+            foreach (string sid in ss)
+            {
+                if (sid.Contains("*"))
+                {
+                    string[] splits = sid.Split('*');
+                    int num = int.Parse(splits[0]);
+                    int id = int.Parse(splits[1]);
+                    for(int i = 1; i < num; ++i)
+                    {
+                        persons.Add(CopyAPerson(Persons[id]));
+                    }
+                    persons.Add(Persons[id]);
+                }
+                else
+                {
+                    persons.Add(Persons[int.Parse(sid)]);
+                }
+            }
+        }
+        return persons;
+    }
+
+    private static Person CopyAPerson(Person p)
+    {
+        return (Person)p.Clone();
     }
 
     static void ReadInteractionData()
@@ -170,7 +224,7 @@ public class GlobalData
     static void ReadInnerGongData()
     {
         var jsonData = Resources.Load<TextAsset>("jsonData/内功");
-        InnerGongs = JsonConvert.DeserializeObject<List<InnerGong>>(jsonData.text);
+        InnerGongFixDatas = JsonConvert.DeserializeObject<List<InnerGongFixData>>(jsonData.text);
         List<GongJson> gongJsons = JsonConvert.DeserializeObject<List<GongJson>>(jsonData.text);
         for(int i = 0; i < gongJsons.Count; ++i)
         {
@@ -183,11 +237,11 @@ public class GlobalData
                 {
                     perTalents.Add((Talent)Enum.Parse(typeof(Talent), p, true));
                 }
-                InnerGongs[i].PerTalentGain = perTalents;
+                InnerGongFixDatas[i].PerTalentGain = perTalents;
             }
             else
             {
-                InnerGongs[i].PerTalentGain = new List<Talent>();
+                InnerGongFixDatas[i].PerTalentGain = new List<Talent>();
             }
 
             string fts = gongJsons[i].FullTalent;
@@ -199,11 +253,11 @@ public class GlobalData
                 {
                     fullTalents.Add((Talent)Enum.Parse(typeof(Talent), f, true));
                 }
-                InnerGongs[i].FullTalentGain = fullTalents;
+                InnerGongFixDatas[i].FullTalentGain = fullTalents;
             }
             else
             {
-                InnerGongs[i].FullTalentGain = new List<Talent>();
+                InnerGongFixDatas[i].FullTalentGain = new List<Talent>();
             }
         }
     }
@@ -232,7 +286,11 @@ public class GlobalData
             }
             for (int j = 0; j < gongs.Length; ++j)
             {
-                innerGongs.Add(InnerGongs[int.Parse(gongs[j])]);
+                InnerGong innerGongData = new InnerGong()
+                {
+                    FixData = InnerGongFixDatas[int.Parse(gongs[j])]
+                };
+                innerGongs.Add(innerGongData);
             }
             for (int j = 0; j < interactionDatas.Length; ++j)
             {
@@ -245,11 +303,12 @@ public class GlobalData
             {
                 BaseData = p,
                 SelectedAttackStyle = attackStyleDatas[0],
-                SelectedInnerGong = InnerGongs[0],
+                SelectedInnerGong = innerGongs[0],
                 CurrentHP = p.HP,
                 CurrentMP = p.MP,
                 CurrentEnergy = p.Energy,
-                CurrentPlaceString = p.InitPlaceString
+                CurrentPlaceString = p.InitPlaceString,
+                EquippedWeapon = Items[p.WeaponId]
             };
             Persons.Add(person);
         }
@@ -284,4 +343,14 @@ class PersonsJson
 class EffectsJson
 {
     public string StyleEffects { get; set; }
+}
+
+class MainLineConflictJson
+{
+    public string PlaceString { get; set; }
+    public string DateString { get; set; }
+    public string ZFriendsString { get; set; }
+    public string ZEnemysString { get; set; }
+    public string FFriendsString { get; set; }
+    public string FEnemysString { get; set; }
 }

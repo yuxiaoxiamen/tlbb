@@ -23,6 +23,22 @@ public class RevokeResponse : MonoBehaviour
                 
                 AttackTool.ClearAttackRange();
                 AttackTool.ClearAttackDistance();
+                FightPersonClick.SelectAPerson(FightPersonClick.currentPerson);
+                FightGUI.ShowBattlePane(FightPersonClick.currentPerson);
+            }
+            else if(FightPersonClick.currentPerson != null && FightPersonClick.currentPerson.ControlState == BattleControlState.Treating)
+            {
+                if (FightPersonClick.currentPerson.IsMoved)
+                {
+                    FightPersonClick.currentPerson.ControlState = BattleControlState.Moved;
+                }
+                else
+                {
+                    FightPersonClick.currentPerson.ControlState = BattleControlState.Moving;
+                }
+
+                TreatTool.ResumeGrid();
+                FightPersonClick.SelectAPerson(FightPersonClick.currentPerson);
                 FightGUI.ShowBattlePane(FightPersonClick.currentPerson);
             }
             else if (FightGUI.isSwitching)
