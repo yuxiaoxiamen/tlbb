@@ -131,6 +131,11 @@ public class Person : ICloneable
         return (int)(GameConfig.PerGongExperience * (BaseData.Wu * GameConfig.WuXingAddition * 1.0f / 100));
     }
 
+    public void PromoteGong()
+    {
+        SelectedInnerGong.AddExperience(CountGongExperience());
+    }
+
     public object Clone()
     {
         object obj = MemberwiseClone();

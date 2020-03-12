@@ -23,9 +23,9 @@ public class MapGridClick : MonoBehaviour
                 endRc = firstPlace.Entry;
             }
             DOTween.KillAll();
-            FirstMapMain.pathIndex = 0;
+            //FirstMapMain.pathIndex = 0;
             List<Vector2Int> movePath = PersonMoveTool.FindPath(FirstMapMain.player.RowCol, endRc, FirstMapMain.GetAllGrids(), GetMapObstacles(), false);
-            FirstMapMain.MovePerson(movePath, FirstMapMain.player, 0.2f, firstPlace);
+            //FirstMapMain.MovePerson(movePath, FirstMapMain.player, 0.2f, firstPlace);
         }
     }
 

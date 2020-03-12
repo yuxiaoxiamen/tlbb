@@ -9,7 +9,7 @@ public class TimeGoSubject
 
     private TimeGoSubject()
     {
-
+        persons = new List<Person>();
     }
 
     public static TimeGoSubject GetTimeSubject()
@@ -32,6 +32,7 @@ public class TimeGoSubject
         foreach(Person person in persons)
         {
             person.UpdatePlace();
+            person.PromoteGong();
         }
     }
     
