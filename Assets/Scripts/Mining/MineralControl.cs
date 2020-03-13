@@ -33,7 +33,7 @@ public class MineralControl : MonoBehaviour
         startPanel.transform.Find("Button").GetComponent<Button>().onClick.AddListener(() =>
         {
             SetManual();
-            CountDown.isGameOver = false;
+            MiningCountDown.isGameOver = false;
             sum = 0;
             for (int i = 1; i <= Manual.CopperNumber + 1; ++i)
             {
