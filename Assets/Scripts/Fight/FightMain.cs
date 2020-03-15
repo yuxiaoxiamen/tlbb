@@ -78,7 +78,21 @@ public class FightMain : MonoBehaviour
                 friendQueue = conflict.FFriends;
                 enemyQueue = conflict.FEnemys;
             }
-            friendQueue.AddRange(GameRunningData.GetRunningData().teammates);
+            var teammates = GameRunningData.GetRunningData().teammates;
+            foreach (Person teammate in teammates)
+            {
+                if (enemyQueue.Contains(teammate))
+                {
+                    teammates.Remove(teammate);
+                }
+                else
+                {
+                    if (!friendQueue.Contains(teammate))
+                    {
+                        friendQueue.Add(teammate);
+                    }
+                }
+            }
         }
         else if(source == FightSource.Contest)
         {

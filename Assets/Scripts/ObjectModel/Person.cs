@@ -71,9 +71,9 @@ public class Person : ICloneable
         return BaseData.Jin;
     }
 
-    public void UpdatePlace()
+    public void UpdatePlace(string placeString)
     {
-
+        CurrentPlaceString = placeString;
     }
 
     public void ChangeHP(int value, bool isAdd)
@@ -116,6 +116,26 @@ public class Person : ICloneable
         }
     }
 
+    public void ChangeEnergy(int value, bool isAdd)
+    {
+        if (isAdd)
+        {
+            CurrentEnergy += value;
+            if (CurrentEnergy >= BaseData.Energy)
+            {
+                CurrentEnergy = BaseData.Energy;
+            }
+        }
+        else
+        {
+            CurrentEnergy -= value;
+            if (CurrentEnergy <= 0)
+            {
+                CurrentEnergy = 0;
+            }
+        }
+    }
+
     public int MedicalSkillResumeHP()
     {
         return (int)(BaseData.MedicalSkill / GameConfig.MaxMedicalSkill * 1.0f * GameConfig.PerMedicalSkillResume);
@@ -134,6 +154,23 @@ public class Person : ICloneable
     public void PromoteGong()
     {
         SelectedInnerGong.AddExperience(CountGongExperience());
+    }
+
+    public void PromoteAttackStyle()
+    {
+        foreach(AttackStyle style in BaseData.AttackStyles)
+        {
+            style.AddExperience(CountStyleExperience());
+        }
+    }
+
+    public void HpMpEnergyChange()
+    {
+        int value = (int)(BaseData.HP * 0.15f);
+        ChangeHP(value, true);
+        value = (int)(BaseData.MP * 0.15f);
+        ChangeMP(value, true);
+        ChangeEnergy(5, false);
     }
 
     public object Clone()

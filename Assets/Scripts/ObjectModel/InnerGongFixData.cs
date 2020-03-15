@@ -19,5 +19,3 @@ public class InnerGongFixData
     public int FirstMaxProficiency { get; set; }
     public int NextMaxRatio { get; set; }
 }
-
-public enum Talent { Bi, Gen, Wu, Shen, Jing}

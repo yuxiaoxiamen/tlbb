@@ -53,4 +53,53 @@ public class GameDate
             }
         }
     }
+
+    public int CompareTo(GameDate date)
+    {
+        if (Year > date.Year)
+        {
+            return 1;
+        }
+        else if (Year < date.Year)
+        {
+            return -1;
+        }
+        else
+        {
+            if (Month > date.Month)
+            {
+                return 1;
+            }
+            else if (Month < date.Month)
+            {
+                return -1;
+            }
+            else
+            {
+                if (Day > date.Day)
+                {
+                    return 1;
+                }
+                else if (Day < date.Day)
+                {
+                    return -1;
+                }
+                else
+                {
+                    if (Slot > date.Slot)
+                    {
+                        return 1;
+                    }
+                    else if (Slot < date.Slot)
+                    {
+                        return -1;
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+                }
+            }
+        }
+    }
 }
