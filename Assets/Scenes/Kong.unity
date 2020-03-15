@@ -149,7 +149,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -418.6, y: 15.1}
+  m_AnchoredPosition: {x: -371, y: 14}
   m_SizeDelta: {x: 25.03, y: 30.86}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &31470660
@@ -275,7 +275,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 364.7, y: 198}
+  m_AnchoredPosition: {x: 305, y: 176}
   m_SizeDelta: {x: 100.6, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &78763419
@@ -1074,7 +1074,7 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -2812,7 +2812,7 @@ PrefabInstance:
     - target: {fileID: 5403630710221819840, guid: 02c4d57fffa07ca42bdcc285d5d78c83,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02c4d57fffa07ca42bdcc285d5d78c83, type: 3}
@@ -2853,7 +2853,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -45.2, y: 15.1}
+  m_AnchoredPosition: {x: -44, y: 14}
   m_SizeDelta: {x: 25.03, y: 30.86}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1959863604
