@@ -61,6 +61,13 @@ public class FightGUI : MonoBehaviour
         {
             text = GetStyleText(lookingPerson.BaseData.AttackStyles[int.Parse(nameSplits[1])]);
         }
+        else if(nameSplits[0] == "buff")
+        {
+            AttackBuff buff = lookingPerson.AttackBuffs[int.Parse(nameSplits[1])];
+            text = buff.StyleEffect.Name + Environment.NewLine +
+                "剩余回合："+buff.Duration+ Environment.NewLine+
+                buff.StyleEffect.Detail;
+        }
         else
         {
             text = GetGongText(lookingPerson.SelectedInnerGong);
@@ -84,7 +91,7 @@ public class FightGUI : MonoBehaviour
             rectTransform.localPosition = Vector3.zero;
             rectTransform.localRotation = Quaternion.identity;
             rectTransform.localScale = Vector3.one;
-            iconObject.name = i+"";
+            iconObject.name = "buff_"+i;
         }
     }
 
@@ -184,7 +191,7 @@ public class FightGUI : MonoBehaviour
         });
         restButton.GetComponent<Button>().onClick.AddListener(delegate {
             FightMain.OneRoundOver(FightPersonClick.currentPerson);
-            FightMain.PlayerFinished();
+            FightMain.instance.PlayerFinished();
         });
         switchStyleButton.GetComponent<Button>().onClick.AddListener(SwitchStyleListener);
         switchInnerButton.GetComponent<Button>().onClick.AddListener(SwitchGongListener);
@@ -227,7 +234,7 @@ public class FightGUI : MonoBehaviour
         battleControlObject.SetActive(false);
     }
 
-    void AddButtonInScrollPane (GameObject buttonPrefab, string text, int i)
+    void AddButtonInScrollPane (GameObject buttonPrefab, string text, int i, bool isSelected)
     {
         GameObject button = Instantiate(buttonPrefab);
         RectTransform buttonTransform = button.GetComponent<RectTransform>();
@@ -237,6 +244,10 @@ public class FightGUI : MonoBehaviour
         buttonTransform.localScale = Vector3.one;
         button.name = i + "";
         button.transform.Find("Text").GetComponent<Text>().text = text;
+        if (isSelected)
+        {
+            button.GetComponent<Image>().color = Color.green;
+        }
     }
 
     void FillAttackStyle()
@@ -244,39 +255,43 @@ public class FightGUI : MonoBehaviour
         List<AttackStyle> styles = FightPersonClick.currentPerson.BaseData.AttackStyles;
         for (int i = 0; i < styles.Count; ++i)
         {
-            if(FightPersonClick.currentPerson.EquippedWeapon != null)
+            bool isSelected = false;
+            if(styles[i] == FightPersonClick.currentPerson.SelectedAttackStyle)
             {
-                switch (FightPersonClick.currentPerson.EquippedWeapon.Type)
-                {
-                    case ItemKind.Sword:
-                        if (styles[i].FixData.WeaponKind == AttackWeaponKind.Sword)
-                        {
-                            AddButtonInScrollPane(styleButtonPrefab, GetStyleText(styles[i]), i);
-                        }
-                        break;
-                    case ItemKind.Knife:
-                        if (styles[i].FixData.WeaponKind == AttackWeaponKind.Knife)
-                        {
-                            AddButtonInScrollPane(styleButtonPrefab, GetStyleText(styles[i]), i);
-                        }
-                        break;
-                    case ItemKind.Rod:
-                        if (styles[i].FixData.WeaponKind == AttackWeaponKind.Rod)
-                        {
-                            AddButtonInScrollPane(styleButtonPrefab, GetStyleText(styles[i]), i);
-                        }
-                        break;
-                }
+                isSelected = true;
             }
-            else
-            {
-                if (styles[i].FixData.WeaponKind == AttackWeaponKind.Finger ||
-                    styles[i].FixData.WeaponKind == AttackWeaponKind.Palm ||
-                    styles[i].FixData.WeaponKind == AttackWeaponKind.Fist)
-                {
-                    AddButtonInScrollPane(styleButtonPrefab, GetStyleText(styles[i]), i);
-                }
-            }
+            AddButtonInScrollPane(styleButtonPrefab, GetStyleText(styles[i]), i, isSelected);
+            //if (styles[i].FixData.WeaponKind == AttackWeaponKind.Finger ||
+            //        styles[i].FixData.WeaponKind == AttackWeaponKind.Palm ||
+            //        styles[i].FixData.WeaponKind == AttackWeaponKind.Fist)
+            //{
+            //    AddButtonInScrollPane(styleButtonPrefab, GetStyleText(styles[i]), i);
+            //    continue;
+            //}
+            //if (FightPersonClick.currentPerson.EquippedWeapon != null)
+            //{
+            //    switch (FightPersonClick.currentPerson.EquippedWeapon.Type)
+            //    {
+            //        case ItemKind.Sword:
+            //            if (styles[i].FixData.WeaponKind == AttackWeaponKind.Sword)
+            //            {
+            //                AddButtonInScrollPane(styleButtonPrefab, GetStyleText(styles[i]), i);
+            //            }
+            //            break;
+            //        case ItemKind.Knife:
+            //            if (styles[i].FixData.WeaponKind == AttackWeaponKind.Knife)
+            //            {
+            //                AddButtonInScrollPane(styleButtonPrefab, GetStyleText(styles[i]), i);
+            //            }
+            //            break;
+            //        case ItemKind.Rod:
+            //            if (styles[i].FixData.WeaponKind == AttackWeaponKind.Rod)
+            //            {
+            //                AddButtonInScrollPane(styleButtonPrefab, GetStyleText(styles[i]), i);
+            //            }
+            //            break;
+            //    }
+            //}
         }
     }
 
@@ -297,7 +312,12 @@ public class FightGUI : MonoBehaviour
         List<InnerGong> gongs = FightPersonClick.currentPerson.BaseData.InnerGongs;
         for (int i = 0; i < gongs.Count; ++i)
         {
-            AddButtonInScrollPane(gongButtonPrefab, GetGongText(gongs[i]), i);
+            bool isSelected = false;
+            if (gongs[i] == FightPersonClick.currentPerson.SelectedInnerGong)
+            {
+                isSelected = true;
+            }
+            AddButtonInScrollPane(gongButtonPrefab, GetGongText(gongs[i]), i, isSelected);
         }
     }
 

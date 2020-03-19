@@ -8,6 +8,7 @@ public class FightAI
 {
     public static List<Person> Enemys { get; set; }
     public static bool AIEnd;
+
     public static void NPCAI(Person person, List<Person> enemys)
     {
         if (!AttackBuffTool.IsPersonHasSkipBuff(person))
@@ -60,7 +61,7 @@ public class FightAI
         }
         else
         {
-            AIEnd = true;
+            NPCRest(person);
         }
     }
 
@@ -126,7 +127,7 @@ public class FightAI
         }
         else
         {
-            AIEnd = true;
+            NPCRest(person);
         }
     }
 

@@ -25,34 +25,38 @@ public class FightPersonClick : MonoBehaviour
         if(FightGUI.isLookingInfo && Input.GetMouseButtonDown(0))
         {
             FightGUI.HideInfoPanel();
+            FightGUI.HideDetailPanel();
         }
     }
 
     private void OnMouseDown()
     {
-        Person p = GlobalData.Persons[int.Parse(gameObject.name)];
-        if (currentPerson != null && currentPerson.ControlState == BattleControlState.Attacking
-            && AttackTool.attackRange.Count > 0)
+        if (!GUIMouseHandle.isMouseOver)
         {
-            if (AttackTool.AttackEnemys(currentPerson, FightMain.enemyQueue))
+            Person p = GlobalData.Persons[int.Parse(gameObject.name)];
+            if (currentPerson != null && currentPerson.ControlState == BattleControlState.Attacking
+                && AttackTool.attackRange.Count > 0)
             {
-                FightMain.RotatePerson(currentPerson,
-                    PersonMoveTool.GetAngle(
-                        currentPerson.PersonObject.transform.position, transform.position));
-                FightMain.PlayerFinished();
+                if (AttackTool.AttackEnemys(currentPerson, FightMain.enemyQueue))
+                {
+                    FightMain.RotatePerson(currentPerson,
+                        PersonMoveTool.GetAngle(
+                            currentPerson.PersonObject.transform.position, transform.position));
+                    FightMain.instance.PlayerFinished();
+                }
             }
-        }
-        else if(currentPerson != null && currentPerson.ControlState == BattleControlState.Treating)
-        {
-            int value = currentPerson.MedicalSkillResumeHP();
-            AttackTool.PersonChangeHP(p, value, true);
-            TreatTool.ResumeGrid();
-            FightMain.OneRoundOver(currentPerson);
-            FightMain.PlayerFinished();
-        }
-        else
-        {
-            SelectAPerson(p);
+            else if (currentPerson != null && currentPerson.ControlState == BattleControlState.Treating)
+            {
+                int value = currentPerson.MedicalSkillResumeHP();
+                AttackTool.PersonChangeHP(p, value, true);
+                TreatTool.ResumeGrid();
+                FightMain.OneRoundOver(currentPerson);
+                FightMain.instance.PlayerFinished();
+            }
+            else
+            {
+                SelectAPerson(p);
+            }
         }
     }
 
@@ -108,7 +112,10 @@ public class FightPersonClick : MonoBehaviour
                 FightGUI.ShowBattlePane(p);
             }
             
-            FightGridClick.SwitchGridColor(FightMain.gridDataToObject[currentPerson.RowCol], FightGridClick.selectColor);
+            if(p.ControlState != BattleControlState.End)
+            {
+                FightGridClick.SwitchGridColor(FightMain.gridDataToObject[currentPerson.RowCol], FightGridClick.selectColor);
+            }
         }
     }
 }

@@ -31,7 +31,7 @@ public class AttackStyle
 
     public void AddExperience(int e)
     {
-        if(Rank < 10)
+        if(Rank < GameConfig.MaxRank)
         {
             Proficiency += e;
             if (Proficiency >= GetMaxProFiciency())

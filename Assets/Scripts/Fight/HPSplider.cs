@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HPSplider : MonoBehaviour
 {
@@ -33,5 +34,10 @@ public class HPSplider : MonoBehaviour
         //把物体坐标转换为屏幕坐标，修改偏移量
         EnemySceenPosition = Camera.main.WorldToScreenPoint(transform.position);
         HPObjectClone.transform.position = EnemySceenPosition;
+    }
+
+    public void SetSliderColor()
+    {
+        HPObjectClone.transform.Find("HP").GetComponent<Image>().color = Color.green;
     }
 }

@@ -11,7 +11,7 @@ public class AttackBuffTool
         {
             if (effect.Type == EffectType.DeBuff)
             {
-                AddBuff(enemy, effect);
+                TriggerValueDeBuff(enemy, AddBuff(enemy, effect));
             }
         }
     }
@@ -23,18 +23,38 @@ public class AttackBuffTool
         {
             if (effect.Type == EffectType.Buff)
             {
-                AddBuff(attacker, effect);
+                TriggerValueBuff(attacker, AddBuff(attacker, effect));
             }
         }
     }
 
-    public static void AddBuff(Person person, AttackStyleEffect effect)
+    public static AttackBuff AddBuff(Person person, AttackStyleEffect effect)
     {
-        person.AttackBuffs.Add(new AttackBuff()
+        var buff = new AttackBuff()
         {
             StyleEffect = effect,
-            Duration = effect.TimeValue
-        });
+            Duration = effect.TimeValue+1
+        };
+        bool flag = false;
+        if (effect.Id == 2 || effect.Id == 3 || effect.Id == 4 || effect.Id == 19 || effect.Id == 20)
+        {
+            foreach(AttackBuff bf in person.AttackBuffs)
+            {
+                if(bf.StyleEffect.Id == effect.Id)
+                {
+                    bf.Duration += effect.TimeValue;
+                    flag = true;
+                    break;
+                }
+            }
+            
+        }
+        if (!flag)
+        {
+            person.AttackBuffs.Add(buff);
+        }
+        
+        return buff;
     }
 
     public static void ReduceBuffDuration(Person person)
@@ -145,108 +165,122 @@ public class AttackBuffTool
         }
     }
 
-    public static void TriggerValueBuff(Person person)
+    public static void TriggerValueBuff(Person person, AttackBuff buff)
+    {
+        AttackStyleEffect effect = buff.StyleEffect;
+        int changeValue = 0;
+        switch (effect.Id)
+        {
+            case 13:
+                buff.AmountOfChange = effect.Value;
+                person.MoveRank += effect.Value;
+                break;
+            case 15:
+                changeValue = effect.Value;
+                person.Dodge += changeValue;
+                buff.AmountOfChange = changeValue;
+                break;
+            case 16:
+                changeValue = effect.Value;
+                person.Crit += changeValue;
+                buff.AmountOfChange = changeValue;
+                break;
+            case 17:
+                changeValue = effect.Value;
+                person.Counterattack += changeValue;
+                buff.AmountOfChange = changeValue;
+                break;
+            case 18:
+                changeValue = (int)(person.Defend * effect.Value * 1.0 / 100);
+                person.Defend += changeValue;
+                buff.AmountOfChange = changeValue;
+                break;
+            case 21:
+                changeValue = effect.Value;
+                person.AttackPowerRate += changeValue;
+                buff.AmountOfChange = changeValue;
+                break;
+            case 22:
+                List<AttackBuff> buffs = new List<AttackBuff>();
+                foreach (AttackBuff bf in person.AttackBuffs)
+                {
+                    if (bf.StyleEffect.Type == EffectType.Buff)
+                    {
+                        buffs.Add(bf);
+                    }
+                    else
+                    {
+                        ResumeValueBuff(person, bf);
+                    }
+                }
+                person.AttackBuffs = buffs;
+                break;
+        }
+    }
+
+    public static void TriggerValueDeBuff(Person person, AttackBuff buff)
+    {
+        AttackStyleEffect effect = buff.StyleEffect;
+        int changeValue = 0;
+        switch (effect.Id)
+        {
+            case 1:
+                changeValue = -effect.Value;
+                person.MoveRank += changeValue;
+                buff.AmountOfChange = changeValue;
+                break;
+            case 5:
+                changeValue = -effect.Value;
+                person.Accuracy += changeValue;
+                buff.AmountOfChange = changeValue;
+                break;
+            case 6:
+                changeValue = -(int)(person.Defend * effect.Value * 1.0 / 100);
+                person.Defend += changeValue;
+                buff.AmountOfChange = changeValue;
+                break;
+            case 7:
+                changeValue = -effect.Value;
+                person.AttackPowerRate += changeValue;
+                buff.AmountOfChange = changeValue;
+                break;
+            case 8:
+                changeValue = -effect.Value;
+                person.Dodge += changeValue;
+                buff.AmountOfChange = changeValue;
+                break;
+            case 10:
+                List<AttackBuff> debuffs = new List<AttackBuff>();
+                foreach (AttackBuff bf in person.AttackBuffs)
+                {
+                    if (bf.StyleEffect.Type == EffectType.DeBuff)
+                    {
+                        debuffs.Add(bf);
+                    }
+                    else
+                    {
+                        ResumeValueBuff(person, bf);
+                    }
+                }
+                person.AttackBuffs = debuffs;
+                break;
+        }
+    }
+
+    public static void ReduceHPMP(Person person)
     {
         foreach (AttackBuff buff in person.AttackBuffs)
         {
             AttackStyleEffect effect = buff.StyleEffect;
-            if(buff.Duration == effect.TimeValue)
+            if (effect.Id == 2 || effect.Id == 4)
             {
-                int changeValue = 0;
-                switch (effect.Id)
-                {
-                    case 1:
-                        changeValue = -effect.Value;
-                        person.MoveRank += changeValue;
-                        buff.AmountOfChange = changeValue;
-                        break;
-                    case 5:
-                        changeValue = -effect.Value;
-                        person.Accuracy += changeValue;
-                        buff.AmountOfChange = changeValue;
-                        break;
-                    case 6:
-                        changeValue = -(int)(person.Defend * effect.Value * 1.0 / 100);
-                        person.Defend += changeValue;
-                        buff.AmountOfChange = changeValue;
-                        break;
-                    case 7:
-                        changeValue = -effect.Value;
-                        person.AttackPowerRate += changeValue;
-                        buff.AmountOfChange = changeValue;
-                        break;
-                    case 8:
-                        changeValue = -effect.Value;
-                        person.Dodge += changeValue;
-                        buff.AmountOfChange = changeValue;
-                        break;
-                    case 10:
-                        List<AttackBuff> debuffs = new List<AttackBuff>();
-                        foreach (AttackBuff bf in person.AttackBuffs)
-                        {
-                            if (bf.StyleEffect.Type == EffectType.DeBuff)
-                            {
-                                debuffs.Add(bf);
-                            }
-                        }
-                        person.AttackBuffs.Clear();
-                        person.AttackBuffs = debuffs;
-                        break;
-                    case 13:
-                        buff.AmountOfChange = effect.Value;
-                        person.MoveRank += effect.Value;
-                        break;
-                    case 15:
-                        changeValue = effect.Value;
-                        person.Dodge += changeValue;
-                        buff.AmountOfChange = changeValue;
-                        break;
-                    case 16:
-                        changeValue = effect.Value;
-                        person.Crit += changeValue;
-                        buff.AmountOfChange = changeValue;
-                        break;
-                    case 17:
-                        changeValue = effect.Value;
-                        person.Counterattack += changeValue;
-                        buff.AmountOfChange = changeValue;
-                        break;
-                    case 18:
-                        changeValue = (int)(person.Defend * effect.Value * 1.0 / 100);
-                        person.Defend += changeValue;
-                        buff.AmountOfChange = changeValue;
-                        break;
-                    case 21:
-                        changeValue = effect.Value;
-                        person.AttackPowerRate += changeValue;
-                        buff.AmountOfChange = changeValue;
-                        break;
-                    case 22:
-                        List<AttackBuff> buffs = new List<AttackBuff>();
-                        foreach (AttackBuff bf in person.AttackBuffs)
-                        {
-                            if (bf.StyleEffect.Type == EffectType.Buff)
-                            {
-                                buffs.Add(bf);
-                            }
-                        }
-                        person.AttackBuffs.Clear();
-                        person.AttackBuffs = buffs;
-                        break;
-                }
+                int changeValue = (int)(person.CurrentHP * (effect.Value * 1.0 / 100));
+                AttackTool.PersonChangeHP(person, changeValue, false);
             }
-            else
+            if (effect.Id == 3)
             {
-                if(effect.Id == 2 || effect.Id == 4)
-                {
-                    int changeValue = (int)(person.CurrentHP * (effect.Value * 1.0 / 100));
-                    AttackTool.PersonChangeHP(person, changeValue, false);
-                }
-                if(effect.Id == 3)
-                {
-                    int changeValue = (int)(person.CurrentMP * (effect.Value * 1.0 / 100));
-                    AttackTool.PersonChangeMP(person, changeValue, false);
-                }
+                int changeValue = (int)(person.CurrentMP * (effect.Value * 1.0 / 100));
+                AttackTool.PersonChangeMP(person, changeValue, false);
             }
         }
     }

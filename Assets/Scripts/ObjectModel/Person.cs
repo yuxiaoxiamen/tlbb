@@ -153,7 +153,43 @@ public class Person : ICloneable
 
     public void PromoteGong()
     {
-        SelectedInnerGong.AddExperience(CountGongExperience());
+        if (SelectedInnerGong.AddExperience(CountGongExperience()))
+        {
+            BaseAttributeIncrease(SelectedInnerGong.FixData.PerHPGain, 
+                SelectedInnerGong.FixData.PerMPGain, SelectedInnerGong.FixData.PerTalentGain);
+            if(SelectedInnerGong.Rank == GameConfig.MaxRank)
+            {
+                BaseAttributeIncrease(SelectedInnerGong.FixData.FullHPGain, 
+                    SelectedInnerGong.FixData.FullMPGain, SelectedInnerGong.FixData.FullTalentGain);
+            }
+        }
+    }
+
+    private void BaseAttributeIncrease(int hp, int mp, List<Talent> talents)
+    {
+        BaseData.HP += hp;
+        BaseData.MP += mp;
+        foreach (Talent talent in talents)
+        {
+            switch (talent.Name)
+            {
+                case TalentName.Bi:
+                    BaseData.Bi += talent.Number;
+                    break;
+                case TalentName.Gen:
+                    BaseData.Gen += talent.Number;
+                    break;
+                case TalentName.Wu:
+                    BaseData.Wu += talent.Number;
+                    break;
+                case TalentName.Shen:
+                    BaseData.Shen += talent.Number;
+                    break;
+                case TalentName.Jing:
+                    BaseData.Jin += talent.Number;
+                    break;
+            }
+        }
     }
 
     public void PromoteAttackStyle()

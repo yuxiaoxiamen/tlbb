@@ -36,35 +36,38 @@ public class FightGridClick : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (FightPersonClick.currentPerson != null && FightPersonClick.currentPerson.ControlState == BattleControlState.Attacking 
+        if (!GUIMouseHandle.isMouseOver)
+        {
+            if (FightPersonClick.currentPerson != null && FightPersonClick.currentPerson.ControlState == BattleControlState.Attacking
             && AttackTool.attackRange.Count > 0)
-        {
-            if (AttackTool.AttackEnemys(FightPersonClick.currentPerson, FightMain.enemyQueue))
             {
-                FightMain.RotatePerson(FightPersonClick.currentPerson, 
-                    PersonMoveTool.GetAngle(
-                        FightPersonClick.currentPerson.PersonObject.transform.position, transform.position));
-                FightMain.PlayerFinished();
+                if (AttackTool.AttackEnemys(FightPersonClick.currentPerson, FightMain.enemyQueue))
+                {
+                    FightMain.RotatePerson(FightPersonClick.currentPerson,
+                        PersonMoveTool.GetAngle(
+                            FightPersonClick.currentPerson.PersonObject.transform.position, transform.position));
+                    FightMain.instance.PlayerFinished();
+                }
             }
-        }
-        else if (movePath.Count != 0) //当前人物可移动的格子
-        {
-            SwitchGridColor(FightMain.gridDataToObject[FightPersonClick.currentPerson.RowCol], defaultColor);
-            
-            ChangeMoveRangeColor(FightPersonClick.currentPerson, defaultColor);
-            FightPersonClick.currentPerson.ControlState = BattleControlState.Moved;
-            FightPersonClick.currentPerson.IsMoved = true;
+            else if (movePath.Count != 0) //当前人物可移动的格子
+            {
+                SwitchGridColor(FightMain.gridDataToObject[FightPersonClick.currentPerson.RowCol], defaultColor);
 
-            FightMain.positionToPerson.Remove(FightPersonClick.currentPerson.RowCol);
-            FightMain.positionToPerson.Add(FightMain.gridObjectToData[gameObject], FightPersonClick.currentPerson);
-            movePreRC= FightPersonClick.currentPerson.RowCol;
-            movePreQuaternion = FightPersonClick.currentPerson.PersonObject.transform.rotation;
-            PersonMoveTool.MovePerson(movePath, FightPersonClick.currentPerson, FightMain.speed, FightGUI.ShowBattlePane);
-            SwitchGridColor(gameObject, selectColor);
-            ChangePathColor(defaultColor);
-            movePath.Clear();
-            FightGUI.HideBattlePane();
-            SwitchGridColor(gameObject, selectColor);
+                ChangeMoveRangeColor(FightPersonClick.currentPerson, defaultColor);
+                FightPersonClick.currentPerson.ControlState = BattleControlState.Moved;
+                FightPersonClick.currentPerson.IsMoved = true;
+
+                FightMain.positionToPerson.Remove(FightPersonClick.currentPerson.RowCol);
+                FightMain.positionToPerson.Add(FightMain.gridObjectToData[gameObject], FightPersonClick.currentPerson);
+                movePreRC = FightPersonClick.currentPerson.RowCol;
+                movePreQuaternion = FightPersonClick.currentPerson.PersonObject.transform.rotation;
+                PersonMoveTool.MovePerson(movePath, FightPersonClick.currentPerson, FightMain.speed, FightGUI.ShowBattlePane);
+                SwitchGridColor(gameObject, selectColor);
+                ChangePathColor(defaultColor);
+                movePath.Clear();
+                FightGUI.HideBattlePane();
+                SwitchGridColor(gameObject, selectColor);
+            }
         }
     }
 

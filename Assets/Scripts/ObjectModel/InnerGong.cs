@@ -38,16 +38,18 @@ public class InnerGong
         return (int)(FixData.FirstMaxProficiency * Mathf.Pow(1 + FixData.NextMaxRatio / 100f, Rank - 1));
     }
 
-    public void AddExperience(int e)
+    public bool AddExperience(int e)
     {
-        if (Rank < 10)
+        if (Rank < GameConfig.MaxRank)
         {
             Proficiency += e;
             if (Proficiency >= GetMaxProFiciency())
             {
                 ++Rank;
                 Proficiency = 0;
+                return true;
             }
         }
+        return false;
     }
 }

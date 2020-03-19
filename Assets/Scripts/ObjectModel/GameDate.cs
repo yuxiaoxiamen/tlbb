@@ -23,6 +23,25 @@ public class GameDate
         return Year + "-" + Month + "-" + Day + "-" + Slot;
     }
 
+    public string GetDateText()
+    {
+        return "第" + Year + "年" + Month + "月" + Day + "日" + GetSoltText(Slot);
+    }
+
+    private string GetSoltText(int solt)
+    {
+        switch (solt)
+        {
+            case 1:
+                return "早晨";
+            case 2:
+                return "中午";
+            case 3:
+                return "晚上";
+        }
+        return "";
+    }
+
     public void GoByTime(int space)
     {
         if ((Slot + space) / 3 == 0)

@@ -48,10 +48,14 @@ public class RevokeResponse : MonoBehaviour
             }
             else if (FightPersonClick.currentPerson != null && FightPersonClick.currentPerson.ControlState == BattleControlState.Moved) 
             {
+                FightGridClick.SwitchGridColor(FightMain.gridDataToObject[FightPersonClick.currentPerson.RowCol], FightGridClick.defaultColor);
                 FightGridClick.SwitchGridColor(FightMain.gridDataToObject[FightGridClick.movePreRC], FightGridClick.selectColor);
                 FightMain.positionToPerson.Remove(FightPersonClick.currentPerson.RowCol);
                 FightMain.positionToPerson.Add(FightGridClick.movePreRC, FightPersonClick.currentPerson);
-                FightPersonClick.currentPerson.PersonObject.transform.DOMove(FightMain.gridDataToObject[FightGridClick.movePreRC].transform.position, 0.1f);
+                FightPersonClick.currentPerson.PersonObject.transform.DOMove(FightMain.gridDataToObject[FightGridClick.movePreRC].transform.position, 0.1f).OnComplete(()=>
+                {
+                    CameraFollow.cameraFollowInstance.SetCameraFollowTarget(FightPersonClick.currentPerson);
+                });
                 FightPersonClick.currentPerson.ControlState = BattleControlState.Moving;
                 FightPersonClick.currentPerson.RowCol = FightGridClick.movePreRC;
                 FightPersonClick.currentPerson.PersonObject.transform.rotation = FightGridClick.movePreQuaternion;
