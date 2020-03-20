@@ -23,19 +23,7 @@ public class ButtonClick : MonoBehaviour
             int.TryParse(ButtonName, out num);
 
             GameObject.Find("num").GetComponent<Text>().text = "1";
-            string storetype = StoreMain.storetype;
-
-            switch(storetype)
-            {
-                case "Alcohol":
-                    GameObject.Find("price").GetComponent<Text>().text = StoreMain.alcohol[num].SellingPrice.ToString();
-                    break;
-                case "Food":
-                    GameObject.Find("price").GetComponent<Text>().text = StoreMain.alcohol[num].SellingPrice.ToString();   //食物尚未添加
-                    break;
-                default:
-                    break;
-            }
+            GameObject.Find("price").GetComponent<Text>().text = GoodDisplay.good[num].SellingPrice.ToString();
 
         });
     }
@@ -43,6 +31,6 @@ public class ButtonClick : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
