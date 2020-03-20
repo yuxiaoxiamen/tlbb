@@ -3,42 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class GUIMouseHandle : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class GUIMouseHandle : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     private bool isEnterBuffIcon = false;
+    public static bool isMouseOver;
+
+    private void Start()
+    {
+        isMouseOver = false;
+    }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if(gameObject.tag == "Buff")
-        {
-            isEnterBuffIcon = true;
-        }
-        else
+        if (gameObject.tag != "GameController")
         {
             FightGUI.SetDetailPanel(gameObject.name);
         }
+        isMouseOver = true;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if(gameObject.tag == "Buff")
-        {
-            isEnterBuffIcon = false;
-        }
-        else
+        if (gameObject.tag != "GameController")
         {
             FightGUI.HideDetailPanel();
-        }
+        } 
+        isMouseOver = false;
     }
 
-    private void OnGUI()
+    public void OnPointerClick(PointerEventData eventData)
     {
-        if (isEnterBuffIcon)
-        {
-            AttackBuff buff = FightGUI.lookingPerson.AttackBuffs[int.Parse(gameObject.name)];
-            string text = buff.StyleEffect.Name + "（" + buff.Duration + "）";
-            GUI.contentColor = Color.white;
-            GUI.Box(new Rect(Input.mousePosition.x, Screen.height - Input.mousePosition.y, 100, 25), text);
-        }
+        isMouseOver = false;
+        FightGUI.HideDetailPanel();
     }
 }

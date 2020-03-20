@@ -24,6 +24,7 @@ public class FightMain : MonoBehaviour
     private static bool isCreateReward;
     public static FightSource source;
     public static Person contestEnemy;
+    public static FightMain instance;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +33,7 @@ public class FightMain : MonoBehaviour
         isFail = false;
         isSuccess = false;
         isCreateReward = false;
+        instance = this;
 
         //GetFriendsAndEnemys();
         //SetPersonRowCol(friendQueue, false);
@@ -78,7 +80,21 @@ public class FightMain : MonoBehaviour
                 friendQueue = conflict.FFriends;
                 enemyQueue = conflict.FEnemys;
             }
-            friendQueue.AddRange(GameRunningData.GetRunningData().teammates);
+            var teammates = GameRunningData.GetRunningData().teammates;
+            foreach (Person teammate in teammates)
+            {
+                if (enemyQueue.Contains(teammate))
+                {
+                    teammates.Remove(teammate);
+                }
+                else
+                {
+                    if (!friendQueue.Contains(teammate))
+                    {
+                        friendQueue.Add(teammate);
+                    }
+                }
+            }
         }
         else if(source == FightSource.Contest)
         {
@@ -172,14 +188,14 @@ public class FightMain : MonoBehaviour
 
     public static void OneRoundOver(Person person)
     {
-       // AttackBuffTool.TriggerValueBuff(FightPersonClick.currentPerson);
+        AttackBuffTool.ReduceHPMP(person);
         AttackBuffTool.ReduceBuffDuration(person);
         GongBuffTool.EffectDefaultBuff(person);
         GongBuffTool.GongBuffRevertHPMP(person);
         GongBuffTool.EffectRecoverHalo(person);
     }
 
-    public static void PlayerFinished()
+    public void PlayerFinished()
     {
         CountPlayerOver();
         FightPersonClick.currentPerson.ControlState = BattleControlState.End;
@@ -189,8 +205,7 @@ public class FightMain : MonoBehaviour
         AttackTool.ClearAttackDistance();
         FightGUI.HideBattlePane();
 
-        SelectNextPerson();
-        
+        StartCoroutine(SelectNextPerson());
     }
 
     public static void SetPersonHPSplider(Person person)
@@ -199,6 +214,15 @@ public class FightMain : MonoBehaviour
         RectTransform hpTransform = hPSpliderScript.HPObjectClone.transform.Find("HP").gameObject.GetComponent<RectTransform>();
         hpTransform.DOScale(new Vector3(person.CurrentHP * 1.0f / person.BaseData.HP,
             1, 1), 0.5f);
+    }
+
+    private void SetHPSpliderColor(Person person)
+    {
+        if (friendQueue.Contains(person))
+        {
+            HPSplider hPSpliderScript = person.PersonObject.GetComponent<HPSplider>();
+            hPSpliderScript.SetSliderColor();
+        }
     }
 
     public static void DestoryHPSplider(Person person)
@@ -218,8 +242,8 @@ public class FightMain : MonoBehaviour
             positionToPerson.Add(person.RowCol, person);
             SetPersonHPSplider(person);
             person.InitAttribute();
+            SetHPSpliderColor(person);
         }
-        
     }
 
     public static HashSet<Vector2Int> GetGrids()
@@ -276,6 +300,11 @@ public class FightMain : MonoBehaviour
                 person.ControlState = BattleControlState.Moving;
                 person.IsMoved = false;
             }
+            else
+            {
+                OneRoundOver(person);
+                CountPlayerOver();
+            }
         }
         FightPersonClick.currentPerson = null;
     }
@@ -289,18 +318,19 @@ public class FightMain : MonoBehaviour
     {
         foreach (Person enemy in enemyQueue)
         {
+            yield return new WaitForSeconds(0.4f);
             CameraFollow.cameraFollowInstance.SetCameraFollowTarget(enemy);
             FightAI.AIEnd = false;
             FightAI.NPCAI(enemy, friendQueue);
             yield return new WaitUntil(()=>FightAI.AIEnd);
         }
         ResumePersonState();
-        DOTween.Clear();
-        SelectNextPerson();
+        StartCoroutine(SelectNextPerson());
     }
 
-    public static void SelectNextPerson()
+    public static IEnumerator SelectNextPerson()
     {
+        yield return new WaitForSeconds(0.4f);
         foreach (var person in friendQueue)
         {
             if (person.ControlState != BattleControlState.End)
@@ -353,16 +383,27 @@ public class FightMain : MonoBehaviour
         enemyQueue = new List<Person>();
         Person player = GameRunningData.GetRunningData().player;
         player.RowCol = new Vector2Int(12, 3);
-        Person friend1 = GlobalData.Persons[1];
+        Person friend1 = (Person)GlobalData.Persons[13];
         friend1.RowCol = new Vector2Int(12, 6);
-        Person enemy1 = GlobalData.Persons[2];
+        Person enemy1 = GlobalData.Persons[15];
         enemy1.RowCol = new Vector2Int(0, 6);
-        enemy1.CurrentMP = 10000;
         Person enemy2 = GlobalData.Persons[3];
         enemy2.RowCol = new Vector2Int(0, 9);
-        enemy2.CurrentMP = 10000;
+
+        player.CurrentHP = player.BaseData.HP = 100000;
+        friend1.CurrentHP = friend1.BaseData.HP = 100000;
+        enemy1.CurrentHP = enemy1.BaseData.HP = 100000;
+        enemy2.CurrentHP = enemy2.BaseData.HP = 100000;
+
+        foreach(InnerGong gong in player.BaseData.InnerGongs)
+        {
+            gong.Rank = 10;
+        }
+
+        //player.SelectedInnerGong = player.BaseData.InnerGongs[1];
 
         friendQueue.Add(player);
+        
         friendQueue.Add(friend1);
         enemyQueue.Add(enemy1);
         //enemyQueue.Add(enemy2);

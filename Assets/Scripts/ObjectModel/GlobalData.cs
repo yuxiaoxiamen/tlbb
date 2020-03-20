@@ -242,7 +242,13 @@ public class GlobalData
                 List<Talent> perTalents = new List<Talent>();
                 foreach (var p in ps)
                 {
-                    perTalents.Add((Talent)Enum.Parse(typeof(Talent), p, true));
+                    string[] ts = p.Split('*');
+                    Talent talent = new Talent()
+                    {
+                        Name = (TalentName)Enum.Parse(typeof(TalentName), ts[0], true),
+                        Number = int.Parse(ts[1])
+                    };
+                    perTalents.Add(talent);
                 }
                 InnerGongFixDatas[i].PerTalentGain = perTalents;
             }
@@ -258,7 +264,13 @@ public class GlobalData
                 List<Talent> fullTalents = new List<Talent>();
                 foreach (var f in fs)
                 {
-                    fullTalents.Add((Talent)Enum.Parse(typeof(Talent), f, true));
+                    string[] ts = f.Split('*');
+                    Talent talent = new Talent()
+                    {
+                        Name = (TalentName)Enum.Parse(typeof(TalentName), ts[0], true),
+                        Number = int.Parse(ts[1])
+                    };
+                    fullTalents.Add(talent);
                 }
                 InnerGongFixDatas[i].FullTalentGain = fullTalents;
             }

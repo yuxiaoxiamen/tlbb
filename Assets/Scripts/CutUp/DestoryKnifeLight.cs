@@ -12,7 +12,7 @@ public class DestoryKnifeLight : MonoBehaviour
 
     IEnumerator DestoryLight()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
         Destroy(gameObject);
     }
 }

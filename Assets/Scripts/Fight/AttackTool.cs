@@ -22,6 +22,7 @@ public class AttackTool
             case AttackStyleKind.Range:
                 distanceRange = PersonMoveTool.CreateRange(person.RowCol, person.SelectedAttackStyle.FixData.AttackRank);
                 attackRange = RangeRemoveFriend(distanceRange, friends);
+                attackDistance.Clear();
                 HashSet<Person> canAttackEnemys = new HashSet<Person>();
                 foreach (Person enemy in FightMain.enemyQueue)
                 {
@@ -33,13 +34,9 @@ public class AttackTool
                 }
                 if (canAttackEnemys.Count > 0)
                 {
-                    foreach (Person enemy in canAttackEnemys)
-                    {
-                        Debug.Log(enemy.BaseData.Id);
-                    }
-                    FightMain.PlayerFinished();
+                    AttackAction(person, canAttackEnemys);
+                    FightMain.instance.PlayerFinished();
                     FightGUI.HideBattlePane();
-                    person.ControlState = BattleControlState.Attacking;
                 }
                 break;
             case AttackStyleKind.Remote:
@@ -68,20 +65,24 @@ public class AttackTool
                 canAttackEnemys.Add(enemy);
             }
         }
+        return AttackAction(attacker, canAttackEnemys);
+    }
+
+    private static bool AttackAction(Person attacker, HashSet<Person> canAttackEnemys)
+    {
         if (canAttackEnemys.Count > 0)
         {
-            //AttackStyle attackStyle = attacker.SelectedAttackStyle;
-            //int mpCost = attackStyle.GetRealMPCost();
-            //if (mpCost > attacker.CurrentMP)
-            //{
-            //    return false;
-            //}
+            AttackStyle attackStyle = attacker.SelectedAttackStyle;
+            int mpCost = attackStyle.GetRealMPCost();
+            if (mpCost > attacker.CurrentMP)
+            {
+                return false;
+            }
 
-            //PersonChangeMP(attacker, mpCost, false);
+            PersonChangeMP(attacker, mpCost, false);
 
             PromoteStyleProficiency(attacker);
             AttackBuffTool.PersonGetBuff(attacker);
-            AttackBuffTool.TriggerValueBuff(attacker);
 
             foreach (Person enemy in canAttackEnemys)
             {
@@ -95,14 +96,14 @@ public class AttackTool
                 value = GongBuffTool.TriggerFiveTen(enemy, value);
                 GongBuffTool.OneTen(attacker, enemy);
                 GongBuffTool.EightTen(attacker, enemy, value);
-                if(PersonChangeHP(enemy, value, false))
+                if (PersonChangeHP(enemy, value, false))
                 {
                     GongBuffTool.TwoTen(attacker);
                 }
                 AttackBuffTool.TriggerReboundBuff(attacker, enemy, value);
                 AttackBuffTool.TriggerAbsorbBuff(attacker, enemy);
 
-                float angle = PersonMoveTool.GetAngle(enemy.PersonObject.transform.position, 
+                float angle = PersonMoveTool.GetAngle(enemy.PersonObject.transform.position,
                     attacker.PersonObject.transform.position);
                 FightMain.RotatePerson(enemy, angle);
             }
@@ -145,6 +146,7 @@ public class AttackTool
                 GongBuffTool.FiveSix(enemy);
                 GongBuffTool.SixSix(enemy);
                 GongBuffTool.TwentyfourSix(enemy);
+                SpecialEffectTool.instance.RateEffect(enemy, "闪避");
             }
             else
             {
@@ -166,12 +168,14 @@ public class AttackTool
                     value *= 2;
                     GongBuffTool.ElevenTen(attacker);
                     GongBuffTool.TwelveSix(attacker, enemy);
+                    SpecialEffectTool.instance.RateEffect(attacker, "暴击");
                 }
 
                 if (!GongBuffTool.FourSix(attacker) && ComputeProbability(enemy.Counterattack))
                 {
                     GongBuffTool.SixteenTen(enemy);
                     GongBuffTool.TwentyfiveSix(enemy);
+                    SpecialEffectTool.instance.RateEffect(enemy, "反击");
                 }
             }
         }
@@ -180,23 +184,24 @@ public class AttackTool
 
     public static bool PersonChangeHP(Person person, int value, bool isAdd)
     {
+        int realValue = value;
         if (isAdd)
         {
-            int realValue = value;
             int rate = AttackBuffTool.IsPersonHasSeriousInjuryBuff(person);
             realValue = (int)(value * (1 - rate * 1.0 / 100));
             person.ChangeHP(realValue, isAdd);
         }
         else
         {
-            person.CurrentHP -= value;
-            if(person.CurrentHP <= 0)
+            person.CurrentHP -= realValue;
+            if (person.CurrentHP <= 0)
             {
                 person.CurrentHP = 0;
                 PersonDead(person);
                 return true;
             }
         }
+        SpecialEffectTool.instance.HPEffect(person, realValue, isAdd);
         FightMain.SetPersonHPSplider(person);
         GongBuffTool.HPBuffTrigger(person);
         return false;

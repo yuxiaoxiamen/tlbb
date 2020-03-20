@@ -10,8 +10,7 @@ public class ControlTopPanel : MonoBehaviour
     void Start()
     {
         Text dateText = transform.Find("dateText").GetComponent<Text>();
-        GameDate gameDate = GameRunningData.GetRunningData().date;
-        dateText.text = "第" + gameDate.Year + "年" + gameDate.Month + "月" + gameDate.Day + "日"+GetSoltString(gameDate.Slot);
+        dateText.text = GameRunningData.GetRunningData().date.GetDateText();
         Button returnButton = transform.Find("returnButton").GetComponent<Button>();
         Place currentPlace = GameRunningData.GetRunningData().currentPlace;
         if(currentPlace == null)
@@ -36,20 +35,6 @@ public class ControlTopPanel : MonoBehaviour
                 SceneManager.LoadScene("FirstMap");
             }
         });
-    }
-
-    string GetSoltString(int solt)
-    {
-        switch (solt)
-        {
-            case 1:
-                return "早晨";
-            case 2:
-                return "中午";
-            case 3:
-                return "晚上";
-        }
-        return "";
     }
 
     // Update is called once per frame

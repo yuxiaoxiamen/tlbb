@@ -71,9 +71,9 @@ public class Person : ICloneable
         return BaseData.Jin;
     }
 
-    public void UpdatePlace()
+    public void UpdatePlace(string placeString)
     {
-
+        CurrentPlaceString = placeString;
     }
 
     public void ChangeHP(int value, bool isAdd)
@@ -116,6 +116,26 @@ public class Person : ICloneable
         }
     }
 
+    public void ChangeEnergy(int value, bool isAdd)
+    {
+        if (isAdd)
+        {
+            CurrentEnergy += value;
+            if (CurrentEnergy >= BaseData.Energy)
+            {
+                CurrentEnergy = BaseData.Energy;
+            }
+        }
+        else
+        {
+            CurrentEnergy -= value;
+            if (CurrentEnergy <= 0)
+            {
+                CurrentEnergy = 0;
+            }
+        }
+    }
+
     public int MedicalSkillResumeHP()
     {
         return (int)(BaseData.MedicalSkill / GameConfig.MaxMedicalSkill * 1.0f * GameConfig.PerMedicalSkillResume);
@@ -133,7 +153,60 @@ public class Person : ICloneable
 
     public void PromoteGong()
     {
-        SelectedInnerGong.AddExperience(CountGongExperience());
+        if (SelectedInnerGong.AddExperience(CountGongExperience()))
+        {
+            BaseAttributeIncrease(SelectedInnerGong.FixData.PerHPGain, 
+                SelectedInnerGong.FixData.PerMPGain, SelectedInnerGong.FixData.PerTalentGain);
+            if(SelectedInnerGong.Rank == GameConfig.MaxRank)
+            {
+                BaseAttributeIncrease(SelectedInnerGong.FixData.FullHPGain, 
+                    SelectedInnerGong.FixData.FullMPGain, SelectedInnerGong.FixData.FullTalentGain);
+            }
+        }
+    }
+
+    private void BaseAttributeIncrease(int hp, int mp, List<Talent> talents)
+    {
+        BaseData.HP += hp;
+        BaseData.MP += mp;
+        foreach (Talent talent in talents)
+        {
+            switch (talent.Name)
+            {
+                case TalentName.Bi:
+                    BaseData.Bi += talent.Number;
+                    break;
+                case TalentName.Gen:
+                    BaseData.Gen += talent.Number;
+                    break;
+                case TalentName.Wu:
+                    BaseData.Wu += talent.Number;
+                    break;
+                case TalentName.Shen:
+                    BaseData.Shen += talent.Number;
+                    break;
+                case TalentName.Jing:
+                    BaseData.Jin += talent.Number;
+                    break;
+            }
+        }
+    }
+
+    public void PromoteAttackStyle()
+    {
+        foreach(AttackStyle style in BaseData.AttackStyles)
+        {
+            style.AddExperience(CountStyleExperience());
+        }
+    }
+
+    public void HpMpEnergyChange()
+    {
+        int value = (int)(BaseData.HP * 0.15f);
+        ChangeHP(value, true);
+        value = (int)(BaseData.MP * 0.15f);
+        ChangeMP(value, true);
+        ChangeEnergy(5, false);
     }
 
     public object Clone()

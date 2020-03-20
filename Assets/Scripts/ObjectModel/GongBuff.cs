@@ -6,4 +6,9 @@ public class GongBuff
 {
     public List<int> AmountOfChanges { get; set; }
     public InnerGong Gong { get; set; }
+
+    public GongBuff()
+    {
+        AmountOfChanges = new List<int>();
+    }
 }

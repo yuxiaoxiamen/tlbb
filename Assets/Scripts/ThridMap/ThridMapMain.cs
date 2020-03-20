@@ -97,11 +97,14 @@ public class ThridMapMain : MonoBehaviour
             GlobalData.Persons[2],
             GlobalData.Persons[3]
         };
-        //foreach(Person person in GlobalData.Persons)
+        //foreach (Person person in GlobalData.Persons)
         //{
-        //    if(person.CurrentPlaceString == GameRunningData.GetRunningData().currentPlace.GetPlaceString())
+        //    if (!GameRunningData.GetRunningData().teammates.Contains(person))
         //    {
-        //        persons.Add(person);
+        //        if (person.CurrentPlaceString == GameRunningData.GetRunningData().currentPlace.GetPlaceString())
+        //        {
+        //            persons.Add(person);
+        //        }
         //    }
         //}
         return persons;

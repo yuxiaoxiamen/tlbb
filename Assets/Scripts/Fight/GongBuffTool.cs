@@ -126,7 +126,7 @@ public class GongBuffTool
                 {
                     halo.ResumeBuffOnPerson(person, false);
                 }
-                else if (halo.Range.Contains(currentRc))
+                else if (!halo.Range.Contains(preRc) && halo.Range.Contains(currentRc))
                 {
                     halo.ActBuffOnPerson(person);
                 }
@@ -525,6 +525,10 @@ public class GongBuffTool
         if(person.SelectedInnerGong.FixData.Id == 1 && person.SelectedInnerGong.Rank >= 6)
         {
             v = (int)(value * 0.5);
+            if (v > person.CurrentMP)
+            {
+                v = person.CurrentMP;
+            }
             AttackTool.PersonChangeMP(person, v, false);
         }
         return value - v;

@@ -23,6 +23,25 @@ public class GameDate
         return Year + "-" + Month + "-" + Day + "-" + Slot;
     }
 
+    public string GetDateText()
+    {
+        return "第" + Year + "年" + Month + "月" + Day + "日" + GetSoltText(Slot);
+    }
+
+    private string GetSoltText(int solt)
+    {
+        switch (solt)
+        {
+            case 1:
+                return "早晨";
+            case 2:
+                return "中午";
+            case 3:
+                return "晚上";
+        }
+        return "";
+    }
+
     public void GoByTime(int space)
     {
         if ((Slot + space) / 3 == 0)
@@ -49,6 +68,55 @@ public class GameDate
                 {
                     Year = Year + (addMonth + Month) / 12;
 
+                }
+            }
+        }
+    }
+
+    public int CompareTo(GameDate date)
+    {
+        if (Year > date.Year)
+        {
+            return 1;
+        }
+        else if (Year < date.Year)
+        {
+            return -1;
+        }
+        else
+        {
+            if (Month > date.Month)
+            {
+                return 1;
+            }
+            else if (Month < date.Month)
+            {
+                return -1;
+            }
+            else
+            {
+                if (Day > date.Day)
+                {
+                    return 1;
+                }
+                else if (Day < date.Day)
+                {
+                    return -1;
+                }
+                else
+                {
+                    if (Slot > date.Slot)
+                    {
+                        return 1;
+                    }
+                    else if (Slot < date.Slot)
+                    {
+                        return -1;
+                    }
+                    else
+                    {
+                        return 0;
+                    }
                 }
             }
         }
