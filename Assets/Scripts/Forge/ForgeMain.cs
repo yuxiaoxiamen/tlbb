@@ -29,14 +29,6 @@ public class ForgeMain : MonoBehaviour
         HookControl.ironNumber = 1;
         HookControl.silverNumber = 1;
         HookControl.goldNumber = 1;
-        MineralControl.Manual = new WeaponManual()
-        {
-            CopperNumber = 1,
-            IronNumber = 0,
-            SilverNumber = 0,
-            GoldNumber = 0
-        };
-        MineralControl.Manual.Item = GlobalData.Items[50];
         sum = HookControl.copperNumber + HookControl.ironNumber + HookControl.silverNumber + HookControl.goldNumber;
 
         startPanel.transform.Find("Button").GetComponent<Button>().onClick.AddListener(()=>
@@ -156,13 +148,13 @@ public class ForgeMain : MonoBehaviour
     public static void GameOver()
     {
         isGameOver = true;
-        if (TunkControl.copperNumber >= MineralControl.Manual.CopperNumber &&
-            TunkControl.ironNumber >= MineralControl.Manual.IronNumber &&
-            TunkControl.silverNumber >= MineralControl.Manual.SilverNumber &&
-            TunkControl.goldNumber >= MineralControl.Manual.GoldNumber)
+        if (TunkControl.copperNumber >= MineralControl.manual.CopperNumber &&
+            TunkControl.ironNumber >= MineralControl.manual.IronNumber &&
+            TunkControl.silverNumber >= MineralControl.manual.SilverNumber &&
+            TunkControl.goldNumber >= MineralControl.manual.GoldNumber)
         {
             successPanel.SetActive(true);
-            successPanel.transform.Find("tipText").GetComponent<Text>().text += MineralControl.Manual.Item.Name;
+            successPanel.transform.Find("tipText").GetComponent<Text>().text += MineralControl.manual.Item.Name;
         }
         else
         {

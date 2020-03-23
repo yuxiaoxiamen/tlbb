@@ -15,4 +15,4 @@ public class Good
     public int SellingPrice { get; set; }
 }
 
-public enum ItemKind { Alcohol, Food, Sword, Knife, Rod }
+public enum ItemKind { Alcohol, Food, Sword, Knife, Rod, Pellet }

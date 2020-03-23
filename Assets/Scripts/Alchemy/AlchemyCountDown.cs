@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CutUpCountDown : MonoBehaviour
+public class AlchemyCountDown : MonoBehaviour
 {
     public int TotalTime;
     public Text text;
@@ -20,7 +20,7 @@ public class CutUpCountDown : MonoBehaviour
         isSuccess = false;
         successPanel = GameObject.Find("successPanel");
         successPanel.SetActive(false);
-        successPanel.transform.Find("Button").GetComponent<Button>().onClick.AddListener(()=> 
+        successPanel.transform.Find("Button").GetComponent<Button>().onClick.AddListener(() =>
         {
 
         });
@@ -35,7 +35,7 @@ public class CutUpCountDown : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isOnce && CutUpMain.isGameStart)
+        if (!isOnce && AlchemyMain.isGameStart)
         {
             StartCoroutine(Count());
             isOnce = true;
@@ -54,14 +54,18 @@ public class CutUpCountDown : MonoBehaviour
             yield return new WaitForSeconds(1);
             TotalTime--;
         }
-        CutUpMain.isGameStart = false;
         GameOver();
     }
 
     void GameOver()
     {
+        isGameOver = true;
         if (isSuccess)
         {
+            int randomIndex = Random.Range(63, 68);
+            Good item = GlobalData.Items[randomIndex];
+            GameRunningData.GetRunningData().belongings.Add(item);
+            successPanel.transform.Find("tipText").GetComponent<Text>().text += item.Name;
             successPanel.SetActive(true);
         }
         else

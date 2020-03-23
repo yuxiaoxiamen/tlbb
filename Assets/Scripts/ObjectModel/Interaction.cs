@@ -26,8 +26,11 @@ public class Interaction
             case 2: //交易
                 break;
             case 3: //锻造
+                ManualMain.instance.SetManual(false);
+                ThridMapMain.manualUI.SetActive(true);
                 break; 
             case 4: //炼丹
+                SceneManager.LoadScene("Alchemy");
                 break;
             case 5: //治疗
                 break;
@@ -38,8 +41,12 @@ public class Interaction
             case 8: //学医
                 break;
             case 9: //下厨
+                ManualMain.instance.SetManual(true);
+                ThridMapMain.manualUI.SetActive(true);
                 break;
             case 10: //招募
+                GameRunningData.GetRunningData().teammates.Add(person);
+                ThridMapMain.ShowAllHeads();
                 break;
             case 11: //离开
                 ThridMapMain.ShowAllHeads();

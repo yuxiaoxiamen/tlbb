@@ -64,10 +64,10 @@ public class MiningCountDown : MonoBehaviour
     public static void GameOver()
     {
         isGameOver = true;
-        if (HookControl.copperNumber >= MineralControl.Manual.CopperNumber &&
-            HookControl.ironNumber >= MineralControl.Manual.IronNumber &&
-            HookControl.silverNumber >= MineralControl.Manual.SilverNumber &&
-            HookControl.goldNumber >= MineralControl.Manual.GoldNumber)
+        if (HookControl.copperNumber >= MineralControl.manual.CopperNumber &&
+            HookControl.ironNumber >= MineralControl.manual.IronNumber &&
+            HookControl.silverNumber >= MineralControl.manual.SilverNumber &&
+            HookControl.goldNumber >= MineralControl.manual.GoldNumber)
         {
             successPanel.SetActive(true);
         }

@@ -11,6 +11,8 @@ public class GlobalData
     public static List<AttackStyleEffect> StyleEffects { get; set; } //所有招式的效果数据
     public static List<InnerGongFixData> InnerGongFixDatas { get; set; } //所有内功固定数据
     public static List<Good> Items { get; set; } //所有物品数据
+    public static List<WeaponManual> WeaponManuals { get; set; }//武器谱
+    public static List<FoodManual> FoodManuals { get; set; }//菜谱
     public static List<FirstPlace> FirstPlaces { get; set; } //所有一级地图中地点数据
     public static List<SecondPlace> SecondPlaces { get; set; } //所有场所的数据
     public static Dictionary<string, List<MainConversation>> MainConversations { get; set; } //主线剧情对话
@@ -21,6 +23,8 @@ public class GlobalData
     {
         Persons = new List<Person>();
         ReadItemData();
+        ReadWeaponManualData();
+        ReadFoodManualData();
         ReadInteractionData();
         ReadSecondPlaceData();
         ReadFirstPlaceData();
@@ -228,6 +232,28 @@ public class GlobalData
         Items = JsonConvert.DeserializeObject<List<Good>>(jsonData.text);
     }
 
+    static void ReadWeaponManualData()
+    {
+        var jsonData = Resources.Load<TextAsset>("jsonData/武器谱");
+        WeaponManuals = JsonConvert.DeserializeObject<List<WeaponManual>>(jsonData.text);
+        var manualIds = JsonConvert.DeserializeObject<List<ManualJson>>(jsonData.text);
+        for(int i = 0; i < WeaponManuals.Count; ++i)
+        {
+            WeaponManuals[i].Item = Items[manualIds[i].ItemId];
+        }
+    }
+
+    static void ReadFoodManualData()
+    {
+        var jsonData = Resources.Load<TextAsset>("jsonData/菜谱");
+        FoodManuals = JsonConvert.DeserializeObject<List<FoodManual>>(jsonData.text);
+        var manualIds = JsonConvert.DeserializeObject<List<ManualJson>>(jsonData.text);
+        for (int i = 0; i < FoodManuals.Count; ++i)
+        {
+            FoodManuals[i].Item = Items[manualIds[i].ItemId];
+        }
+    }
+
     static void ReadInnerGongData()
     {
         var jsonData = Resources.Load<TextAsset>("jsonData/内功");
@@ -372,4 +398,9 @@ class MainLineConflictJson
     public string ZEnemysString { get; set; }
     public string FFriendsString { get; set; }
     public string FEnemysString { get; set; }
+}
+
+class ManualJson
+{
+    public int ItemId { get; set; }
 }

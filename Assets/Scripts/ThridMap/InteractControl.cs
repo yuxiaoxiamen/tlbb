@@ -25,6 +25,8 @@ public class InteractControl : MonoBehaviour
             GameObject interButtonObject = Instantiate(interButtonPrefab);
             interButtonObject.GetComponent<RectTransform>().SetParent(rectTransform);
             interButtonObject.transform.localScale = Vector3.one;
+            interButtonObject.transform.localRotation = Quaternion.identity;
+            interButtonObject.transform.localPosition = Vector3.zero;
             interButtonObject.transform.Find("Text").GetComponent<Text>().text = interaction.Name;
             interButtonObject.GetComponent<Button>().onClick.AddListener(()=>
             {

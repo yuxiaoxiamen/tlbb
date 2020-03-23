@@ -18,18 +18,12 @@ public class CutUpMain : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //manual = GlobalData.FoodManuals[0];
         minY = foodPrefab.transform.position.y - 3;
         isGameStart = false;
         fruitNum = 0;
         vegetableNum = 0;
         meatNum = 0;
-        manual = new FoodManual()
-        {
-            FruitNum = 1,
-            VegetableNum = 1,
-            MeatNum = 1,
-            Item = GlobalData.Items[7]
-        };
         GameObject startPanel = GameObject.Find("startPanel");
         scorePanel = GameObject.Find("scorePanel");
         Button startButton = startPanel.GetComponentInChildren<Button>();

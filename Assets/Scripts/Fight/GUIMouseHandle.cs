@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 
 public class GUIMouseHandle : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
-    private bool isEnterBuffIcon = false;
     public static bool isMouseOver;
 
     private void Start()

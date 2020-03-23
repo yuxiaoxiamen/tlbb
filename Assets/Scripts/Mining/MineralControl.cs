@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class MineralControl : MonoBehaviour
 {
-    public static WeaponManual Manual { get; set; }
+    public static WeaponManual manual;
     public GameObject mineralPrefab;
     public float[] scales = new float[] { 1.2f, 1, 0.8f, 0.6f };
     public static float minX = -6;
@@ -20,14 +20,7 @@ public class MineralControl : MonoBehaviour
 
     private void Awake()
     {
-        Manual = new WeaponManual()
-        {
-            CopperNumber = 1,
-            IronNumber = 0,
-            SilverNumber = 0,
-            GoldNumber = 0
-        };
-        Manual.Item = GlobalData.Items[50];
+        //manual = GlobalData.WeaponManuals[0];
         isOver = false;
         isGameStart = false;
         startPanel.transform.Find("Button").GetComponent<Button>().onClick.AddListener(() =>
@@ -35,22 +28,22 @@ public class MineralControl : MonoBehaviour
             SetManual();
             MiningCountDown.isGameOver = false;
             sum = 0;
-            for (int i = 1; i <= Manual.CopperNumber + 1; ++i)
+            for (int i = 1; i <= manual.CopperNumber + 1; ++i)
             {
                 CreateMineralObject(0);
                 ++sum;
             }
-            for (int i = 1; i <= Manual.IronNumber + 1; ++i)
+            for (int i = 1; i <= manual.IronNumber + 1; ++i)
             {
                 CreateMineralObject(1);
                 ++sum;
             }
-            for (int i = 1; i <= Manual.SilverNumber + 1; ++i)
+            for (int i = 1; i <= manual.SilverNumber + 1; ++i)
             {
                 ++sum;
                 CreateMineralObject(2);
             }
-            for (int i = 1; i <= Manual.GoldNumber + 1; ++i)
+            for (int i = 1; i <= manual.GoldNumber + 1; ++i)
             {
                 CreateMineralObject(3);
                 ++sum;
@@ -69,16 +62,16 @@ public class MineralControl : MonoBehaviour
             switch (i)
             {
                 case 0:
-                    textMesh.text = Manual.CopperNumber + "";
+                    textMesh.text = manual.CopperNumber + "";
                     break;
                 case 1:
-                    textMesh.text = Manual.IronNumber + "";
+                    textMesh.text = manual.IronNumber + "";
                     break;
                 case 2:
-                    textMesh.text = Manual.SilverNumber + "";
+                    textMesh.text = manual.SilverNumber + "";
                     break;
                 case 3:
-                    textMesh.text = Manual.GoldNumber + "";
+                    textMesh.text = manual.GoldNumber + "";
                     break;
             }
         }

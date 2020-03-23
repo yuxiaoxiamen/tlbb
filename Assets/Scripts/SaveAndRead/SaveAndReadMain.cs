@@ -21,7 +21,7 @@ public class SaveAndReadMain : MonoBehaviour
     void Start()
     {
         instance = this;
-        MouseControl.isSave = true;
+        SaveMouseControl.isSave = true;
         savePath = Application.persistentDataPath + "/";
         ReadAllSaveDatas();
         for(int i = 1; i < 100; ++i)
