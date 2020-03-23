@@ -28,7 +28,7 @@ public class ItemDetailShow : MonoBehaviour
         return temp;
     }
 
-    private void OnMouseEnter()
+    private void MouseEnter()
     {
         float num = float.Parse(gameObject.name);           //获取物品栏序号
         int num1 = (int)num;
