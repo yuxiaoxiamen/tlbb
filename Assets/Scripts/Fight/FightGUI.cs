@@ -118,12 +118,6 @@ public class FightGUI : MonoBehaviour
         Transform attributeTexts = infoPanel.transform.Find("sx");
         Transform gongText = infoPanel.transform.Find("ng").GetChild(0);
         Transform styleTexts = infoPanel.transform.Find("zs");
-        Button exitButton = infoPanel.transform.Find("exitButton").GetComponent<Button>();
-
-        exitButton.onClick.AddListener(() =>
-        {
-            HideInfoPanel();
-        });
 
         head.GetComponent<Image>().sprite = Resources.Load<Sprite>("head/"+person.BaseData.HeadPortrait);
 
@@ -246,7 +240,7 @@ public class FightGUI : MonoBehaviour
         button.transform.Find("Text").GetComponent<Text>().text = text;
         if (isSelected)
         {
-            button.GetComponent<Image>().color = Color.green;
+            button.GetComponent<Image>().sprite = Resources.Load<Sprite>("ui/selected");
         }
     }
 

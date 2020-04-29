@@ -82,10 +82,10 @@ public class FightGridClick : MonoBehaviour
         if (FightPersonClick.currentPerson != null && FightPersonClick.currentPerson.ControlState == BattleControlState.Moving &&
             moveRange.Contains(FightMain.gridObjectToData[gameObject]))
         {
-            movePath = PersonMoveTool.FindPath(FightPersonClick.currentPerson.RowCol, FightMain.gridObjectToData[gameObject], FightMain.GetGrids(), PersonMoveTool.GetObstacles(), true);
+            movePath = PersonMoveTool.FindPath(FightPersonClick.currentPerson.RowCol, 
+                FightMain.gridObjectToData[gameObject], FightMain.GetGrids(), PersonMoveTool.GetObstacles(), true);
             ChangePathColor(pathColor);
         }
-
     }
 
     private void OnMouseExit()

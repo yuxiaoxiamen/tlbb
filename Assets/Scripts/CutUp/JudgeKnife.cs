@@ -92,7 +92,8 @@ public class JudgeKnife : MonoBehaviour
         GameObject foodObject1 = Instantiate(damagedFoodPrefab1);
         foodObject1.transform.rotation = transform.rotation;
         foodObject1.transform.position = transform.position;
-        foodObject1.GetComponent<Rigidbody2D>().AddForce(foodObject1.transform.right.normalized * -1 * leaveForce, ForceMode2D.Impulse);
+        foodObject1.GetComponent<Rigidbody2D>().
+            AddForce(foodObject1.transform.right.normalized * -1 * leaveForce, ForceMode2D.Impulse);
         foodObject1.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("cutUp/"+gameObject.name+"d1");
         GameObject foodObject2 = Instantiate(damagedFoodPrefab2);
         foodObject2.transform.rotation = transform.rotation;

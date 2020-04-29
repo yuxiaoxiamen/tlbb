@@ -57,7 +57,7 @@ public static class PathFinding
     }
 
 
-    public static List<Vector2Int> Astar(Vector2Int from, Vector2Int to, HashSet<Vector2Int> map, HashSet<Vector2Int> impassableValues, bool isSix)
+    public static List<Vector2Int> Astar(Vector2Int from, Vector2Int to, HashSet<Vector2Int> map, HashSet<Vector2Int> impassableValues)
     {
         var result = new List<Vector2Int>();
         if (from == to)
@@ -65,9 +65,8 @@ public static class PathFinding
             result.Add(from);
             return result;
         }
-        Node finalNode;
         List<Node> open = new List<Node>();
-        if (FindDest(new Node(null, from, isSix ? GetDistanceSix(from, to): GetDistanceFour(from, to), 0), open, map, to, out finalNode, impassableValues, isSix))
+        if (FindDest(new Node(null, from, GetDistanceSix(from, to), 0), open, map, to, out Node finalNode, impassableValues))
         {
             while (finalNode != null)
             {
@@ -80,7 +79,7 @@ public static class PathFinding
     }
 
     static bool FindDest(Node currentNode, List<Node> openList,
-                         HashSet<Vector2Int> map, Vector2Int to, out Node finalNode, HashSet<Vector2Int> impassableValues, bool isSix)
+                         HashSet<Vector2Int> map, Vector2Int to, out Node finalNode, HashSet<Vector2Int> impassableValues)
     {
         if (currentNode == null) {
             finalNode = null;
@@ -94,24 +93,24 @@ public static class PathFinding
         currentNode.open = false;
         openList.Add(currentNode);
 
-        foreach (var item in isSix ? GetNeighborsSix(currentNode.pos): GetNeighborsFour(currentNode.pos))
+        foreach (var item in GetNeighborsSix(currentNode.pos))
         {
             if (map.Contains(item) && !impassableValues.Contains(item))
             {
-                FindTemp(openList, currentNode, item, to, isSix);
+                FindTemp(openList, currentNode, item, to);
             }
         }
         var next = openList.FindAll(obj => obj.open).Min();
-        return FindDest(next, openList, map, to, out finalNode, impassableValues, isSix);
+        return FindDest(next, openList, map, to, out finalNode, impassableValues);
     }
 
-    static void FindTemp(List<Node> openList, Node currentNode, Vector2Int from, Vector2Int to, bool isSix)
+    static void FindTemp(List<Node> openList, Node currentNode, Vector2Int from, Vector2Int to)
     {
 
-        Node temp = openList.Find(obj => obj.pos == (from));
+        Node temp = openList.Find(obj => obj.pos == from);
         if (temp == null)
         {
-            temp = new Node(currentNode, from, isSix ? GetDistanceSix(from, to) : GetDistanceFour(from, to), currentNode.gScore + 1);
+            temp = new Node(currentNode, from, GetDistanceSix(from, to), currentNode.gScore + 1);
             openList.Add(temp);
         }
         else if (temp.open && temp.gScore > currentNode.gScore + 1)
@@ -143,12 +142,13 @@ public static class PathFinding
         public int CompareTo(object obj)
         {
 
-            if (!(obj is Node temp)) return 1;
-
+            if (!(obj is Node temp))
+            {
+                return 1;
+            }
             if (Mathf.Abs(fScore - temp.fScore) < 0.01f) {
                 return fScore > temp.fScore ? 1 : -1;
             }
-
             if (Mathf.Abs(hScore - temp.hScore) < 0.01f)
             {
                 return hScore > temp.hScore ? 1 : -1;

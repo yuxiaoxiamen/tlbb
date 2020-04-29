@@ -33,7 +33,7 @@ public class AttackBuffTool
         var buff = new AttackBuff()
         {
             StyleEffect = effect,
-            Duration = effect.TimeValue+1
+            Duration = effect.TimeValue
         };
         bool flag = false;
         if (effect.Id == 2 || effect.Id == 3 || effect.Id == 4 || effect.Id == 19 || effect.Id == 20)
@@ -47,7 +47,6 @@ public class AttackBuffTool
                     break;
                 }
             }
-            
         }
         if (!flag)
         {

@@ -29,14 +29,16 @@ public class SecondMapMain : MonoBehaviour
     void SetSites()
     {
         var secondPlaces = ((FirstPlace)GameRunningData.GetRunningData().currentPlace).Sites;
-        float width = sitePrefab.GetComponent<Renderer>().bounds.size.x;
+        Transform siteBgTransform = sitePrefab.transform.Find("siteBg").transform;
+        float width = siteBgTransform.GetComponent<Renderer>().bounds.size.x;
         for (int i = 0; i < secondPlaces.Count; ++i)
         {
             SecondPlace secondPlace = secondPlaces[i];
             GameObject siteObject = Instantiate(sitePrefab);
             siteObject.name = secondPlace.Id + "";
-            siteObject.transform.Find("siteName").GetComponent<TextMesh>().text = GetVerticalString(secondPlace.Name);
-            siteObject.transform.position = sitePrefab.transform.position + new Vector3((-0.5f - width) * i, 0, 0);
+            siteBgTransform.Find("siteName").GetComponent<TextMesh>().text = GetVerticalString(secondPlace.Name);
+            //siteObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("bg/" + secondPlace.Name);
+            siteObject.transform.position = sitePrefab.transform.position + new Vector3((-0.8f - width) * i, 0, 0);
         }
     }
 

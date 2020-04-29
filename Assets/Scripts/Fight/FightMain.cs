@@ -237,6 +237,9 @@ public class FightMain : MonoBehaviour
         {
             Vector3 personPosition = gridDataToObject[person.RowCol].transform.position;
             GameObject personObject = Instantiate(personPrefab, personPosition, Quaternion.identity);
+            //GameObject personObject = Resources.Load<GameObject>("persons/" + person.BaseData.Id);
+            //personObject.transform.position = personPosition;
+            //personObject.transform.localRotation = Quaternion.identity;
             personObject.name = person.BaseData.Id + "";
             person.PersonObject = personObject;
             positionToPerson.Add(person.RowCol, person);

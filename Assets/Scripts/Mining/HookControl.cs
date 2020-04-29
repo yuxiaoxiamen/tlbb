@@ -125,14 +125,14 @@ public class HookControl : MonoBehaviour
         {
             Transform mineralTransform = collision.transform;
             float tempDistance = Vector3.Distance(transform.position, mineralTransform.position);
-            mineralTransform.position = transform.position + transform.up * -1 * tempDistance;//位置修正
-            mineralTransform.SetParent(transform);//设置父物体用于拖拽移动
+            mineralTransform.position = transform.position + transform.up * -1 * tempDistance;
+            mineralTransform.SetParent(transform);
             ComputeSpeed(speedLevel[int.Parse(collision.name)]);
             isBack = true;
         }
     }
 
-    public void ComputeSpeed(int scaleLevel)//计算新的玩家速度
+    public void ComputeSpeed(int scaleLevel)
     {
         moveSpeed = moveSpeed - moveSpeed * 0.2f * scaleLevel;
     }

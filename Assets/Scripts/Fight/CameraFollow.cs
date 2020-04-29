@@ -14,7 +14,6 @@ public class CameraFollow : MonoBehaviour
 
     void Awake()
     {
-        //设置相对偏移
         offset = initTransform.position - transform.position;
         cameraFollowInstance = this;
         defaultQuaternion = transform.rotation;

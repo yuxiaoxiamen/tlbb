@@ -97,7 +97,8 @@ public class CutUpMain : MonoBehaviour
         int randomZ = Random.Range(2, 100);
         float randomAngle = Random.Range(0, 361);
         var randomRotation = Quaternion.AngleAxis(randomAngle, new Vector3(0, 0, 1));
-        GameObject foodObject = Instantiate(foodPrefab, new Vector3(randomX, foodPrefab.transform.position.y, randomZ), randomRotation);
+        Vector3 randomPosition = new Vector3(randomX, foodPrefab.transform.position.y, randomZ);
+        GameObject foodObject = Instantiate(foodPrefab, randomPosition, randomRotation);
         randomAngle = Random.Range(-10, 11);
         Vector2 force = Quaternion.AngleAxis(randomAngle, new Vector3(0, 0, 1)) * Vector3.up * throwForce;
         foodObject.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);

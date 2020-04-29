@@ -25,7 +25,7 @@ public class ClickSite : MonoBehaviour
     {
         if (!ControlBottomPanel.isMouseInPane)
         {
-            gameObject.transform.DOScale(defaultScale * 1.2f, 0.5f);
+            gameObject.transform.DOScale(defaultScale * 1.1f, 0.5f);
         }
     }
 

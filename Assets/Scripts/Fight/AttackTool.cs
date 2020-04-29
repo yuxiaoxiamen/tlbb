@@ -78,7 +78,6 @@ public class AttackTool
             {
                 return false;
             }
-
             PersonChangeMP(attacker, mpCost, false);
 
             PromoteStyleProficiency(attacker);
@@ -263,7 +262,8 @@ public class AttackTool
         else if (person.SelectedAttackStyle.FixData.AttackKind == AttackStyleKind.Remote)
         {
             HashSet<Vector2Int> remoteRange =
-                PersonMoveTool.CreateRange(FightMain.gridObjectToData[gridObject], person.SelectedAttackStyle.FixData.AttackRank);
+                PersonMoveTool.CreateRange(FightMain.gridObjectToData[gridObject], 
+                person.SelectedAttackStyle.FixData.AttackRank);
             attackRange = RangeRemoveFriend(remoteRange, friends);
             attackRange.Add(gridObject);
         }

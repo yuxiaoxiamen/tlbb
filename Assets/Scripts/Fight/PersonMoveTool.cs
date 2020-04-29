@@ -97,7 +97,7 @@ public class PersonMoveTool
 
     static public List<Vector2Int> FindPath(Vector2Int startPosition, Vector2Int endPosition, HashSet<Vector2Int> grids, HashSet<Vector2Int> obstacles, bool isSix)
     {
-        var path = PathFinding.Astar(startPosition, endPosition, grids, obstacles, isSix);
+        var path = PathFinding.Astar(startPosition, endPosition, grids, obstacles);
         path.Remove(startPosition);
         return path;
     }
