@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Mouse : MonoBehaviour
 {
+    public int Id;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,15 +26,35 @@ public class Mouse : MonoBehaviour
         string name = gameObject.name;
         if (name.Equals("Member_Delete"))
         {
-            DeleteMember(gameObject);
-            Debug.Log(name);
+            Para_Pass.characterId = gameObject.transform.parent.GetComponent<Mouse>().Id;
+            int protagonist = 0;     //主角id
+            if (Para_Pass.characterId != protagonist)   //非主角可请离
+            {
+                DeleteMember(gameObject);
+            }
+            else
+            {
+                Debug.Log("主角无法移出队伍");
+            }
+            //Debug.Log(name);
         }
-        else if (name.Equals("Member_Detail"))
+        else if (name.Equals("Member_ShuXing"))
         {
+            Para_Pass.characterId = gameObject.transform.parent.GetComponent<Mouse>().Id;
             Debug.Log(name);
+            Debug.Log(Para_Pass.characterId);
+            SceneManager.LoadScene("BasicAttributes");
+        }
+        else if (name.Equals("Member_ZhaoShi"))
+        {
+            //Debug.Log(name);
+        }
+        else if (name.Equals("Member_NeiGong"))
+        {
+            //Debug.Log(name);
         }
         else { }
-    
+
     }
     public void DeleteMember(GameObject xMem)
     {

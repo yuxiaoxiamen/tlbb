@@ -43,7 +43,7 @@ public class Attributes_Init : MonoBehaviour
                 label.GetComponent<TextMesh>().text = label.GetComponent<TextMesh>().text + "    " + Member_Init.Members[memIndex].BaseData.Energy;
                 break;
         }
-
+        gameObject.SetActive(false);
 
     }
 

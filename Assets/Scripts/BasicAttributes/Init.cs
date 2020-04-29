@@ -16,6 +16,9 @@ public class Init : MonoBehaviour
         attris.Add("ShengMing", "shengming");
         attris.Add("NeiLi", "neili");
         attris.Add("BaoShi", "baoshi");
+        attris.Add("YiShu", "yishu");
+        attris.Add("ChuYi", "chuyi");
+        attris.Add("JiuLi", "jiuli");
     }
     // Start is called before the first frame update
     void Start()
