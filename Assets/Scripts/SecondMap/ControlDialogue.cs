@@ -24,6 +24,7 @@ public class ControlDialogue : MonoBehaviour
     private List<Conversation> Evils = new List<Conversation>();
     private bool isInChooice = false;
     private string key;
+    private RectTransform bgTransform;
 
     public GameObject optionButtonPrefab;
 
@@ -32,6 +33,7 @@ public class ControlDialogue : MonoBehaviour
     void Awake()
     {
         instance = this;
+        bgTransform = transform.Find("bg").GetComponent<RectTransform>();
         rightHead = transform.Find("rightHead").GetComponent<Image>();
         rightName = transform.Find("rightName").GetComponent<Text>();
         leftHead = transform.Find("leftHead").GetComponent<Image>();
@@ -146,11 +148,13 @@ public class ControlDialogue : MonoBehaviour
         {
             leftHead.sprite = Resources.Load<Sprite>("head/"+conversation.People.BaseData.HeadPortrait);
             leftName.text = conversation.People.BaseData.Name;
+            bgTransform.rotation = Quaternion.Euler(0, 0, 0);
         }
         else
         {
             rightHead.sprite = Resources.Load<Sprite>("head/"+conversation.People.BaseData.HeadPortrait);
             rightName.text = conversation.People.BaseData.Name;
+            bgTransform.rotation = Quaternion.Euler(0, 180, 0);
         }
         StartCoroutine(SetContentText(conversation.Content));
     }

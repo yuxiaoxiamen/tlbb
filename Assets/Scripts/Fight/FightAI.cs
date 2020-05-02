@@ -32,7 +32,8 @@ public class FightAI
             List<Vector2Int> realPath = new List<Vector2Int>();
             if (CanFight(person))
             {
-                List<Vector2Int> path = PersonMoveTool.FindPath(person.RowCol, closestEnemy.RowCol, FightMain.GetGrids(), obstacles, true);
+                List<Vector2Int> path = PersonMoveTool.FindPath(person.RowCol, 
+                    closestEnemy.RowCol, FightMain.GetGrids(), obstacles, true);
                 foreach (Vector2Int rc in path)
                 {
                     if (moveRangeGrids.Contains(rc))
@@ -91,7 +92,6 @@ public class FightAI
         AttackTool.CountAttackDistance(person, FightMain.enemyQueue);
 
         Dictionary<GameObject, int> canAttackCounts = new Dictionary<GameObject, int>();
-
         foreach (GameObject gridObject in AttackTool.attackDistance)
         {
             AttackTool.CountAttackRange(gridObject, person, FightMain.enemyQueue);

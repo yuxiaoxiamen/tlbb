@@ -237,6 +237,9 @@ public class FightMain : MonoBehaviour
         {
             Vector3 personPosition = gridDataToObject[person.RowCol].transform.position;
             GameObject personObject = Instantiate(personPrefab, personPosition, Quaternion.identity);
+            //GameObject personObject = Resources.Load<GameObject>("persons/" + person.BaseData.Id);
+            //personObject.transform.position = personPosition;
+            //personObject.transform.localRotation = Quaternion.identity;
             personObject.name = person.BaseData.Id + "";
             person.PersonObject = personObject;
             positionToPerson.Add(person.RowCol, person);
@@ -390,10 +393,10 @@ public class FightMain : MonoBehaviour
         Person enemy2 = GlobalData.Persons[3];
         enemy2.RowCol = new Vector2Int(0, 9);
 
-        player.CurrentHP = player.BaseData.HP = 100000;
-        friend1.CurrentHP = friend1.BaseData.HP = 100000;
-        enemy1.CurrentHP = enemy1.BaseData.HP = 100000;
-        enemy2.CurrentHP = enemy2.BaseData.HP = 100000;
+        player.CurrentHP = player.BaseData.HP = 10000;
+        friend1.CurrentHP = friend1.BaseData.HP = 10000;
+        enemy1.CurrentHP = enemy1.BaseData.HP = 10000;
+        enemy2.CurrentHP = enemy2.BaseData.HP = 10000;
 
         foreach(InnerGong gong in player.BaseData.InnerGongs)
         {

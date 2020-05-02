@@ -41,7 +41,7 @@ public class Person : ICloneable
         Counterattack = CountCounterattack();
         Dodge = CountDodge();
         Defend = CountDefend();
-        MoveRank = 5;//CountMoveRank();
+        MoveRank = CountMoveRank();
         Accuracy = 100;
         AttackPowerRate = 0;
     }

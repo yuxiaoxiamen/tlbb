@@ -15,7 +15,7 @@ public class ClickSite : MonoBehaviour
 
     private void OnMouseDown()
     {
-        SecondPlace secondPlace = GlobalData.SecondPlaces[int.Parse(gameObject.name)];
+        SecondPlace secondPlace = GlobalData.SecondPlaces[int.Parse(gameObject.transform.parent.name)];
         secondPlace.PrePlace = (FirstPlace)GameRunningData.GetRunningData().currentPlace;
         GameRunningData.GetRunningData().currentPlace = secondPlace;
         SceneManager.LoadScene("ThridMap");
@@ -25,7 +25,7 @@ public class ClickSite : MonoBehaviour
     {
         if (!ControlBottomPanel.isMouseInPane)
         {
-            gameObject.transform.DOScale(defaultScale * 1.2f, 0.5f);
+            gameObject.transform.DOScale(defaultScale * 1.1f, 0.5f);
         }
     }
 

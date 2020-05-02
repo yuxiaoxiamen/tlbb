@@ -51,7 +51,7 @@ public class MiningCountDown : MonoBehaviour
             {
                 break;
             }
-            text.GetComponent<TextMesh>().text = TotalTime.ToString();
+            text.GetComponent<Text>().text = TotalTime.ToString();
             yield return new WaitForSeconds(1);
             TotalTime--;
         }

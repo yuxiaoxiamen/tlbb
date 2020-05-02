@@ -26,7 +26,8 @@ public class DrawKnife : MonoBehaviour
             lineRenderer = GetComponent<LineRenderer>();
             if (Input.GetMouseButton(0))
             {
-                var position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1.0f));
+                var position = Camera.main.ScreenToWorldPoint(
+                    new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1.0f));
                 positions.Enqueue(position);
 
                 if (positions.Count >= 10)

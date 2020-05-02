@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Alchemy.unity
     guid: 259ff186e8408b34c85fb6ad28034e11
+  - enabled: 1
+    path: Assets/Scenes/BasicAttributes.unity
+    guid: 7308ce9b5cd42a440835eaab37c5bc26
   m_configObjects: {}

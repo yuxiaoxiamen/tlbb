@@ -18,7 +18,7 @@ public class CutUpMain : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //manual = GlobalData.FoodManuals[0];
+        manual = GlobalData.FoodManuals[0];
         minY = foodPrefab.transform.position.y - 3;
         isGameStart = false;
         fruitNum = 0;
@@ -97,7 +97,8 @@ public class CutUpMain : MonoBehaviour
         int randomZ = Random.Range(2, 100);
         float randomAngle = Random.Range(0, 361);
         var randomRotation = Quaternion.AngleAxis(randomAngle, new Vector3(0, 0, 1));
-        GameObject foodObject = Instantiate(foodPrefab, new Vector3(randomX, foodPrefab.transform.position.y, randomZ), randomRotation);
+        Vector3 randomPosition = new Vector3(randomX, foodPrefab.transform.position.y, randomZ);
+        GameObject foodObject = Instantiate(foodPrefab, randomPosition, randomRotation);
         randomAngle = Random.Range(-10, 11);
         Vector2 force = Quaternion.AngleAxis(randomAngle, new Vector3(0, 0, 1)) * Vector3.up * throwForce;
         foodObject.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);

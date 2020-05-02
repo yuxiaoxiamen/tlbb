@@ -17,20 +17,20 @@ public class ThridMapMain : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1;
-        //bool hasDialogue = ControlDialogue.instance.CheckMainConversation(() =>
-        //{
-        //    var key = GameRunningData.GetRunningData().GetPlaceDateKey();
-        //    if (GlobalData.MainLineConflicts[key].ConflictForm == ConflictKind.Battle)
-        //    {
-        //        FightMain.source = FightSource.MainLine;
-        //        SceneManager.LoadScene("Fight");
-        //    }
-        //});
-        //if (!hasDialogue)
-        //{
-        //    GeneratePersonHead(FindPerson());
-        //}
-        GeneratePersonHead(FindPerson());
+        bool hasDialogue = ControlDialogue.instance.CheckMainConversation(() =>
+        {
+            var key = GameRunningData.GetRunningData().GetPlaceDateKey();
+            if (GlobalData.MainLineConflicts[key].ConflictForm == ConflictKind.Battle)
+            {
+                FightMain.source = FightSource.MainLine;
+                SceneManager.LoadScene("Fight");
+            }
+        });
+        if (!hasDialogue)
+        {
+            GeneratePersonHead(FindPerson());
+        }
+        //GeneratePersonHead(FindPerson());
         manualUI = GameObject.Find("manualUI");
         manualUI.SetActive(false);
         peopleObject = Instantiate(peoplePrefab);
@@ -101,8 +101,8 @@ public class ThridMapMain : MonoBehaviour
             GlobalData.Persons[2],
             GlobalData.Persons[3]
         };
-        GlobalData.Persons[1].BaseData.Interactions.Add(GlobalData.Interactions[10]);
-        GlobalData.Persons[1].BaseData.Interactions.Add(GlobalData.Interactions[9]);
+        //GlobalData.Persons[1].BaseData.Interactions.Add(GlobalData.Interactions[10]);
+        //GlobalData.Persons[1].BaseData.Interactions.Add(GlobalData.Interactions[9]);
         //foreach (Person person in GlobalData.Persons)
         //{
         //    if (!GameRunningData.GetRunningData().teammates.Contains(person))

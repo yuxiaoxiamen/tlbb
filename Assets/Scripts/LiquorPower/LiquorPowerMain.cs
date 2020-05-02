@@ -48,7 +48,7 @@ public class LiquorPowerMain : MonoBehaviour
         player = GameRunningData.GetRunningData().player;
         player.RowCol = startRc;
         player.PersonObject = Instantiate(personPrefab, gridDataToObject[player.RowCol].transform.position, Quaternion.identity);
-        enemy.PersonObject.GetComponent<SpriteRenderer>().color = Color.red;
+        enemy.PersonObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("ui/liquorEnemy");
 
         isGameStart = false;
         Button startButton = startPanel.transform.Find("Button").GetComponent<Button>();
@@ -253,7 +253,7 @@ public class LiquorPowerMain : MonoBehaviour
                 gridDataToObject.Add(rowAndCol, newGrid);
                 if (!grids[r, c])
                 {
-                    newGrid.GetComponent<SpriteRenderer>().color = Color.black;
+                    newGrid.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("ui/wall");
                 }
                 if(r == 0 || c == 0 || r == maxRow - 1 || c == maxCol - 1)
                 {

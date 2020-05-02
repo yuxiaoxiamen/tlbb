@@ -17,7 +17,7 @@ public class GlobalData
     public static List<SecondPlace> SecondPlaces { get; set; } //所有场所的数据
     public static Dictionary<string, List<MainConversation>> MainConversations { get; set; } //主线剧情对话
     public static List<Interaction> Interactions { get; set; }//交互选项
-    public static Dictionary<string, MainLineConflict> MainLineConflicts { get; set; }
+    public static Dictionary<string, MainLineConflict> MainLineConflicts { get; set; }//主线冲突
 
     static GlobalData()
     {
@@ -357,6 +357,12 @@ public class GlobalData
             };
             Persons.Add(person);
         }
+    }
+
+    static T StringToObject<T>(string fileName)
+    {
+        var jsonData = Resources.Load<TextAsset>(fileName);
+        return JsonConvert.DeserializeObject<T>(jsonData.text);
     }
 }
 

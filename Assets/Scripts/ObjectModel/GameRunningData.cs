@@ -12,14 +12,16 @@ public class GameRunningData
     public List<Person> teammates;
     public List<Good> belongings;
     public Vector2Int playerPreRc;
+    public int money;
 
     private GameRunningData()
     {
         date = new GameDate(1, 1, 1, 1);
         player = GlobalData.Persons[0];
-        player.RowCol = new Vector2Int(30, 39);
+        player.RowCol = new Vector2Int(33, 43);
         playerPreRc = new Vector2Int(30, 39);
         currentPlace = null;
+        money = 0;
         teammates = new List<Person>();
         belongings = new List<Good>();
     }

@@ -20,6 +20,20 @@ public class FirstMapMain : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GlobalData.FirstPlaces[6].Entry = new Vector2Int(34, 42);
+        GlobalData.FirstPlaces[6].Hold.Add(new Vector2Int(34, 41));
+        GlobalData.FirstPlaces[6].Hold.Add(new Vector2Int(34, 40));
+        GlobalData.FirstPlaces[6].Hold.Add(new Vector2Int(34, 39));
+        GlobalData.FirstPlaces[6].Hold.Add(new Vector2Int(33, 42));
+        GlobalData.FirstPlaces[6].Hold.Add(new Vector2Int(33, 41));
+        GlobalData.FirstPlaces[6].Hold.Add(new Vector2Int(33, 40));
+        GlobalData.FirstPlaces[6].Hold.Add(new Vector2Int(33, 39));
+        GlobalData.FirstPlaces[6].Hold.Add(new Vector2Int(32, 42));
+        GlobalData.FirstPlaces[6].Hold.Add(new Vector2Int(32, 41));
+        GlobalData.FirstPlaces[6].Hold.Add(new Vector2Int(32, 40));
+        GlobalData.FirstPlaces[6].Hold.Add(new Vector2Int(32, 39));
+        GlobalData.FirstPlaces[6].Hold.Add(new Vector2Int(35, 42));
+        GlobalData.FirstPlaces[6].Hold.Add(new Vector2Int(35, 43));
         gridDataToObject.Clear();
         gridObjectToData.Clear();
         Time.timeScale = 1;
@@ -114,22 +128,48 @@ public class FirstMapMain : MonoBehaviour
         if (upAngle <= 10)
         {
             direction = Direction.Up;
-            arrowObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("ui/up");
+            arrowObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("ui/上");
+        }
+        if (upAngle <= 55 && upAngle >= 35)
+        {
+            if(rightAngle < 90)
+            {
+                direction = Direction.UpRight;
+                arrowObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("ui/右上");
+            }
+            else
+            {
+                direction = Direction.UpLeft;
+                arrowObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("ui/左上");
+            }
         }
         if (upAngle >= 170)
         {
             direction = Direction.Down;
-            arrowObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("ui/down");
+            arrowObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("ui/下");
+        }
+        if (upAngle <= 145 && upAngle >= 125)
+        {
+            if (rightAngle < 90)
+            {
+                direction = Direction.DownRight;
+                arrowObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("ui/右下");
+            }
+            else
+            {
+                direction = Direction.DownLeft;
+                arrowObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("ui/左下");
+            }
         }
         if (rightAngle <= 10)
         {
             direction = Direction.Right;
-            arrowObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("ui/right");
+            arrowObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("ui/右");
         }
         if (rightAngle >= 170)
         {
             direction = Direction.Left;
-            arrowObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("ui/left");
+            arrowObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("ui/左");
         }
         arrowObject.transform.position = position;
     }
@@ -224,6 +264,22 @@ public class FirstMapMain : MonoBehaviour
             case Direction.Right:
                 nextRc.y += 1;
                 break;
+            case Direction.UpRight:
+                nextRc.x -= 1;
+                nextRc.y += 1;
+                break;
+            case Direction.DownRight:
+                nextRc.x += 1;
+                nextRc.y += 1;
+                break;
+            case Direction.UpLeft:
+                nextRc.x -= 1;
+                nextRc.y -= 1;
+                break;
+            case Direction.DownLeft:
+                nextRc.x += 1;
+                nextRc.y -= 1;
+                break;
         }
         if (!GetMapObstacles().Contains(nextRc) && GetAllGrids().Contains(nextRc))
         {
@@ -252,4 +308,4 @@ public class FirstMapMain : MonoBehaviour
     }
 }
 
-enum Direction { Up, Right, Down, Left}
+enum Direction { Up, Right, Down, Left, UpRight, UpLeft, DownRight, DownLeft}
