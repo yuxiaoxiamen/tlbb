@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -684,6 +684,7 @@ GameObject:
   - component: {fileID: 322797056}
   - component: {fileID: 322797055}
   - component: {fileID: 322797054}
+  - component: {fileID: 322797057}
   m_Layer: 5
   m_Name: sell
   m_TagString: Untagged
@@ -786,6 +787,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 322797052}
   m_CullTransparentMesh: 0
+--- !u!114 &322797057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 322797052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10849e08dadfd7645b279599def302d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemButtonPrefab: {fileID: 0}
 --- !u!1 &325734460
 GameObject:
   m_ObjectHideFlags: 0
@@ -1800,7 +1814,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2727,6 +2741,7 @@ GameObject:
   - component: {fileID: 1476656594}
   - component: {fileID: 1476656593}
   - component: {fileID: 1476656592}
+  - component: {fileID: 1476656595}
   m_Layer: 5
   m_Name: buy
   m_TagString: Untagged
@@ -2829,6 +2844,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1476656590}
   m_CullTransparentMesh: 0
+--- !u!114 &1476656595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1476656590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10849e08dadfd7645b279599def302d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemButtonPrefab: {fileID: 0}
 --- !u!1 &1492496470
 GameObject:
   m_ObjectHideFlags: 0
@@ -3073,7 +3101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3592,7 +3620,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

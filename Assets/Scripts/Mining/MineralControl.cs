@@ -20,7 +20,7 @@ public class MineralControl : MonoBehaviour
 
     private void Awake()
     {
-        //manual = GlobalData.WeaponManuals[0];
+        manual = GlobalData.WeaponManuals[0];
         isOver = false;
         isGameStart = false;
         startPanel.transform.Find("Button").GetComponent<Button>().onClick.AddListener(() =>

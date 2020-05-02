@@ -41,8 +41,6 @@ public class ItemDisplay : MonoBehaviour
         itemtemp.Add(GlobalData.Items[48]);
         itemtemp.Add(GlobalData.Items[49]);
         itemtemp.Add(GlobalData.Items[50]);
-        itemtemp.Add(GlobalData.Items[73]);
-        itemtemp.Add(GlobalData.Items[74]);
 
         for (int i = 0; i < itemtemp.Count; i++)
         {

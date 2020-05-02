@@ -124,7 +124,7 @@ public class PageClick : MonoBehaviour
             GameObject.Find("top").GetComponent<TextMesh>().text = (KongMain.center % KongMain.gong.Count+1).ToString() + "/" + KongMain.gong.Count.ToString();
 
             //显示内功信息
-            GameObject.Find("KongName").GetComponent<TextMesh>().text = KongMain.gong[KongMain.center].Name;
+            GameObject.Find("KongName").GetComponent<TextMesh>().text = Textchange(KongMain.gong[KongMain.center].Name);
             InnerGong inner = new InnerGong();
             GameObject.Find("RankValue").GetComponent<TextMesh>().text = inner.Rank.ToString();
             //GameObject.Find("RankValue").GetComponent<TextMesh>().text = "没找到这个数据";

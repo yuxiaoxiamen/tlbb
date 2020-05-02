@@ -11,6 +11,7 @@ public class ItemMain : MonoBehaviour
     public static List<Good> knife = new List<Good>();
     public static List<Good> sword = new List<Good>();
     public static List<Good> rod = new List<Good>();
+    public static List<Good> pellet = new List<Good>();
     public static string itemtype;
     public static Dictionary<string, int> itemNum = new Dictionary<string, int>();       //物品数量记录
     public static string equipmentNow = "无";
@@ -43,9 +44,7 @@ public class ItemMain : MonoBehaviour
         item.Add(GlobalData.Items[47]);
         item.Add(GlobalData.Items[48]);
         item.Add(GlobalData.Items[49]);
-        item.Add(GlobalData.Items[50]);
-        item.Add(GlobalData.Items[73]);
-        item.Add(GlobalData.Items[74]);
+
 
         int num;
 
@@ -69,6 +68,9 @@ public class ItemMain : MonoBehaviour
                 case "Rod":
                     rod.Add(item[i]);
                     break;
+                case "Pellet":
+                    pellet.Add(item[i]);
+                    break;
                 default:
                     break;
             }
@@ -88,8 +90,22 @@ public class ItemMain : MonoBehaviour
         }
 
         //默认显示所有酒
-        for(int n=0;n<alcohol.Count;n++)
-            GameObject.Find(n.ToString()).GetComponent<SpriteRenderer>().color= new Color32(100, 100, 100, 255);
+      
+
+        for(int n = 0; n < alcohol.Count; n++)
+        {
+            float spritex, spritey;
+            float offSetx, offSety;
+            var sp = GameObject.Find(n.ToString()).GetComponent<SpriteRenderer>();
+            spritex =sp.bounds.size.x;
+            spritey = sp.bounds.size.y;
+            sp.sprite = Resources.Load<Sprite>("ItemIcon/" + alcohol[n].Id.ToString());
+            offSetx = sp.transform.localScale.x;
+            offSety = sp.transform.localScale.y;
+            sp.transform.localScale = new Vector3(offSetx * spritex / sp.bounds.size.x, offSety * spritey / sp.bounds.size.y, 1);
+            sp.color = new Color32(255, 255, 255, 255);
+        }
+        
 
         itemtype = "Alcohol";
 

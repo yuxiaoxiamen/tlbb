@@ -52,7 +52,6 @@ public class ZhaoSwitch : MonoBehaviour
                 GameObject.Find("ZhaoName").GetComponent<TextMesh>().text = "";
                 GameObject.Find("ZhaoRank").GetComponent<TextMesh>().text = "";
                 GameObject.Find("ZhaoProficiency").GetComponent<TextMesh>().text = "";
-                GameObject.Find("ZhaoIntroduction").GetComponent<TextMesh>().text = "";
                 GameObject.Find("RankValue").GetComponent<TextMesh>().text = "";
                 GameObject.Find("ProficiencyValue").GetComponent<TextMesh>().text = "";
                 GameObject.Find("ZhaoDetail").GetComponent<TextMesh>().text = "";
@@ -63,7 +62,7 @@ public class ZhaoSwitch : MonoBehaviour
 
                 //清空名字
                 for (int n = 0; n < 20; n++)
-                    GameObject.Find(n.ToString()).GetComponent<TextMesh>().text = "";
+                    GameObject.Find("book"+n.ToString()).GetComponent<TextMesh>().text = "";
 
                 ZhaoMain.zhaotype = ButtonName;
 
@@ -73,27 +72,27 @@ public class ZhaoSwitch : MonoBehaviour
                 {
                     case "Fist":
                         for (int m = 0; m < ZhaoMain.fist.Count; m++)
-                            GameObject.Find(m.ToString()).GetComponent<TextMesh>().text = Textchange(ZhaoMain.fist[m].Name);
+                            GameObject.Find("book"+m.ToString()).GetComponent<TextMesh>().text = Textchange(ZhaoMain.fist[m].Name);
                         break;
                     case "Palm":
                         for (int m = 0; m < ZhaoMain.palm.Count; m++)
-                            GameObject.Find(m.ToString()).GetComponent<TextMesh>().text = Textchange(ZhaoMain.palm[m].Name);
+                            GameObject.Find("book" + m.ToString()).GetComponent<TextMesh>().text = Textchange(ZhaoMain.palm[m].Name);
                         break;
                     case "Finger":
                         for (int m = 0; m < ZhaoMain.finger.Count; m++)
-                            GameObject.Find(m.ToString()).GetComponent<TextMesh>().text = Textchange(ZhaoMain.finger[m].Name);
+                            GameObject.Find("book" + m.ToString()).GetComponent<TextMesh>().text = Textchange(ZhaoMain.finger[m].Name);
                         break;
                     case "Knife":
                         for (int m = 0; m < ZhaoMain.knife.Count; m++)
-                            GameObject.Find(m.ToString()).GetComponent<TextMesh>().text = Textchange(ZhaoMain.knife[m].Name);
+                            GameObject.Find("book" + m.ToString()).GetComponent<TextMesh>().text = Textchange(ZhaoMain.knife[m].Name);
                         break;
                     case "Sword":
                         for (int m = 0; m < ZhaoMain.sword.Count; m++)
-                            GameObject.Find(m.ToString()).GetComponent<TextMesh>().text = Textchange(ZhaoMain.sword[m].Name);
+                            GameObject.Find("book" + m.ToString()).GetComponent<TextMesh>().text = Textchange(ZhaoMain.sword[m].Name);
                         break;
                     case "Rod":
                         for (int m = 0; m < ZhaoMain.rod.Count; m++)
-                            GameObject.Find(m.ToString()).GetComponent<TextMesh>().text = Textchange(ZhaoMain.rod[m].Name);
+                            GameObject.Find("book" + m.ToString()).GetComponent<TextMesh>().text = Textchange(ZhaoMain.rod[m].Name);
                         break;
                     default:
                         break;

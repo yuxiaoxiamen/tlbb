@@ -28,8 +28,9 @@ public class ItemDetailShow : MonoBehaviour
         return temp;
     }
 
-    private void MouseEnter()
+    private void OnMouseEnter()
     {
+
         float num = float.Parse(gameObject.name);           //获取物品栏序号
         int num1 = (int)num;
         string itemdetail = null;
@@ -43,7 +44,7 @@ public class ItemDetailShow : MonoBehaviour
                     name = ItemMain.alcohol[num1].Name;
                     info = ItemMain.alcohol[num1].Information;
                     effect = ItemMain.alcohol[num1].Effect;
-                    itemdetail = "名称：\n        " + name + "\n描述：\n        " + Textnumchange(info, 35) + "效果：\n        " + Textnumchange(effect, 35);
+                    itemdetail = name + "\n\n" + Textnumchange(info, 32) + Textnumchange(effect, 32);
                 }
                 break;
             case "Food":
@@ -52,7 +53,7 @@ public class ItemDetailShow : MonoBehaviour
                     name = ItemMain.food[num1].Name;
                     info = ItemMain.food[num1].Information;
                     effect = ItemMain.food[num1].Effect;
-                    itemdetail = "名称：\n        " + name + "\n描述：\n        " + Textnumchange(info, 35) + "效果：\n        " + Textnumchange(effect, 35);
+                    itemdetail = name + "\n\n" + Textnumchange(info, 32) + Textnumchange(effect, 32);
                 }
                 break;
             case "Knife":
@@ -61,7 +62,7 @@ public class ItemDetailShow : MonoBehaviour
                     name = ItemMain.knife[num1].Name;
                     info = ItemMain.knife[num1].Information;
                     effect = ItemMain.knife[num1].Effect;
-                    itemdetail = "名称：\n        " + name + "\n描述：\n        " + Textnumchange(info, 35) + "效果：\n        " + Textnumchange(effect, 35);
+                    itemdetail = name + "\n\n" + Textnumchange(info, 32) + Textnumchange(effect, 32);
                 }
                 break;
             case "Sword":
@@ -70,7 +71,7 @@ public class ItemDetailShow : MonoBehaviour
                     name = ItemMain.sword[num1].Name;
                     info = ItemMain.sword[num1].Information;
                     effect = ItemMain.sword[num1].Effect;
-                    itemdetail = "名称：\n        " + name + "\n描述：\n        " + Textnumchange(info, 35) + "效果：\n        " + Textnumchange(effect, 35);
+                    itemdetail = name + "\n\n" + Textnumchange(info, 32) + Textnumchange(effect, 32);
                 }
                 break;
             case "Rod":
@@ -79,7 +80,16 @@ public class ItemDetailShow : MonoBehaviour
                     name = ItemMain.rod[num1].Name;
                     info = ItemMain.rod[num1].Information;
                     effect = ItemMain.rod[num1].Effect;
-                    itemdetail = "名称：\n        " + name + "\n描述：\n        " + Textnumchange(info, 35) + "效果：\n        " + Textnumchange(effect, 35);
+                    itemdetail = name + "\n\n" + Textnumchange(info, 32) + Textnumchange(effect, 32);
+                }
+                break;
+            case "Pellet":
+                if (num1 < ItemMain.pellet.Count)
+                {
+                    name = ItemMain.pellet[num1].Name;
+                    info = ItemMain.pellet[num1].Information;
+                    effect = ItemMain.pellet[num1].Effect;
+                    itemdetail = name + "\n\n" + Textnumchange(info, 32) + Textnumchange(effect, 32);
                 }
                 break;
             default:
@@ -90,6 +100,7 @@ public class ItemDetailShow : MonoBehaviour
 
     private void OnMouseExit()
     {
+        //Debug.Log("能进来");
         GameObject.Find("ItemDetail").GetComponent<TextMesh>().text = " ";
     }
 }

@@ -116,14 +116,23 @@ public class KongMain : MonoBehaviour
             GameObject.Find("top").GetComponent<TextMesh>().text = (center% gong.Count+1).ToString()+"/"+ gong.Count.ToString();
 
         //标注当前功法
-        /*if(string.Equals(gong[center].Name, GlobalData.Persons[0].SelectedInnerGong.Name))
-            GameObject.Find("KongChange").GetComponent<TextMesh>().text = "居然成功了";
-        else
-        GameObject.Find("KongChange").transform.GetComponent<Text>().text="居然成功了";*/
+        /*if(string.Equals(inners[center].Name, GlobalData.Persons[0].SelectedInnerGong.Name))
+              {GameObject root = GameObject.Find("Canvas");
+               GameObject kongchange = root.transform.Find("KongChange").gameObject;
+               kongchange.transform.GetComponent<Text>().text = "正在修炼";
+               kongchange.SetActive(false);}
+          else  
+              {GameObject root = GameObject.Find("Canvas");
+               GameObject kongchange = root.transform.Find("KongChange").gameObject;
+               kongchange.transform.GetComponent<Text>().text = "切换内功";
+               kongchange.SetActive(true);}
+              
+         
+         */
 
         //显示功法信息
-        GameObject.Find("KongName").GetComponent<TextMesh>().text = gong[center].Name;
-        InnerGong inner = new InnerGong();
+        GameObject.Find("KongName").GetComponent<TextMesh>().text = Textchange(gong[center].Name);
+        InnerGong inner = new InnerGong();                                                   //需修改为直接调用inners[center]
         GameObject.Find("RankValue").GetComponent<TextMesh>().text = inner.Rank.ToString();
         //GameObject.Find("RankValue").GetComponent<TextMesh>().text = "没找到这个数据";
         GameObject.Find("ProficiencyValue").GetComponent<TextMesh>().text = inner.Proficiency.ToString()+"/100";
@@ -132,7 +141,8 @@ public class KongMain : MonoBehaviour
         //进度条
         var v = GameObject.Find("ProficiencyActual").transform;
         //真实数据
-        //float parcent = (float)inner.Proficiency/100;
+        //float parcent = (float)inners[center].Proficiency/(float)inners[center].GetMaxProFiciency;
+        
         //测试数据进度条60%
         float parcent = 0.6F;
         float xlen = GameObject.Find("ProficiencyBackground").transform.localScale.x;
