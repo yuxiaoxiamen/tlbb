@@ -393,10 +393,10 @@ public class FightMain : MonoBehaviour
         Person enemy2 = GlobalData.Persons[3];
         enemy2.RowCol = new Vector2Int(0, 9);
 
-        player.CurrentHP = player.BaseData.HP = 100000;
-        friend1.CurrentHP = friend1.BaseData.HP = 100000;
-        enemy1.CurrentHP = enemy1.BaseData.HP = 100000;
-        enemy2.CurrentHP = enemy2.BaseData.HP = 100000;
+        player.CurrentHP = player.BaseData.HP = 10000;
+        friend1.CurrentHP = friend1.BaseData.HP = 10000;
+        enemy1.CurrentHP = enemy1.BaseData.HP = 10000;
+        enemy2.CurrentHP = enemy2.BaseData.HP = 10000;
 
         foreach(InnerGong gong in player.BaseData.InnerGongs)
         {

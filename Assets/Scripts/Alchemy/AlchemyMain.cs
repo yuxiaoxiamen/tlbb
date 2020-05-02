@@ -11,6 +11,7 @@ public class AlchemyMain : MonoBehaviour
     public int count = 0;
     public GameObject startPanel;
     public static bool isGameStart;
+    private List<RandomSelected> randomScripts;
 
     // Start is called before the first frame update
     void Start()
@@ -27,11 +28,20 @@ public class AlchemyMain : MonoBehaviour
         {
             itemObject.transform.Find("buoy").GetComponent<BuoyControl>()
         };
+        randomScripts = new List<RandomSelected>()
+        {
+            itemObject.transform.GetComponent<RandomSelected>()
+        };
         for(int i = 1; i <= 4; ++i)
         {
             Vector3 position = new Vector3(itemObject.transform.position.x, itemObject.transform.position.y - i * 2f);
             GameObject itemClone = Instantiate(itemObject, position, Quaternion.identity);
             scripts.Add(itemClone.transform.Find("buoy").GetComponent<BuoyControl>());
+            randomScripts.Add(itemClone.transform.GetComponent<RandomSelected>());
+        }
+        foreach(var script in randomScripts)
+        {
+            script.SetItem();
         }
     }
 
@@ -43,6 +53,7 @@ public class AlchemyMain : MonoBehaviour
             if (scripts[currentIndex].isStay)
             {
                 ++count;
+                Debug.Log(count);
             }
             scripts[currentIndex].Stop();
             if (++currentIndex < scripts.Count)

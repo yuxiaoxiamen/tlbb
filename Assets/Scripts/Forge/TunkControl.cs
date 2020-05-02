@@ -12,6 +12,7 @@ public class TunkControl : MonoBehaviour
     public static int ironNumber;
     public static int silverNumber;
     public static int goldNumber;
+    public GameObject hammerPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -72,6 +73,15 @@ public class TunkControl : MonoBehaviour
                 break;
         }
         Destroy(gameObject);
+        StartCoroutine(CreateHammer(gameObject.transform.position));
+    }
+
+    public IEnumerator CreateHammer(Vector3 position)
+    {
+        GameObject hammerObject = Instantiate(hammerPrefab);
+        hammerObject.transform.position = position;
+        yield return new WaitForSeconds(0.4f);
+        Destroy(hammerObject);
     }
 
     private void OnTriggerStay2D(Collider2D collision)

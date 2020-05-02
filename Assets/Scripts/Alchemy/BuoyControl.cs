@@ -19,6 +19,10 @@ public class BuoyControl : MonoBehaviour
         if (isStop)
         {
             var g = Instantiate(gameObject);
+            if (isStay)
+            {
+                g.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("ui/stop");
+            }
             g.transform.SetParent(transform.parent);
             g.transform.localPosition = transform.localPosition;
             g.transform.localScale = transform.localScale;
@@ -36,13 +40,13 @@ public class BuoyControl : MonoBehaviour
         float time = Random.Range(0.4f, 0.6f);
         if (isLeft)
         {
-            currentDOtween = transform.DOLocalMoveX(-0.5f, time).OnComplete(()=>
+            currentDOtween = transform.DOLocalMoveX(-5f, time).OnComplete(()=>
             {
                 Move(false);
             }).SetEase(Ease.Linear);
         }
         else{
-            currentDOtween = transform.DOLocalMoveX(0.5f, time).OnComplete(() =>
+            currentDOtween = transform.DOLocalMoveX(5f, time).OnComplete(() =>
             {
                 Move(true);
             }).SetEase(Ease.Linear);

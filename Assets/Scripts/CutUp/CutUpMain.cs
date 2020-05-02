@@ -18,7 +18,7 @@ public class CutUpMain : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //manual = GlobalData.FoodManuals[0];
+        manual = GlobalData.FoodManuals[0];
         minY = foodPrefab.transform.position.y - 3;
         isGameStart = false;
         fruitNum = 0;

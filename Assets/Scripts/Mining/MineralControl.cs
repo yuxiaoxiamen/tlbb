@@ -7,20 +7,21 @@ public class MineralControl : MonoBehaviour
 {
     public static WeaponManual manual;
     public GameObject mineralPrefab;
-    public float[] scales = new float[] { 1.2f, 1, 0.8f, 0.6f };
+    public float[] scales = new float[] { 1f, 0.4f, 0.16f, 0.064f };
     public static float minX = -6;
     public static float maxX = 6;
     public static float minY = -3;
-    public static float maxY = 3;
+    public static float maxY = 1.8f;
     public static bool isOver;
     public static bool isGameStart;
     public GameObject manualObject;
+    public GameObject manualName;
     public GameObject startPanel;
     public static int sum;
 
     private void Awake()
     {
-        //manual = GlobalData.WeaponManuals[0];
+        manual = GlobalData.WeaponManuals[0];
         isOver = false;
         isGameStart = false;
         startPanel.transform.Find("Button").GetComponent<Button>().onClick.AddListener(() =>
@@ -55,23 +56,24 @@ public class MineralControl : MonoBehaviour
 
     void SetManual()
     {
+        manualName.GetComponent<Text>().text += manual.Item.Name;
         for(int i = 0; i < 4; ++i)
         {
             Transform titleTransform = manualObject.transform.GetChild(i);
-            TextMesh textMesh = titleTransform.GetChild(0).GetComponent<TextMesh>();
+            Text textMesh = titleTransform.GetComponent<Text>();
             switch (i)
             {
                 case 0:
-                    textMesh.text = manual.CopperNumber + "";
+                    textMesh.text += manual.CopperNumber + "";
                     break;
                 case 1:
-                    textMesh.text = manual.IronNumber + "";
+                    textMesh.text += manual.IronNumber + "";
                     break;
                 case 2:
-                    textMesh.text = manual.SilverNumber + "";
+                    textMesh.text += manual.SilverNumber + "";
                     break;
                 case 3:
-                    textMesh.text = manual.GoldNumber + "";
+                    textMesh.text += manual.GoldNumber + "";
                     break;
             }
         }

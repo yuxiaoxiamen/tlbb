@@ -25,10 +25,10 @@ public class ForgeMain : MonoBehaviour
     {
         isGameOver = false;
         isGameStart = false;
-        HookControl.copperNumber = 1;
-        HookControl.ironNumber = 1;
-        HookControl.silverNumber = 1;
-        HookControl.goldNumber = 1;
+        HookControl.copperNumber = 10;
+        HookControl.ironNumber = 10;
+        HookControl.silverNumber = 10;
+        HookControl.goldNumber = 10;
         sum = HookControl.copperNumber + HookControl.ironNumber + HookControl.silverNumber + HookControl.goldNumber;
 
         startPanel.transform.Find("Button").GetComponent<Button>().onClick.AddListener(()=>

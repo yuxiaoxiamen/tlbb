@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HookControl : MonoBehaviour
 {
@@ -141,7 +142,7 @@ public class HookControl : MonoBehaviour
     {
         int type = int.Parse(gameObject.name);
         Transform titleTransform = mineralObject.transform.GetChild(type);
-        TextMesh textMesh = titleTransform.GetChild(0).GetComponent<TextMesh>();
+        Text textMesh = titleTransform.GetComponent<Text>();
         switch (type)
         {
             case 0:

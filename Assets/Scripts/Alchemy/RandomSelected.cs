@@ -10,16 +10,20 @@ public class RandomSelected : MonoBehaviour
     void Awake()
     {
         selectedObject = transform.Find("selected").gameObject;
-        SetItem();
     }
 
-    void SetItem()
+    public void SetItem()
     {
-        float randomScale = Random.Range(0.1f, 0.3f);
-        selectedObject.transform.localScale = new Vector3(randomScale, 1, 1);
-        float maxX = 0.5f - randomScale / 2;
-        float minX = -maxX;
-        float randomX = Random.Range(minX, maxX);
+        int randomCount = Random.Range(1, 5);
+        float width = selectedObject.GetComponent<SpriteRenderer>().sprite.bounds.size.x;
+        float maxX = 5 - width * randomCount;
+        float randomX = Random.Range(-5, maxX);
         selectedObject.transform.localPosition = new Vector3(randomX, 0, 0);
+        for(int i = 1; i <= randomCount; ++i)
+        {
+            GameObject selectedOj = Instantiate(selectedObject);
+            selectedOj.transform.SetParent(transform);
+            selectedOj.transform.localPosition = new Vector3(randomX + width * i, 0, 0);
+        }
     }
 }

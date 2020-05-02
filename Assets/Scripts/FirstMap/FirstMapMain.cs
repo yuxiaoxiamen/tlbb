@@ -20,6 +20,20 @@ public class FirstMapMain : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GlobalData.FirstPlaces[6].Entry = new Vector2Int(34, 42);
+        GlobalData.FirstPlaces[6].Hold.Add(new Vector2Int(34, 41));
+        GlobalData.FirstPlaces[6].Hold.Add(new Vector2Int(34, 40));
+        GlobalData.FirstPlaces[6].Hold.Add(new Vector2Int(34, 39));
+        GlobalData.FirstPlaces[6].Hold.Add(new Vector2Int(33, 42));
+        GlobalData.FirstPlaces[6].Hold.Add(new Vector2Int(33, 41));
+        GlobalData.FirstPlaces[6].Hold.Add(new Vector2Int(33, 40));
+        GlobalData.FirstPlaces[6].Hold.Add(new Vector2Int(33, 39));
+        GlobalData.FirstPlaces[6].Hold.Add(new Vector2Int(32, 42));
+        GlobalData.FirstPlaces[6].Hold.Add(new Vector2Int(32, 41));
+        GlobalData.FirstPlaces[6].Hold.Add(new Vector2Int(32, 40));
+        GlobalData.FirstPlaces[6].Hold.Add(new Vector2Int(32, 39));
+        GlobalData.FirstPlaces[6].Hold.Add(new Vector2Int(35, 42));
+        GlobalData.FirstPlaces[6].Hold.Add(new Vector2Int(35, 43));
         gridDataToObject.Clear();
         gridObjectToData.Clear();
         Time.timeScale = 1;
