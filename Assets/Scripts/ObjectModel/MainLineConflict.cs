@@ -10,6 +10,7 @@ public class MainLineConflict
     public List<Person> FFriends { get; set; }
     public List<Person> FEnemys { get; set; }
     public bool IsZ { get; set; }
+    public string Title { get; set; }
 }
 
 public enum ConflictKind { Battle, WeiQi, ThanLiquor }

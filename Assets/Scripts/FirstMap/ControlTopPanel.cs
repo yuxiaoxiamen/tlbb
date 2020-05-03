@@ -23,6 +23,7 @@ public class ControlTopPanel : MonoBehaviour
         }
         returnButton.onClick.AddListener(() =>
         {
+            ControlBottomPanel.IsBanPane = false;
             if(currentPlace is SecondPlace)
             {
                 GameRunningData.GetRunningData().currentPlace = ((SecondPlace)currentPlace).PrePlace;
