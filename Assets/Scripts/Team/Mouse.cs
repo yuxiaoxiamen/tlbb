@@ -18,6 +18,10 @@ public class Mouse : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!gameObject.name.Equals("Mem_Oper"))
+        {
+            Para_Pass.characterId = gameObject.transform.parent.GetComponent<Mouse>().Id;
+        }
         
     }
 
@@ -26,7 +30,7 @@ public class Mouse : MonoBehaviour
         string name = gameObject.name;
         if (name.Equals("Member_Delete"))
         {
-            Para_Pass.characterId = gameObject.transform.parent.GetComponent<Mouse>().Id;
+            //Para_Pass.characterId = gameObject.transform.parent.GetComponent<Mouse>().Id;
             int protagonist = 0;     //主角id
             if (Para_Pass.characterId != protagonist)   //非主角可请离
             {
@@ -40,7 +44,7 @@ public class Mouse : MonoBehaviour
         }
         else if (name.Equals("Member_ShuXing"))
         {
-            Para_Pass.characterId = gameObject.transform.parent.GetComponent<Mouse>().Id;
+            //Para_Pass.characterId = gameObject.transform.parent.GetComponent<Mouse>().Id;
             Debug.Log(name);
             Debug.Log(Para_Pass.characterId);
             SceneManager.LoadScene("BasicAttributes");

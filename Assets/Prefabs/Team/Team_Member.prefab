@@ -115,7 +115,7 @@ GameObject:
   - component: {fileID: 7723354462580326497}
   - component: {fileID: 220591157733426334}
   - component: {fileID: 2312510087653586823}
-  - component: {fileID: 6123687006228784406}
+  - component: {fileID: 8988449342077759196}
   m_Layer: 0
   m_Name: Member_ZhaoShi
   m_TagString: Untagged
@@ -199,7 +199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Id: 0
---- !u!65 &6123687006228784406
+--- !u!65 &8988449342077759196
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -210,8 +210,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.99999994, y: 1, z: 0.20000003}
-  m_Center: {x: -0.00000023841858, y: 0, z: 0}
+  m_Size: {x: 6.0599995, y: 0.8, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3208399444680796435
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,7 +327,7 @@ GameObject:
   - component: {fileID: 3288211951131235243}
   - component: {fileID: 3288211951131235252}
   - component: {fileID: 3288211951131235242}
-  - component: {fileID: 9057530903744973356}
+  - component: {fileID: 2029099937104151769}
   m_Layer: 0
   m_Name: Member_Delete
   m_TagString: Untagged
@@ -411,7 +411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Id: 0
---- !u!65 &9057530903744973356
+--- !u!65 &2029099937104151769
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -422,8 +422,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.99999994, y: 1, z: 0.20000003}
-  m_Center: {x: -0.00000023841858, y: 0, z: 0}
+  m_Size: {x: 6.060001, y: 0.8, z: 0.20000003}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3288211951195429053
 GameObject:
   m_ObjectHideFlags: 0
@@ -1744,7 +1744,7 @@ GameObject:
   - component: {fileID: 673080389116807572}
   - component: {fileID: 1363202605954059390}
   - component: {fileID: 2250433984346293715}
-  - component: {fileID: 6431299986175197865}
+  - component: {fileID: 2210365901672331667}
   m_Layer: 0
   m_Name: Member_NeiGong
   m_TagString: Untagged
@@ -1828,7 +1828,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Id: 0
---- !u!65 &6431299986175197865
+--- !u!65 &2210365901672331667
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1839,8 +1839,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.99999994, y: 1, z: 0.20000003}
-  m_Center: {x: -0.00000023841858, y: 0, z: 0}
+  m_Size: {x: 6.0599995, y: 0.8, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5112633319294483447
 GameObject:
   m_ObjectHideFlags: 0
@@ -2060,7 +2060,7 @@ GameObject:
   - component: {fileID: 180125025207048225}
   - component: {fileID: 3876497411197541291}
   - component: {fileID: 2473179231417071059}
-  - component: {fileID: 525602336980822027}
+  - component: {fileID: 7527089290211878454}
   m_Layer: 0
   m_Name: Member_ShuXing
   m_TagString: Untagged
@@ -2144,7 +2144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Id: 0
---- !u!65 &525602336980822027
+--- !u!65 &7527089290211878454
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2155,5 +2155,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.99999994, y: 1, z: 0.20000003}
-  m_Center: {x: -0.00000023841858, y: 0, z: 0}
+  m_Size: {x: 6.0599995, y: 0.8, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}

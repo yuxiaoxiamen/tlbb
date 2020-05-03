@@ -34,6 +34,10 @@ public class Team_Member_Attributes : MonoBehaviour
         if (System.Math.Abs(mouseP.x - gameObject.transform.position.x) <= XRANGE && System.Math.Abs(mouseP.y - gameObject.transform.position.y) <= YRANGE)
         {
             gameObject.transform.Find("Mem_Oper").gameObject.SetActive(true);
+            if (gameObject.transform.Find("Mem_Oper").gameObject.transform.GetComponent<Mouse>().Id == 0)
+            {
+                gameObject.transform.Find("Mem_Oper").gameObject.transform.Find("Member_Delete").gameObject.SetActive(false);
+            }
         }
         else
         {
