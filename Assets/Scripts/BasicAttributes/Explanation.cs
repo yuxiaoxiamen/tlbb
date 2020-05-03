@@ -35,7 +35,7 @@ public class Explanation : MonoBehaviour
                 text_.GetComponent<TextMesh>().text = "影响反击率      当前反击率为： " + GlobalData.Persons[Para_Pass.characterId].Counterattack * 100 + "%";
                 break;
             case "WuXing":
-                text_.GetComponent<TextMesh>().text = "影响影响学习武学的效率      当前为： ";
+                text_.GetComponent<TextMesh>().text = "影响学习武学的效率      当前为： ";
                 break;
             case "ShenFa":
                 text_.GetComponent<TextMesh>().text = "影响闪避率和移动范围      当前闪避率为： " + GlobalData.Persons[Para_Pass.characterId].Dodge * 100 + "%      当前移动范围为："  + GlobalData.Persons[Para_Pass.characterId].MoveRank;
