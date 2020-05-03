@@ -97,18 +97,25 @@ public class TimeGoSubject
 
     void GetMainLineTimeQueue()
     {
-        foreach(var key in GlobalData.MainLineConflicts.Keys)
+        mainLineTime = SortMainLine();
+        preUpdateIndex = -1;
+    }
+
+    public List<GameDate> SortMainLine()
+    {
+        var time = new List<GameDate>();
+        foreach (var key in GlobalData.MainLineConflicts.Keys)
         {
             var dateString = key.Split('/')[1];
             string[] dateStrings = dateString.Split('-');
-            mainLineTime.Add(new GameDate(int.Parse(dateStrings[0]), int.Parse(dateStrings[1]), 
+            time.Add(new GameDate(int.Parse(dateStrings[0]), int.Parse(dateStrings[1]),
                 int.Parse(dateStrings[2]), int.Parse(dateStrings[3])));
         }
-        mainLineTime.Sort(delegate (GameDate x, GameDate y)
+        time.Sort(delegate (GameDate x, GameDate y)
         {
             return x.CompareTo(y);
         });
-        preUpdateIndex = -1;
+        return time;
     }
     
 }

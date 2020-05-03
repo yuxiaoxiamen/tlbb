@@ -57,20 +57,54 @@ public class Interaction
     void ChatListener(Person person)
     {
         List<Conversation> conversations = new List<Conversation>();
-        if(person.BaseData.ChatConversations != null)
+        Random.InitState((int)System.DateTime.Now.Ticks);
+        int x = Random.Range(1, 101);
+        if (x <= 100)
+        {
+            List<GameDate> times = TimeGoSubject.GetTimeSubject().SortMainLine();
+            int count = 0;
+            List<string> titles = new List<string>();
+            foreach (var time in times)
+            {
+                if (GameRunningData.GetRunningData().date.CompareTo(time) <= 0)
+                {
+                    foreach (var key in GlobalData.MainLineConflicts.Keys)
+                    {
+                        var dateString = key.Split('/')[1];
+                        if (time.GetDateString().Equals(dateString))
+                        {
+                            titles.Add(GlobalData.MainLineConflicts[key].Title);
+                        }
+                    }
+                    ++count;
+                    if(count == 3)
+                    {
+                        break;
+                    }
+                }
+            }
+            int i = Random.Range(0, titles.Count);
+            if (!HearsayMain.says.Contains(titles[i]))
+            {
+                HearsayMain.says.Add(titles[i]);
+            }
+            conversations.Add(new Conversation()
+            {
+                People = person,
+                Content = titles[i],
+                IsLeft = false
+            });
+        }
+        else
         {
             foreach (var cc in person.BaseData.ChatConversations)
             {
                 conversations.Add(cc);
             }
-            ControlDialogue.instance.StartConversation(conversations, () =>
-            {
-                ThridMapMain.ShowAllHeads();
-            });
         }
-        else
+        ControlDialogue.instance.StartConversation(conversations, () =>
         {
             ThridMapMain.ShowAllHeads();
-        }
+        });
     }
 }

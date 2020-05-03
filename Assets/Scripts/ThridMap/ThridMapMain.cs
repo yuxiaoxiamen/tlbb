@@ -30,7 +30,7 @@ public class ThridMapMain : MonoBehaviour
         {
             GeneratePersonHead(FindPerson());
         }
-        GeneratePersonHead(FindPerson());
+        //GeneratePersonHead(FindPerson());
         transform.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("mapBg/" + GameRunningData.GetRunningData().currentPlace.Id);
         manualUI = GameObject.Find("manualUI");
         manualUI.SetActive(false);

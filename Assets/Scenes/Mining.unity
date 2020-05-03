@@ -423,7 +423,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 150699547}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.016, y: 2.86, z: 0}
+  m_LocalPosition: {x: -0.016, y: 3.1799998, z: 0}
   m_LocalScale: {x: 0.40037587, y: 0.34262747, z: 1.635467}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2735,7 +2735,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1555452014}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.73, y: 3.66, z: 0}
+  m_LocalPosition: {x: -0.73, y: 3.98, z: 0}
   m_LocalScale: {x: 0.5906154, y: 0.32977265, z: 0.4092}
   m_Children:
   - {fileID: 1274787880}
@@ -2756,11 +2756,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mineralPrefab: {fileID: 1245141170250413421, guid: 295e6744cf16977488d21b9ef4e05414,
     type: 3}
-  scales:
-  - 1.2
-  - 1
-  - 0.8
-  - 0.6
   manualObject: {fileID: 202436542}
   manualName: {fileID: 404824521}
   startPanel: {fileID: 285259813}

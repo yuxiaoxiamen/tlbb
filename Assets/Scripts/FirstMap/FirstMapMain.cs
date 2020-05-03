@@ -191,6 +191,7 @@ public class FirstMapMain : MonoBehaviour
         {
             player.PersonObject.GetComponent<Animator>().SetInteger("Direction", GetDirectionNumber());
             player.PersonObject.GetComponent<Animator>().SetBool("IsMoving",true);
+            SoundEffectControl.instance.PlaySoundEffect();
             StopAllCoroutines();
             player.PersonObject.transform.DOMove(nextGridObject.transform.position, moveSpeed).OnComplete(() =>
             {

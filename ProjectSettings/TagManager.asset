@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Buff
   - Mineral
+  - MapBgm
   layers:
   - Default
   - TransparentFX

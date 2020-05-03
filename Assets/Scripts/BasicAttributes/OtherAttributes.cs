@@ -14,19 +14,30 @@ public class OtherAttributes : MonoBehaviour
         switch(y.name)
         {
             case "ShengMing_Current":
-                percent = (float)GlobalData.Persons[characterId].BaseData.HP / 3000;   //3000：最大生命
+                percent = (float)GlobalData.Persons[characterId].CurrentHP / GlobalData.Persons[characterId].BaseData.HP; 
                 y.localScale = new Vector3(y.localScale.x * percent, y.localScale.y, y.localScale.z);
                 y.localPosition = new Vector3(3*(percent - 1) / 2, y.localPosition.y, y.localPosition.z);
                 break;
+            case "ShengMing_Value":
+                y.GetComponent<TextMesh>().text = GlobalData.Persons[characterId].CurrentHP + " / " + GlobalData.Persons[characterId].BaseData.HP;
+                break;
+
             case "NeiLi_Current":
-                percent = (float)GlobalData.Persons[characterId].BaseData.MP / 3000;    //3000：最大内力
+                percent = (float)GlobalData.Persons[characterId].CurrentMP / GlobalData.Persons[characterId].BaseData.MP;
                 y.localScale = new Vector3(y.localScale.x * percent, y.localScale.y, y.localScale.z);
                 y.localPosition = new Vector3(3*(percent - 1) / 2, y.localPosition.y, y.localPosition.z);
                 break;
+            case "NeiLi_Value":
+                y.GetComponent<TextMesh>().text = GlobalData.Persons[characterId].CurrentMP + " / " + GlobalData.Persons[characterId].BaseData.MP;
+                break;
+
             case "Baoshi_Current":
-                percent = (float)GlobalData.Persons[characterId].BaseData.Energy / 100;     //100：最大饱食
+                percent = (float)GlobalData.Persons[characterId].CurrentEnergy / GlobalData.Persons[characterId].BaseData.Energy;
                 y.localScale = new Vector3(y.localScale.x * percent, y.localScale.y, y.localScale.z);
                 y.localPosition = new Vector3(3*(percent - 1) / 2, y.localPosition.y, y.localPosition.z);
+                break;
+            case "BaoShi_Value":
+                y.GetComponent<TextMesh>().text = GlobalData.Persons[characterId].CurrentEnergy + " / " + GlobalData.Persons[characterId].BaseData.Energy;
                 break;
 
             case "YiShu_Text":
