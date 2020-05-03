@@ -25,10 +25,6 @@ public class ForgeMain : MonoBehaviour
     {
         isGameOver = false;
         isGameStart = false;
-        HookControl.copperNumber = 10;
-        HookControl.ironNumber = 10;
-        HookControl.silverNumber = 10;
-        HookControl.goldNumber = 10;
         sum = HookControl.copperNumber + HookControl.ironNumber + HookControl.silverNumber + HookControl.goldNumber;
 
         startPanel.transform.Find("Button").GetComponent<Button>().onClick.AddListener(()=>
@@ -42,7 +38,7 @@ public class ForgeMain : MonoBehaviour
         Button failButton = failPanel.transform.Find("Button").GetComponent<Button>();
         failButton.onClick.AddListener(() =>
         {
-            //SceneManager.LoadScene("Forge");
+            GameRunningData.GetRunningData().ReturnToMap();
         });
         failPanel.SetActive(false);
 
@@ -50,7 +46,8 @@ public class ForgeMain : MonoBehaviour
         Button successButton = successPanel.transform.Find("Button").GetComponent<Button>();
         successButton.onClick.AddListener(() =>
         {
-            //SceneManager.LoadScene("Forge");
+            GameRunningData.GetRunningData().AddItem(MineralControl.manual.Item);
+            GameRunningData.GetRunningData().ReturnToMap();
         });
         successPanel.SetActive(false);
 

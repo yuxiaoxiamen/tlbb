@@ -13,27 +13,13 @@ public class FirstMapMain : MonoBehaviour
     public static Person player;
     private Direction direction;
     public GameObject arrowObject;
-    public float moveSpeed = 0.2f;
+    public float moveSpeed = 0.7f;
     private bool lastMoveOver = true;
     private bool isInConversation = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        GlobalData.FirstPlaces[6].Entry = new Vector2Int(34, 42);
-        GlobalData.FirstPlaces[6].Hold.Add(new Vector2Int(34, 41));
-        GlobalData.FirstPlaces[6].Hold.Add(new Vector2Int(34, 40));
-        GlobalData.FirstPlaces[6].Hold.Add(new Vector2Int(34, 39));
-        GlobalData.FirstPlaces[6].Hold.Add(new Vector2Int(33, 42));
-        GlobalData.FirstPlaces[6].Hold.Add(new Vector2Int(33, 41));
-        GlobalData.FirstPlaces[6].Hold.Add(new Vector2Int(33, 40));
-        GlobalData.FirstPlaces[6].Hold.Add(new Vector2Int(33, 39));
-        GlobalData.FirstPlaces[6].Hold.Add(new Vector2Int(32, 42));
-        GlobalData.FirstPlaces[6].Hold.Add(new Vector2Int(32, 41));
-        GlobalData.FirstPlaces[6].Hold.Add(new Vector2Int(32, 40));
-        GlobalData.FirstPlaces[6].Hold.Add(new Vector2Int(32, 39));
-        GlobalData.FirstPlaces[6].Hold.Add(new Vector2Int(35, 42));
-        GlobalData.FirstPlaces[6].Hold.Add(new Vector2Int(35, 43));
         gridDataToObject.Clear();
         gridObjectToData.Clear();
         Time.timeScale = 1;
@@ -89,6 +75,7 @@ public class FirstMapMain : MonoBehaviour
             {
                 Cursor.visible = true;
                 GameRunningData.GetRunningData().currentPlace = place;
+                GameRunningData.GetRunningData().playerPreRc = player.RowCol;
                 if (place.Sites == null)
                 {
                     SceneManager.LoadScene("ThridMap");
@@ -191,6 +178,7 @@ public class FirstMapMain : MonoBehaviour
         {
             obstacles.UnionWith(place.Hold);
         }
+        obstacles.UnionWith(GlobalData.MapObstacle);
         return obstacles;
     }
 
@@ -203,6 +191,7 @@ public class FirstMapMain : MonoBehaviour
         {
             player.PersonObject.GetComponent<Animator>().SetInteger("Direction", GetDirectionNumber());
             player.PersonObject.GetComponent<Animator>().SetBool("IsMoving",true);
+            StopAllCoroutines();
             player.PersonObject.transform.DOMove(nextGridObject.transform.position, moveSpeed).OnComplete(() =>
             {
                 player.RowCol = gridObjectToData[nextGridObject];
@@ -303,6 +292,14 @@ public class FirstMapMain : MonoBehaviour
                 return 3;
             case Direction.Right:
                 return 2;
+            case Direction.UpRight:
+                return 4;
+            case Direction.UpLeft:
+                return 5;
+            case Direction.DownRight:
+                return 6;
+            case Direction.DownLeft:
+                return 7;
         }
         return 0;
     }

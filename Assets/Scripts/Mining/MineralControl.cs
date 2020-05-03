@@ -7,7 +7,7 @@ public class MineralControl : MonoBehaviour
 {
     public static WeaponManual manual;
     public GameObject mineralPrefab;
-    public float[] scales = new float[] { 1f, 0.4f, 0.16f, 0.064f };
+    private float[] scales = new float[] { 1.5f, 1.2f, 0.8f, 0.4f };
     public static float minX = -6;
     public static float maxX = 6;
     public static float minY = -3;

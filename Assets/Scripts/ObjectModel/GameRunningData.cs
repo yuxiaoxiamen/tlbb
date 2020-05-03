@@ -67,4 +67,16 @@ public class GameRunningData
             SceneManager.LoadScene("FirstMap");
         }
     }
+
+    public void AddItem(Good item)
+    {
+        if (belongings.Contains(item))
+        {
+            ++item.Number;
+        }
+        else
+        {
+            belongings.Add(item);
+        }
+    }
 }
