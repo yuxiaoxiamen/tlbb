@@ -23,12 +23,15 @@ public class AlchemyCountDown : MonoBehaviour
         successPanel.transform.Find("Button").GetComponent<Button>().onClick.AddListener(() =>
         {
 
+            int id = Random.Range(GlobalData.Items.Count - 5, GlobalData.Items.Count);
+            GameRunningData.GetRunningData().AddItem(GlobalData.Items[id]);
+            GameRunningData.GetRunningData().ReturnToMap();
         });
         failPanel = GameObject.Find("failPanel");
         failPanel.SetActive(false);
         failPanel.transform.Find("Button").GetComponent<Button>().onClick.AddListener(() =>
         {
-
+            GameRunningData.GetRunningData().ReturnToMap();
         });
     }
 

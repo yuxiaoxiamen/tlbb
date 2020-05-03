@@ -28,6 +28,7 @@ public class SecondMapMain : MonoBehaviour
 
     void SetSites()
     {
+        
         var secondPlaces = ((FirstPlace)GameRunningData.GetRunningData().currentPlace).Sites;
         Transform siteBgTransform = sitePrefab.transform.Find("siteBg").transform;
         float width = siteBgTransform.GetComponent<Renderer>().bounds.size.x;
@@ -36,9 +37,9 @@ public class SecondMapMain : MonoBehaviour
             SecondPlace secondPlace = secondPlaces[i];
             GameObject siteObject = Instantiate(sitePrefab);
             siteObject.name = secondPlace.Id + "";
-            siteBgTransform.Find("siteName").GetComponent<TextMesh>().text = GetVerticalString(secondPlace.Name);
-            //siteObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("bg/" + secondPlace.Name);
-            siteObject.transform.position = sitePrefab.transform.position + new Vector3((-0.8f - width) * i, 0, 0);
+            sitePrefab.transform.Find("siteName").GetComponent<TextMesh>().text = secondPlace.Name;
+            siteBgTransform.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("mapCard/" + secondPlace.Id);
+            siteObject.transform.position = sitePrefab.transform.position + new Vector3((-2.8f - width) * i, 0, 0);
         }
     }
 
