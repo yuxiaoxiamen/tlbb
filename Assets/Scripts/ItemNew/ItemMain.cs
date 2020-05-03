@@ -14,7 +14,8 @@ public class ItemMain : MonoBehaviour
     public static List<Good> pellet = new List<Good>();
     public static string itemtype;
     public static Dictionary<string, int> itemNum = new Dictionary<string, int>();       //物品数量记录
-    public static string equipmentNow = "无";
+    public static string equipmentNow = "";
+    public static int dialogState = 0;
 
     static ItemMain()
     {
@@ -25,6 +26,12 @@ public class ItemMain : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        foreach(var belonging in GameRunningData.GetRunningData().belongings)
+        {
+            item.Add(belonging);
+        }
+
+        /*
         item.Add(GlobalData.Items[0]);
         item.Add(GlobalData.Items[1]);
         item.Add(GlobalData.Items[2]);
@@ -46,6 +53,7 @@ public class ItemMain : MonoBehaviour
         item.Add(GlobalData.Items[49]);
 
 
+    */
         int num;
 
         for(int i=0;i<item.Count;i++)
@@ -94,6 +102,7 @@ public class ItemMain : MonoBehaviour
 
         for(int n = 0; n < alcohol.Count; n++)
         {
+            /*
             float spritex, spritey;
             float offSetx, offSety;
             var sp = GameObject.Find(n.ToString()).GetComponent<SpriteRenderer>();
@@ -104,8 +113,21 @@ public class ItemMain : MonoBehaviour
             offSety = sp.transform.localScale.y;
             sp.transform.localScale = new Vector3(offSetx * spritex / sp.bounds.size.x, offSety * spritey / sp.bounds.size.y, 1);
             sp.color = new Color32(255, 255, 255, 255);
+            */
+            var sp= GameObject.Find(n.ToString()).GetComponent<Button>().image;
+            sp.sprite = Resources.Load<Sprite>("ItemIcon/" + alcohol[n].Id.ToString());
+            sp.color = new Color32(255, 255, 255, 255);
         }
-        
+
+        if (GameRunningData.GetRunningData().player.EquippedWeapon == null)
+            equipmentNow = "无";
+        else
+            equipmentNow = GameRunningData.GetRunningData().player.EquippedWeapon.Name.ToString();
+
+
+        GameObject.Find("MoneyValue").GetComponent<TextMesh>().text = GameRunningData.GetRunningData().money.ToString();
+        GameObject.Find("EquipmentValue").GetComponent<TextMesh>().text = equipmentNow;
+
 
         itemtype = "Alcohol";
 

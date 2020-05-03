@@ -33,6 +33,8 @@ public class Person : ICloneable
         MoveRank = 3;
         ControlState = BattleControlState.Moving;
         AttackBuffs = new List<AttackBuff>();
+        //测试数据
+        //EquippedWeapon = GlobalData.Items[56];
     }
 
     public void InitAttribute()

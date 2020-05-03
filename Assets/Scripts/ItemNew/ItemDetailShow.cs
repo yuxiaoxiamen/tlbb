@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class ItemDetailShow : MonoBehaviour
+public class ItemDetailShow : EventTrigger
 {
-    string name;
+    string itemname;
     string info;
     string effect;
     public string Textnumchange(string s, int num)
@@ -28,7 +30,86 @@ public class ItemDetailShow : MonoBehaviour
         return temp;
     }
 
-    private void OnMouseEnter()
+    public override void OnPointerExit(PointerEventData eventData)
+    {
+        base.OnPointerExit(eventData);
+        GameObject.Find("ItemDetail").GetComponent<TextMesh>().text = " ";
+
+    }
+    public override void OnPointerEnter(PointerEventData eventData)
+    {
+
+        base.OnPointerEnter(eventData);
+
+        float num = float.Parse(gameObject.name);           //获取物品栏序号
+        int num1 = (int)num;
+        string itemdetail = null;
+
+        string type = ItemMain.itemtype;                 //获取物品栏类型
+        switch (type)
+        {
+            case "Alcohol":
+                if (num1 < ItemMain.alcohol.Count)
+                {
+                    itemname = ItemMain.alcohol[num1].Name;
+                    info = ItemMain.alcohol[num1].Information;
+                    effect = ItemMain.alcohol[num1].Effect;
+                    itemdetail = itemname + "\n\n" + Textnumchange(info, 32) + Textnumchange(effect, 32);
+                }
+                break;
+            case "Food":
+                if (num1 < ItemMain.food.Count)
+                {
+                    itemname = ItemMain.food[num1].Name;
+                    info = ItemMain.food[num1].Information;
+                    effect = ItemMain.food[num1].Effect;
+                    itemdetail = itemname + "\n\n" + Textnumchange(info, 32) + Textnumchange(effect, 32);
+                }
+                break;
+            case "Knife":
+                if (num1 < ItemMain.knife.Count)
+                {
+                    itemname = ItemMain.knife[num1].Name;
+                    info = ItemMain.knife[num1].Information;
+                    effect = ItemMain.knife[num1].Effect;
+                    itemdetail = itemname + "\n\n" + Textnumchange(info, 32) + Textnumchange(effect, 32);
+                }
+                break;
+            case "Sword":
+                if (num1 < ItemMain.sword.Count)
+                {
+                    itemname = ItemMain.sword[num1].Name;
+                    info = ItemMain.sword[num1].Information;
+                    effect = ItemMain.sword[num1].Effect;
+                    itemdetail = itemname + "\n\n" + Textnumchange(info, 32) + Textnumchange(effect, 32);
+                }
+                break;
+            case "Rod":
+                if (num1 < ItemMain.rod.Count)
+                {
+                    itemname = ItemMain.rod[num1].Name;
+                    info = ItemMain.rod[num1].Information;
+                    effect = ItemMain.rod[num1].Effect;
+                    itemdetail = itemname + "\n\n" + Textnumchange(info, 32) + Textnumchange(effect, 32);
+                }
+                break;
+            case "Pellet":
+                if (num1 < ItemMain.pellet.Count)
+                {
+                    itemname = ItemMain.pellet[num1].Name;
+                    info = ItemMain.pellet[num1].Information;
+                    effect = ItemMain.pellet[num1].Effect;
+                    itemdetail = itemname + "\n\n" + Textnumchange(info, 32) + Textnumchange(effect, 32);
+                }
+                break;
+            default:
+                break;
+        }
+        GameObject.Find("ItemDetail").GetComponent<TextMesh>().text = itemdetail;
+
+    }
+
+    /*private void OnMouseEnter()
     {
 
         float num = float.Parse(gameObject.name);           //获取物品栏序号
@@ -41,7 +122,7 @@ public class ItemDetailShow : MonoBehaviour
             case "Alcohol":
                 if (num1 < ItemMain.alcohol.Count)
                 {
-                    name = ItemMain.alcohol[num1].Name;
+                    itemname = ItemMain.alcohol[num1].Name;
                     info = ItemMain.alcohol[num1].Information;
                     effect = ItemMain.alcohol[num1].Effect;
                     itemdetail = name + "\n\n" + Textnumchange(info, 32) + Textnumchange(effect, 32);
@@ -50,7 +131,7 @@ public class ItemDetailShow : MonoBehaviour
             case "Food":
                 if (num1 < ItemMain.food.Count)
                 {
-                    name = ItemMain.food[num1].Name;
+                    itemname = ItemMain.food[num1].Name;
                     info = ItemMain.food[num1].Information;
                     effect = ItemMain.food[num1].Effect;
                     itemdetail = name + "\n\n" + Textnumchange(info, 32) + Textnumchange(effect, 32);
@@ -59,7 +140,7 @@ public class ItemDetailShow : MonoBehaviour
             case "Knife":
                 if (num1 < ItemMain.knife.Count)
                 {
-                    name = ItemMain.knife[num1].Name;
+                    itemname = ItemMain.knife[num1].Name;
                     info = ItemMain.knife[num1].Information;
                     effect = ItemMain.knife[num1].Effect;
                     itemdetail = name + "\n\n" + Textnumchange(info, 32) + Textnumchange(effect, 32);
@@ -68,7 +149,7 @@ public class ItemDetailShow : MonoBehaviour
             case "Sword":
                 if (num1 < ItemMain.sword.Count)
                 {
-                    name = ItemMain.sword[num1].Name;
+                    itemname = ItemMain.sword[num1].Name;
                     info = ItemMain.sword[num1].Information;
                     effect = ItemMain.sword[num1].Effect;
                     itemdetail = name + "\n\n" + Textnumchange(info, 32) + Textnumchange(effect, 32);
@@ -77,7 +158,7 @@ public class ItemDetailShow : MonoBehaviour
             case "Rod":
                 if (num1 < ItemMain.rod.Count)
                 {
-                    name = ItemMain.rod[num1].Name;
+                    itemname = ItemMain.rod[num1].Name;
                     info = ItemMain.rod[num1].Information;
                     effect = ItemMain.rod[num1].Effect;
                     itemdetail = name + "\n\n" + Textnumchange(info, 32) + Textnumchange(effect, 32);
@@ -86,7 +167,7 @@ public class ItemDetailShow : MonoBehaviour
             case "Pellet":
                 if (num1 < ItemMain.pellet.Count)
                 {
-                    name = ItemMain.pellet[num1].Name;
+                    itemname = ItemMain.pellet[num1].Name;
                     info = ItemMain.pellet[num1].Information;
                     effect = ItemMain.pellet[num1].Effect;
                     itemdetail = name + "\n\n" + Textnumchange(info, 32) + Textnumchange(effect, 32);
@@ -96,11 +177,14 @@ public class ItemDetailShow : MonoBehaviour
                 break;
         }
         GameObject.Find("ItemDetail").GetComponent<TextMesh>().text = itemdetail;
+
     }
 
     private void OnMouseExit()
     {
+
         //Debug.Log("能进来");
         GameObject.Find("ItemDetail").GetComponent<TextMesh>().text = " ";
     }
+    */
 }
