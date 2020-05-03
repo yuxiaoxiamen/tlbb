@@ -18,6 +18,7 @@ public class GlobalData
     public static Dictionary<string, List<MainConversation>> MainConversations { get; set; } //主线剧情对话
     public static List<Interaction> Interactions { get; set; }//交互选项
     public static Dictionary<string, MainLineConflict> MainLineConflicts { get; set; }//主线冲突
+    public static HashSet<Vector2Int> MapObstacle { get; set; }
 
     static GlobalData()
     {
@@ -35,6 +36,7 @@ public class GlobalData
         ReadChatDialogueData();
         ReadMainDialogueData();
         ReadMainLineConflictData();
+        ReadMapObstacle();
         foreach(Person person in Persons)
         {
             if(person.BaseData.Id < 65)
@@ -47,6 +49,19 @@ public class GlobalData
     public static void Init()
     {
 
+    }
+
+    static void ReadMapObstacle()
+    {
+        var text = Resources.Load<TextAsset>("jsonData/障碍");
+        string[] splits = text.text.Split(',');
+        MapObstacle = new HashSet<Vector2Int>();
+        foreach(string s in splits)
+        {
+            string[] rcs = s.Split('_');
+            Vector2Int rc = new Vector2Int(int.Parse(rcs[0]), int.Parse(rcs[1]));
+            MapObstacle.Add(rc);
+        }
     }
 
     static void ReadMainLineConflictData()

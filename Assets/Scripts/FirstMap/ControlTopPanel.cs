@@ -31,7 +31,8 @@ public class ControlTopPanel : MonoBehaviour
             else
             {
                 GameRunningData.GetRunningData().currentPlace = null;
-                GameRunningData.GetRunningData().player.RowCol = ((FirstPlace)currentPlace).Entry;
+                Vector2Int rc = new Vector2Int(((FirstPlace)currentPlace).Entry.x + 1, ((FirstPlace)currentPlace).Entry.y);
+                GameRunningData.GetRunningData().player.RowCol = rc;
                 SceneManager.LoadScene("FirstMap");
             }
         });

@@ -47,7 +47,7 @@ public class MapCameraFollow : MonoBehaviour
         {
             destination.y = mapHeight / 2 - cameraHeight / 2;
         }
-        transform.DOMove(destination, 0.2f);
+        transform.DOMove(destination, 0.7f);
     }
     // 设置目标
     void SetTarget()

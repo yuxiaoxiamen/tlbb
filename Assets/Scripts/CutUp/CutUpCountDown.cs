@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CutUpCountDown : MonoBehaviour
@@ -22,13 +23,14 @@ public class CutUpCountDown : MonoBehaviour
         successPanel.SetActive(false);
         successPanel.transform.Find("Button").GetComponent<Button>().onClick.AddListener(()=> 
         {
-
+            GameRunningData.GetRunningData().AddItem(CutUpMain.manual.Item);
+            GameRunningData.GetRunningData().ReturnToMap();
         });
         failPanel = GameObject.Find("failPanel");
         failPanel.SetActive(false);
         failPanel.transform.Find("Button").GetComponent<Button>().onClick.AddListener(() =>
         {
-
+            GameRunningData.GetRunningData().ReturnToMap();
         });
     }
 
