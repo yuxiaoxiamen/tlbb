@@ -33,6 +33,14 @@ public class GameRunningData
         belongings.Add(GlobalData.Items[13]);
         belongings.Add(GlobalData.Items[14]);
         belongings.Add(GlobalData.Items[15]);
+        belongings[0].Number = 3;
+        belongings[1].Number = 4;
+        belongings[2].Number = 6;
+        belongings[3].Number = 1;
+        belongings[4].Number = 2;
+        belongings[5].Number = 1;
+        belongings[6].Number = 3;
+
         belongings.Add(GlobalData.Items[23]);
         belongings.Add(GlobalData.Items[24]);
         belongings.Add(GlobalData.Items[25]);
@@ -42,9 +50,23 @@ public class GameRunningData
         belongings.Add(GlobalData.Items[55]);
         belongings.Add(GlobalData.Items[56]);
         belongings.Add(GlobalData.Items[57]);
+        belongings[7].Number = 1;
+        belongings[8].Number = 1;
+        belongings[9].Number = 1;
+        belongings[10].Number = 1;
+        belongings[11].Number = 1;
+        belongings[12].Number = 1;
+        belongings[13].Number = 1;
+        belongings[14].Number = 1;
+        belongings[15].Number = 1;
+
         belongings.Add(GlobalData.Items[64]);
         belongings.Add(GlobalData.Items[65]);
         belongings.Add(GlobalData.Items[66]);
+        belongings[16].Number = 1;
+        belongings[17].Number = 2;
+        belongings[18].Number = 2;
+
     }
 
     public static GameRunningData GetRunningData()

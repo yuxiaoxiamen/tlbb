@@ -66,33 +66,36 @@ public class ZhaoSwitch : MonoBehaviour
 
                 ZhaoMain.zhaotype = ButtonName;
 
+                GameObject.Find(type).GetComponent<Button>().image.color = new Color32(255, 255, 255, 255);
+                GameObject.Find(ButtonName).GetComponent<Button>().image.color = new Color32(212, 168, 93, 255);
+
                 //加载新招式
 
                 switch (ButtonName)
                 {
                     case "Fist":
                         for (int m = 0; m < ZhaoMain.fist.Count; m++)
-                            GameObject.Find("book"+m.ToString()).GetComponent<TextMesh>().text = Textchange(ZhaoMain.fist[m].Name);
+                            GameObject.Find("book"+m.ToString()).GetComponent<TextMesh>().text = Textchange(ZhaoMain.fist[m].FixData.Name);
                         break;
                     case "Palm":
                         for (int m = 0; m < ZhaoMain.palm.Count; m++)
-                            GameObject.Find("book" + m.ToString()).GetComponent<TextMesh>().text = Textchange(ZhaoMain.palm[m].Name);
+                            GameObject.Find("book" + m.ToString()).GetComponent<TextMesh>().text = Textchange(ZhaoMain.palm[m].FixData.Name);
                         break;
                     case "Finger":
                         for (int m = 0; m < ZhaoMain.finger.Count; m++)
-                            GameObject.Find("book" + m.ToString()).GetComponent<TextMesh>().text = Textchange(ZhaoMain.finger[m].Name);
+                            GameObject.Find("book" + m.ToString()).GetComponent<TextMesh>().text = Textchange(ZhaoMain.finger[m].FixData.Name);
                         break;
                     case "Knife":
                         for (int m = 0; m < ZhaoMain.knife.Count; m++)
-                            GameObject.Find("book" + m.ToString()).GetComponent<TextMesh>().text = Textchange(ZhaoMain.knife[m].Name);
+                            GameObject.Find("book" + m.ToString()).GetComponent<TextMesh>().text = Textchange(ZhaoMain.knife[m].FixData.Name);
                         break;
                     case "Sword":
                         for (int m = 0; m < ZhaoMain.sword.Count; m++)
-                            GameObject.Find("book" + m.ToString()).GetComponent<TextMesh>().text = Textchange(ZhaoMain.sword[m].Name);
+                            GameObject.Find("book" + m.ToString()).GetComponent<TextMesh>().text = Textchange(ZhaoMain.sword[m].FixData.Name);
                         break;
                     case "Rod":
                         for (int m = 0; m < ZhaoMain.rod.Count; m++)
-                            GameObject.Find("book" + m.ToString()).GetComponent<TextMesh>().text = Textchange(ZhaoMain.rod[m].Name);
+                            GameObject.Find("book" + m.ToString()).GetComponent<TextMesh>().text = Textchange(ZhaoMain.rod[m].FixData.Name);
                         break;
                     default:
                         break;

@@ -21,8 +21,11 @@ public class ItemSwitch : MonoBehaviour
             {
                 //清空物品栏
 
-                for(int n=0;n<30;n++)
-                    GameObject.Find(n.ToString()).GetComponent<Button>().image.color = new Color32(255, 255, 255, 0);
+                for (int n = 0; n < 30; n++)
+                { GameObject.Find(n.ToString()).GetComponent<Button>().image.color = new Color32(255, 255, 255, 0);
+                  GameObject.Find("num" + n.ToString()).GetComponent<Image>().color = new Color32(241, 162, 65, 0);
+                  GameObject.Find("num" + n.ToString()).gameObject.transform.Find("Text").GetComponent<Text>().text = "";
+                }
 
                 /*
                 switch (type)
@@ -57,6 +60,9 @@ public class ItemSwitch : MonoBehaviour
 
                 ItemMain.itemtype = ButtonName;
 
+                GameObject.Find(type).GetComponent<Button>().image.color = new Color32(255, 255, 255, 255);
+                GameObject.Find(ButtonName).GetComponent<Button>().image.color = new Color32(226, 128, 106, 255);
+
                 switch (ButtonName)
                 {
                     case "Alcohol":
@@ -76,6 +82,9 @@ public class ItemSwitch : MonoBehaviour
                             var sp = GameObject.Find(n.ToString()).GetComponent<Button>().image;
                             sp.sprite = Resources.Load<Sprite>("ItemIcon/" + ItemMain.alcohol[n].Id.ToString());
                             sp.color = new Color32(255, 255, 255, 255);
+
+                            GameObject.Find("num" + n.ToString()).GetComponent<Image>().color = new Color32(241, 162, 65, 255);
+                            GameObject.Find("num" + n.ToString()).gameObject.transform.Find("Text").GetComponent<Text>().text = ItemMain.alcohol[n].Number.ToString();
                         }
                         break;
                     case "Food":
@@ -95,6 +104,9 @@ public class ItemSwitch : MonoBehaviour
                             var sp = GameObject.Find(n.ToString()).GetComponent<Button>().image;
                             sp.sprite = Resources.Load<Sprite>("ItemIcon/" + ItemMain.food[n].Id.ToString());
                             sp.color = new Color32(255, 255, 255, 255);
+
+                            GameObject.Find("num" + n.ToString()).GetComponent<Image>().color = new Color32(241, 162, 65, 255);
+                            GameObject.Find("num" + n.ToString()).gameObject.transform.Find("Text").GetComponent<Text>().text = ItemMain.food[n].Number.ToString();
                         }
                         break;
                     case "Knife":
@@ -114,6 +126,9 @@ public class ItemSwitch : MonoBehaviour
                             var sp = GameObject.Find(n.ToString()).GetComponent<Button>().image;
                             sp.sprite = Resources.Load<Sprite>("ItemIcon/" + ItemMain.knife[n].Id.ToString());
                             sp.color = new Color32(255, 255, 255, 255);
+
+                            GameObject.Find("num" + n.ToString()).GetComponent<Image>().color = new Color32(241, 162, 65, 255);
+                            GameObject.Find("num" + n.ToString()).gameObject.transform.Find("Text").GetComponent<Text>().text = ItemMain.knife[n].Number.ToString();
                         }
                         break;
                     case "Sword":
@@ -132,6 +147,9 @@ public class ItemSwitch : MonoBehaviour
                             var sp = GameObject.Find(n.ToString()).GetComponent<Button>().image;
                             sp.sprite = Resources.Load<Sprite>("ItemIcon/" + ItemMain.sword[n].Id.ToString());
                             sp.color = new Color32(255, 255, 255, 255);
+
+                            GameObject.Find("num" + n.ToString()).GetComponent<Image>().color = new Color32(241, 162, 65, 255);
+                            GameObject.Find("num" + n.ToString()).gameObject.transform.Find("Text").GetComponent<Text>().text = ItemMain.sword[n].Number.ToString();
                         }
                         break;
                     case "Rod":
@@ -151,6 +169,9 @@ public class ItemSwitch : MonoBehaviour
                             var sp = GameObject.Find(n.ToString()).GetComponent<Button>().image;
                             sp.sprite = Resources.Load<Sprite>("ItemIcon/" + ItemMain.rod[n].Id.ToString());
                             sp.color = new Color32(255, 255, 255, 255);
+
+                            GameObject.Find("num" + n.ToString()).GetComponent<Image>().color = new Color32(241, 162, 65, 255);
+                            GameObject.Find("num" + n.ToString()).gameObject.transform.Find("Text").GetComponent<Text>().text = ItemMain.rod[n].Number.ToString();
                         }
                         break;
                     case "Pellet":
@@ -169,6 +190,9 @@ public class ItemSwitch : MonoBehaviour
                             var sp = GameObject.Find(n.ToString()).GetComponent<Button>().image;
                             sp.sprite = Resources.Load<Sprite>("ItemIcon/" + ItemMain.pellet[n].Id.ToString());
                             sp.color = new Color32(255, 255, 255, 255);
+
+                            GameObject.Find("num" + n.ToString()).GetComponent<Image>().color = new Color32(241, 162, 65, 255);
+                            GameObject.Find("num" + n.ToString()).gameObject.transform.Find("Text").GetComponent<Text>().text = ItemMain.pellet[n].Number.ToString();
                         }
                         break;
                     default:

@@ -13,7 +13,6 @@ public class ItemMain : MonoBehaviour
     public static List<Good> rod = new List<Good>();
     public static List<Good> pellet = new List<Good>();
     public static string itemtype;
-    public static Dictionary<string, int> itemNum = new Dictionary<string, int>();       //物品数量记录
     public static string equipmentNow = "";
     public static int dialogState = 0;
 
@@ -26,6 +25,7 @@ public class ItemMain : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         foreach(var belonging in GameRunningData.GetRunningData().belongings)
         {
             item.Add(belonging);
@@ -54,7 +54,6 @@ public class ItemMain : MonoBehaviour
 
 
     */
-        int num;
 
         for(int i=0;i<item.Count;i++)
         {
@@ -83,18 +82,6 @@ public class ItemMain : MonoBehaviour
                     break;
             }
 
-            if (itemNum.ContainsKey(item[i].Name) == false)
-            {
-                num = 1;
-                itemNum.Add(item[i].Name, num);
-            }
-
-            else
-            {
-                num = itemNum[item[i].Name];
-                num++;
-                itemNum[item[i].Name] = num;
-            }
         }
 
         //默认显示所有酒
@@ -117,6 +104,9 @@ public class ItemMain : MonoBehaviour
             var sp= GameObject.Find(n.ToString()).GetComponent<Button>().image;
             sp.sprite = Resources.Load<Sprite>("ItemIcon/" + alcohol[n].Id.ToString());
             sp.color = new Color32(255, 255, 255, 255);
+
+            GameObject.Find("num" + n.ToString()).GetComponent<Image>().color= new Color32(241, 162, 65, 255);
+            GameObject.Find("num" + n.ToString()).gameObject.transform.Find("Text").GetComponent<Text>().text = alcohol[n].Number.ToString();
         }
 
         if (GameRunningData.GetRunningData().player.EquippedWeapon == null)
