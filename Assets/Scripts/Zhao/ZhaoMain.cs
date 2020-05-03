@@ -88,13 +88,12 @@ public class ZhaoMain : MonoBehaviour
 
         //默认显示所有拳法
         for (int m = 0; m <fist.Count; m++)
-            GameObject.Find(m.ToString()).GetComponent<TextMesh>().text=Textchange(fist[m].Name);
+            GameObject.Find("book"+m.ToString()).GetComponent<TextMesh>().text=Textchange(fist[m].Name);
 
         //清楚解释文字
         GameObject.Find("ZhaoName").GetComponent<TextMesh>().text = "";
         GameObject.Find("ZhaoRank").GetComponent<TextMesh>().text = "";
         GameObject.Find("ZhaoProficiency").GetComponent<TextMesh>().text = "";
-        GameObject.Find("ZhaoIntroduction").GetComponent<TextMesh>().text = "";
         GameObject.Find("RankValue").GetComponent<TextMesh>().text = "";
         GameObject.Find("ProficiencyValue").GetComponent<TextMesh>().text = "";
         GameObject.Find("ZhaoDetail").GetComponent<TextMesh>().text = "";

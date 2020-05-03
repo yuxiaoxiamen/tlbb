@@ -55,7 +55,6 @@ public class ZhaoDetailShow : MonoBehaviour
 
                     GameObject.Find("ZhaoRank").GetComponent<TextMesh>().text = "修炼层数：";
                     GameObject.Find("ZhaoProficiency").GetComponent<TextMesh>().text = "熟练度：";
-                    GameObject.Find("ZhaoIntroduction").GetComponent<TextMesh>().text = "招式介绍：";
                     
                     AttackStyle attack = new AttackStyle();
                     GameObject.Find("RankValue").GetComponent<TextMesh>().text = attack.Rank.ToString();
@@ -95,7 +94,6 @@ public class ZhaoDetailShow : MonoBehaviour
                     GameObject.Find("ZhaoName").GetComponent<TextMesh>().text = "";
                     GameObject.Find("ZhaoRank").GetComponent<TextMesh>().text = "";
                     GameObject.Find("ZhaoProficiency").GetComponent<TextMesh>().text = "";
-                    GameObject.Find("ZhaoIntroduction").GetComponent<TextMesh>().text = "";
                     GameObject.Find("RankValue").GetComponent<TextMesh>().text = "";
                     GameObject.Find("ProficiencyValue").GetComponent<TextMesh>().text = "";
                     GameObject.Find("ZhaoDetail").GetComponent<TextMesh>().text = "";
@@ -112,7 +110,6 @@ public class ZhaoDetailShow : MonoBehaviour
 
                     GameObject.Find("ZhaoRank").GetComponent<TextMesh>().text = "修炼层数：";
                     GameObject.Find("ZhaoProficiency").GetComponent<TextMesh>().text = "熟练度：";
-                    GameObject.Find("ZhaoIntroduction").GetComponent<TextMesh>().text = "招式介绍：";
 
                     AttackStyle attack = new AttackStyle();
                     GameObject.Find("RankValue").GetComponent<TextMesh>().text = attack.Rank.ToString();
@@ -152,7 +149,6 @@ public class ZhaoDetailShow : MonoBehaviour
                     GameObject.Find("ZhaoName").GetComponent<TextMesh>().text = "";
                     GameObject.Find("ZhaoRank").GetComponent<TextMesh>().text = "";
                     GameObject.Find("ZhaoProficiency").GetComponent<TextMesh>().text = "";
-                    GameObject.Find("ZhaoIntroduction").GetComponent<TextMesh>().text = "";
                     GameObject.Find("RankValue").GetComponent<TextMesh>().text = "";
                     GameObject.Find("ProficiencyValue").GetComponent<TextMesh>().text = "";
                     GameObject.Find("ZhaoDetail").GetComponent<TextMesh>().text = "";
@@ -169,7 +165,6 @@ public class ZhaoDetailShow : MonoBehaviour
 
                     GameObject.Find("ZhaoRank").GetComponent<TextMesh>().text = "修炼层数：";
                     GameObject.Find("ZhaoProficiency").GetComponent<TextMesh>().text = "熟练度：";
-                    GameObject.Find("ZhaoIntroduction").GetComponent<TextMesh>().text = "招式介绍：";
 
                     AttackStyle attack = new AttackStyle();
                     GameObject.Find("RankValue").GetComponent<TextMesh>().text = attack.Rank.ToString();
@@ -209,7 +204,6 @@ public class ZhaoDetailShow : MonoBehaviour
                     GameObject.Find("ZhaoName").GetComponent<TextMesh>().text = "";
                     GameObject.Find("ZhaoRank").GetComponent<TextMesh>().text = "";
                     GameObject.Find("ZhaoProficiency").GetComponent<TextMesh>().text = "";
-                    GameObject.Find("ZhaoIntroduction").GetComponent<TextMesh>().text = "";
                     GameObject.Find("RankValue").GetComponent<TextMesh>().text = "";
                     GameObject.Find("ProficiencyValue").GetComponent<TextMesh>().text = "";
                     GameObject.Find("ZhaoDetail").GetComponent<TextMesh>().text = "";
@@ -226,7 +220,6 @@ public class ZhaoDetailShow : MonoBehaviour
 
                     GameObject.Find("ZhaoRank").GetComponent<TextMesh>().text = "修炼层数：";
                     GameObject.Find("ZhaoProficiency").GetComponent<TextMesh>().text = "熟练度：";
-                    GameObject.Find("ZhaoIntroduction").GetComponent<TextMesh>().text = "招式介绍：";
 
                     AttackStyle attack = new AttackStyle();
                     GameObject.Find("RankValue").GetComponent<TextMesh>().text = attack.Rank.ToString();
@@ -266,7 +259,6 @@ public class ZhaoDetailShow : MonoBehaviour
                     GameObject.Find("ZhaoName").GetComponent<TextMesh>().text = "";
                     GameObject.Find("ZhaoRank").GetComponent<TextMesh>().text = "";
                     GameObject.Find("ZhaoProficiency").GetComponent<TextMesh>().text = "";
-                    GameObject.Find("ZhaoIntroduction").GetComponent<TextMesh>().text = "";
                     GameObject.Find("RankValue").GetComponent<TextMesh>().text = "";
                     GameObject.Find("ProficiencyValue").GetComponent<TextMesh>().text = "";
                     GameObject.Find("ZhaoDetail").GetComponent<TextMesh>().text = "";
@@ -283,7 +275,6 @@ public class ZhaoDetailShow : MonoBehaviour
 
                     GameObject.Find("ZhaoRank").GetComponent<TextMesh>().text = "修炼层数：";
                     GameObject.Find("ZhaoProficiency").GetComponent<TextMesh>().text = "熟练度：";
-                    GameObject.Find("ZhaoIntroduction").GetComponent<TextMesh>().text = "招式介绍：";
 
                     AttackStyle attack = new AttackStyle();
                     GameObject.Find("RankValue").GetComponent<TextMesh>().text = attack.Rank.ToString();
@@ -323,7 +314,6 @@ public class ZhaoDetailShow : MonoBehaviour
                     GameObject.Find("ZhaoName").GetComponent<TextMesh>().text = "";
                     GameObject.Find("ZhaoRank").GetComponent<TextMesh>().text = "";
                     GameObject.Find("ZhaoProficiency").GetComponent<TextMesh>().text = "";
-                    GameObject.Find("ZhaoIntroduction").GetComponent<TextMesh>().text = "";
                     GameObject.Find("RankValue").GetComponent<TextMesh>().text = "";
                     GameObject.Find("ProficiencyValue").GetComponent<TextMesh>().text = "";
                     GameObject.Find("ZhaoDetail").GetComponent<TextMesh>().text = "";
@@ -340,7 +330,6 @@ public class ZhaoDetailShow : MonoBehaviour
 
                     GameObject.Find("ZhaoRank").GetComponent<TextMesh>().text = "修炼层数：";
                     GameObject.Find("ZhaoProficiency").GetComponent<TextMesh>().text = "熟练度：";
-                    GameObject.Find("ZhaoIntroduction").GetComponent<TextMesh>().text = "招式介绍：";
 
                     AttackStyle attack = new AttackStyle();
                     GameObject.Find("RankValue").GetComponent<TextMesh>().text = attack.Rank.ToString();
@@ -380,7 +369,6 @@ public class ZhaoDetailShow : MonoBehaviour
                     GameObject.Find("ZhaoName").GetComponent<TextMesh>().text = "";
                     GameObject.Find("ZhaoRank").GetComponent<TextMesh>().text = "";
                     GameObject.Find("ZhaoProficiency").GetComponent<TextMesh>().text = "";
-                    GameObject.Find("ZhaoIntroduction").GetComponent<TextMesh>().text = "";
                     GameObject.Find("RankValue").GetComponent<TextMesh>().text = "";
                     GameObject.Find("ProficiencyValue").GetComponent<TextMesh>().text = "";
                     GameObject.Find("ZhaoDetail").GetComponent<TextMesh>().text = "";
