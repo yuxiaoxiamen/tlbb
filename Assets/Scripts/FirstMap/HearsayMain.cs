@@ -36,4 +36,12 @@ public class HearsayMain : MonoBehaviour
         }
         lastCount = says.Count;
     }
+
+    private void Update()
+    {
+        if (hearsayList.activeSelf && Input.GetMouseButtonDown(0))
+        {
+            hearsayList.SetActive(false);
+        }
+    }
 }

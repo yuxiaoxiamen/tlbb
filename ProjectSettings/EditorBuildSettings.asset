@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Start.unity
+    guid: 83b538767c8473547aa8f2f278ecb170
+  - enabled: 1
     path: Assets/Scenes/FirstMap.unity
     guid: 81702d3ed8c621b41a1841d3938f1e81
   - enabled: 1
@@ -32,4 +35,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BasicAttributes.unity
     guid: 7308ce9b5cd42a440835eaab37c5bc26
+  - enabled: 1
+    path: Assets/Scenes/LiquorPower.unity
+    guid: 7ac8c1ec376e1c844bf10da588308b27
+  - enabled: 1
+    path: Assets/Scenes/RandomAttribute.unity
+    guid: fb97fd532f7585d4b9b002152966693f
+  - enabled: 1
+    path: Assets/Scenes/SaveAndRead.unity
+    guid: 0ac3eb9e1fc224246bdb5f62707c1f1c
+  - enabled: 1
+    path: Assets/Scenes/Team.unity
+    guid: 2bfb49ec5d862254083b7312b8dae3a1
   m_configObjects: {}

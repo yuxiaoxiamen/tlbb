@@ -11,6 +11,7 @@ public class ThridMapMain : MonoBehaviour
     public GameObject peoplePrefab;
     public static GameObject peopleObject;
     public static GameObject manualUI;
+    public static GameObject storeUI;
     private static List<GameObject> headObjects = new List<GameObject>();
 
     // Start is called before the first frame update
@@ -30,10 +31,12 @@ public class ThridMapMain : MonoBehaviour
         {
             GeneratePersonHead(FindPerson());
         }
-        //GeneratePersonHead(FindPerson());
+        GeneratePersonHead(FindPerson());
         transform.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("mapBg/" + GameRunningData.GetRunningData().currentPlace.Id);
         manualUI = GameObject.Find("manualUI");
         manualUI.SetActive(false);
+        storeUI = GameObject.Find("store");
+        storeUI.SetActive(false);
         peopleObject = Instantiate(peoplePrefab);
         HidePeople();
     }
@@ -102,8 +105,8 @@ public class ThridMapMain : MonoBehaviour
             GlobalData.Persons[2],
             GlobalData.Persons[3]
         };
-        GlobalData.Persons[1].BaseData.Interactions.Add(GlobalData.Interactions[10]);
-        GlobalData.Persons[1].BaseData.Interactions.Add(GlobalData.Interactions[9]);
+        GlobalData.Persons[1].BaseData.Interactions.Add(GlobalData.Interactions[3]);
+        GlobalData.Persons[1].BaseData.Interactions.Add(GlobalData.Interactions[2]);
         //foreach (Person person in GlobalData.Persons)
         //{
         //    if (!GameRunningData.GetRunningData().teammates.Contains(person))

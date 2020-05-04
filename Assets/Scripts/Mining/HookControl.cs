@@ -113,9 +113,9 @@ public class HookControl : MonoBehaviour
             isBack = false;
             isMove = false;
             moveSpeed = defaultMoveSpeed;
-            if(transform.childCount > 0)
+            for(int i = 0; i < transform.childCount; ++i)
             {
-                MineWasDug(transform.GetChild(0).gameObject);
+                MineWasDug(transform.GetChild(i).gameObject);
             }
         }
     }

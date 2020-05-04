@@ -21,12 +21,10 @@ public class ControlBottomPanel : MonoBehaviour
         {
             if (hearsayList.activeSelf)
             {
-                IsBanPane = false;
                 hearsayList.SetActive(false);
             }
             else
             {
-                IsBanPane = true;
                 hearsayList.SetActive(true);
                 listContent.GetComponent<HearsayMain>().SetSays();
             } 

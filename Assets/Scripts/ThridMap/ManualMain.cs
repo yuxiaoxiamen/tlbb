@@ -123,6 +123,7 @@ public class ManualMain : MonoBehaviour
         Button button = transform.Find("returnButton").GetComponent<Button>();
         button.onClick.AddListener(()=>
         {
+            ControlBottomPanel.IsBanPane = false;
             gameObject.SetActive(false);
             ThridMapMain.ShowAllHeads();
         });

@@ -64,16 +64,16 @@ public class MineralControl : MonoBehaviour
             switch (i)
             {
                 case 0:
-                    textMesh.text += manual.CopperNumber + "";
+                    textMesh.text += " " + manual.CopperNumber + "";
                     break;
                 case 1:
-                    textMesh.text += manual.IronNumber + "";
+                    textMesh.text += "  " + manual.IronNumber + "";
                     break;
                 case 2:
-                    textMesh.text += manual.SilverNumber + "";
+                    textMesh.text += "  " + manual.SilverNumber + "";
                     break;
                 case 3:
-                    textMesh.text += manual.GoldNumber + "";
+                    textMesh.text += "  " + manual.GoldNumber + "";
                     break;
             }
         }

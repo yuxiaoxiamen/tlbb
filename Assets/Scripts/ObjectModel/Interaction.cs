@@ -24,8 +24,12 @@ public class Interaction
                 SceneManager.LoadScene("Fight");
                 break;
             case 2: //交易
+                ControlBottomPanel.IsBanPane = true;
+                GoodDisplay.storeType = "Food";
+                ThridMapMain.storeUI.SetActive(true);
                 break;
             case 3: //锻造
+                ControlBottomPanel.IsBanPane = true;
                 ManualMain.instance.SetManual(false);
                 ThridMapMain.manualUI.SetActive(true);
                 break; 
@@ -41,6 +45,7 @@ public class Interaction
             case 8: //学医
                 break;
             case 9: //下厨
+                ControlBottomPanel.IsBanPane = true;
                 ManualMain.instance.SetManual(true);
                 ThridMapMain.manualUI.SetActive(true);
                 break;
