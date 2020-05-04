@@ -51,25 +51,22 @@ public class ZhaoDetailShow : MonoBehaviour
             case "Fist":
                 if (num1 < ZhaoMain.fist.Count)
                 { 
-                    GameObject.Find("ZhaoName").GetComponent<TextMesh>().text = ZhaoMain.fist[num1].Name;
+                    GameObject.Find("ZhaoName").GetComponent<TextMesh>().text = ZhaoMain.fist[num1].FixData.Name;
 
                     GameObject.Find("ZhaoRank").GetComponent<TextMesh>().text = "修炼层数：";
                     GameObject.Find("ZhaoProficiency").GetComponent<TextMesh>().text = "熟练度：";
                     
-                    AttackStyle attack = new AttackStyle();
-                    GameObject.Find("RankValue").GetComponent<TextMesh>().text = attack.Rank.ToString();
-                    //GameObject.Find("RankValue").GetComponent<TextMesh>().text = "没找到这个数据";
-                    GameObject.Find("ProficiencyValue").GetComponent<TextMesh>().text = attack.Proficiency.ToString() + "/100";
+                    GameObject.Find("RankValue").GetComponent<TextMesh>().text = ZhaoMain.fist[num1].Rank.ToString();
+                    GameObject.Find("ProficiencyValue").GetComponent<TextMesh>().text = ZhaoMain.fist[num1].Proficiency.ToString() + "/"
+                        + ZhaoMain.fist[num1].GetMaxProFiciency();
 
                     //进度条
                     GameObject.Find("ProficiencyBackground").GetComponent<SpriteRenderer>().color = new Color32(108, 153, 192, 255);
                     GameObject.Find("ProficiencyActual").GetComponent<SpriteRenderer>().color = new Color32(226, 115, 110, 255);
 
                     var v = GameObject.Find("ProficiencyActual").transform;
-                    //真实数据
-                    //float parcent = (float)attack.Proficiency/100;
-                    //测试数据进度条70%
-                    float parcent = 0.7F;
+
+                    float parcent = (float)ZhaoMain.fist[num1].Proficiency/100;
                     float xlen = GameObject.Find("ProficiencyBackground").transform.localScale.x;
                     float prex = v.localScale.x;
                     float actualx = xlen * parcent;
@@ -78,15 +75,16 @@ public class ZhaoDetailShow : MonoBehaviour
 
                     //招式效果读取
                     string effect = "";
-                    for (int n = 0; n < ZhaoMain.fist[num1].Effects.Count; n++)
+                    for (int n = 0; n < ZhaoMain.fist[num1].FixData.Effects.Count; n++)
                     {
-                        effect = effect+ZhaoMain.fist[num1].Effects[n].Name + ":\n" + ZhaoMain.fist[num1].Effects[n].Detail;
-                        if (ZhaoMain.fist[num1].Effects[n].Value != 0)
-                            effect = effect + "： " + ZhaoMain.fist[num1].Effects[n].Value;
-                        effect = effect + "\n"+"持续时间： "+ ZhaoMain.fist[num1].Effects[n].TimeValue+"\n";
+                        effect = effect+ZhaoMain.fist[num1].FixData.Effects[n].Name + ":\n" + ZhaoMain.fist[num1].FixData.Effects[n].Detail;
+                        if (ZhaoMain.fist[num1].FixData.Effects[n].Value != 0)
+                            effect = effect + "： " + ZhaoMain.fist[num1].FixData.Effects[n].Value;
+                        effect = effect + "\n"+"持续时间： "+ ZhaoMain.fist[num1].FixData.Effects[n].TimeValue+"\n";
                     }
 
-                    GameObject.Find("ZhaoDetail").GetComponent<TextMesh>().text = "真气消耗量： "+ZhaoMain.fist[num1].MPCost.ToString()+"\n"+"攻击范围： "+ZhaoMain.fist[num1].DetailInfo + "\n\n"+effect;
+                    GameObject.Find("ZhaoDetail").GetComponent<TextMesh>().text = "真气消耗量： "+ZhaoMain.fist[num1].FixData.MPCost.ToString()+"\n"
+                        +"攻击范围： "+ZhaoMain.fist[num1].FixData.DetailInfo + "\n\n"+effect;
 
                 }
                 else
@@ -106,25 +104,21 @@ public class ZhaoDetailShow : MonoBehaviour
             case "Palm":
                 if (num1 < ZhaoMain.palm.Count)
                 {
-                    GameObject.Find("ZhaoName").GetComponent<TextMesh>().text = ZhaoMain.palm[num1].Name;
+                    GameObject.Find("ZhaoName").GetComponent<TextMesh>().text = ZhaoMain.palm[num1].FixData.Name;
 
                     GameObject.Find("ZhaoRank").GetComponent<TextMesh>().text = "修炼层数：";
                     GameObject.Find("ZhaoProficiency").GetComponent<TextMesh>().text = "熟练度：";
 
-                    AttackStyle attack = new AttackStyle();
-                    GameObject.Find("RankValue").GetComponent<TextMesh>().text = attack.Rank.ToString();
-                    //GameObject.Find("RankValue").GetComponent<TextMesh>().text = "没找到这个数据";
-                    GameObject.Find("ProficiencyValue").GetComponent<TextMesh>().text = attack.Proficiency.ToString() + "/100";
+                    GameObject.Find("RankValue").GetComponent<TextMesh>().text = ZhaoMain.palm[num1].Rank.ToString();
+                    GameObject.Find("ProficiencyValue").GetComponent<TextMesh>().text = ZhaoMain.palm[num1].Proficiency.ToString() + "/"
+                        + ZhaoMain.palm[num1].GetMaxProFiciency();
 
                     //进度条
                     GameObject.Find("ProficiencyBackground").GetComponent<SpriteRenderer>().color = new Color32(108, 153, 192, 255);
                     GameObject.Find("ProficiencyActual").GetComponent<SpriteRenderer>().color = new Color32(226, 115, 110, 255);
 
                     var v = GameObject.Find("ProficiencyActual").transform;
-                    //真实数据
-                    //float parcent = (float)attack.Proficiency/100;
-                    //测试数据进度条70%
-                    float parcent = 0.7F;
+                    float parcent = (float)ZhaoMain.palm[num1].Proficiency/100;
                     float xlen = GameObject.Find("ProficiencyBackground").transform.localScale.x;
                     float prex = v.localScale.x;
                     float actualx = xlen * parcent;
@@ -133,15 +127,16 @@ public class ZhaoDetailShow : MonoBehaviour
 
                     //招式效果读取
                     string effect = "";
-                    for (int n = 0; n < ZhaoMain.palm[num1].Effects.Count; n++)
+                    for (int n = 0; n < ZhaoMain.palm[num1].FixData.Effects.Count; n++)
                     {
-                        effect = effect + ZhaoMain.palm[num1].Effects[n].Name + ":\n" + ZhaoMain.palm[num1].Effects[n].Detail;
-                        if (ZhaoMain.palm[num1].Effects[n].Value != 0)
-                            effect = effect + "： " + ZhaoMain.palm[num1].Effects[n].Value;
-                        effect = effect + "\n" + "持续时间： " + ZhaoMain.palm[num1].Effects[n].TimeValue + "\n";
+                        effect = effect + ZhaoMain.palm[num1].FixData.Effects[n].Name + ":\n" + ZhaoMain.palm[num1].FixData.Effects[n].Detail;
+                        if (ZhaoMain.palm[num1].FixData.Effects[n].Value != 0)
+                            effect = effect + "： " + ZhaoMain.palm[num1].FixData.Effects[n].Value;
+                        effect = effect + "\n" + "持续时间： " + ZhaoMain.palm[num1].FixData.Effects[n].TimeValue + "\n";
                     }
 
-                    GameObject.Find("ZhaoDetail").GetComponent<TextMesh>().text = "真气消耗量： " + ZhaoMain.palm[num1].MPCost.ToString() + "\n" + "攻击范围： " + ZhaoMain.palm[num1].DetailInfo + "\n\n" + effect;
+                    GameObject.Find("ZhaoDetail").GetComponent<TextMesh>().text = "真气消耗量： " + ZhaoMain.palm[num1].FixData.MPCost.ToString() + "\n" 
+                        + "攻击范围： " + ZhaoMain.palm[num1].FixData.DetailInfo + "\n\n" + effect;
 
                 }
                 else
@@ -161,25 +156,23 @@ public class ZhaoDetailShow : MonoBehaviour
             case "Finger":
                 if (num1 < ZhaoMain.finger.Count)
                 {
-                    GameObject.Find("ZhaoName").GetComponent<TextMesh>().text = ZhaoMain.finger[num1].Name;
+                    GameObject.Find("ZhaoName").GetComponent<TextMesh>().text = ZhaoMain.finger[num1].FixData.Name;
 
                     GameObject.Find("ZhaoRank").GetComponent<TextMesh>().text = "修炼层数：";
                     GameObject.Find("ZhaoProficiency").GetComponent<TextMesh>().text = "熟练度：";
 
-                    AttackStyle attack = new AttackStyle();
-                    GameObject.Find("RankValue").GetComponent<TextMesh>().text = attack.Rank.ToString();
+                    GameObject.Find("RankValue").GetComponent<TextMesh>().text = ZhaoMain.finger[num1].Rank.ToString();
                     //GameObject.Find("RankValue").GetComponent<TextMesh>().text = "没找到这个数据";
-                    GameObject.Find("ProficiencyValue").GetComponent<TextMesh>().text = attack.Proficiency.ToString() + "/100";
+                    GameObject.Find("ProficiencyValue").GetComponent<TextMesh>().text = ZhaoMain.finger[num1].Proficiency.ToString() + "/"
+                        + ZhaoMain.finger[num1].GetMaxProFiciency();
 
                     //进度条
                     GameObject.Find("ProficiencyBackground").GetComponent<SpriteRenderer>().color = new Color32(108, 153, 192, 255);
                     GameObject.Find("ProficiencyActual").GetComponent<SpriteRenderer>().color = new Color32(226, 115, 110, 255);
 
                     var v = GameObject.Find("ProficiencyActual").transform;
-                    //真实数据
-                    //float parcent = (float)attack.Proficiency/100;
-                    //测试数据进度条70%
-                    float parcent = 0.7F;
+                    float parcent = (float)ZhaoMain.finger[num1].Proficiency/100;
+
                     float xlen = GameObject.Find("ProficiencyBackground").transform.localScale.x;
                     float prex = v.localScale.x;
                     float actualx = xlen * parcent;
@@ -188,15 +181,16 @@ public class ZhaoDetailShow : MonoBehaviour
 
                     //招式效果读取
                     string effect = "";
-                    for (int n = 0; n < ZhaoMain.finger[num1].Effects.Count; n++)
+                    for (int n = 0; n < ZhaoMain.finger[num1].FixData.Effects.Count; n++)
                     {
-                        effect = effect + ZhaoMain.finger[num1].Effects[n].Name + ":\n" + ZhaoMain.finger[num1].Effects[n].Detail;
-                        if (ZhaoMain.finger[num1].Effects[n].Value != 0)
-                            effect = effect + "： " + ZhaoMain.finger[num1].Effects[n].Value;
-                        effect = effect + "\n" + "持续时间： " + ZhaoMain.finger[num1].Effects[n].TimeValue + "\n";
+                        effect = effect + ZhaoMain.finger[num1].FixData.Effects[n].Name + ":\n" + ZhaoMain.finger[num1].FixData.Effects[n].Detail;
+                        if (ZhaoMain.finger[num1].FixData.Effects[n].Value != 0)
+                            effect = effect + "： " + ZhaoMain.finger[num1].FixData.Effects[n].Value;
+                        effect = effect + "\n" + "持续时间： " + ZhaoMain.finger[num1].FixData.Effects[n].TimeValue + "\n";
                     }
 
-                    GameObject.Find("ZhaoDetail").GetComponent<TextMesh>().text = "真气消耗量： " + ZhaoMain.finger[num1].MPCost.ToString() + "\n" + "攻击范围： " + ZhaoMain.finger[num1].DetailInfo + "\n\n" + effect;
+                    GameObject.Find("ZhaoDetail").GetComponent<TextMesh>().text = "真气消耗量： " + ZhaoMain.finger[num1].FixData.MPCost.ToString() + "\n"
+                        + "攻击范围： " + ZhaoMain.finger[num1].FixData.DetailInfo + "\n\n" + effect;
 
                 }
                 else
@@ -216,25 +210,21 @@ public class ZhaoDetailShow : MonoBehaviour
             case "Knife":
                 if (num1 < ZhaoMain.knife.Count)
                 {
-                    GameObject.Find("ZhaoName").GetComponent<TextMesh>().text = ZhaoMain.knife[num1].Name;
+                    GameObject.Find("ZhaoName").GetComponent<TextMesh>().text = ZhaoMain.knife[num1].FixData.Name;
 
                     GameObject.Find("ZhaoRank").GetComponent<TextMesh>().text = "修炼层数：";
                     GameObject.Find("ZhaoProficiency").GetComponent<TextMesh>().text = "熟练度：";
 
-                    AttackStyle attack = new AttackStyle();
-                    GameObject.Find("RankValue").GetComponent<TextMesh>().text = attack.Rank.ToString();
-                    //GameObject.Find("RankValue").GetComponent<TextMesh>().text = "没找到这个数据";
-                    GameObject.Find("ProficiencyValue").GetComponent<TextMesh>().text = attack.Proficiency.ToString() + "/100";
+                    GameObject.Find("RankValue").GetComponent<TextMesh>().text = ZhaoMain.knife[num1].Rank.ToString();
+                    GameObject.Find("ProficiencyValue").GetComponent<TextMesh>().text = ZhaoMain.knife[num1].Proficiency.ToString() + "/"
+                        + ZhaoMain.knife[num1].GetMaxProFiciency();
 
                     //进度条
                     GameObject.Find("ProficiencyBackground").GetComponent<SpriteRenderer>().color = new Color32(108, 153, 192, 255);
                     GameObject.Find("ProficiencyActual").GetComponent<SpriteRenderer>().color = new Color32(226, 115, 110, 255);
 
                     var v = GameObject.Find("ProficiencyActual").transform;
-                    //真实数据
-                    //float parcent = (float)attack.Proficiency/100;
-                    //测试数据进度条70%
-                    float parcent = 0.7F;
+                    float parcent = (float)ZhaoMain.knife[num1].Proficiency/100;
                     float xlen = GameObject.Find("ProficiencyBackground").transform.localScale.x;
                     float prex = v.localScale.x;
                     float actualx = xlen * parcent;
@@ -243,15 +233,16 @@ public class ZhaoDetailShow : MonoBehaviour
 
                     //招式效果读取
                     string effect = "";
-                    for (int n = 0; n < ZhaoMain.knife[num1].Effects.Count; n++)
+                    for (int n = 0; n < ZhaoMain.knife[num1].FixData.Effects.Count; n++)
                     {
-                        effect = effect + ZhaoMain.knife[num1].Effects[n].Name + ":\n" + ZhaoMain.knife[num1].Effects[n].Detail;
-                        if (ZhaoMain.fist[num1].Effects[n].Value != 0)
-                            effect = effect + "： " + ZhaoMain.knife[num1].Effects[n].Value;
-                        effect = effect + "\n" + "持续时间： " + ZhaoMain.knife[num1].Effects[n].TimeValue + "\n";
+                        effect = effect + ZhaoMain.knife[num1].FixData.Effects[n].Name + ":\n" + ZhaoMain.knife[num1].FixData.Effects[n].Detail;
+                        if (ZhaoMain.fist[num1].FixData.Effects[n].Value != 0)
+                            effect = effect + "： " + ZhaoMain.knife[num1].FixData.Effects[n].Value;
+                        effect = effect + "\n" + "持续时间： " + ZhaoMain.knife[num1].FixData.Effects[n].TimeValue + "\n";
                     }
 
-                    GameObject.Find("ZhaoDetail").GetComponent<TextMesh>().text = "真气消耗量： " + ZhaoMain.knife[num1].MPCost.ToString() + "\n" + "攻击范围： " + ZhaoMain.knife[num1].DetailInfo + "\n\n" + effect;
+                    GameObject.Find("ZhaoDetail").GetComponent<TextMesh>().text = "真气消耗量： " + ZhaoMain.knife[num1].FixData.MPCost.ToString() + "\n" 
+                        + "攻击范围： " + ZhaoMain.knife[num1].FixData.DetailInfo + "\n\n" + effect;
 
                 }
                 else
@@ -271,25 +262,21 @@ public class ZhaoDetailShow : MonoBehaviour
             case "Sword":
                 if (num1 < ZhaoMain.sword.Count)
                 {
-                    GameObject.Find("ZhaoName").GetComponent<TextMesh>().text = ZhaoMain.sword[num1].Name;
+                    GameObject.Find("ZhaoName").GetComponent<TextMesh>().text = ZhaoMain.sword[num1].FixData.Name;
 
                     GameObject.Find("ZhaoRank").GetComponent<TextMesh>().text = "修炼层数：";
                     GameObject.Find("ZhaoProficiency").GetComponent<TextMesh>().text = "熟练度：";
 
-                    AttackStyle attack = new AttackStyle();
-                    GameObject.Find("RankValue").GetComponent<TextMesh>().text = attack.Rank.ToString();
+                    GameObject.Find("RankValue").GetComponent<TextMesh>().text = ZhaoMain.sword[num1].Rank.ToString();
                     //GameObject.Find("RankValue").GetComponent<TextMesh>().text = "没找到这个数据";
-                    GameObject.Find("ProficiencyValue").GetComponent<TextMesh>().text = attack.Proficiency.ToString() + "/100";
+                    GameObject.Find("ProficiencyValue").GetComponent<TextMesh>().text = ZhaoMain.sword[num1].Proficiency.ToString() + "/100";
 
                     //进度条
                     GameObject.Find("ProficiencyBackground").GetComponent<SpriteRenderer>().color = new Color32(108, 153, 192, 255);
                     GameObject.Find("ProficiencyActual").GetComponent<SpriteRenderer>().color = new Color32(226, 115, 110, 255);
 
                     var v = GameObject.Find("ProficiencyActual").transform;
-                    //真实数据
-                    //float parcent = (float)attack.Proficiency/100;
-                    //测试数据进度条70%
-                    float parcent = 0.7F;
+                    float parcent = (float)ZhaoMain.sword[num1].Proficiency/100;
                     float xlen = GameObject.Find("ProficiencyBackground").transform.localScale.x;
                     float prex = v.localScale.x;
                     float actualx = xlen * parcent;
@@ -298,15 +285,16 @@ public class ZhaoDetailShow : MonoBehaviour
 
                     //招式效果读取
                     string effect = "";
-                    for (int n = 0; n < ZhaoMain.sword[num1].Effects.Count; n++)
+                    for (int n = 0; n < ZhaoMain.sword[num1].FixData.Effects.Count; n++)
                     {
-                        effect = effect + ZhaoMain.sword[num1].Effects[n].Name + ":\n" + ZhaoMain.sword[num1].Effects[n].Detail;
-                        if (ZhaoMain.sword[num1].Effects[n].Value != 0)
-                            effect = effect + "： " + ZhaoMain.sword[num1].Effects[n].Value;
-                        effect = effect + "\n" + "持续时间： " + ZhaoMain.sword[num1].Effects[n].TimeValue + "\n";
+                        effect = effect + ZhaoMain.sword[num1].FixData.Effects[n].Name + ":\n" + ZhaoMain.sword[num1].FixData.Effects[n].Detail;
+                        if (ZhaoMain.sword[num1].FixData.Effects[n].Value != 0)
+                            effect = effect + "： " + ZhaoMain.sword[num1].FixData.Effects[n].Value;
+                        effect = effect + "\n" + "持续时间： " + ZhaoMain.sword[num1].FixData.Effects[n].TimeValue + "\n";
                     }
 
-                    GameObject.Find("ZhaoDetail").GetComponent<TextMesh>().text = "真气消耗量： " + ZhaoMain.sword[num1].MPCost.ToString() + "\n" + "攻击范围： " + ZhaoMain.sword[num1].DetailInfo + "\n\n" + effect;
+                    GameObject.Find("ZhaoDetail").GetComponent<TextMesh>().text = "真气消耗量： " + ZhaoMain.sword[num1].FixData.MPCost.ToString() + "\n" 
+                        + "攻击范围： " + ZhaoMain.sword[num1].FixData.DetailInfo + "\n\n" + effect;
 
                 }
                 else
@@ -326,25 +314,21 @@ public class ZhaoDetailShow : MonoBehaviour
             case "Rod":
                 if (num1 < ZhaoMain.rod.Count)
                 {
-                    GameObject.Find("ZhaoName").GetComponent<TextMesh>().text = ZhaoMain.rod[num1].Name;
+                    GameObject.Find("ZhaoName").GetComponent<TextMesh>().text = ZhaoMain.rod[num1].FixData.Name;
 
                     GameObject.Find("ZhaoRank").GetComponent<TextMesh>().text = "修炼层数：";
                     GameObject.Find("ZhaoProficiency").GetComponent<TextMesh>().text = "熟练度：";
 
-                    AttackStyle attack = new AttackStyle();
-                    GameObject.Find("RankValue").GetComponent<TextMesh>().text = attack.Rank.ToString();
-                    //GameObject.Find("RankValue").GetComponent<TextMesh>().text = "没找到这个数据";
-                    GameObject.Find("ProficiencyValue").GetComponent<TextMesh>().text = attack.Proficiency.ToString() + "/100";
+                    GameObject.Find("RankValue").GetComponent<TextMesh>().text = ZhaoMain.rod[num1].Rank.ToString();
+                    GameObject.Find("ProficiencyValue").GetComponent<TextMesh>().text = ZhaoMain.rod[num1].Proficiency.ToString() + "/"
+                        + ZhaoMain.rod[num1].GetMaxProFiciency();
 
                     //进度条
                     GameObject.Find("ProficiencyBackground").GetComponent<SpriteRenderer>().color = new Color32(108, 153, 192, 255);
                     GameObject.Find("ProficiencyActual").GetComponent<SpriteRenderer>().color = new Color32(226, 115, 110, 255);
 
                     var v = GameObject.Find("ProficiencyActual").transform;
-                    //真实数据
-                    //float parcent = (float)attack.Proficiency/100;
-                    //测试数据进度条70%
-                    float parcent = 0.7F;
+                    float parcent = (float)ZhaoMain.rod[num1].Proficiency/100;
                     float xlen = GameObject.Find("ProficiencyBackground").transform.localScale.x;
                     float prex = v.localScale.x;
                     float actualx = xlen * parcent;
@@ -353,15 +337,16 @@ public class ZhaoDetailShow : MonoBehaviour
 
                     //招式效果读取
                     string effect = "";
-                    for (int n = 0; n < ZhaoMain.rod[num1].Effects.Count; n++)
+                    for (int n = 0; n < ZhaoMain.rod[num1].FixData.Effects.Count; n++)
                     {
-                        effect = effect + ZhaoMain.rod[num1].Effects[n].Name + ":\n" + ZhaoMain.rod[num1].Effects[n].Detail;
-                        if (ZhaoMain.rod[num1].Effects[n].Value != 0)
-                            effect = effect + "： " + ZhaoMain.rod[num1].Effects[n].Value;
-                        effect = effect + "\n" + "持续时间： " + ZhaoMain.rod[num1].Effects[n].TimeValue + "\n";
+                        effect = effect + ZhaoMain.rod[num1].FixData.Effects[n].Name + ":\n" + ZhaoMain.rod[num1].FixData.Effects[n].Detail;
+                        if (ZhaoMain.rod[num1].FixData.Effects[n].Value != 0)
+                            effect = effect + "： " + ZhaoMain.rod[num1].FixData.Effects[n].Value;
+                        effect = effect + "\n" + "持续时间： " + ZhaoMain.rod[num1].FixData.Effects[n].TimeValue + "\n";
                     }
 
-                    GameObject.Find("ZhaoDetail").GetComponent<TextMesh>().text = "真气消耗量： " + ZhaoMain.rod[num1].MPCost.ToString() + "\n" + "攻击范围： " + ZhaoMain.rod[num1].DetailInfo + "\n\n" + effect;
+                    GameObject.Find("ZhaoDetail").GetComponent<TextMesh>().text = "真气消耗量： " + ZhaoMain.rod[num1].FixData.MPCost.ToString() + "\n" 
+                        + "攻击范围： " + ZhaoMain.rod[num1].FixData.DetailInfo + "\n\n" + effect;
 
                 }
                 else

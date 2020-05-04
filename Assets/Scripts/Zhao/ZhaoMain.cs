@@ -5,13 +5,15 @@ using UnityEngine.UI;
 
 public class ZhaoMain : MonoBehaviour
 {
-    public static List<AttackStyleFixData> zhao = new List<AttackStyleFixData>();    //招式固定数据读取接口
-    public static List<AttackStyleFixData> fist = new List<AttackStyleFixData>();
-    public static List<AttackStyleFixData> palm = new List<AttackStyleFixData>();
-    public static List<AttackStyleFixData> finger = new List<AttackStyleFixData>();
-    public static List<AttackStyleFixData> knife = new List<AttackStyleFixData>();
-    public static List<AttackStyleFixData> sword = new List<AttackStyleFixData>();
-    public static List<AttackStyleFixData> rod = new List<AttackStyleFixData>();
+    //public static List<AttackStyleFixData> zhao = new List<AttackStyleFixData>();    //招式固定数据读取接口
+
+    public static List<AttackStyle> attackStyles = new List<AttackStyle>();
+    public static List<AttackStyle> fist = new List<AttackStyle>();
+    public static List<AttackStyle> palm = new List<AttackStyle>();
+    public static List<AttackStyle> finger = new List<AttackStyle>();
+    public static List<AttackStyle> knife = new List<AttackStyle>();
+    public static List<AttackStyle> sword = new List<AttackStyle>();
+    public static List<AttackStyle> rod = new List<AttackStyle>();
 
     public static string zhaotype;
 
@@ -51,44 +53,43 @@ public class ZhaoMain : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        int i = 54;
-        int n = 0;
-        while (i!=0)
+        Person player = GameRunningData.GetRunningData().player;  //获取人物实例化对象
+
+        foreach (AttackStyle x in player.BaseData.AttackStyles)
+            attackStyles.Add(x);
+
+        for (int i = 0; i < attackStyles.Count; i++)
         {
-            zhao.Add(GlobalData.StyleFixDatas[i]);
-            string type = zhao[n].WeaponKind.ToString();
-            switch (type)
+            string kind = attackStyles[i].FixData.WeaponKind.ToString();
+            switch (kind)
             {
                 case "Fist":
-                    fist.Add(zhao[n]);
+                    fist.Add(attackStyles[i]);
                     break;
                 case "Palm":
-                    palm.Add(zhao[n]);
+                    palm.Add(attackStyles[i]);
                     break;
                 case "Finger":
-                    finger.Add(zhao[n]);
+                    finger.Add(attackStyles[i]);
                     break;
                 case "Knife":
-                    knife.Add(zhao[n]);
+                    knife.Add(attackStyles[i]);
                     break;
                 case "Sword":
-                    sword.Add(zhao[n]);
+                    sword.Add(attackStyles[i]);
                     break;
                 case "Rod":
-                    rod.Add(zhao[n]);
+                    rod.Add(attackStyles[i]);
                     break;
                 default:
                     break;
-
             }
-            i--;
-            n++;
 
         }
 
         //默认显示所有拳法
         for (int m = 0; m <fist.Count; m++)
-            GameObject.Find("book"+m.ToString()).GetComponent<TextMesh>().text=Textchange(fist[m].Name);
+            GameObject.Find("book"+m.ToString()).GetComponent<TextMesh>().text=Textchange(fist[m].FixData.Name);
 
         //清楚解释文字
         GameObject.Find("ZhaoName").GetComponent<TextMesh>().text = "";

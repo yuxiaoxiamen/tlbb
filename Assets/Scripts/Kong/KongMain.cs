@@ -140,7 +140,8 @@ public class KongMain : MonoBehaviour
         inner = inners[center];
         GameObject.Find("KongName").GetComponent<TextMesh>().text = Textchange(inner.FixData.Name);                                                    
         GameObject.Find("RankValue").GetComponent<TextMesh>().text = inner.Rank.ToString();
-        GameObject.Find("ProficiencyValue").GetComponent<TextMesh>().text = inner.Proficiency.ToString()+"/100";
+        GameObject.Find("ProficiencyValue").GetComponent<TextMesh>().text = inner.Proficiency.ToString()+"/"
+            +inner.GetMaxProFiciency();
 
 
         //进度条

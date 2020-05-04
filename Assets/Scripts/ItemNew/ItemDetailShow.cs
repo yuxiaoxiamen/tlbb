@@ -66,6 +66,15 @@ public class ItemDetailShow : EventTrigger
                     itemdetail = itemname + "\n\n" + Textnumchange(info, 32) + Textnumchange(effect, 32);
                 }
                 break;
+            case "Pellet":
+                if (num1 < ItemMain.pellet.Count)
+                {
+                    itemname = ItemMain.pellet[num1].Name;
+                    info = ItemMain.pellet[num1].Information;
+                    effect = ItemMain.pellet[num1].Effect;
+                    itemdetail = itemname + "\n\n" + Textnumchange(info, 32) + Textnumchange(effect, 32);
+                }
+                break;
             case "Knife":
                 if (num1 < ItemMain.knife.Count)
                 {
@@ -93,15 +102,7 @@ public class ItemDetailShow : EventTrigger
                     itemdetail = itemname + "\n\n" + Textnumchange(info, 32) + Textnumchange(effect, 32);
                 }
                 break;
-            case "Pellet":
-                if (num1 < ItemMain.pellet.Count)
-                {
-                    itemname = ItemMain.pellet[num1].Name;
-                    info = ItemMain.pellet[num1].Information;
-                    effect = ItemMain.pellet[num1].Effect;
-                    itemdetail = itemname + "\n\n" + Textnumchange(info, 32) + Textnumchange(effect, 32);
-                }
-                break;
+
             default:
                 break;
         }
