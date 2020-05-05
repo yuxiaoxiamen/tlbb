@@ -216,6 +216,34 @@ public class FightMain : MonoBehaviour
             1, 1), 0.5f);
     }
 
+    public static void HideAllHPSplider()
+    {
+        foreach(Person p in friendQueue)
+        {
+            HPSplider hPSpliderScript = p.PersonObject.GetComponent<HPSplider>();
+            hPSpliderScript.HPObjectClone.SetActive(false);
+        }
+        foreach (Person p in enemyQueue)
+        {
+            HPSplider hPSpliderScript = p.PersonObject.GetComponent<HPSplider>();
+            hPSpliderScript.HPObjectClone.SetActive(false);
+        }
+    }
+
+    public static void ShowHPSplider()
+    {
+        foreach (Person p in friendQueue)
+        {
+            HPSplider hPSpliderScript = p.PersonObject.GetComponent<HPSplider>();
+            hPSpliderScript.HPObjectClone.SetActive(true);
+        }
+        foreach (Person p in enemyQueue)
+        {
+            HPSplider hPSpliderScript = p.PersonObject.GetComponent<HPSplider>();
+            hPSpliderScript.HPObjectClone.SetActive(true);
+        }
+    }
+
     private void SetHPSpliderColor(Person person)
     {
         if (friendQueue.Contains(person))
@@ -281,7 +309,7 @@ public class FightMain : MonoBehaviour
         }
         if(isFail)
         {
-            
+            StartCoroutine(FightGUI.ShowFailPanel());
         }
         else
         {

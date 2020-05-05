@@ -31,7 +31,7 @@ public class ThridMapMain : MonoBehaviour
         {
             GeneratePersonHead(FindPerson());
         }
-        GeneratePersonHead(FindPerson());
+        //GeneratePersonHead(FindPerson());
         transform.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("mapBg/" + GameRunningData.GetRunningData().currentPlace.Id);
         manualUI = GameObject.Find("manualUI");
         manualUI.SetActive(false);
@@ -101,22 +101,22 @@ public class ThridMapMain : MonoBehaviour
     {
         List<Person> persons = new List<Person>
         {
-            GlobalData.Persons[1],
-            GlobalData.Persons[2],
-            GlobalData.Persons[3]
+            GlobalData.Persons[89],
+            GlobalData.Persons[90],
+            GlobalData.Persons[91]
         };
-        GlobalData.Persons[1].BaseData.Interactions.Add(GlobalData.Interactions[3]);
-        GlobalData.Persons[1].BaseData.Interactions.Add(GlobalData.Interactions[2]);
-        //foreach (Person person in GlobalData.Persons)
-        //{
-        //    if (!GameRunningData.GetRunningData().teammates.Contains(person))
-        //    {
-        //        if (person.CurrentPlaceString == GameRunningData.GetRunningData().currentPlace.GetPlaceString())
-        //        {
-        //            persons.Add(person);
-        //        }
-        //    }
-        //}
+        //GlobalData.Persons[1].BaseData.Interactions.Add(GlobalData.Interactions[3]);
+        //GlobalData.Persons[1].BaseData.Interactions.Add(GlobalData.Interactions[2]);
+        foreach (Person person in GlobalData.Persons)
+        {
+            if (!GameRunningData.GetRunningData().teammates.Contains(person))
+            {
+                if (person.CurrentPlaceString == GameRunningData.GetRunningData().currentPlace.GetPlaceString())
+                {
+                    persons.Add(person);
+                }
+            }
+        }
         return persons;
     }
 

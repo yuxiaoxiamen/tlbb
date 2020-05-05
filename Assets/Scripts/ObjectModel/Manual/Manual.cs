@@ -5,4 +5,5 @@ using UnityEngine;
 public class Manual
 {
     public Good Item { get; set; }
+    public int Price { get; set; }
 }

@@ -62,7 +62,9 @@ public class ManualMain : MonoBehaviour
         Text numberText2 = manualItemTransform.Find("number2").GetComponent<Text>();
         Text numberText3 = manualItemTransform.Find("number3").GetComponent<Text>();
         Text numberText4 = manualItemTransform.Find("number4").GetComponent<Text>();
+        Text numberText5 = manualItemTransform.Find("number5").GetComponent<Text>();
         nameText.text = manual.Item.Name;
+        numberText5.text = manual.Price + "钱";
         
         if (isFood)
         {

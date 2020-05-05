@@ -30,7 +30,11 @@ public class FightGUI : MonoBehaviour
     public static GameObject buffPanel;
 
     public static GameObject successPanel;
+    public static GameObject failPanel;
     public static GameObject settlementText;
+
+    private static GameObject tabObject;
+    public static bool isTabing = false;
 
     // Start is called before the first frame update
     void Awake()
@@ -44,8 +48,13 @@ public class FightGUI : MonoBehaviour
         detailPanel.SetActive(false);
         successPanel = GameObject.Find("successPanel");
         successPanel.SetActive(false);
+        failPanel = GameObject.Find("failPanel");
+        failPanel.SetActive(false);
         settlementText = GameObject.Find("settlement");
         settlementText.SetActive(false);
+        tabObject = GameObject.Find("Inventory");
+        tabObject.SetActive(false);
+        ControlDialogue.instance.HideDialogue();
         SetBattleControlPanel();
         SetButtonListener();
         buffIconPrefab = iconPrefab;
@@ -192,6 +201,20 @@ public class FightGUI : MonoBehaviour
         treatButotn.GetComponent<Button>().onClick.AddListener(delegate {
             TreatTool.ShowTreatPersons(FightPersonClick.currentPerson);
         });
+        itemButton.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            isTabing = true;
+            tabObject.SetActive(true);
+            FightGridClick.ClearPathAndRange();
+            HideBattlePane();
+            FightMain.HideAllHPSplider();
+        });
+    }
+
+    public static void HideTab()
+    {
+        isTabing = false;
+        tabObject.SetActive(false);
     }
 
 
@@ -373,8 +396,71 @@ public class FightGUI : MonoBehaviour
     {
         successPanel.SetActive(true);
         yield return new WaitForSeconds(2f);
-        GameRunningData.GetRunningData().date.GoByTime(100);
-        GameRunningData.GetRunningData().ReturnToMap();
+        StartEndConversation(true);
+    }
+
+    public static IEnumerator ShowFailPanel()
+    {
+        failPanel.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        StartEndConversation(true);
+    }
+
+    private static void StartEndConversation(bool isSuccess)
+    {
+        if (FightMain.source == FightSource.MainLine)
+        {
+            var key = GameRunningData.GetRunningData().GetPlaceDateKey();
+            var conflict = GlobalData.MainLineConflicts[key];
+            var conversations = new List<Conversation>();
+            if (conflict.IsZ)
+            {
+                if (isSuccess)
+                {
+                    conversations = GetConversations(4);
+                }
+                else
+                {
+                    conversations = GetConversations(5);
+                }
+
+            }
+            else
+            {
+                if (isSuccess)
+                {
+                    conversations = GetConversations(6);
+                }
+                else
+                {
+                    conversations = GetConversations(7);
+                }
+            }
+            ControlDialogue.instance.StartConversation(conversations, () =>
+            {
+                GameRunningData.GetRunningData().date.GoByTime(100);
+                GameRunningData.GetRunningData().ReturnToMap();
+            });
+        }
+        else
+        {
+            GameRunningData.GetRunningData().date.GoByTime(100);
+            GameRunningData.GetRunningData().ReturnToMap();
+        }
+    }
+
+    private static List<Conversation> GetConversations(int type)
+    {
+        List<Conversation> conversations = new List<Conversation>();
+        var key = GameRunningData.GetRunningData().GetPlaceDateKey();
+        foreach (var mc in GlobalData.MainConversations[key])
+        {
+            if(mc.ContentType == type)
+            {
+                conversations.Add(mc);
+            }
+        }
+        return conversations;
     }
 
     public static void SetSettlement(List<Good> rewards, int experience, int money)

@@ -46,6 +46,12 @@ public class RevokeResponse : MonoBehaviour
                 FightGUI.HideScrollPane();
                 FightGUI.ShowBattlePane(FightPersonClick.currentPerson);
             }
+            else if (FightGUI.isTabing)
+            {
+                FightGUI.HideTab();
+                FightGUI.ShowBattlePane(FightPersonClick.currentPerson);
+                FightMain.ShowHPSplider();
+            }
             else if (FightPersonClick.currentPerson != null && FightPersonClick.currentPerson.ControlState == BattleControlState.Moved) 
             {
                 FightGridClick.SwitchGridColor(FightMain.gridDataToObject[FightPersonClick.currentPerson.RowCol], FightGridClick.defaultColor);

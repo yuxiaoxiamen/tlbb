@@ -31,30 +31,6 @@ public class ItemMain : MonoBehaviour
             item.Add(belonging);
         }
 
-        /*
-        item.Add(GlobalData.Items[0]);
-        item.Add(GlobalData.Items[1]);
-        item.Add(GlobalData.Items[2]);
-        item.Add(GlobalData.Items[3]);
-        item.Add(GlobalData.Items[4]);
-        item.Add(GlobalData.Items[5]);
-        item.Add(GlobalData.Items[10]);
-        item.Add(GlobalData.Items[11]);
-        item.Add(GlobalData.Items[12]);
-        item.Add(GlobalData.Items[13]);
-        item.Add(GlobalData.Items[14]);
-        item.Add(GlobalData.Items[15]);
-        item.Add(GlobalData.Items[22]);
-        item.Add(GlobalData.Items[23]);
-        item.Add(GlobalData.Items[24]);
-        item.Add(GlobalData.Items[25]);
-        item.Add(GlobalData.Items[47]);
-        item.Add(GlobalData.Items[48]);
-        item.Add(GlobalData.Items[49]);
-
-
-    */
-
         for(int i=0;i<item.Count;i++)
         {
             string kind = item[i].Type.ToString();
@@ -85,28 +61,9 @@ public class ItemMain : MonoBehaviour
         }
 
         //默认显示所有酒
-      
-
         for(int n = 0; n < alcohol.Count; n++)
         {
-            /*
-            float spritex, spritey;
-            float offSetx, offSety;
-            var sp = GameObject.Find(n.ToString()).GetComponent<SpriteRenderer>();
-            spritex =sp.bounds.size.x;
-            spritey = sp.bounds.size.y;
-            sp.sprite = Resources.Load<Sprite>("ItemIcon/" + alcohol[n].Id.ToString());
-            offSetx = sp.transform.localScale.x;
-            offSety = sp.transform.localScale.y;
-            sp.transform.localScale = new Vector3(offSetx * spritex / sp.bounds.size.x, offSety * spritey / sp.bounds.size.y, 1);
-            sp.color = new Color32(255, 255, 255, 255);
-            */
-            var sp= GameObject.Find(n.ToString()).GetComponent<Button>().image;
-            sp.sprite = Resources.Load<Sprite>("ItemIcon/" + alcohol[n].Id.ToString());
-            sp.color = new Color32(255, 255, 255, 255);
-
-            GameObject.Find("num" + n.ToString()).GetComponent<Image>().color= new Color32(241, 162, 65, 255);
-            GameObject.Find("num" + n.ToString()).gameObject.transform.Find("Text").GetComponent<Text>().text = alcohol[n].Number.ToString();
+            SetItem(n, transform.Find(n + "").gameObject, alcohol);
         }
 
         if (GameRunningData.GetRunningData().player.EquippedWeapon == null)
@@ -115,12 +72,22 @@ public class ItemMain : MonoBehaviour
             equipmentNow = GameRunningData.GetRunningData().player.EquippedWeapon.Name.ToString();
 
 
-        GameObject.Find("MoneyValue").GetComponent<TextMesh>().text = GameRunningData.GetRunningData().money.ToString();
-        GameObject.Find("EquipmentValue").GetComponent<TextMesh>().text = equipmentNow;
+        transform.Find("MoneyValue").GetComponent<Text>().text = GameRunningData.GetRunningData().money.ToString();
+        transform.Find("EquipmentValue").GetComponent<Text>().text = equipmentNow;
 
 
         itemtype = "Alcohol";
 
+    }
+
+    public static void SetItem(int n, GameObject itemObject, List<Good> items)
+    {
+        var sp = itemObject.GetComponent<Button>().image;
+        sp.sprite = Resources.Load<Sprite>("ItemIcon/" + items[n].Id.ToString());
+        sp.color = new Color32(255, 255, 255, 255);
+
+        itemObject.transform.Find("num" + n.ToString()).GetComponent<Image>().color = new Color32(241, 162, 65, 255);
+        itemObject.transform.Find("num" + n.ToString()).gameObject.transform.Find("Text").GetComponent<Text>().text = items[n].Number.ToString();
     }
 
     // Update is called once per frame

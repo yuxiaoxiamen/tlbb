@@ -35,11 +35,11 @@ public class ControlBottomPanel : MonoBehaviour
         });
         transform.Find("item").GetComponent<Button>().onClick.AddListener(() =>
         {
-            SceneManager.LoadScene("Items");
+            SceneManager.LoadScene("ItemNew");
         });
         transform.Find("kongFu").GetComponent<Button>().onClick.AddListener(() =>
         {
-            SceneManager.LoadScene("KongFu");
+            SceneManager.LoadScene("Kong");
         });
         transform.Find("queue").GetComponent<Button>().onClick.AddListener(() =>
         {

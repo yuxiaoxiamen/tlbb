@@ -14,6 +14,11 @@ public class Good
     public int BuyingPrice { get; set; }
     public int SellingPrice { get; set; }
     public int Number { get; set; }
+
+    public Good()
+    {
+        Number = 1;
+    }
 }
 
 public enum ItemKind { Alcohol, Food, Sword, Knife, Rod, Pellet }
