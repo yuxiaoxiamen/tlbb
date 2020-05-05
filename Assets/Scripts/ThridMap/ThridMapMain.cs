@@ -66,10 +66,10 @@ public class ThridMapMain : MonoBehaviour
         {
             float x = headPrefab.transform.position.x - i * widthInterval;
             float y = headPrefab.transform.position.y;
-            SetPersonObject(persons[i], 
+            SetPersonObject(persons[2 * i], 
                 Instantiate(headPrefab, new Vector3(x, y, 0), Quaternion.identity));
             y -= heightInterval;
-            SetPersonObject(persons[i + 1], 
+            SetPersonObject(persons[2 * i + 1], 
                 Instantiate(headPrefab, new Vector3(x, y, 0), Quaternion.identity));
         }
         if (count % 2 != 0)
@@ -114,6 +114,7 @@ public class ThridMapMain : MonoBehaviour
                 if (person.CurrentPlaceString == GameRunningData.GetRunningData().currentPlace.GetPlaceString())
                 {
                     persons.Add(person);
+                    Debug.Log(person.BaseData.Name);
                 }
             }
         }
