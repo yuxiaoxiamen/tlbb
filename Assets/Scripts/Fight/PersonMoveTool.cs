@@ -112,6 +112,7 @@ public class PersonMoveTool
             realPath.Add(gridObject.transform.position);
         }
         person.PersonObject.GetComponent<Animator>().SetBool("IsWalk", true);
+        SoundEffectControl.instance.PlaySoundEffect(0);
         Move(person, realPath, speed, finishAction);
         if(movePath.Count > 0)
         {

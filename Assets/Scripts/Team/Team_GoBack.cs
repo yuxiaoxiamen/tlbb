@@ -19,7 +19,7 @@ public class Team_GoBack : MonoBehaviour
 
     private void OnMouseDown()
     {
-        SceneManager.LoadScene("FirstMap");
+        GameRunningData.GetRunningData().ReturnToMap();
     }
 
 }

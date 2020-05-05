@@ -6,6 +6,7 @@ public class SoundEffectControl : MonoBehaviour
 {
     public static SoundEffectControl instance;
     private AudioSource audioEffect;
+    public List<AudioClip> clips;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,8 +14,9 @@ public class SoundEffectControl : MonoBehaviour
         instance = this;
     }
 
-    public void PlaySoundEffect()
+    public void PlaySoundEffect(int i)
     {
+        audioEffect.clip = clips[i];
         audioEffect.Play();
     }
 }

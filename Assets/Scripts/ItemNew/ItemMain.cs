@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ItemMain : MonoBehaviour
 {
-    public static List<Good> item = new List<Good>();                               //物品读取接口
+    public List<Good> item = new List<Good>();                               //物品读取接口
     public static List<Good> alcohol = new List<Good>();
     public static List<Good> food = new List<Good>();
     public static List<Good> knife = new List<Good>();
@@ -21,6 +21,15 @@ public class ItemMain : MonoBehaviour
 
     }
 
+    public static void ClearItems()
+    {
+        alcohol.Clear();
+        food.Clear();
+        knife.Clear();
+        sword.Clear();
+        rod.Clear();
+        pellet.Clear();
+    }
 
     // Start is called before the first frame update
     void Start()

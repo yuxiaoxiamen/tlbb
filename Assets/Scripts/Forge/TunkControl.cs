@@ -50,6 +50,7 @@ public class TunkControl : MonoBehaviour
 
     private void MineWasForge(GameObject gameObject)
     {
+        SoundEffectControl.instance.PlaySoundEffect(0);
         int type = int.Parse(gameObject.name);
         Transform titleTransform = mineralObject.transform.GetChild(type);
         TextMesh textMesh = titleTransform.GetChild(0).GetComponent<TextMesh>();

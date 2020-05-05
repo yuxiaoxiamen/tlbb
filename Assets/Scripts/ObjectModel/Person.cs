@@ -167,6 +167,27 @@ public class Person : ICloneable
         }
     }
 
+    public int PromoteLiquorSkill()
+    {
+        int x = UnityEngine.Random.Range(3, 8);
+        BaseData.LiquorSkill += x;
+        return x;
+    }
+
+    public int PromoteCookingSkill()
+    {
+        int x = UnityEngine.Random.Range(3, 8);
+        BaseData.CookingSkill += x;
+        return x;
+    }
+
+    public int PromoteMedicalSkill()
+    {
+        int x = UnityEngine.Random.Range(3, 8);
+        BaseData.MedicalSkill += x;
+        return x;
+    }
+
     private void BaseAttributeIncrease(int hp, int mp, List<Talent> talents)
     {
         BaseData.HP += hp;

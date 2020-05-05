@@ -32,11 +32,11 @@ public class GameDate
     {
         switch (solt)
         {
-            case 1:
+            case 0:
                 return "早晨";
-            case 2:
+            case 1:
                 return "中午";
-            case 3:
+            case 2:
                 return "晚上";
         }
         return "";

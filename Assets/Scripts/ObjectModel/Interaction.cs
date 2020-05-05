@@ -11,8 +11,8 @@ public class Interaction
     public void InteractionListener(Person person)
     {
         InteractControl.instance.HideInterPanel();
-        //ThridMapMain.ShowAllHeads();
         ThridMapMain.HidePeople();
+        int money = 0;
         switch (Id)
         {
             case 0: //交谈
@@ -25,7 +25,20 @@ public class Interaction
                 break;
             case 2: //交易
                 ControlBottomPanel.IsBanPane = true;
-                GoodDisplay.storeType = "Food";
+                switch (person.BaseData.Name)
+                {
+                    case "店小二":
+                        GoodDisplay.storeType = "Food";
+                        break;
+                    case "酒保":
+                        GoodDisplay.storeType = "Alcohol";
+                        break;
+                    case "铁匠":
+                        GoodDisplay.storeType = "Blacksmith";
+                        break;
+                }
+                GoodDisplay.instance.SetItemList();
+                ConfirmOperation.instance.ChangeImage();
                 ThridMapMain.storeUI.SetActive(true);
                 break;
             case 3: //锻造
@@ -34,13 +47,42 @@ public class Interaction
                 ThridMapMain.manualUI.SetActive(true);
                 break; 
             case 4: //炼丹
+                TimeGoSubject.GetTimeSubject().UpdateTime(5);
                 SceneManager.LoadScene("Alchemy");
                 break;
             case 5: //治疗
+                var player = GameRunningData.GetRunningData().player;
+                money = (int)(player.CurrentHP * 1.0f / player.BaseData.HP * 100 * 10);
+                if(GameRunningData.GetRunningData().money >= money)
+                {
+                    player.ChangeHP(player.BaseData.HP, true);
+                    GameRunningData.GetRunningData().money -= money;
+                    TipControl.instance.SetTip("花费了" + money + "钱" + "，回复全部生命值");
+                }
+                else
+                {
+                    TipControl.instance.SetTip( "金钱不足");
+                }
+                ThridMapMain.ShowAllHeads();
                 break;
             case 6: //休息
+                money = 50;
+                if (GameRunningData.GetRunningData().money >= money)
+                {
+                    GameRunningData.GetRunningData().money -= money;
+                    TimeGoSubject.GetTimeSubject().UpdateTime(1);
+                    ControlTopPanel.instance.UpdateTimeText();
+                    TipControl.instance.SetTip("花费了" + money + "钱" + "，休息了一会儿");
+                }
+                else
+                {
+                    TipControl.instance.SetTip("金钱不足");
+                }
+                ThridMapMain.ShowAllHeads();
                 break;
             case 7: //喝酒
+                TimeGoSubject.GetTimeSubject().UpdateTime(2);
+                SceneManager.LoadScene("LiquorPower");
                 break;
             case 8: //学医
                 break;
@@ -51,7 +93,8 @@ public class Interaction
                 break;
             case 10: //招募
                 GameRunningData.GetRunningData().teammates.Add(person);
-                ThridMapMain.ShowAllHeads();
+                ThridMapMain.instance.persons.Remove(person);
+                ThridMapMain.instance.ReAddHead();
                 break;
             case 11: //离开
                 ThridMapMain.ShowAllHeads();

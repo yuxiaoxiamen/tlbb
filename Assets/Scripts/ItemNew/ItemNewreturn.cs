@@ -14,7 +14,8 @@ public class ItemNewreturn : MonoBehaviour
 
         button.onClick.AddListener(() =>
         {
-            SceneManager.LoadScene("FirstMap");
+            ItemMain.ClearItems();
+            GameRunningData.GetRunningData().ReturnToMap();
         });
     }
 

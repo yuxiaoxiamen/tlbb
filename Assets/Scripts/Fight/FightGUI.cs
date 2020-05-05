@@ -189,20 +189,24 @@ public class FightGUI : MonoBehaviour
     public void SetButtonListener()
     {
         attackButton.GetComponent<Button>().onClick.AddListener(delegate {
+            SoundEffectControl.instance.PlaySoundEffect(9);
             AttackTool.CountAttackDistance(FightPersonClick.currentPerson, FightMain.friendQueue);
             AttackTool.ShowAttackDistance();
         });
         restButton.GetComponent<Button>().onClick.AddListener(delegate {
+            SoundEffectControl.instance.PlaySoundEffect(9);
             FightMain.OneRoundOver(FightPersonClick.currentPerson);
             FightMain.instance.PlayerFinished();
         });
         switchStyleButton.GetComponent<Button>().onClick.AddListener(SwitchStyleListener);
         switchInnerButton.GetComponent<Button>().onClick.AddListener(SwitchGongListener);
         treatButotn.GetComponent<Button>().onClick.AddListener(delegate {
+            SoundEffectControl.instance.PlaySoundEffect(9);
             TreatTool.ShowTreatPersons(FightPersonClick.currentPerson);
         });
         itemButton.GetComponent<Button>().onClick.AddListener(() =>
         {
+            SoundEffectControl.instance.PlaySoundEffect(9);
             isTabing = true;
             tabObject.SetActive(true);
             FightGridClick.ClearPathAndRange();
@@ -277,38 +281,37 @@ public class FightGUI : MonoBehaviour
             {
                 isSelected = true;
             }
-            AddButtonInScrollPane(styleButtonPrefab, GetStyleText(styles[i]), i, isSelected);
-            //if (styles[i].FixData.WeaponKind == AttackWeaponKind.Finger ||
-            //        styles[i].FixData.WeaponKind == AttackWeaponKind.Palm ||
-            //        styles[i].FixData.WeaponKind == AttackWeaponKind.Fist)
-            //{
-            //    AddButtonInScrollPane(styleButtonPrefab, GetStyleText(styles[i]), i);
-            //    continue;
-            //}
-            //if (FightPersonClick.currentPerson.EquippedWeapon != null)
-            //{
-            //    switch (FightPersonClick.currentPerson.EquippedWeapon.Type)
-            //    {
-            //        case ItemKind.Sword:
-            //            if (styles[i].FixData.WeaponKind == AttackWeaponKind.Sword)
-            //            {
-            //                AddButtonInScrollPane(styleButtonPrefab, GetStyleText(styles[i]), i);
-            //            }
-            //            break;
-            //        case ItemKind.Knife:
-            //            if (styles[i].FixData.WeaponKind == AttackWeaponKind.Knife)
-            //            {
-            //                AddButtonInScrollPane(styleButtonPrefab, GetStyleText(styles[i]), i);
-            //            }
-            //            break;
-            //        case ItemKind.Rod:
-            //            if (styles[i].FixData.WeaponKind == AttackWeaponKind.Rod)
-            //            {
-            //                AddButtonInScrollPane(styleButtonPrefab, GetStyleText(styles[i]), i);
-            //            }
-            //            break;
-            //    }
-            //}
+            if (styles[i].FixData.WeaponKind == AttackWeaponKind.Finger ||
+                    styles[i].FixData.WeaponKind == AttackWeaponKind.Palm ||
+                    styles[i].FixData.WeaponKind == AttackWeaponKind.Fist)
+            {
+                AddButtonInScrollPane(styleButtonPrefab, GetStyleText(styles[i]), i, isSelected);
+                continue;
+            }
+            if (FightPersonClick.currentPerson.EquippedWeapon != null)
+            {
+                switch (FightPersonClick.currentPerson.EquippedWeapon.Type)
+                {
+                    case ItemKind.Sword:
+                        if (styles[i].FixData.WeaponKind == AttackWeaponKind.Sword)
+                        {
+                            AddButtonInScrollPane(styleButtonPrefab, GetStyleText(styles[i]), i, isSelected);
+                        }
+                        break;
+                    case ItemKind.Knife:
+                        if (styles[i].FixData.WeaponKind == AttackWeaponKind.Knife)
+                        {
+                            AddButtonInScrollPane(styleButtonPrefab, GetStyleText(styles[i]), i, isSelected);
+                        }
+                        break;
+                    case ItemKind.Rod:
+                        if (styles[i].FixData.WeaponKind == AttackWeaponKind.Rod)
+                        {
+                            AddButtonInScrollPane(styleButtonPrefab, GetStyleText(styles[i]), i, isSelected);
+                        }
+                        break;
+                }
+            }
         }
     }
 
@@ -368,6 +371,7 @@ public class FightGUI : MonoBehaviour
 
     public void SwitchStyleListener()
     {
+        SoundEffectControl.instance.PlaySoundEffect(9);
         ClearScrollPane();
         FightGridClick.ClearPathAndRange();
         isSwitching = true;
@@ -378,6 +382,7 @@ public class FightGUI : MonoBehaviour
 
     public void SwitchGongListener()
     {
+        SoundEffectControl.instance.PlaySoundEffect(9);
         ClearScrollPane();
         FightGridClick.ClearPathAndRange();
         isSwitching = true;
@@ -394,6 +399,7 @@ public class FightGUI : MonoBehaviour
 
     public static IEnumerator ShowSuccessPanel()
     {
+        SoundEffectControl.instance.PlaySoundEffect(7);
         successPanel.SetActive(true);
         yield return new WaitForSeconds(2f);
         StartEndConversation(true);
@@ -401,6 +407,7 @@ public class FightGUI : MonoBehaviour
 
     public static IEnumerator ShowFailPanel()
     {
+        SoundEffectControl.instance.PlaySoundEffect(8);
         failPanel.SetActive(true);
         yield return new WaitForSeconds(2f);
         StartEndConversation(true);
@@ -438,15 +445,39 @@ public class FightGUI : MonoBehaviour
             }
             ControlDialogue.instance.StartConversation(conversations, () =>
             {
-                GameRunningData.GetRunningData().date.GoByTime(100);
-                GameRunningData.GetRunningData().ReturnToMap();
+                EndFight();
+            });
+        }
+        else if (FightMain.source == FightSource.Contest)
+        {
+            List<Conversation> contestConversation = new List<Conversation>
+            {
+                new Conversation()
+                {
+                    People = FightMain.contestEnemy,
+                    Content = "阁下武艺高强，在下佩服，日后若有用的上的地方尽管吩咐",
+                    IsLeft = false
+                }
+            };
+            ControlDialogue.instance.StartConversation(contestConversation, () =>
+            {
+                FightMain.contestEnemy.BaseData.Interactions.RemoveAt(FightMain.contestEnemy.BaseData.Interactions.Count - 1);
+                FightMain.contestEnemy.BaseData.Interactions.Add(GlobalData.Interactions[10]);
+                FightMain.contestEnemy.BaseData.Interactions.Add(GlobalData.Interactions[11]);
+                EndFight();
             });
         }
         else
         {
-            GameRunningData.GetRunningData().date.GoByTime(100);
-            GameRunningData.GetRunningData().ReturnToMap();
+            EndFight();
         }
+    }
+
+    private static void EndFight()
+    {
+        ItemMain.ClearItems();
+        GameRunningData.GetRunningData().date.GoByTime(100);
+        GameRunningData.GetRunningData().ReturnToMap();
     }
 
     private static List<Conversation> GetConversations(int type)

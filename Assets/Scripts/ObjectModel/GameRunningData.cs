@@ -13,38 +13,19 @@ public class GameRunningData
     public List<Good> belongings;
     public Vector2Int playerPreRc;
     public int money;
+    public int experspance;
 
     private GameRunningData()
     {
-        date = new GameDate(1, 1, 1, 1);
+        date = new GameDate(1, 1, 1, 0);
         player = GlobalData.Persons[0];
         player.RowCol = new Vector2Int(33, 43);
         playerPreRc = new Vector2Int(30, 39);
         currentPlace = null;
         money = 50000;   //测试数据
+        experspance = 1000;
         teammates = new List<Person>();
         belongings = new List<Good>();
-
-        //测试数据
-        belongings.Add(GlobalData.Items[0]);
-        belongings.Add(GlobalData.Items[3]);
-        belongings.Add(GlobalData.Items[4]);
-        belongings.Add(GlobalData.Items[6]);
-        belongings.Add(GlobalData.Items[13]);
-        belongings.Add(GlobalData.Items[14]);
-        belongings.Add(GlobalData.Items[15]);
-        belongings.Add(GlobalData.Items[23]);
-        belongings.Add(GlobalData.Items[24]);
-        belongings.Add(GlobalData.Items[25]);
-        belongings.Add(GlobalData.Items[38]);
-        belongings.Add(GlobalData.Items[39]);
-        belongings.Add(GlobalData.Items[40]);
-        belongings.Add(GlobalData.Items[55]);
-        belongings.Add(GlobalData.Items[56]);
-        belongings.Add(GlobalData.Items[57]);
-        belongings.Add(GlobalData.Items[64]);
-        belongings.Add(GlobalData.Items[65]);
-        belongings.Add(GlobalData.Items[66]);
     }
 
     public static GameRunningData GetRunningData()
@@ -63,6 +44,7 @@ public class GameRunningData
 
     public void ReturnToMap()
     {
+        ControlBottomPanel.IsBanPane = false;
         if(currentPlace != null)
         {
             if (currentPlace is SecondPlace)

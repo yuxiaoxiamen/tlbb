@@ -14,6 +14,11 @@ public class AttackStyle
         Proficiency = 0;
     }
 
+    public int GetGrade()
+    {
+        return FixData.Effects.Count;
+    }
+
     public int GetRealMPCost()
     {
         return (int)(FixData.MPCost * Mathf.Pow(1 + FixData.CostIncrease / 100f, Rank - 1));

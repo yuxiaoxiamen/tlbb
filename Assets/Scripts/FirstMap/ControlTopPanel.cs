@@ -6,11 +6,12 @@ using UnityEngine.UI;
 
 public class ControlTopPanel : MonoBehaviour
 {
+    public static ControlTopPanel instance;
     // Start is called before the first frame update
     void Start()
     {
-        Text dateText = transform.Find("dateText").GetComponent<Text>();
-        dateText.text = GameRunningData.GetRunningData().date.GetDateText();
+        instance = this;
+        UpdateTimeText();
         Button returnButton = transform.Find("returnButton").GetComponent<Button>();
         Place currentPlace = GameRunningData.GetRunningData().currentPlace;
         if(currentPlace == null)
@@ -37,6 +38,12 @@ public class ControlTopPanel : MonoBehaviour
                 SceneManager.LoadScene("FirstMap");
             }
         });
+    }
+
+    public void UpdateTimeText()
+    {
+        Text dateText = transform.Find("dateText").GetComponent<Text>();
+        dateText.text = GameRunningData.GetRunningData().date.GetDateText();
     }
 
     // Update is called once per frame

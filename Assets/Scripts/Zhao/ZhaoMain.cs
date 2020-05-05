@@ -7,7 +7,7 @@ public class ZhaoMain : MonoBehaviour
 {
     //public static List<AttackStyleFixData> zhao = new List<AttackStyleFixData>();    //招式固定数据读取接口
 
-    public static List<AttackStyle> attackStyles = new List<AttackStyle>();
+    public List<AttackStyle> attackStyles = new List<AttackStyle>();
     public static List<AttackStyle> fist = new List<AttackStyle>();
     public static List<AttackStyle> palm = new List<AttackStyle>();
     public static List<AttackStyle> finger = new List<AttackStyle>();
@@ -16,6 +16,10 @@ public class ZhaoMain : MonoBehaviour
     public static List<AttackStyle> rod = new List<AttackStyle>();
 
     public static string zhaotype;
+    public static string preScene;
+    public static Person person;
+    public static Transform consultTransform;
+    public static AttackStyle zhao;
 
     public string Textchange(string s)
     {
@@ -50,12 +54,57 @@ public class ZhaoMain : MonoBehaviour
     {
     }
 
+    void SetConsultButton()
+    {
+        consultTransform = GameObject.Find("Consult").transform;
+        var player = GameRunningData.GetRunningData().player;
+        if (preScene != "map" && person != player)
+        {
+            consultTransform.GetComponent<Button>().onClick.AddListener(() =>
+            {
+                if (player.BaseData.AttackStyles.Contains(zhao))
+                {
+                    TipControl.instance.SetTip("已拥有该招式");
+                }
+                else if (GameRunningData.GetRunningData().experspance < GameConfig.ConsultCost[zhao.GetGrade()])
+                {
+                    TipControl.instance.SetTip("江湖阅历不足");
+                }
+                else
+                {
+                    player.BaseData.AttackStyles.Add(zhao);
+                    GameRunningData.GetRunningData().experspance -= GameConfig.ConsultCost[zhao.GetGrade()];
+                }
+            });
+        }
+        else
+        {
+            consultTransform.gameObject.SetActive(false);
+        }
+    }
+
+    public static void SetCurrentZhao(AttackStyle attackStyle)
+    {
+        var player = GameRunningData.GetRunningData().player;
+        if (preScene != "map" && person != player)
+        {
+            if (attackStyle != null)
+            {
+                consultTransform.gameObject.SetActive(true);
+                zhao = attackStyle;
+            }
+            else
+            {
+                consultTransform.gameObject.SetActive(false); 
+            }
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        Person player = GameRunningData.GetRunningData().player;  //获取人物实例化对象
-
-        foreach (AttackStyle x in player.BaseData.AttackStyles)
+        SetConsultButton();
+        foreach (AttackStyle x in person.BaseData.AttackStyles)
             attackStyles.Add(x);
 
         for (int i = 0; i < attackStyles.Count; i++)

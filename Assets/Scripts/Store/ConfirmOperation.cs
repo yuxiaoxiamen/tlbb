@@ -159,19 +159,7 @@ public class ConfirmOperation : MonoBehaviour
 
     public void InitStore()
     {
-        moneyText.text = GameRunningData.GetRunningData().money + "";
-        if(GoodDisplay.storeType == "Alcohol")
-        {
-            people.sprite = Resources.Load<Sprite>("ui/waiter");
-        }
-        else if(GoodDisplay.storeType == "Blacksmith")
-        {
-            items.GetComponent<Image>().sprite = Resources.Load<Sprite>("ui/scrollBg");
-            goodBg.sprite = Resources.Load<Sprite>("ui/scrollBg");
-            handleBg1.sprite = Resources.Load<Sprite>("ui/handle");
-            handleBg2.sprite = Resources.Load<Sprite>("ui/handle");
-            people.sprite = Resources.Load<Sprite>("ui/blacksmith");
-        }
+        ChangeImage();
         items.SetActive(false);
         returnButton.onClick.AddListener(() =>
         {
@@ -179,5 +167,22 @@ public class ConfirmOperation : MonoBehaviour
             ThridMapMain.storeUI.SetActive(false);
             ThridMapMain.ShowAllHeads();
         });
+    }
+
+    public void ChangeImage()
+    {
+        moneyText.text = GameRunningData.GetRunningData().money + "";
+        if (GoodDisplay.storeType == "Alcohol")
+        {
+            people.sprite = Resources.Load<Sprite>("ui/waiter");
+        }
+        else if (GoodDisplay.storeType == "Blacksmith")
+        {
+            items.GetComponent<Image>().sprite = Resources.Load<Sprite>("ui/scrollBg");
+            goodBg.sprite = Resources.Load<Sprite>("ui/scrollBg");
+            handleBg1.sprite = Resources.Load<Sprite>("ui/handle");
+            handleBg2.sprite = Resources.Load<Sprite>("ui/handle");
+            people.sprite = Resources.Load<Sprite>("ui/blacksmith");
+        }
     }
 }

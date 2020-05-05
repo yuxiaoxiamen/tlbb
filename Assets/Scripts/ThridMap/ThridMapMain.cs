@@ -13,10 +13,14 @@ public class ThridMapMain : MonoBehaviour
     public static GameObject manualUI;
     public static GameObject storeUI;
     private static List<GameObject> headObjects = new List<GameObject>();
+    public static ThridMapMain instance;
+    public List<Person> persons;
 
     // Start is called before the first frame update
     void Start()
     {
+        persons = new List<Person>();
+        instance = this;
         Time.timeScale = 1;
         bool hasDialogue = ControlDialogue.instance.CheckMainConversation(() =>
         {
@@ -31,7 +35,6 @@ public class ThridMapMain : MonoBehaviour
         {
             GeneratePersonHead(FindPerson());
         }
-        //GeneratePersonHead(FindPerson());
         transform.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("mapBg/" + GameRunningData.GetRunningData().currentPlace.Id);
         manualUI = GameObject.Find("manualUI");
         manualUI.SetActive(false);
@@ -76,7 +79,7 @@ public class ThridMapMain : MonoBehaviour
         {
             float x = headPrefab.transform.position.x - count / 2 * widthInterval;
             float y = headPrefab.transform.position.y;
-            SetPersonObject(persons[count / 2 + 1], 
+            SetPersonObject(persons[count - 1], 
                 Instantiate(headPrefab, new Vector3(x, y, 0), Quaternion.identity));
         }
     }
@@ -99,14 +102,22 @@ public class ThridMapMain : MonoBehaviour
 
     List<Person> FindPerson()
     {
-        List<Person> persons = new List<Person>
+        int randomCount = Random.Range(1, 4);
+        for (int i = 0; i < randomCount; ++i)
         {
-            GlobalData.Persons[89],
-            GlobalData.Persons[90],
-            GlobalData.Persons[91]
-        };
-        //GlobalData.Persons[1].BaseData.Interactions.Add(GlobalData.Interactions[3]);
-        //GlobalData.Persons[1].BaseData.Interactions.Add(GlobalData.Interactions[2]);
+            Person p = GlobalData.Persons[Random.Range(89, 95)];
+            if (!persons.Contains(p))
+            {
+                if (!GameRunningData.GetRunningData().teammates.Contains(p))
+                {
+                    persons.Add(p);
+                }
+            }
+            else
+            {
+                --i;
+            }
+        }
         foreach (Person person in GlobalData.Persons)
         {
             if (!GameRunningData.GetRunningData().teammates.Contains(person))
@@ -114,7 +125,6 @@ public class ThridMapMain : MonoBehaviour
                 if (person.CurrentPlaceString == GameRunningData.GetRunningData().currentPlace.GetPlaceString())
                 {
                     persons.Add(person);
-                    Debug.Log(person.BaseData.Name);
                 }
             }
         }
@@ -129,5 +139,15 @@ public class ThridMapMain : MonoBehaviour
         TextMesh textMesh = headObject.transform.Find("name").GetComponent<TextMesh>();
         textMesh.text = person.BaseData.Name;
         headObjects.Add(headObject);
+    }
+
+    public void ReAddHead()
+    {
+        foreach(GameObject headObject in headObjects)
+        {
+            Destroy(headObject);
+        }
+        headObjects.Clear();
+        GeneratePersonHead(persons);
     }
 }

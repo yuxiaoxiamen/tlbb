@@ -21,6 +21,7 @@ public class FightGridClick : MonoBehaviour
     void Awake()
     {
         defaultColor = gameObject.GetComponent<Renderer>().material.color;
+        SwitchGridColor(gameObject, defaultColor);
         SetColor();
     }
 

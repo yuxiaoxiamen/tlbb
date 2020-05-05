@@ -12,10 +12,22 @@ public class ZhaoReturn : MonoBehaviour
     void Start()
     {
         button = GetComponent<Button>();
-
         button.onClick.AddListener(() =>
         {
-            SceneManager.LoadScene("FirstMap");
+            ZhaoMain.fist.Clear();
+            ZhaoMain.finger.Clear();
+            ZhaoMain.palm.Clear();
+            ZhaoMain.sword.Clear();
+            ZhaoMain.knife.Clear();
+            ZhaoMain.rod.Clear();
+            if (ZhaoMain.preScene == "map")
+            {
+                GameRunningData.GetRunningData().ReturnToMap();
+            }
+            else
+            {
+                SceneManager.LoadScene("Team");
+            }
         });
     }
 

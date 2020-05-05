@@ -12,6 +12,7 @@ public class GoodDisplay : MonoBehaviour
     public static string storeType;
     public static bool isBuy;
     private Text moneyText;
+    public static GoodDisplay instance;
 
     static GoodDisplay()
     {
@@ -22,7 +23,7 @@ public class GoodDisplay : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SetItemList();
+        instance = this;
     }
 
     public void SetItemList()

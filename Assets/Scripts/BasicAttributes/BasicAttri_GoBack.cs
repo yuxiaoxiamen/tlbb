@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class BasicAttri_GoBack : MonoBehaviour
 {
+    public static string preScene;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +20,14 @@ public class BasicAttri_GoBack : MonoBehaviour
 
     private void OnMouseDown()
     {
-        SceneManager.LoadScene("FirstMap");
+        if (preScene == "map")
+        {
+            GameRunningData.GetRunningData().ReturnToMap();
+        }
+        else
+        {
+            SceneManager.LoadScene("Team");
+        }
     }
 
 }

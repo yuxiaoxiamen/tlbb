@@ -17,7 +17,6 @@ public class Good
 
     public Good()
     {
-        Number = 1;
     }
 }
 

@@ -15,7 +15,17 @@ public class KongReturn : MonoBehaviour
 
         button.onClick.AddListener(() =>
         {
-            SceneManager.LoadScene("FirstMap");
+            KongMain.order.Clear();
+            KongMain.inners.Clear();
+            KongMain.center = 0;
+            if(KongMain.preScene == "map")
+            {
+                GameRunningData.GetRunningData().ReturnToMap();
+            }
+            else
+            {
+                SceneManager.LoadScene("Team");
+            }
         });
     }
 

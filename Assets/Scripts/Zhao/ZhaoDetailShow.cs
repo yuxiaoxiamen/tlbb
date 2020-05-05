@@ -50,7 +50,8 @@ public class ZhaoDetailShow : MonoBehaviour
         {
             case "Fist":
                 if (num1 < ZhaoMain.fist.Count)
-                { 
+                {
+                    ZhaoMain.SetCurrentZhao(ZhaoMain.fist[num1]);
                     GameObject.Find("ZhaoName").GetComponent<TextMesh>().text = ZhaoMain.fist[num1].FixData.Name;
 
                     GameObject.Find("ZhaoRank").GetComponent<TextMesh>().text = "修炼层数：";
@@ -89,6 +90,7 @@ public class ZhaoDetailShow : MonoBehaviour
                 }
                 else
                 {
+                    ZhaoMain.SetCurrentZhao(null);
                     GameObject.Find("ZhaoName").GetComponent<TextMesh>().text = "";
                     GameObject.Find("ZhaoRank").GetComponent<TextMesh>().text = "";
                     GameObject.Find("ZhaoProficiency").GetComponent<TextMesh>().text = "";
@@ -104,6 +106,7 @@ public class ZhaoDetailShow : MonoBehaviour
             case "Palm":
                 if (num1 < ZhaoMain.palm.Count)
                 {
+                    ZhaoMain.SetCurrentZhao(ZhaoMain.palm[num1]);
                     GameObject.Find("ZhaoName").GetComponent<TextMesh>().text = ZhaoMain.palm[num1].FixData.Name;
 
                     GameObject.Find("ZhaoRank").GetComponent<TextMesh>().text = "修炼层数：";
@@ -141,6 +144,7 @@ public class ZhaoDetailShow : MonoBehaviour
                 }
                 else
                 {
+                    ZhaoMain.SetCurrentZhao(null);
                     GameObject.Find("ZhaoName").GetComponent<TextMesh>().text = "";
                     GameObject.Find("ZhaoRank").GetComponent<TextMesh>().text = "";
                     GameObject.Find("ZhaoProficiency").GetComponent<TextMesh>().text = "";
@@ -156,6 +160,7 @@ public class ZhaoDetailShow : MonoBehaviour
             case "Finger":
                 if (num1 < ZhaoMain.finger.Count)
                 {
+                    ZhaoMain.SetCurrentZhao(ZhaoMain.finger[num1]);
                     GameObject.Find("ZhaoName").GetComponent<TextMesh>().text = ZhaoMain.finger[num1].FixData.Name;
 
                     GameObject.Find("ZhaoRank").GetComponent<TextMesh>().text = "修炼层数：";
@@ -195,6 +200,7 @@ public class ZhaoDetailShow : MonoBehaviour
                 }
                 else
                 {
+                    ZhaoMain.SetCurrentZhao(null);
                     GameObject.Find("ZhaoName").GetComponent<TextMesh>().text = "";
                     GameObject.Find("ZhaoRank").GetComponent<TextMesh>().text = "";
                     GameObject.Find("ZhaoProficiency").GetComponent<TextMesh>().text = "";
@@ -210,6 +216,7 @@ public class ZhaoDetailShow : MonoBehaviour
             case "Knife":
                 if (num1 < ZhaoMain.knife.Count)
                 {
+                    ZhaoMain.SetCurrentZhao(ZhaoMain.knife[num1]);
                     GameObject.Find("ZhaoName").GetComponent<TextMesh>().text = ZhaoMain.knife[num1].FixData.Name;
 
                     GameObject.Find("ZhaoRank").GetComponent<TextMesh>().text = "修炼层数：";
@@ -247,6 +254,7 @@ public class ZhaoDetailShow : MonoBehaviour
                 }
                 else
                 {
+                    ZhaoMain.SetCurrentZhao(null);
                     GameObject.Find("ZhaoName").GetComponent<TextMesh>().text = "";
                     GameObject.Find("ZhaoRank").GetComponent<TextMesh>().text = "";
                     GameObject.Find("ZhaoProficiency").GetComponent<TextMesh>().text = "";
@@ -262,6 +270,7 @@ public class ZhaoDetailShow : MonoBehaviour
             case "Sword":
                 if (num1 < ZhaoMain.sword.Count)
                 {
+                    ZhaoMain.SetCurrentZhao(ZhaoMain.sword[num1]);
                     GameObject.Find("ZhaoName").GetComponent<TextMesh>().text = ZhaoMain.sword[num1].FixData.Name;
 
                     GameObject.Find("ZhaoRank").GetComponent<TextMesh>().text = "修炼层数：";
@@ -299,6 +308,7 @@ public class ZhaoDetailShow : MonoBehaviour
                 }
                 else
                 {
+                    ZhaoMain.SetCurrentZhao(null);
                     GameObject.Find("ZhaoName").GetComponent<TextMesh>().text = "";
                     GameObject.Find("ZhaoRank").GetComponent<TextMesh>().text = "";
                     GameObject.Find("ZhaoProficiency").GetComponent<TextMesh>().text = "";
@@ -314,6 +324,7 @@ public class ZhaoDetailShow : MonoBehaviour
             case "Rod":
                 if (num1 < ZhaoMain.rod.Count)
                 {
+                    ZhaoMain.SetCurrentZhao(ZhaoMain.rod[num1]);
                     GameObject.Find("ZhaoName").GetComponent<TextMesh>().text = ZhaoMain.rod[num1].FixData.Name;
 
                     GameObject.Find("ZhaoRank").GetComponent<TextMesh>().text = "修炼层数：";
@@ -351,6 +362,7 @@ public class ZhaoDetailShow : MonoBehaviour
                 }
                 else
                 {
+                    ZhaoMain.SetCurrentZhao(null);
                     GameObject.Find("ZhaoName").GetComponent<TextMesh>().text = "";
                     GameObject.Find("ZhaoRank").GetComponent<TextMesh>().text = "";
                     GameObject.Find("ZhaoProficiency").GetComponent<TextMesh>().text = "";

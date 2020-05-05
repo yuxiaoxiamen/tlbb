@@ -14,8 +14,8 @@ public class FightMain : MonoBehaviour
     public static Dictionary<Vector2Int, Person> positionToPerson; //通过人物在战斗场景中的位置获取人物实例
     public static List<Person> friendQueue;//友方战斗的人
     public static List<Person> enemyQueue;//敌方战斗的人
-    public static int mapWidth = 21; //地图的最大列数
-    public static int mapHeight = 13; //地图的最大行数
+    public static int mapWidth = 25; //地图的最大列数
+    public static int mapHeight = 25; //地图的最大行数
     public static bool isEnemyRound = false;
     public static readonly float speed = 0.1f;
     public static int finished = 0;
@@ -35,11 +35,11 @@ public class FightMain : MonoBehaviour
         isCreateReward = false;
         instance = this;
 
-        //GetFriendsAndEnemys();
-        //SetPersonRowCol(friendQueue, false);
-        //SetPersonRowCol(enemyQueue, true);
+        GetFriendsAndEnemys();
+        SetPersonRowCol(friendQueue, false);
+        SetPersonRowCol(enemyQueue, true);
 
-        TestData();
+        //TestData();
 
         positionToPerson = new Dictionary<Vector2Int, Person>();
         SetFightPerson(friendQueue);
@@ -169,21 +169,38 @@ public class FightMain : MonoBehaviour
         float height = gridPrefab.GetComponent<Renderer>().bounds.size.z;
         gridObjectToData = new Dictionary<GameObject, Vector2Int>();
         gridDataToObject = new Dictionary<Vector2Int, GameObject>();
+        var os = GetFightObstacles();
         for (int j = 0; j < mapHeight; ++j)
         {
             int realMapWidth = j % 2 == 0 ? mapWidth : mapWidth - 1;
             for (int i = 0; i < realMapWidth; ++i)
             {
-                GameObject newGrid = Instantiate(gridPrefab);
-                newGrid.name = j + "_" + i;
-                newGrid.transform.parent = transform;
-                float x = j % 2 == 0 ? i : i + 0.5f;
-                newGrid.transform.position += new Vector3(x * width, 0, -j * height * heightGrap);
-                var rowAndCol = new Vector2Int(j, i);
-                gridObjectToData.Add(newGrid, rowAndCol);
-                gridDataToObject.Add(rowAndCol, newGrid);
+                string rc = j + "_" + i;
+                if (!os.Contains(rc))
+                {
+                    GameObject newGrid = Instantiate(gridPrefab);
+                    newGrid.name = rc;
+                    newGrid.transform.parent = transform;
+                    float x = j % 2 == 0 ? i : i + 0.5f;
+                    newGrid.transform.position += new Vector3(x * width, 0, -j * height * heightGrap);
+                    var rowAndCol = new Vector2Int(j, i);
+                    gridObjectToData.Add(newGrid, rowAndCol);
+                    gridDataToObject.Add(rowAndCol, newGrid);
+                }
             }
         }
+    }
+
+    HashSet<string> GetFightObstacles()
+    {
+        var data = Resources.Load<TextAsset>("jsonData/战斗障碍");
+        string[] splits = data.text.Split(',');
+        HashSet<string> os = new HashSet<string>();
+        foreach(string s in splits)
+        {
+            os.Add(s);
+        }
+        return os;
     }
 
     public static void OneRoundOver(Person person)
@@ -396,13 +413,18 @@ public class FightMain : MonoBehaviour
                     rewards.Add(GlobalData.Items[i]);
                 }
             }
-            GameRunningData.GetRunningData().belongings.AddRange(rewards);
+            foreach(Good reward in rewards)
+            {
+                GameRunningData.GetRunningData().AddItem(reward);
+            }
             int money = Random.Range(100, 201);
             int experspance = 5 + Random.Range(-2, 3);
             if(source == FightSource.MainLine)
             {
                 experspance = 20 + Random.Range(-5, 5);
             }
+            GameRunningData.GetRunningData().experspance += experspance;
+            GameRunningData.GetRunningData().money += money;
             FightGUI.SetSettlement(rewards, experspance, money);
         }
     }

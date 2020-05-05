@@ -118,6 +118,7 @@ public class ItemUse : MonoBehaviour
         {
             case ItemKind.Alcohol:
                 value = (int)(player.BaseData.MP * (item.ResumeValue * 1.0f / 100));
+                value = (int)(value * (1 + player.BaseData.LiquorSkill * 0.01f));
                 player.ChangeMP(value, true);
                 switch (item.Id)
                 {
@@ -141,6 +142,7 @@ public class ItemUse : MonoBehaviour
                 break;
             case ItemKind.Food:
                 value = (int)(player.BaseData.Energy * (item.ResumeValue * 1.0f / 100));
+                value = (int)(value * (1 + player.BaseData.CookingSkill * 0.01f));
                 player.ChangeEnergy(value, true);
                 break;
             case ItemKind.Pellet:

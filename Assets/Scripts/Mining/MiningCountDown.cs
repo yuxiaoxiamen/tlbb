@@ -21,7 +21,7 @@ public class MiningCountDown : MonoBehaviour
         Button failButton = failPanel.transform.Find("Button").GetComponent<Button>();
         failButton.onClick.AddListener(()=>
         {
-
+            GameRunningData.GetRunningData().ReturnToMap();
         });
         failPanel.SetActive(false);
 
@@ -73,7 +73,10 @@ public class MiningCountDown : MonoBehaviour
         }
         else
         {
-            int money = 10;
+            int allCount = MineralControl.manual.CopperNumber + MineralControl.manual.IronNumber + MineralControl.manual.SilverNumber + MineralControl.manual.GoldNumber;
+            int nowCount = HookControl.copperNumber + HookControl.ironNumber + HookControl.silverNumber + HookControl.goldNumber;
+            int money = (int)(nowCount * 1.0f / allCount * 0.8f * MineralControl.manual.Price);
+            GameRunningData.GetRunningData().money += money;
             moneyText.GetComponent<Text>().text += money;
             failPanel.SetActive(true);
         }

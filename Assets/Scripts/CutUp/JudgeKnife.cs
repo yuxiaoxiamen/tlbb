@@ -47,12 +47,14 @@ public class JudgeKnife : MonoBehaviour
         switch (type)
         {
             case 'f':
+                SoundEffectControl.instance.PlaySoundEffect(0);
                 CreateDamagedGreens();
                 gameObject.transform.position = new Vector3(100, 10, 0);
                 CutUpMain.SetAlreadyText(type);
                 break;
             case 'v':
-                if(cutCount == 2)
+                SoundEffectControl.instance.PlaySoundEffect(1);
+                if (cutCount == 2)
                 {
                     CreateDamagedGreens();
                     gameObject.transform.position = new Vector3(100, 10, 0);
@@ -60,7 +62,8 @@ public class JudgeKnife : MonoBehaviour
                 }
                 break;
             case 'm':
-                if(cutCount == 3)
+                SoundEffectControl.instance.PlaySoundEffect(2);
+                if (cutCount == 3)
                 {
                     CreateDamagedGreens();
                     gameObject.transform.position = new Vector3(100, 10, 0);

@@ -47,15 +47,21 @@ public class Mouse : MonoBehaviour
             //Para_Pass.characterId = gameObject.transform.parent.GetComponent<Mouse>().Id;
             Debug.Log(name);
             Debug.Log(Para_Pass.characterId);
+            MainAttributes.personId = Para_Pass.characterId;
+            BasicAttri_GoBack.preScene = "team";
             SceneManager.LoadScene("BasicAttributes");
         }
         else if (name.Equals("Member_ZhaoShi"))
         {
-            //Debug.Log(name);
+            ZhaoMain.preScene = "team";
+            ZhaoMain.person = GlobalData.Persons[Para_Pass.characterId];
+            SceneManager.LoadScene("Zhao");
         }
         else if (name.Equals("Member_NeiGong"))
         {
-            //Debug.Log(name);
+            KongMain.preScene = "team";
+            KongMain.person = GlobalData.Persons[Para_Pass.characterId];
+            SceneManager.LoadScene("Kong");
         }
         else { }
 

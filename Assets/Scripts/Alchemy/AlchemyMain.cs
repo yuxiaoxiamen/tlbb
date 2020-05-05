@@ -50,6 +50,7 @@ public class AlchemyMain : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && !AlchemyCountDown.isGameOver)
         {
+            SoundEffectControl.instance.PlaySoundEffect(0);
             if (scripts[currentIndex].isStay)
             {
                 ++count;

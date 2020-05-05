@@ -10,7 +10,7 @@ public class OtherAttributes : MonoBehaviour
     {
         var y = gameObject.transform;
         float percent = 0;
-        int characterId = Para_Pass.characterId;
+        int characterId = MainAttributes.personId;
         switch(y.name)
         {
             case "ShengMing_Current":
@@ -52,6 +52,9 @@ public class OtherAttributes : MonoBehaviour
 
             case "CharacterName":
                 y.GetComponent<TextMesh>().text = GlobalData.Persons[characterId].BaseData.Name;
+                break;
+            case "CharacterImage":
+                y.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("head/" + GlobalData.Persons[characterId].BaseData.HeadPortrait);
                 break;
 
         }

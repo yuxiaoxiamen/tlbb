@@ -22,9 +22,6 @@ public class AlchemyCountDown : MonoBehaviour
         successPanel.SetActive(false);
         successPanel.transform.Find("Button").GetComponent<Button>().onClick.AddListener(() =>
         {
-
-            int id = Random.Range(GlobalData.Items.Count - 5, GlobalData.Items.Count);
-            GameRunningData.GetRunningData().AddItem(GlobalData.Items[id]);
             GameRunningData.GetRunningData().ReturnToMap();
         });
         failPanel = GameObject.Find("failPanel");
@@ -65,10 +62,10 @@ public class AlchemyCountDown : MonoBehaviour
         isGameOver = true;
         if (isSuccess)
         {
-            int randomIndex = Random.Range(63, 68);
-            Good item = GlobalData.Items[randomIndex];
-            GameRunningData.GetRunningData().belongings.Add(item);
-            successPanel.transform.Find("tipText").GetComponent<Text>().text += item.Name;
+            int id = Random.Range(GlobalData.Items.Count - 5, GlobalData.Items.Count);
+            GameRunningData.GetRunningData().AddItem(GlobalData.Items[id]);
+            successPanel.transform.Find("tipText").GetComponent<Text>().text += 
+                System.Environment.NewLine + "获得"+GlobalData.Items[id].Name;
             successPanel.SetActive(true);
         }
         else

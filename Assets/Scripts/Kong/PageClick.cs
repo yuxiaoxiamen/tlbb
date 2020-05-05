@@ -57,6 +57,24 @@ public class PageClick : MonoBehaviour
                         KongMain.order[2] = Textchange(KongMain.inners[(temp + 2) % KongMain.inners.Count].FixData.Name);
                         KongMain.order[3] = Textchange(KongMain.inners[(temp + KongMain.inners.Count - 2) % KongMain.inners.Count].FixData.Name);
                         KongMain.order[4] = Textchange(KongMain.inners[(temp + KongMain.inners.Count - 1) % KongMain.inners.Count].FixData.Name);
+                        //标注当前功法
+            if (string.Equals(KongMain.inners[KongMain.center].FixData.Name, KongMain.person.SelectedInnerGong.FixData.Name))
+            {
+                GameObject.Find("KongChange").SetActive(false);
+                GameObject root = GameObject.Find("introduction");
+                GameObject innerstate = root.transform.Find("KongState").gameObject;
+                innerstate.SetActive(true);         
+            }
+            else
+            {
+                if (GameObject.Find("KongState"))
+                {
+                    GameObject.Find("KongState").SetActive(false);
+                    GameObject root = GameObject.Find("Canvas");
+                    GameObject innerstate = root.transform.Find("KongChange").gameObject;
+                    innerstate.SetActive(true);
+                }
+            }
                     }
                     else
                     {
@@ -74,6 +92,23 @@ public class PageClick : MonoBehaviour
                                     KongMain.order[m] = "待\n学\n习";
                                 temp = (temp +1) % 5;
                             }
+                            if (string.Equals(KongMain.inners[KongMain.center].FixData.Name, KongMain.person.SelectedInnerGong.FixData.Name))
+                            {
+                                GameObject.Find("KongChange").SetActive(false);
+                                GameObject root = GameObject.Find("introduction");
+                                GameObject innerstate = root.transform.Find("KongState").gameObject;
+                                innerstate.SetActive(true);
+                            }
+                            else
+                            {
+                                if (GameObject.Find("KongState"))
+                                {
+                                    GameObject.Find("KongState").SetActive(false);
+                                    GameObject root = GameObject.Find("Canvas");
+                                    GameObject innerstate = root.transform.Find("KongChange").gameObject;
+                                    innerstate.SetActive(true);
+                                }
+                            }
                         }
                     }
                     break;
@@ -87,7 +122,23 @@ public class PageClick : MonoBehaviour
                         KongMain.order[2] = Textchange(KongMain.inners[(temp+2) % KongMain.inners.Count].FixData.Name);
                         KongMain.order[3] = Textchange(KongMain.inners[(temp+ KongMain.inners.Count-2) % KongMain.inners.Count].FixData.Name);
                         KongMain.order[4] = Textchange(KongMain.inners[(temp + KongMain.inners.Count-1) % KongMain.inners.Count].FixData.Name);
-
+                        if (string.Equals(KongMain.inners[KongMain.center].FixData.Name, KongMain.person.SelectedInnerGong.FixData.Name))
+                        {
+                            GameObject.Find("KongChange").SetActive(false);
+                            GameObject root = GameObject.Find("introduction");
+                            GameObject innerstate = root.transform.Find("KongState").gameObject;
+                            innerstate.SetActive(true);
+                        }
+                        else
+                        {
+                            if (GameObject.Find("KongState"))
+                            {
+                                GameObject.Find("KongState").SetActive(false);
+                                GameObject root = GameObject.Find("Canvas");
+                                GameObject innerstate = root.transform.Find("KongChange").gameObject;
+                                innerstate.SetActive(true);
+                            }
+                        }
                     }
                     else
                     {
@@ -104,6 +155,23 @@ public class PageClick : MonoBehaviour
                                 else
                                     KongMain.order[m] = "待\n学\n习";
                                 temp = (temp + 1) % 5;
+                            }
+                            if (string.Equals(KongMain.inners[KongMain.center].FixData.Name, KongMain.person.SelectedInnerGong.FixData.Name))
+                            {
+                                GameObject.Find("KongChange").SetActive(false);
+                                GameObject root = GameObject.Find("introduction");
+                                GameObject innerstate = root.transform.Find("KongState").gameObject;
+                                innerstate.SetActive(true);
+                            }
+                            else
+                            {
+                                if (GameObject.Find("KongState"))
+                                {
+                                    GameObject.Find("KongState").SetActive(false);
+                                    GameObject root = GameObject.Find("Canvas");
+                                    GameObject innerstate = root.transform.Find("KongChange").gameObject;
+                                    innerstate.SetActive(true);
+                                }
                             }
                         }
                     }
@@ -208,24 +276,7 @@ public class PageClick : MonoBehaviour
                 + "\n内力增益(每重/满重): " + inner.FixData.PerMPGain.ToString() + " / " + inner.FixData.FullMPGain.ToString()
                 + "\n属性增益: \n每重: " + pertalentgain + "\n满重: " + fulltalentgain;
 
-            //标注当前功法
-            if (string.Equals(inner.FixData.Name, player.SelectedInnerGong.FixData.Name))
-            {
-                GameObject.Find("KongChange").SetActive(false);
-                GameObject root = GameObject.Find("introduction");
-                GameObject innerstate = root.transform.Find("KongState").gameObject;
-                innerstate.SetActive(true);         
-            }
-            else
-            {
-                if (GameObject.Find("KongState"))
-                {
-                    GameObject.Find("KongState").SetActive(false);
-                    GameObject root = GameObject.Find("Canvas");
-                    GameObject innerstate = root.transform.Find("KongChange").gameObject;
-                    innerstate.SetActive(true);
-                }
-            }
+           
 
 
             //进度条

@@ -29,12 +29,31 @@ public class ManualMouseControl : MonoBehaviour, IPointerEnterHandler, IPointerE
         if (ManualMain.isFood)
         {
             CutUpMain.manual = GlobalData.FoodManuals[int.Parse(name)];
-            SceneManager.LoadScene("CutUp");
+            if (GameRunningData.GetRunningData().money >= CutUpMain.manual.Price)
+            {
+                GameRunningData.GetRunningData().money -= CutUpMain.manual.Price;
+                TimeGoSubject.GetTimeSubject().UpdateTime(1);
+                SceneManager.LoadScene("CutUp");
+            }
+            else
+            {
+                TipControl.instance.SetTip("金钱不足");
+            }
+            
         }
         else
         {
             MineralControl.manual = GlobalData.WeaponManuals[int.Parse(name)];
-            SceneManager.LoadScene("Mining");
+            if (GameRunningData.GetRunningData().money >= MineralControl.manual.Price)
+            {
+                GameRunningData.GetRunningData().money -= MineralControl.manual.Price;
+                TimeGoSubject.GetTimeSubject().UpdateTime(1);
+                SceneManager.LoadScene("Mining");
+            }
+            else
+            {
+                TipControl.instance.SetTip("金钱不足");
+            }
         }
     }
 }

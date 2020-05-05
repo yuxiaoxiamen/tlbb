@@ -45,7 +45,7 @@ public class ZhaoSwitch : MonoBehaviour
         {
             string ButtonName = button.name;
             string type = ZhaoMain.zhaotype;     //获取当前招式类型
-
+            ZhaoMain.SetCurrentZhao(null);
             if (!string.Equals(ButtonName, type))
             {
                 //处理解释面板

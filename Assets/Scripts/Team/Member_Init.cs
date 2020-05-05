@@ -26,13 +26,13 @@ public class Member_Init : MonoBehaviour
     void Start()
     {
         //****************************测试数据******************************
-        int count = 5;
-        for (int i = 0; i < count ; ++i)
-        {
-            Members.Add(GlobalData.Persons[i]);
-            Debug.Log(GlobalData.Persons[i].BaseData.Name);
-        }
-
+        //int count = 5;
+        //for (int i = 0; i < count ; ++i)
+        //{
+        //    Members.Add(GlobalData.Persons[i]);
+        //    Debug.Log(GlobalData.Persons[i].BaseData.Name);
+        //}
+        Members = GameRunningData.GetRunningData().teammates;
 
         for (int i=0;i<Members.ToArray().Length; ++i)
         {

@@ -54,6 +54,31 @@ public class AttackTool
         }
     }
 
+    public static void PlayAttackMusic(Person person)
+    {
+        switch (person.SelectedAttackStyle.FixData.WeaponKind)
+        {
+            case AttackWeaponKind.Knife:
+                SoundEffectControl.instance.PlaySoundEffect(1);
+                break;
+            case AttackWeaponKind.Sword:
+                SoundEffectControl.instance.PlaySoundEffect(2);
+                break;
+            case AttackWeaponKind.Rod:
+                SoundEffectControl.instance.PlaySoundEffect(3);
+                break;
+            case AttackWeaponKind.Fist:
+                SoundEffectControl.instance.PlaySoundEffect(4);
+                break;
+            case AttackWeaponKind.Palm:
+                SoundEffectControl.instance.PlaySoundEffect(5);
+                break;
+            case AttackWeaponKind.Finger:
+                SoundEffectControl.instance.PlaySoundEffect(6);
+                break;
+        }
+    }
+
     public static bool AttackEnemys(Person attacker, List<Person> enemys)
     {
         HashSet<Person> canAttackEnemys = new HashSet<Person>();
@@ -109,6 +134,7 @@ public class AttackTool
 
             AttackBuffTool.TriggerDubleHitBuff(attacker, canAttackEnemys);
             FightMain.OneRoundOver(attacker);
+            PlayAttackMusic(attacker);
             return true;
         }
         else

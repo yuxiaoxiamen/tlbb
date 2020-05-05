@@ -31,15 +31,25 @@ public class ControlBottomPanel : MonoBehaviour
         });
         transform.Find("person").GetComponent<Button>().onClick.AddListener(() =>
         {
+            BasicAttri_GoBack.preScene = "map";
+            MainAttributes.personId = GameRunningData.GetRunningData().player.BaseData.Id;
             SceneManager.LoadScene("BasicAttributes");
         });
         transform.Find("item").GetComponent<Button>().onClick.AddListener(() =>
         {
             SceneManager.LoadScene("ItemNew");
         });
-        transform.Find("kongFu").GetComponent<Button>().onClick.AddListener(() =>
+        transform.Find("gong").GetComponent<Button>().onClick.AddListener(() =>
         {
+            KongMain.preScene = "map";
+            KongMain.person = GameRunningData.GetRunningData().player;
             SceneManager.LoadScene("Kong");
+        });
+        transform.Find("zhao").GetComponent<Button>().onClick.AddListener(() =>
+        {
+            ZhaoMain.preScene = "map";
+            ZhaoMain.person = GameRunningData.GetRunningData().player;
+            SceneManager.LoadScene("Zhao");
         });
         transform.Find("queue").GetComponent<Button>().onClick.AddListener(() =>
         {

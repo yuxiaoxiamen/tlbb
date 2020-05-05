@@ -10,10 +10,10 @@ using UnityEngine;
 
 public class MainAttributes : MonoBehaviour
 {
-
+    public static int personId;
     void Start()
     {
-        int characterId = Para_Pass.characterId;
+        int characterId = personId;
         gameObject.AddComponent<MeshFilter>();
         gameObject.AddComponent<MeshRenderer>();
         //gameObject.GetComponent<MeshRenderer>().material = mat;

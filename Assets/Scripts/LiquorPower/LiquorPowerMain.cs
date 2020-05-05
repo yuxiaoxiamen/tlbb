@@ -73,13 +73,13 @@ public class LiquorPowerMain : MonoBehaviour
         successPanel.SetActive(false);
         successPanel.transform.Find("Button").GetComponent<Button>().onClick.AddListener(() =>
         {
-
+            GameRunningData.GetRunningData().ReturnToMap();
         });
         failPanel = GameObject.Find("failPanel");
         failPanel.SetActive(false);
         failPanel.transform.Find("Button").GetComponent<Button>().onClick.AddListener(() =>
         {
-
+            GameRunningData.GetRunningData().ReturnToMap();
         });
     }
 
@@ -147,6 +147,8 @@ public class LiquorPowerMain : MonoBehaviour
                 if (!isShow)
                 {
                     successPanel.SetActive(true);
+                    successPanel.transform.Find("tipText").GetComponent<Text>().text +=
+                        System.Environment.NewLine + "酒力提高" + player.PromoteLiquorSkill();
                     sequence.Kill();
                     isShow = true;
                 }

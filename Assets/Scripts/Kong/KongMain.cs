@@ -10,6 +10,9 @@ public class KongMain : MonoBehaviour
     public static List<string> order = new List<string>();      //用于存储功法顺序
     public static InnerGong inner = new InnerGong();
     public static int center = 0;
+    public static string preScene;
+    public static Person person;
+    public Transform consultTransform;
     int i = 0;
 
     List<GameObject> temp = new List<GameObject>();
@@ -48,15 +51,40 @@ public class KongMain : MonoBehaviour
 
     }
 
+    void SetConsultButton()
+    {
+        var player = GameRunningData.GetRunningData().player;
+        if (preScene != "map" && person != player)
+        {
+            consultTransform.GetComponent<Button>().onClick.AddListener(() =>
+            {
+                if (player.BaseData.InnerGongs.Contains(inner))
+                {
+                    TipControl.instance.SetTip("已拥有该功法");
+                }
+                else if (GameRunningData.GetRunningData().experspance < GameConfig.ConsultCost[inner.GetGrade() - 1])
+                {
+                    TipControl.instance.SetTip("江湖阅历不足");
+                }
+                else
+                {
+                    player.BaseData.InnerGongs.Add(inner);
+                    GameRunningData.GetRunningData().experspance -= GameConfig.ConsultCost[inner.GetGrade() - 1];
+                }
+            });
+        }
+        else
+        {
+            consultTransform.gameObject.SetActive(false);
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        Person player = GameRunningData.GetRunningData().player;  //获取人物实例化对象
-
-        foreach (InnerGong x in player.BaseData.InnerGongs)
+        SetConsultButton();
+        foreach (InnerGong x in person.BaseData.InnerGongs)
             inners.Add(x);
-
-
         order.Add("待\n学\n习");
         order.Add("待\n学\n习");
         order.Add("待\n学\n习");
@@ -117,7 +145,7 @@ public class KongMain : MonoBehaviour
             GameObject.Find("top").GetComponent<TextMesh>().text = (center% inners.Count+1).ToString()+"/"+ inners.Count.ToString();
 
         //标注当前功法
-        if(string.Equals(inners[center].FixData.Name, player.SelectedInnerGong.FixData.Name))
+        if(string.Equals(inners[center].FixData.Name, person.SelectedInnerGong.FixData.Name))
               { 
             GameObject.Find("KongChange").SetActive(false);
             GameObject root = GameObject.Find("introduction");

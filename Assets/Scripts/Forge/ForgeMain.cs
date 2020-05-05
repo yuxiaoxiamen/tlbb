@@ -46,7 +46,6 @@ public class ForgeMain : MonoBehaviour
         Button successButton = successPanel.transform.Find("Button").GetComponent<Button>();
         successButton.onClick.AddListener(() =>
         {
-            GameRunningData.GetRunningData().AddItem(MineralControl.manual.Item);
             GameRunningData.GetRunningData().ReturnToMap();
         });
         successPanel.SetActive(false);
@@ -151,7 +150,10 @@ public class ForgeMain : MonoBehaviour
             TunkControl.goldNumber >= MineralControl.manual.GoldNumber)
         {
             successPanel.SetActive(true);
-            successPanel.transform.Find("tipText").GetComponent<Text>().text += MineralControl.manual.Item.Name;
+            GameRunningData.GetRunningData().AddItem(MineralControl.manual.Item);
+            successPanel.transform.Find("tipText").GetComponent<Text>().text += 
+                System.Environment.NewLine + "获得武器"+MineralControl.manual.Item.Name;
+            GameRunningData.GetRunningData().AddItem(MineralControl.manual.Item);
         }
         else
         {

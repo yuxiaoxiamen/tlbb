@@ -23,7 +23,6 @@ public class CutUpCountDown : MonoBehaviour
         successPanel.SetActive(false);
         successPanel.transform.Find("Button").GetComponent<Button>().onClick.AddListener(()=> 
         {
-            GameRunningData.GetRunningData().AddItem(CutUpMain.manual.Item);
             GameRunningData.GetRunningData().ReturnToMap();
         });
         failPanel = GameObject.Find("failPanel");
@@ -64,7 +63,11 @@ public class CutUpCountDown : MonoBehaviour
     {
         if (isSuccess)
         {
+            GameRunningData.GetRunningData().AddItem(CutUpMain.manual.Item);
             successPanel.SetActive(true);
+            successPanel.transform.Find("tipText").GetComponent<Text>().text += 
+                System.Environment.NewLine + ("获得" + CutUpMain.manual.Item.Name+"")+ System.Environment.NewLine
+                +"厨艺提高"+GameRunningData.GetRunningData().player.PromoteCookingSkill();
         }
         else
         {
