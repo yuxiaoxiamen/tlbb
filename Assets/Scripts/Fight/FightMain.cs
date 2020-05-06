@@ -14,8 +14,8 @@ public class FightMain : MonoBehaviour
     public static Dictionary<Vector2Int, Person> positionToPerson; //通过人物在战斗场景中的位置获取人物实例
     public static List<Person> friendQueue;//友方战斗的人
     public static List<Person> enemyQueue;//敌方战斗的人
-    public static int mapWidth = 25; //地图的最大列数
-    public static int mapHeight = 25; //地图的最大行数
+    public static int mapWidth = 19; //地图的最大列数
+    public static int mapHeight = 15; //地图的最大行数
     public static bool isEnemyRound = false;
     public static readonly float speed = 0.1f;
     public static int finished = 0;
@@ -176,8 +176,8 @@ public class FightMain : MonoBehaviour
             for (int i = 0; i < realMapWidth; ++i)
             {
                 string rc = j + "_" + i;
-                if (!os.Contains(rc))
-                {
+                //if (!os.Contains(rc))
+                //{
                     GameObject newGrid = Instantiate(gridPrefab);
                     newGrid.name = rc;
                     newGrid.transform.parent = transform;
@@ -186,7 +186,7 @@ public class FightMain : MonoBehaviour
                     var rowAndCol = new Vector2Int(j, i);
                     gridObjectToData.Add(newGrid, rowAndCol);
                     gridDataToObject.Add(rowAndCol, newGrid);
-                }
+                //}
             }
         }
     }

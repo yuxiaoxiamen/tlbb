@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class AttackStyle
 {
-    public AttackStyleFixData FixData { get; set; }
+    [System.NonSerialized]
+    private AttackStyleFixData fixData;
+    public AttackStyleFixData FixData { get { return fixData; } set { fixData = value; } }
+    public int Id { get; set; }
     public int Rank { get; set; }
     public int Proficiency { get; set; }
 

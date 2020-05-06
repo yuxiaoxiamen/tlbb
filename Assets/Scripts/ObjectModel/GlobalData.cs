@@ -340,6 +340,7 @@ public class GlobalData
             {
                 AttackStyle attackStyleData = new AttackStyle()
                 {
+                    Id = int.Parse(styles[j]),
                     FixData = StyleFixDatas[int.Parse(styles[j])]
                 };
                 attackStyleDatas.Add(attackStyleData);
@@ -348,6 +349,7 @@ public class GlobalData
             {
                 InnerGong innerGongData = new InnerGong()
                 {
+                    Id = int.Parse(gongs[j]),
                     FixData = InnerGongFixDatas[int.Parse(gongs[j])]
                 };
                 innerGongs.Add(innerGongData);

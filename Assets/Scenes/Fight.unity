@@ -4892,7 +4892,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.0025787, y: 7}
+  m_AnchoredPosition: {x: -0.0025634766, y: 7}
   m_SizeDelta: {x: -311, y: -388.57}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &686325730
@@ -7789,6 +7789,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 972ff51cdb7e29c4f9bc435815704b9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  item: []
 --- !u!1 &1052372923
 GameObject:
   m_ObjectHideFlags: 0
@@ -12120,8 +12121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d87b39212870fd8438f4c911d73388e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridPrefab: {fileID: 4408415261044255169, guid: 9eae0b3715d075548ba747fb07f38297,
-    type: 3}
+  gridPrefab: {fileID: 0}
   personPrefab: {fileID: 7625441022397625602, guid: 29c0f3d4a2e06ba4fb66306a258feaca,
     type: 3}
   heightGrap: 0.78
@@ -13263,7 +13263,7 @@ PrefabInstance:
     - target: {fileID: 7083903963584978547, guid: 46bfc5b572320c144911eb9b408fcc45,
         type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7083903963584978547, guid: 46bfc5b572320c144911eb9b408fcc45,
         type: 3}
@@ -16551,7 +16551,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000005403749, y: -0.000023987941}
+  m_AnchoredPosition: {x: 0.000005403749, y: -0.0000062128656}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2135269277

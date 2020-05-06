@@ -37,6 +37,11 @@ public class GameRunningData
         return instance;
     }
 
+    public void SavePlayerMapRc()
+    {
+        playerPreRc = player.RowCol;
+    }
+
     public string GetPlaceDateKey()
     {
         return currentPlace.GetPlaceString() + "/" + date.GetDateString();
@@ -80,6 +85,7 @@ public class GameRunningData
         else
         {
             belongings.Add(item);
+            item.Number = 1;
         }
     }
 }

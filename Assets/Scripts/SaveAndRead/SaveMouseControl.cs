@@ -34,6 +34,7 @@ public class SaveMouseControl : MonoBehaviour, IPointerEnterHandler, IPointerExi
         else
         {
             SaveData saveData = SaveAndReadMain.instance.saveDatas[index];
+            saveData.ResumeData();
         }
     }
 }

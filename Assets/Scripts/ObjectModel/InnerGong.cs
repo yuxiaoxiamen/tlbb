@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class InnerGong
 {
-    public InnerGongFixData FixData { get; set; }
+    [System.NonSerialized]
+    private InnerGongFixData fixData;
+    public InnerGongFixData FixData { get { return fixData; } set { fixData = value; } }
+    public int Id { get; set; }
     public int Rank { get; set; }
     public int Proficiency { get; set; }
 

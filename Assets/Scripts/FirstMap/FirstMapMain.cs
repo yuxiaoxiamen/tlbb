@@ -75,7 +75,7 @@ public class FirstMapMain : MonoBehaviour
             {
                 Cursor.visible = true;
                 GameRunningData.GetRunningData().currentPlace = place;
-                GameRunningData.GetRunningData().playerPreRc = player.RowCol;
+                GameRunningData.GetRunningData().SavePlayerMapRc();
                 if (place.Sites == null)
                 {
                     SceneManager.LoadScene("ThridMap");

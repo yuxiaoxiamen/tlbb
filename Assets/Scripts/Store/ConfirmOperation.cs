@@ -94,25 +94,16 @@ public class ConfirmOperation : MonoBehaviour
             }
             else
             {
-                if (item.Number < number)
+                if (item.Number == number)
                 {
-                    GameObject.Find("info").transform.Find("text").GetComponent<Text>().text = "拥有的物品数量不足";
-                }
-                else if (item.Number == number)
-                {
-                    item.Number -= number;
-                    GameRunningData.GetRunningData().money += allPrice;
                     SetMoneyText();
                     GameRunningData.GetRunningData().belongings.Remove(item);
                     GameObject.Find("Items").transform.Find("Viewport").Find("Content").
                     GetComponent<GoodDisplay>().SetItemList();
                 }
-                else
-                {
-                    item.Number -= number;
-                    GameRunningData.GetRunningData().money += allPrice;
-                    SetMoneyText();
-                }
+                SetMoneyText();
+                item.Number -= number;
+                GameRunningData.GetRunningData().money += allPrice;
             }
             numText.text = "1";
             transform.gameObject.SetActive(false);

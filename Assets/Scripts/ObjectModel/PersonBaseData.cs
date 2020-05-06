@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class PersonBaseData
 {
     public int Id { get; set; } //编号
@@ -21,8 +22,14 @@ public class PersonBaseData
     public int HeadPortrait { get; set; }
     public int WeaponId { get; set; }
     public List<Interaction> Interactions { get; set; }
-    public List<ChatConversation> ChatConversations { get; set; }
-    public List<AttackStyle> AttackStyles { get; set; }
-    public List<InnerGong> InnerGongs { get; set; }
+    [System.NonSerialized]
+    private List<ChatConversation> chatConversations;
+    public List<ChatConversation> ChatConversations { get { return chatConversations; } set { chatConversations = value; } }
+    //[System.NonSerialized]
+    private List<AttackStyle> attackStyles;
+    public List<AttackStyle> AttackStyles { get { return attackStyles; } set { attackStyles = value; } }
+    //[System.NonSerialized]
+    private List<InnerGong> innerGongs;
+    public List<InnerGong> InnerGongs { get { return innerGongs; } set { innerGongs = value; } }
 }
 

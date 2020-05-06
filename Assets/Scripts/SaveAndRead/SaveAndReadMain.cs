@@ -16,12 +16,12 @@ public class SaveAndReadMain : MonoBehaviour
     public Dictionary<int, SaveData> saveDatas;
     public static SaveAndReadMain instance;
     private string savePath;
+    public Button returnButton;
 
     // Start is called before the first frame update
     void Start()
     {
         instance = this;
-        SaveMouseControl.isSave = true;
         savePath = Application.persistentDataPath + "/";
         ReadAllSaveDatas();
         for(int i = 1; i < 100; ++i)
@@ -42,6 +42,10 @@ public class SaveAndReadMain : MonoBehaviour
                 SetText(saveItemTransform, null);
             }
         }
+        returnButton.onClick.AddListener(() =>
+        {
+            GameRunningData.GetRunningData().ReturnToMap();
+        });
     }
 
     void ReadAllSaveDatas()
@@ -80,6 +84,7 @@ public class SaveAndReadMain : MonoBehaviour
         FileStream stream = new FileStream(savePath + number + ".bin",
             FileMode.Create, FileAccess.Write);
         SaveData save = new SaveData(number);
+        saveDatas[number] = save;
         formatter.Serialize(stream, save);
         var saveItemTransform = scrollContent.transform.Find(save.Number + "").GetComponent<RectTransform>();
         SetText(saveItemTransform, save);
@@ -126,11 +131,11 @@ public class SaveAndReadMain : MonoBehaviour
 
         realTimeText.text = saveData.RealTime;
 
-        nameText.text = GameRunningData.GetRunningData().player.BaseData.Name;
+        nameText.text = saveData.Persons[0].BaseData.Name;
 
         placeText.text = GetCurrentPlaceString();
 
-        gameTimeText.text = GameRunningData.GetRunningData().date.GetDateText();
+        gameTimeText.text = saveData.Date.GetDateText();
     }
 
     public static string GetCurrentPlaceString()

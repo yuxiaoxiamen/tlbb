@@ -3,15 +3,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Person : ICloneable
 {
-    public AttackStyle SelectedAttackStyle { get; set; }
-    public List<AttackBuff> AttackBuffs { get; set; }
-    public GongBuff GongBuff { get; set; }
-    public InnerGong SelectedInnerGong { get; set; }
-    public Vector2Int RowCol { get; set; }
-    public GameObject PersonObject { get; set; }
-    public BattleControlState ControlState { get; set; }
+    //[NonSerialized]
+    private AttackStyle selectedAttackStyle;
+    public AttackStyle SelectedAttackStyle { get { return selectedAttackStyle; } set { selectedAttackStyle = value; } }
+    [NonSerialized]
+    private List<AttackBuff> attackBuffs;
+    public List<AttackBuff> AttackBuffs { get { return attackBuffs; } set { attackBuffs = value; } }
+    [NonSerialized]
+    private GongBuff gongBuff;
+    public GongBuff GongBuff { get { return gongBuff; } set{ gongBuff = value; } }
+    //[NonSerialized]
+    private InnerGong selectedInnerGong;
+    public InnerGong SelectedInnerGong { get { return selectedInnerGong; } set { selectedInnerGong = value; } }
+    [NonSerialized]
+    private Vector2Int rowCol;
+    public Vector2Int RowCol { get { return rowCol; } set { rowCol = value; } }
+    [NonSerialized]
+    private GameObject personObject;
+    public GameObject PersonObject { get { return personObject; } set { personObject = value; } }
+    [NonSerialized]
+    private BattleControlState controlState;
+    public BattleControlState ControlState { get { return controlState; } set { controlState = value; } }
     public int CurrentHP { get; set; }
     public int CurrentMP { get; set; }
     public int CurrentEnergy { get; set; }
@@ -23,8 +38,10 @@ public class Person : ICloneable
     public int AttackPowerRate { get; set; } //攻击强度提升比例
     public int MoveRank { get; set; }
     public string CurrentPlaceString { get; set; }
-    public bool IsMoved { get; set; } 
-    public Good EquippedWeapon { get; set; }
+    public bool IsMoved { get; set; }
+    [NonSerialized]
+    private Good equippedWeapon;
+    public Good EquippedWeapon { get { return equippedWeapon; } set { equippedWeapon = value; } }
     public PersonBaseData BaseData { get; set; }
 
     public Person()
