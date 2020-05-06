@@ -96,14 +96,13 @@ public class ConfirmOperation : MonoBehaviour
             {
                 if (item.Number == number)
                 {
-                    SetMoneyText();
                     GameRunningData.GetRunningData().belongings.Remove(item);
                     GameObject.Find("Items").transform.Find("Viewport").Find("Content").
                     GetComponent<GoodDisplay>().SetItemList();
                 }
+                GameRunningData.GetRunningData().money += allPrice;
                 SetMoneyText();
                 item.Number -= number;
-                GameRunningData.GetRunningData().money += allPrice;
             }
             numText.text = "1";
             transform.gameObject.SetActive(false);

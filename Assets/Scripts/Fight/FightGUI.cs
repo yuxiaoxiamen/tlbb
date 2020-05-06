@@ -476,7 +476,10 @@ public class FightGUI : MonoBehaviour
     private static void EndFight()
     {
         ItemMain.ClearItems();
-        GameRunningData.GetRunningData().date.GoByTime(100);
+        if(FightMain.source != FightSource.Encounter)
+        {
+            GameRunningData.GetRunningData().date.GoByTime(1);
+        }
         GameRunningData.GetRunningData().ReturnToMap();
     }
 

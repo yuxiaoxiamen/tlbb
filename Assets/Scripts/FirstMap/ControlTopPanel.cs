@@ -38,6 +38,11 @@ public class ControlTopPanel : MonoBehaviour
                 SceneManager.LoadScene("FirstMap");
             }
         });
+        //transform.Find("Button").GetComponent<Button>().onClick.AddListener(()=>
+        //{
+        //    GameRunningData.GetRunningData().date.GoByTime(40);
+        //    Debug.Log(GameRunningData.GetRunningData().date.GetDateString());
+        //});
     }
 
     public void UpdateTimeText()

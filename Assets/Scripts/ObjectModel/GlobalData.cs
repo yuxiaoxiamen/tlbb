@@ -159,7 +159,7 @@ public class GlobalData
         {
             var conversationJson = conversationJsons[i];
             MainConversation conversation = conversations[i];
-            conversation.People = Persons[conversationJson.PeopleId];
+            conversation.People = conversationJson.PeopleId == -1 ? null : Persons[conversationJson.PeopleId];
         }
         MainConversations = new Dictionary<string, List<MainConversation>>();
         foreach(var conversation in conversations)
@@ -370,7 +370,7 @@ public class GlobalData
                 CurrentMP = p.MP,
                 CurrentEnergy = p.Energy,
                 CurrentPlaceString = p.InitPlaceString,
-                EquippedWeapon = Items[p.WeaponId]
+                EquippedWeapon = p.WeaponId == 0 ? null : Items[p.WeaponId]
             };
             Persons.Add(person);
         }

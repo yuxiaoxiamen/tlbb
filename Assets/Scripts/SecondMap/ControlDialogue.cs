@@ -144,17 +144,20 @@ public class ControlDialogue : MonoBehaviour
     {
         ShowOneSide(conversation.IsLeft);
         HideOneSide(conversation.IsLeft);
-        if (conversation.IsLeft)
+        if(conversation.People != null)
         {
-            leftHead.sprite = Resources.Load<Sprite>("head/"+conversation.People.BaseData.HeadPortrait);
-            leftName.text = conversation.People.BaseData.Name;
-            bgTransform.rotation = Quaternion.Euler(0, 0, 0);
-        }
-        else
-        {
-            rightHead.sprite = Resources.Load<Sprite>("head/"+conversation.People.BaseData.HeadPortrait);
-            rightName.text = conversation.People.BaseData.Name;
-            bgTransform.rotation = Quaternion.Euler(0, 180, 0);
+            if (conversation.IsLeft)
+            {
+                leftHead.sprite = Resources.Load<Sprite>("head/" + conversation.People.BaseData.HeadPortrait);
+                leftName.text = conversation.People.BaseData.Name;
+                bgTransform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+            else
+            {
+                rightHead.sprite = Resources.Load<Sprite>("head/" + conversation.People.BaseData.HeadPortrait);
+                rightName.text = conversation.People.BaseData.Name;
+                bgTransform.rotation = Quaternion.Euler(0, 180, 0);
+            }
         }
         StartCoroutine(SetContentText(conversation.Content));
     }
@@ -189,6 +192,7 @@ public class ControlDialogue : MonoBehaviour
 
     IEnumerator SetContentText(string text)
     {
+        text.Replace("{}", GameRunningData.GetRunningData().player.BaseData.Name);
         isOneConversationOver = false;
         for (int i = 1; i < text.Length + 1; ++i)
         {
@@ -236,7 +240,6 @@ public class ControlDialogue : MonoBehaviour
                     {
                         HideDialogue();
                         conversationIndex = 0;
-                        conversations.Clear();
                         finishAction();
                         ControlBottomPanel.IsBanPane = false;
                     }

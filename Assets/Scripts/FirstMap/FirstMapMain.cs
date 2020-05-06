@@ -208,7 +208,7 @@ public class FirstMapMain : MonoBehaviour
     void RandomEvent()
     {
         Random.InitState((int)System.DateTime.Now.Ticks);
-        int x = Random.Range(100, 101);
+        int x = Random.Range(1, 101);
         if (x <= GameConfig.MapEventProbability)
         {
             isInConversation = true;

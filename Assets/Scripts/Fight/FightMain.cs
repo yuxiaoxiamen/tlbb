@@ -22,6 +22,7 @@ public class FightMain : MonoBehaviour
     public static bool isSuccess;
     public static bool isFail;
     private static bool isCreateReward;
+    private bool isStartEndOperation;
     public static FightSource source;
     public static Person contestEnemy;
     public static FightMain instance;
@@ -34,6 +35,7 @@ public class FightMain : MonoBehaviour
         isSuccess = false;
         isCreateReward = false;
         instance = this;
+        isStartEndOperation = false;
 
         GetFriendsAndEnemys();
         SetPersonRowCol(friendQueue, false);
@@ -318,7 +320,11 @@ public class FightMain : MonoBehaviour
         }
         if (isSuccess)
         {
-            StartCoroutine(FightGUI.ShowSuccessPanel());
+            if (!isStartEndOperation)
+            {
+                StartCoroutine(FightGUI.ShowSuccessPanel());
+                isStartEndOperation = true;
+            }
             if(source != FightSource.Contest)
             {
                 CreateReward();
@@ -326,7 +332,11 @@ public class FightMain : MonoBehaviour
         }
         if(isFail)
         {
-            StartCoroutine(FightGUI.ShowFailPanel());
+            if (!isStartEndOperation)
+            {
+                StartCoroutine(FightGUI.ShowFailPanel());
+                isStartEndOperation = true;
+            }
         }
         else
         {

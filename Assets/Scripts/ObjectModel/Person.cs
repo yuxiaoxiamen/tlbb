@@ -47,7 +47,6 @@ public class Person : ICloneable
     public Person()
     {
         IsMoved = false;
-        MoveRank = 3;
         ControlState = BattleControlState.Moving;
         AttackBuffs = new List<AttackBuff>();
         //测试数据

@@ -61,14 +61,13 @@ public class GameDate
             {
                 int addMonth = (addDay + Day) / 30;
                 Day = (addDay + Day) % 30;
-                if(addMonth + Month / 12 == 0)
+                if((addMonth + Month) / 12 == 0)
                 {
                     Month = addMonth + Month;
                 }
                 else
                 {
                     Year = Year + (addMonth + Month) / 12;
-
                 }
             }
         }

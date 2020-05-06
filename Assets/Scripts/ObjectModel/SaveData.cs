@@ -24,7 +24,7 @@ public class SaveData
         RealTime = DateTime.Now.ToString();
         Persons = GlobalData.Persons;
         var rData = GameRunningData.GetRunningData();
-        PlayerEquipWeaponId = rData.player.EquippedWeapon.Id;
+        PlayerEquipWeaponId = rData.player.EquippedWeapon == null ? -1 : rData.player.EquippedWeapon.Id;
         Belongings = new Dictionary<int, int>();
         Teammates = new List<int>();
         foreach(Good good in rData.belongings)
@@ -82,7 +82,7 @@ public class SaveData
         }
         GlobalData.Persons = Persons;
         var player = GlobalData.Persons[0];
-        player.EquippedWeapon = GlobalData.Items[PlayerEquipWeaponId];
+        player.EquippedWeapon = PlayerEquipWeaponId == -1 ? null : GlobalData.Items[PlayerEquipWeaponId];
         GameRunningData.GetRunningData().player = player;
         GameRunningData.GetRunningData().date = Date;
         GameRunningData.GetRunningData().money = Money;

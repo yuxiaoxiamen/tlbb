@@ -242,6 +242,8 @@ public class AttackTool
     {
         Object.Destroy(person.PersonObject);
         FightMain.DestoryHPSplider(person);
+        person.ChangeHP((int)(0.2f * person.BaseData.HP), true);
+        person.ChangeMP((int)(0.2f * person.BaseData.MP), true);
         if (FightMain.friendQueue.Contains(person))
         {
             FightMain.friendQueue.Remove(person);

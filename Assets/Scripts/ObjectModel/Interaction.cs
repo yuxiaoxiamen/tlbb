@@ -108,7 +108,7 @@ public class Interaction
         List<Conversation> conversations = new List<Conversation>();
         Random.InitState((int)System.DateTime.Now.Ticks);
         int x = Random.Range(1, 101);
-        if (x <= 100)
+        if (x <= 10)
         {
             List<GameDate> times = TimeGoSubject.GetTimeSubject().SortMainLine();
             int count = 0;
