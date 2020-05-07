@@ -21,8 +21,8 @@ public class RevokeResponse : MonoBehaviour
                     FightPersonClick.currentPerson.ControlState = BattleControlState.Moving;
                 }
                 
-                AttackTool.ClearAttackRange();
-                AttackTool.ClearAttackDistance();
+                AttackTool.instance.ClearAttackRange();
+                AttackTool.instance.ClearAttackDistance();
                 FightPersonClick.SelectAPerson(FightPersonClick.currentPerson);
                 FightGUI.ShowBattlePane(FightPersonClick.currentPerson);
             }
@@ -50,15 +50,15 @@ public class RevokeResponse : MonoBehaviour
             {
                 FightGUI.HideTab();
                 FightGUI.ShowBattlePane(FightPersonClick.currentPerson);
-                FightMain.ShowHPSplider();
+                FightMain.instance.ShowHPSplider();
             }
             else if (FightPersonClick.currentPerson != null && FightPersonClick.currentPerson.ControlState == BattleControlState.Moved) 
             {
-                FightGridClick.SwitchGridColor(FightMain.gridDataToObject[FightPersonClick.currentPerson.RowCol], FightGridClick.defaultColor);
-                FightGridClick.SwitchGridColor(FightMain.gridDataToObject[FightGridClick.movePreRC], FightGridClick.selectColor);
-                FightMain.positionToPerson.Remove(FightPersonClick.currentPerson.RowCol);
-                FightMain.positionToPerson.Add(FightGridClick.movePreRC, FightPersonClick.currentPerson);
-                FightPersonClick.currentPerson.PersonObject.transform.DOMove(FightMain.gridDataToObject[FightGridClick.movePreRC].transform.position, 0.1f).OnComplete(()=>
+                FightGridClick.SwitchGridColor(FightMain.instance.gridDataToObject[FightPersonClick.currentPerson.RowCol], FightGridClick.defaultColor);
+                FightGridClick.SwitchGridColor(FightMain.instance.gridDataToObject[FightGridClick.movePreRC], FightGridClick.selectColor);
+                FightMain.instance.positionToPerson.Remove(FightPersonClick.currentPerson.RowCol);
+                FightMain.instance.positionToPerson.Add(FightGridClick.movePreRC, FightPersonClick.currentPerson);
+                FightPersonClick.currentPerson.PersonObject.transform.DOMove(FightMain.instance.gridDataToObject[FightGridClick.movePreRC].transform.position, 0.1f).OnComplete(() =>
                 {
                     CameraFollow.cameraFollowInstance.SetCameraFollowTarget(FightPersonClick.currentPerson);
                 });

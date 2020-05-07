@@ -16,7 +16,7 @@ public class FightInnerGongClick : MonoBehaviour
             GongBuffTool.ResumeGongBuff(person);
             person.SelectedInnerGong = person.BaseData.InnerGongs[int.Parse(name)];
             GongBuffTool.EffectValueBuff(person);
-            GongBuffTool.CreateHalo(person, FightMain.friendQueue, FightMain.enemyQueue);
+            GongBuffTool.CreateHalo(person, FightMain.instance.friendQueue, FightMain.instance.enemyQueue);
             FightGUI.HideScrollPane();
             FightGUI.ShowBattlePane(FightPersonClick.currentPerson);
         });

@@ -165,13 +165,13 @@ public class GongBuffTool
 
         if(person.SelectedInnerGong.FixData.Id == 18 && person.SelectedInnerGong.Rank >= 10)
         {
-            if (FightMain.friendQueue.Contains(person))
+            if (FightMain.instance.friendQueue.Contains(person))
             {
-                ResumeEighteenTen(FightMain.friendQueue, FightMain.enemyQueue, false);
+                ResumeEighteenTen(FightMain.instance.friendQueue, FightMain.instance.enemyQueue, false);
             }
             else
             {
-                ResumeEighteenTen(FightMain.enemyQueue, FightMain.friendQueue, true);
+                ResumeEighteenTen(FightMain.instance.enemyQueue, FightMain.instance.friendQueue, true);
             }
         }
 

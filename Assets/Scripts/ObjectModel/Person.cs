@@ -46,11 +46,6 @@ public class Person : ICloneable
 
     public Person()
     {
-        IsMoved = false;
-        ControlState = BattleControlState.Moving;
-        AttackBuffs = new List<AttackBuff>();
-        //测试数据
-        //EquippedWeapon = GlobalData.Items[56];
     }
 
     public void InitAttribute()
@@ -62,6 +57,9 @@ public class Person : ICloneable
         MoveRank = CountMoveRank();
         Accuracy = 100;
         AttackPowerRate = 0;
+        AttackBuffs = new List<AttackBuff>();
+        controlState = BattleControlState.Moving;
+        IsMoved = false;
     }
 
     public int CountCrit()

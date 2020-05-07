@@ -17,13 +17,13 @@ public class GoodDisplay : MonoBehaviour
     static GoodDisplay()
     {
         storeType = "Blacksmith";
-        isBuy = true;
     }
 
     // Start is called before the first frame update
     void Start()
     {
         instance = this;
+        isBuy = true;
     }
 
     public void SetItemList()
@@ -49,7 +49,7 @@ public class GoodDisplay : MonoBehaviour
             oneLineTransform.localScale = Vector3.one;
             for (int j = 0; j < 4; ++j)
             {
-                SetItem(oneLineTransform.GetChild(j).gameObject, goods[i + j]);
+                SetItem(oneLineTransform.GetChild(j).gameObject, goods[4 * i + j]);
             }
         }
 
@@ -91,27 +91,25 @@ public class GoodDisplay : MonoBehaviour
     List<Good> GetGood(string type)
     {
         List<Good> items = new List<Good>();
-        if(!isBuy)
+        var allItems = GameRunningData.GetRunningData().belongings;
+        if (isBuy)
         {
-            items = GameRunningData.GetRunningData().belongings;
+            allItems = GlobalData.Items;
         }
-        else
+        foreach (Good item in allItems)
         {
-            foreach (Good item in GlobalData.Items)
+            if (storeType == "Blacksmith")
             {
-                if(storeType == "Blacksmith")
+                if (item.Type == ItemKind.Knife || item.Type == ItemKind.Sword || item.Type == ItemKind.Rod)
                 {
-                    if(item.Type == ItemKind.Knife || item.Type == ItemKind.Sword || item.Type == ItemKind.Rod)
-                    {
-                        items.Add(item);
-                    }
+                    items.Add(item);
                 }
-                else
+            }
+            else
+            {
+                if (Enum.GetName(typeof(ItemKind), item.Type) == type)
                 {
-                    if (Enum.GetName(typeof(ItemKind), item.Type) == type)
-                    {
-                        items.Add(item);
-                    }
+                    items.Add(item);
                 }
             }
         }

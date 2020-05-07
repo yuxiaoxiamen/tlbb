@@ -26,6 +26,7 @@ public class GameRunningData
         experspance = 1000;
         teammates = new List<Person>();
         belongings = new List<Good>();
+        teammates.Add(GlobalData.Persons[2]);
     }
 
     public static GameRunningData GetRunningData()

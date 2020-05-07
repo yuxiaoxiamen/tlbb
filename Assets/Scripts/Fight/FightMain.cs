@@ -9,19 +9,18 @@ public class FightMain : MonoBehaviour
     public GameObject gridPrefab; //格子的预制体
     public GameObject personPrefab; //人物的预制体
     public float heightGrap = 0.85f;
-    public static Dictionary<GameObject, Vector2Int> gridObjectToData; //通过格子对象获取格子的行列
-    public static Dictionary<Vector2Int, GameObject> gridDataToObject; //通过格子的行列获取格子对象
-    public static Dictionary<Vector2Int, Person> positionToPerson; //通过人物在战斗场景中的位置获取人物实例
-    public static List<Person> friendQueue;//友方战斗的人
-    public static List<Person> enemyQueue;//敌方战斗的人
-    public static int mapWidth = 19; //地图的最大列数
-    public static int mapHeight = 15; //地图的最大行数
-    public static bool isEnemyRound = false;
-    public static readonly float speed = 0.1f;
-    public static int finished = 0;
-    public static bool isSuccess;
-    public static bool isFail;
-    private static bool isCreateReward;
+    public Dictionary<GameObject, Vector2Int> gridObjectToData; //通过格子对象获取格子的行列
+    public Dictionary<Vector2Int, GameObject> gridDataToObject; //通过格子的行列获取格子对象
+    public Dictionary<Vector2Int, Person> positionToPerson; //通过人物在战斗场景中的位置获取人物实例
+    public List<Person> persons;
+    public List<Person> friendQueue;//友方战斗的人
+    public List<Person> enemyQueue;//敌方战斗的人
+    public int mapWidth = 19; //地图的最大列数
+    public int mapHeight = 15; //地图的最大行数
+    public readonly float speed = 0.1f;
+    public int finished = 0;
+    public bool isSuccess;
+    public bool isFail;
     private bool isStartEndOperation;
     public static FightSource source;
     public static Person contestEnemy;
@@ -30,22 +29,23 @@ public class FightMain : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CreateMap();
         isFail = false;
         isSuccess = false;
-        isCreateReward = false;
         instance = this;
         isStartEndOperation = false;
+        finished = 0;
+
+        CreateMap();
 
         GetFriendsAndEnemys();
         SetPersonRowCol(friendQueue, false);
         SetPersonRowCol(enemyQueue, true);
 
         //TestData();
-
+        persons = new List<Person>();
         positionToPerson = new Dictionary<Vector2Int, Person>();
-        SetFightPerson(friendQueue);
-        SetFightPerson(enemyQueue);
+        SetFightPerson(friendQueue, 0);
+        SetFightPerson(enemyQueue, persons.Count);
         RotateEnemys();
         FightPersonClick.SelectAPerson(GameRunningData.GetRunningData().player);
         foreach (Person person in friendQueue)
@@ -68,19 +68,21 @@ public class FightMain : MonoBehaviour
 
     void GetFriendsAndEnemys()
     {
-        if(source == FightSource.MainLine)
+        friendQueue = new List<Person>();
+        enemyQueue = new List<Person>();
+        if (source == FightSource.MainLine)
         {
             var key = GameRunningData.GetRunningData().GetPlaceDateKey();
             var conflict = GlobalData.MainLineConflicts[key];
             if (conflict.IsZ)
             {
-                friendQueue = conflict.ZFriends;
-                enemyQueue = conflict.ZEnemys;
+                friendQueue.AddRange(conflict.ZFriends);
+                enemyQueue.AddRange(conflict.ZEnemys);
             }
             else
             {
-                friendQueue = conflict.FFriends;
-                enemyQueue = conflict.FEnemys;
+                friendQueue.AddRange(conflict.FFriends);
+                enemyQueue.AddRange(conflict.FEnemys);
             }
             var teammates = GameRunningData.GetRunningData().teammates;
             foreach (Person teammate in teammates)
@@ -100,7 +102,7 @@ public class FightMain : MonoBehaviour
         }
         else if(source == FightSource.Contest)
         {
-            friendQueue = new List<Person>();
+            
             enemyQueue = new List<Person>
             {
                 contestEnemy
@@ -108,11 +110,11 @@ public class FightMain : MonoBehaviour
         }
         else if(source == FightSource.Encounter)
         {
-            friendQueue = GameRunningData.GetRunningData().teammates;
-            enemyQueue = new List<Person>();
+            friendQueue.AddRange(GameRunningData.GetRunningData().teammates);
+            
             for(int i = 1; i <= (friendQueue.Count + 1) * 2; ++i)
             {
-                enemyQueue.Add((Person)GlobalData.Persons[2].Clone());
+                enemyQueue.Add((Person)GlobalData.Persons[94].Clone());
             }
         }
         
@@ -171,38 +173,24 @@ public class FightMain : MonoBehaviour
         float height = gridPrefab.GetComponent<Renderer>().bounds.size.z;
         gridObjectToData = new Dictionary<GameObject, Vector2Int>();
         gridDataToObject = new Dictionary<Vector2Int, GameObject>();
-        var os = GetFightObstacles();
+
         for (int j = 0; j < mapHeight; ++j)
         {
             int realMapWidth = j % 2 == 0 ? mapWidth : mapWidth - 1;
             for (int i = 0; i < realMapWidth; ++i)
             {
                 string rc = j + "_" + i;
-                //if (!os.Contains(rc))
-                //{
-                    GameObject newGrid = Instantiate(gridPrefab);
-                    newGrid.name = rc;
-                    newGrid.transform.parent = transform;
-                    float x = j % 2 == 0 ? i : i + 0.5f;
-                    newGrid.transform.position += new Vector3(x * width, 0, -j * height * heightGrap);
-                    var rowAndCol = new Vector2Int(j, i);
-                    gridObjectToData.Add(newGrid, rowAndCol);
-                    gridDataToObject.Add(rowAndCol, newGrid);
-                //}
+                GameObject newGrid = Instantiate(gridPrefab);
+                newGrid.name = rc;
+                newGrid.transform.parent = transform;
+                float x = j % 2 == 0 ? i : i + 0.5f;
+                newGrid.transform.position += new Vector3(x * width, 0, -j * height * heightGrap);
+                var rowAndCol = new Vector2Int(j, i);
+                gridObjectToData.Add(newGrid, rowAndCol);
+                gridDataToObject.Add(rowAndCol, newGrid);
+
             }
         }
-    }
-
-    HashSet<string> GetFightObstacles()
-    {
-        var data = Resources.Load<TextAsset>("jsonData/战斗障碍");
-        string[] splits = data.text.Split(',');
-        HashSet<string> os = new HashSet<string>();
-        foreach(string s in splits)
-        {
-            os.Add(s);
-        }
-        return os;
     }
 
     public static void OneRoundOver(Person person)
@@ -220,8 +208,8 @@ public class FightMain : MonoBehaviour
         FightPersonClick.currentPerson.ControlState = BattleControlState.End;
         FightGridClick.SwitchGridColor(gridDataToObject[FightPersonClick.currentPerson.RowCol], FightGridClick.defaultColor);
         FightGridClick.ClearPathAndRange();
-        AttackTool.ClearAttackRange();
-        AttackTool.ClearAttackDistance();
+        AttackTool.instance.ClearAttackRange();
+        AttackTool.instance.ClearAttackDistance();
         FightGUI.HideBattlePane();
 
         StartCoroutine(SelectNextPerson());
@@ -235,7 +223,7 @@ public class FightMain : MonoBehaviour
             1, 1), 0.5f);
     }
 
-    public static void HideAllHPSplider()
+    public void HideAllHPSplider()
     {
         foreach(Person p in friendQueue)
         {
@@ -249,7 +237,7 @@ public class FightMain : MonoBehaviour
         }
     }
 
-    public static void ShowHPSplider()
+    public void ShowHPSplider()
     {
         foreach (Person p in friendQueue)
         {
@@ -272,13 +260,13 @@ public class FightMain : MonoBehaviour
         }
     }
 
-    public static void DestoryHPSplider(Person person)
+    public void DestoryHPSplider(Person person)
     {
         HPSplider hPSpliderScript = person.PersonObject.GetComponent<HPSplider>();
         Destroy(hPSpliderScript.HPObjectClone);
     }
 
-    void SetFightPerson(List<Person> personQueue)
+    void SetFightPerson(List<Person> personQueue, int i)
     {
         foreach(var person in personQueue)
         {
@@ -287,7 +275,8 @@ public class FightMain : MonoBehaviour
             //GameObject personObject = Resources.Load<GameObject>("persons/" + person.BaseData.Id);
             //personObject.transform.position = personPosition;
             //personObject.transform.localRotation = Quaternion.identity;
-            personObject.name = person.BaseData.Id + "";
+            personObject.name = (i++) + "";
+            persons.Add(person);
             person.PersonObject = personObject;
             positionToPerson.Add(person.RowCol, person);
             SetPersonHPSplider(person);
@@ -296,7 +285,7 @@ public class FightMain : MonoBehaviour
         }
     }
 
-    public static HashSet<Vector2Int> GetGrids()
+    public HashSet<Vector2Int> GetGrids()
     {
         HashSet<Vector2Int> grids = new HashSet<Vector2Int>();
         foreach (var key in gridDataToObject.Keys)
@@ -309,33 +298,26 @@ public class FightMain : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isFail || isSuccess)
-        {
-            foreach(Person person in friendQueue)
-            {
-                person.PersonObject.GetComponent<FightPersonClick>().enabled = false;
-            }
-            FightGUI.HideBattlePane();
-            FightGridClick.ClearPathAndRange();
-        }
         if (isSuccess)
         {
             if (!isStartEndOperation)
             {
-                StartCoroutine(FightGUI.ShowSuccessPanel());
                 isStartEndOperation = true;
-            }
-            if(source != FightSource.Contest)
-            {
-                CreateReward();
+                StopGame();
+                StartCoroutine(FightGUI.ShowSuccessPanel());
+                if (source != FightSource.Contest)
+                {
+                    CreateReward();
+                }
             }
         }
         if(isFail)
         {
             if (!isStartEndOperation)
             {
-                StartCoroutine(FightGUI.ShowFailPanel());
                 isStartEndOperation = true;
+                StopGame();
+                StartCoroutine(FightGUI.ShowFailPanel());
             }
         }
         else
@@ -347,6 +329,16 @@ public class FightMain : MonoBehaviour
                 StartCoroutine(EnemyRound());
             }
         }
+    }
+
+    void StopGame()
+    {
+        foreach (Person person in friendQueue)
+        {
+            person.PersonObject.GetComponent<FightPersonClick>().enabled = false;
+        }
+        FightGUI.HideBattlePane();
+        FightGridClick.ClearPathAndRange();
     }
 
     void ResumePersonState()
@@ -367,7 +359,7 @@ public class FightMain : MonoBehaviour
         FightPersonClick.currentPerson = null;
     }
 
-    public static void CountPlayerOver()
+    public void CountPlayerOver()
     {
         ++finished;
     }
@@ -376,7 +368,6 @@ public class FightMain : MonoBehaviour
     {
         foreach (Person enemy in enemyQueue)
         {
-            yield return new WaitForSeconds(0.4f);
             CameraFollow.cameraFollowInstance.SetCameraFollowTarget(enemy);
             FightAI.AIEnd = false;
             FightAI.NPCAI(enemy, friendQueue);
@@ -386,9 +377,9 @@ public class FightMain : MonoBehaviour
         StartCoroutine(SelectNextPerson());
     }
 
-    public static IEnumerator SelectNextPerson()
+    public IEnumerator SelectNextPerson()
     {
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.2f);
         foreach (var person in friendQueue)
         {
             if (person.ControlState != BattleControlState.End)
@@ -401,73 +392,64 @@ public class FightMain : MonoBehaviour
 
     public static void CreateReward()
     {
-        if (!isCreateReward)
+        Random.InitState((int)System.DateTime.Now.Ticks);
+        int x = Random.Range(1, 101);
+        List<Good> rewards = new List<Good>();
+        if (x > 50)
         {
-            isCreateReward = true;
-            Random.InitState((int)System.DateTime.Now.Ticks);
-            int x = Random.Range(1, 101);
-            List<Good> rewards = new List<Good>();
-            if (x > 50)
+            int i = Random.Range(0, GameConfig.RewardMaxIndex + 1);
+            rewards.Add(GlobalData.Items[i]);
+            x = Random.Range(1, 101);
+            if (x >= 30)
             {
-                int i = Random.Range(0, GameConfig.RewardMaxIndex + 1);
+                i = Random.Range(0, GameConfig.RewardMaxIndex + 1);
                 rewards.Add(GlobalData.Items[i]);
-                x = Random.Range(1, 101);
-                if (x >= 30)
-                {
-                    i = Random.Range(0, GameConfig.RewardMaxIndex + 1);
-                    rewards.Add(GlobalData.Items[i]);
-                }
-                else
-                {
-                    i = Random.Range(0, GameConfig.RewardMaxIndex + 1);
-                    rewards.Add(GlobalData.Items[i]);
-                }
             }
-            foreach(Good reward in rewards)
+            else
             {
-                GameRunningData.GetRunningData().AddItem(reward);
+                i = Random.Range(0, GameConfig.RewardMaxIndex + 1);
+                rewards.Add(GlobalData.Items[i]);
             }
-            int money = Random.Range(100, 201);
-            int experspance = 5 + Random.Range(-2, 3);
-            if(source == FightSource.MainLine)
-            {
-                experspance = 20 + Random.Range(-5, 5);
-            }
-            GameRunningData.GetRunningData().experspance += experspance;
-            GameRunningData.GetRunningData().money += money;
-            FightGUI.SetSettlement(rewards, experspance, money);
         }
+        foreach (Good reward in rewards)
+        {
+            GameRunningData.GetRunningData().AddItem(reward);
+        }
+        int money = Random.Range(100, 201);
+        int experspance = 5 + Random.Range(-2, 3);
+        if (source == FightSource.MainLine)
+        {
+            experspance = 20 + Random.Range(-5, 5);
+        }
+        GameRunningData.GetRunningData().experspance += experspance;
+        GameRunningData.GetRunningData().money += money;
+        FightGUI.SetSettlement(rewards, experspance, money);
     }
 
     void TestData()
     {
-        source = FightSource.Encounter;
+        //source = FightSource.Encounter;
         friendQueue = new List<Person>();
         enemyQueue = new List<Person>();
         Person player = GameRunningData.GetRunningData().player;
         player.RowCol = new Vector2Int(12, 3);
-        Person friend1 = (Person)GlobalData.Persons[13];
+        Person friend1 = GlobalData.Persons[13];
         friend1.RowCol = new Vector2Int(12, 6);
-        Person enemy1 = GlobalData.Persons[15];
-        enemy1.RowCol = new Vector2Int(0, 6);
+        Person enemy1 = GlobalData.Persons[92];
+        enemy1.RowCol = new Vector2Int(9, 3);
         Person enemy2 = GlobalData.Persons[3];
         enemy2.RowCol = new Vector2Int(0, 9);
 
         player.CurrentHP = player.BaseData.HP = 10000;
-        friend1.CurrentHP = friend1.BaseData.HP = 10000;
-        enemy1.CurrentHP = enemy1.BaseData.HP = 10000;
-        enemy2.CurrentHP = enemy2.BaseData.HP = 10000;
-
-        foreach(InnerGong gong in player.BaseData.InnerGongs)
-        {
-            gong.Rank = 10;
-        }
+        friend1.CurrentHP = friend1.BaseData.HP = 1000;
+        enemy1.CurrentHP = enemy1.BaseData.HP = 100;
+        enemy2.CurrentHP = enemy2.BaseData.HP = 1000;
 
         //player.SelectedInnerGong = player.BaseData.InnerGongs[1];
 
         friendQueue.Add(player);
         
-        friendQueue.Add(friend1);
+        //friendQueue.Add(friend1);
         enemyQueue.Add(enemy1);
         //enemyQueue.Add(enemy2);
     }

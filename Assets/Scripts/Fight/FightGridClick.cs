@@ -12,20 +12,27 @@ public class FightGridClick : MonoBehaviour
     public static Color attackRangeColor;
     public static Color treatColor;
     public static float defaultA = 1.0f;
-    private static List<Vector2Int> movePath = new List<Vector2Int>();
-    public static HashSet<Vector2Int> moveRange = new HashSet<Vector2Int>();
+    private static List<Vector2Int> movePath;
+    public static HashSet<Vector2Int> moveRange;
     public static Vector2Int movePreRC;
     public static Quaternion movePreQuaternion;
+    public static bool isInit;
 
     // Start is called before the first frame update
     void Awake()
     {
         defaultColor = gameObject.GetComponent<Renderer>().material.color;
         SwitchGridColor(gameObject, defaultColor);
-        SetColor();
+        if (!isInit)
+        {
+            movePath = new List<Vector2Int>();
+            moveRange = new HashSet<Vector2Int>();
+            ClearPathAndRange();
+            isInit = true;
+        }
     }
 
-    private void SetColor()
+    static FightGridClick()
     {
         selectColor = new Color(0, 1, 0, defaultA);
         pathColor = new Color(1, 0, 1, defaultA);
@@ -33,6 +40,7 @@ public class FightGridClick : MonoBehaviour
         attackDistanceColor = new Color(147 / 255f, 112 / 255f, 219 / 255f, defaultA);
         attackRangeColor = new Color(1, 0, 0, defaultA);
         treatColor = new Color(1, 165 / 255f, 0, defaultA);
+        isInit = false;
     }
 
     private void OnMouseDown()
@@ -40,9 +48,9 @@ public class FightGridClick : MonoBehaviour
         if (!GUIMouseHandle.isMouseOver)
         {
             if (FightPersonClick.currentPerson != null && FightPersonClick.currentPerson.ControlState == BattleControlState.Attacking
-            && AttackTool.attackRange.Count > 0)
+            && AttackTool.instance.attackRange.Count > 0)
             {
-                if (AttackTool.AttackEnemys(FightPersonClick.currentPerson, FightMain.enemyQueue))
+                if (AttackTool.instance.AttackEnemys(FightPersonClick.currentPerson, FightMain.instance.enemyQueue))
                 {
                     FightMain.RotatePerson(FightPersonClick.currentPerson,
                         PersonMoveTool.GetAngle(
@@ -52,17 +60,16 @@ public class FightGridClick : MonoBehaviour
             }
             else if (movePath.Count != 0) //当前人物可移动的格子
             {
-                SwitchGridColor(FightMain.gridDataToObject[FightPersonClick.currentPerson.RowCol], defaultColor);
+                SwitchGridColor(FightMain.instance.gridDataToObject[FightPersonClick.currentPerson.RowCol], defaultColor);
 
                 ChangeMoveRangeColor(FightPersonClick.currentPerson, defaultColor);
                 FightPersonClick.currentPerson.ControlState = BattleControlState.Moved;
                 FightPersonClick.currentPerson.IsMoved = true;
 
-                FightMain.positionToPerson.Remove(FightPersonClick.currentPerson.RowCol);
-                FightMain.positionToPerson.Add(FightMain.gridObjectToData[gameObject], FightPersonClick.currentPerson);
+                
                 movePreRC = FightPersonClick.currentPerson.RowCol;
                 movePreQuaternion = FightPersonClick.currentPerson.PersonObject.transform.rotation;
-                PersonMoveTool.MovePerson(movePath, FightPersonClick.currentPerson, FightMain.speed, FightGUI.ShowBattlePane);
+                PersonMoveTool.MovePerson(movePath, FightPersonClick.currentPerson, FightMain.instance.speed, FightGUI.ShowBattlePane);
                 SwitchGridColor(gameObject, selectColor);
                 ChangePathColor(defaultColor);
                 movePath.Clear();
@@ -75,16 +82,16 @@ public class FightGridClick : MonoBehaviour
     private void OnMouseEnter()
     {
         if (FightPersonClick.currentPerson != null && FightPersonClick.currentPerson.ControlState == BattleControlState.Attacking &&
-            AttackTool.attackDistance.Contains(gameObject))
+            AttackTool.instance.attackDistance.Contains(gameObject))
         {
-            AttackTool.CountAttackRange(gameObject, FightPersonClick.currentPerson, FightMain.friendQueue);
-            AttackTool.ShowAttackRange();
+            AttackTool.instance.CountAttackRange(gameObject, FightPersonClick.currentPerson, FightMain.instance.friendQueue);
+            AttackTool.instance.ShowAttackRange();
         }
         if (FightPersonClick.currentPerson != null && FightPersonClick.currentPerson.ControlState == BattleControlState.Moving &&
-            moveRange.Contains(FightMain.gridObjectToData[gameObject]))
+            moveRange.Contains(FightMain.instance.gridObjectToData[gameObject]))
         {
             movePath = PersonMoveTool.FindPath(FightPersonClick.currentPerson.RowCol, 
-                FightMain.gridObjectToData[gameObject], FightMain.GetGrids(), PersonMoveTool.GetObstacles(), true);
+                FightMain.instance.gridObjectToData[gameObject], FightMain.instance.GetGrids(), PersonMoveTool.GetObstacles(), true);
             ChangePathColor(pathColor);
         }
     }
@@ -92,9 +99,9 @@ public class FightGridClick : MonoBehaviour
     private void OnMouseExit()
     {
         if (FightPersonClick.currentPerson != null && FightPersonClick.currentPerson.ControlState == BattleControlState.Attacking &&
-            AttackTool.attackDistance.Contains(gameObject))
+            AttackTool.instance.attackDistance.Contains(gameObject))
         {
-            AttackTool.ClearAttackRange();
+            AttackTool.instance.ClearAttackRange();
         }
         if (FightPersonClick.currentPerson != null && FightPersonClick.currentPerson.ControlState == BattleControlState.Moving)
         {
@@ -119,7 +126,7 @@ public class FightGridClick : MonoBehaviour
             {
                 continue;
             }
-            var gridObject = FightMain.gridDataToObject[point];
+            var gridObject = FightMain.instance.gridDataToObject[point];
             SwitchGridColor(gridObject, color);
         }
     }
@@ -128,7 +135,7 @@ public class FightGridClick : MonoBehaviour
     {
         foreach (var point in movePath)
         {
-            var gridObject = FightMain.gridDataToObject[point];
+            var gridObject = FightMain.instance.gridDataToObject[point];
             SwitchGridColor(gridObject, color);
         }
     }

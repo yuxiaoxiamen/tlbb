@@ -8,9 +8,9 @@ public class TreatTool : MonoBehaviour
     {
         FightGridClick.ClearPathAndRange();
         person.ControlState = BattleControlState.Treating;
-        foreach (Person friend in FightMain.friendQueue)
+        foreach (Person friend in FightMain.instance.friendQueue)
         {
-            GameObject gridObject = FightMain.gridDataToObject[friend.RowCol];
+            GameObject gridObject = FightMain.instance.gridDataToObject[friend.RowCol];
             FightGridClick.SwitchGridColor(gridObject, FightGridClick.treatColor);
         }
         FightGUI.HideBattlePane();
@@ -18,9 +18,9 @@ public class TreatTool : MonoBehaviour
 
     public static void ResumeGrid()
     {
-        foreach (Person friend in FightMain.friendQueue)
+        foreach (Person friend in FightMain.instance.friendQueue)
         {
-            GameObject gridObject = FightMain.gridDataToObject[friend.RowCol];
+            GameObject gridObject = FightMain.instance.gridDataToObject[friend.RowCol];
             FightGridClick.SwitchGridColor(gridObject, FightGridClick.defaultColor);
         }
     }

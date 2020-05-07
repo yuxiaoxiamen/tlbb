@@ -18,7 +18,7 @@ public class FightPersonClick : MonoBehaviour
     {
         if (isMouseInPerson &&Input.GetMouseButtonDown(1))
         {
-            Person p = GlobalData.Persons[int.Parse(gameObject.name)];
+            Person p = FightMain.instance.persons[int.Parse(gameObject.name)];
             FightGUI.SetInfoPanel(p);
         }
 
@@ -33,11 +33,11 @@ public class FightPersonClick : MonoBehaviour
     {
         if (!GUIMouseHandle.isMouseOver)
         {
-            Person p = GlobalData.Persons[int.Parse(gameObject.name)];
+            Person p = FightMain.instance.persons[int.Parse(gameObject.name)];
             if (currentPerson != null && currentPerson.ControlState == BattleControlState.Attacking
-                && AttackTool.attackRange.Count > 0)
+                && AttackTool.instance.attackRange.Count > 0)
             {
-                if (AttackTool.AttackEnemys(currentPerson, FightMain.enemyQueue))
+                if (AttackTool.instance.AttackEnemys(currentPerson, FightMain.instance.enemyQueue))
                 {
                     FightMain.RotatePerson(currentPerson,
                         PersonMoveTool.GetAngle(
@@ -63,29 +63,29 @@ public class FightPersonClick : MonoBehaviour
     private void OnMouseEnter()
     {
         isMouseInPerson = true;
-        GameObject gridObject = FightMain.gridDataToObject[GlobalData.Persons[int.Parse(gameObject.name)].RowCol];
+        GameObject gridObject = FightMain.instance.gridDataToObject[FightMain.instance.persons[int.Parse(gameObject.name)].RowCol];
         if (currentPerson != null && currentPerson.ControlState == BattleControlState.Attacking &&
-            AttackTool.attackDistance.Contains(gridObject))
+            AttackTool.instance.attackDistance.Contains(gridObject))
         {
-            AttackTool.CountAttackRange(gridObject, currentPerson, FightMain.friendQueue);
-            AttackTool.ShowAttackRange();
+            AttackTool.instance.CountAttackRange(gridObject, currentPerson, FightMain.instance.friendQueue);
+            AttackTool.instance.ShowAttackRange();
         }
     }
 
     private void OnMouseExit()
     {
         isMouseInPerson = false;
-        GameObject gridObject = FightMain.gridDataToObject[GlobalData.Persons[int.Parse(gameObject.name)].RowCol];
+        GameObject gridObject = FightMain.instance.gridDataToObject[FightMain.instance.persons[int.Parse(gameObject.name)].RowCol];
         if (currentPerson != null && currentPerson.ControlState == BattleControlState.Attacking &&
-            AttackTool.attackDistance.Contains(gridObject))
+            AttackTool.instance.attackDistance.Contains(gridObject))
         {
-            AttackTool.ClearAttackRange();
+            AttackTool.instance.ClearAttackRange();
         }
     }
 
     public static void SelectAPerson(Person p)
     {
-        if (FightMain.friendQueue.Contains(p))
+        if (FightMain.instance.friendQueue.Contains(p))
         {
             if (p.ControlState == BattleControlState.Moving)
             {
@@ -95,12 +95,12 @@ public class FightPersonClick : MonoBehaviour
 
                 if (prePerson != null)
                 {
-                    FightGridClick.SwitchGridColor(FightMain.gridDataToObject[prePerson.RowCol], FightGridClick.defaultColor);
+                    FightGridClick.SwitchGridColor(FightMain.instance.gridDataToObject[prePerson.RowCol], FightGridClick.defaultColor);
                     FightGridClick.ChangeMoveRangeColor(prePerson, FightGridClick.defaultColor);
                     if (prePerson.ControlState == BattleControlState.Moved)
                     {
                         prePerson.ControlState = BattleControlState.End;
-                        FightMain.CountPlayerOver();
+                        FightMain.instance.CountPlayerOver();
                     }
                 }
                 FightGridClick.moveRange = PersonMoveTool.GenerateMoveRange(currentPerson.RowCol, currentPerson.MoveRank);
@@ -114,7 +114,7 @@ public class FightPersonClick : MonoBehaviour
             
             if(p.ControlState != BattleControlState.End)
             {
-                FightGridClick.SwitchGridColor(FightMain.gridDataToObject[currentPerson.RowCol], FightGridClick.selectColor);
+                FightGridClick.SwitchGridColor(FightMain.instance.gridDataToObject[currentPerson.RowCol], FightGridClick.selectColor);
             }
         }
     }

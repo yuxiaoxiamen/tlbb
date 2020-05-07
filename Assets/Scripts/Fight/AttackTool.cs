@@ -2,12 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackTool
+public class AttackTool : MonoBehaviour
 {
-    public static HashSet<GameObject> attackDistance = new HashSet<GameObject>();
-    public static HashSet<GameObject> attackRange = new HashSet<GameObject>();
+    public HashSet<GameObject> attackDistance = new HashSet<GameObject>();
+    public HashSet<GameObject> attackRange = new HashSet<GameObject>();
+    public static AttackTool instance;
 
-    public static void CountAttackDistance(Person person, List<Person> friends)
+    private void Start()
+    {
+        instance = this;
+        attackRange = new HashSet<GameObject>();
+        attackRange = new HashSet<GameObject>();
+    }
+
+    public void CountAttackDistance(Person person, List<Person> friends)
     {
         FightGridClick.ClearPathAndRange();
         HashSet<Vector2Int> distanceRange = new HashSet<Vector2Int>();
@@ -24,9 +32,9 @@ public class AttackTool
                 attackRange = RangeRemoveFriend(distanceRange, friends);
                 attackDistance.Clear();
                 HashSet<Person> canAttackEnemys = new HashSet<Person>();
-                foreach (Person enemy in FightMain.enemyQueue)
+                foreach (Person enemy in FightMain.instance.enemyQueue)
                 {
-                    GameObject gridObject = FightMain.gridDataToObject[enemy.RowCol];
+                    GameObject gridObject = FightMain.instance.gridDataToObject[enemy.RowCol];
                     if (attackRange.Contains(gridObject))
                     {
                         canAttackEnemys.Add(enemy);
@@ -54,7 +62,7 @@ public class AttackTool
         }
     }
 
-    public static void PlayAttackMusic(Person person)
+    public void PlayAttackMusic(Person person)
     {
         switch (person.SelectedAttackStyle.FixData.WeaponKind)
         {
@@ -79,12 +87,12 @@ public class AttackTool
         }
     }
 
-    public static bool AttackEnemys(Person attacker, List<Person> enemys)
+    public bool AttackEnemys(Person attacker, List<Person> enemys)
     {
         HashSet<Person> canAttackEnemys = new HashSet<Person>();
         foreach (Person enemy in enemys)
         {
-            GameObject gridObject = FightMain.gridDataToObject[enemy.RowCol];
+            GameObject gridObject = FightMain.instance.gridDataToObject[enemy.RowCol];
             if (attackRange.Contains(gridObject))
             {
                 canAttackEnemys.Add(enemy);
@@ -93,7 +101,7 @@ public class AttackTool
         return AttackAction(attacker, canAttackEnemys);
     }
 
-    private static bool AttackAction(Person attacker, HashSet<Person> canAttackEnemys)
+    private bool AttackAction(Person attacker, HashSet<Person> canAttackEnemys)
     {
         if (canAttackEnemys.Count > 0)
         {
@@ -240,29 +248,30 @@ public class AttackTool
 
     private static void PersonDead(Person person)
     {
-        Object.Destroy(person.PersonObject);
-        FightMain.DestoryHPSplider(person);
+        person.PersonObject.SetActive(false);
+        FightMain.instance.DestoryHPSplider(person);
+        FightMain.instance.positionToPerson.Remove(person.RowCol);
         person.ChangeHP((int)(0.2f * person.BaseData.HP), true);
         person.ChangeMP((int)(0.2f * person.BaseData.MP), true);
-        if (FightMain.friendQueue.Contains(person))
+        if (FightMain.instance.friendQueue.Contains(person))
         {
-            FightMain.friendQueue.Remove(person);
-            if(FightMain.friendQueue.Count == 0)
+            FightMain.instance.friendQueue.Remove(person);
+            if(FightMain.instance.friendQueue.Count == 0)
             {
-                FightMain.isFail = true;
+                FightMain.instance.isFail = true;
             }
         }
-        if (FightMain.enemyQueue.Contains(person))
+        if (FightMain.instance.enemyQueue.Contains(person))
         {
-            FightMain.enemyQueue.Remove(person);
-            if (FightMain.enemyQueue.Count == 0)
+            FightMain.instance.enemyQueue.Remove(person);
+            if (FightMain.instance.enemyQueue.Count == 0)
             {
-                FightMain.isSuccess = true;
+                FightMain.instance.isSuccess = true;
             }
         }
     }
 
-    public static void ShowAttackRange()
+    public void ShowAttackRange()
     {
         foreach (var grid in attackRange)
         {
@@ -270,11 +279,11 @@ public class AttackTool
         }
     }
 
-    public static void CountAttackRange(GameObject gridObject, Person person, List<Person> friends)
+    public void CountAttackRange(GameObject gridObject, Person person, List<Person> friends)
     {
         if (person.SelectedAttackStyle.FixData.AttackKind == AttackStyleKind.Line)
         {
-            var lineRange = CreateLineRange(person.RowCol, FightMain.gridObjectToData[gridObject]);
+            var lineRange = CreateLineRange(person.RowCol, FightMain.instance.gridObjectToData[gridObject]);
             attackRange = RangeRemoveFriend(lineRange, friends);
             var realRange = new HashSet<GameObject>();
             foreach (var rc in attackRange)
@@ -290,7 +299,7 @@ public class AttackTool
         else if (person.SelectedAttackStyle.FixData.AttackKind == AttackStyleKind.Remote)
         {
             HashSet<Vector2Int> remoteRange =
-                PersonMoveTool.CreateRange(FightMain.gridObjectToData[gridObject], 
+                PersonMoveTool.CreateRange(FightMain.instance.gridObjectToData[gridObject], 
                 person.SelectedAttackStyle.FixData.AttackRank);
             attackRange = RangeRemoveFriend(remoteRange, friends);
             attackRange.Add(gridObject);
@@ -298,7 +307,7 @@ public class AttackTool
         else
         {
             HashSet<Vector2Int> range1 =
-                PersonMoveTool.CreateRange(FightMain.gridObjectToData[gridObject], 1);
+                PersonMoveTool.CreateRange(FightMain.instance.gridObjectToData[gridObject], 1);
             HashSet<Vector2Int> range2 = PersonMoveTool.CreateRange(person.RowCol, 1);
             HashSet<Vector2Int> range = new HashSet<Vector2Int>();
             foreach (var rc in range1)
@@ -313,7 +322,7 @@ public class AttackTool
         }
     }
 
-    public static void ClearAttackDistance()
+    public void ClearAttackDistance()
     {
         if(attackDistance != null)
         {
@@ -325,7 +334,7 @@ public class AttackTool
         }
     }
 
-    public static void ClearAttackRange()
+    public void ClearAttackRange()
     {
         if(attackRange != null)
         {
@@ -345,7 +354,7 @@ public class AttackTool
         }
     }
 
-    static HashSet<GameObject> RangeRemoveFriend(HashSet<Vector2Int> gridRange, List<Person> friends)
+    HashSet<GameObject> RangeRemoveFriend(HashSet<Vector2Int> gridRange, List<Person> friends)
     {
         HashSet<Vector2Int> obstacles = new HashSet<Vector2Int>();
         var range = new HashSet<GameObject>();
@@ -357,13 +366,13 @@ public class AttackTool
         {
             if (!obstacles.Contains(rc))
             {
-                range.Add(FightMain.gridDataToObject[rc]);
+                range.Add(FightMain.instance.gridDataToObject[rc]);
             }
         }
         return range;
     }
 
-    public static void ShowAttackDistance()
+    public void ShowAttackDistance()
     {
         foreach (var grid in attackDistance)
         {
@@ -371,7 +380,7 @@ public class AttackTool
         }
     }
 
-    static HashSet<Vector2Int> CreateLineRange(Vector2Int startRc, Vector2Int endRc)
+    HashSet<Vector2Int> CreateLineRange(Vector2Int startRc, Vector2Int endRc)
     {
         HashSet<Vector2Int> gridRanges = new HashSet<Vector2Int>();
         if (startRc.x % 2 == 0)//偶
@@ -381,7 +390,7 @@ public class AttackTool
                 if (startRc.y <= endRc.y)//右
                 {
                     Vector2Int current = startRc;
-                    while (current.x >= 0 && current.x < FightMain.mapHeight && current.y >= 0 && current.y < FightMain.mapWidth)
+                    while (current.x >= 0 && current.x < FightMain.instance.mapHeight && current.y >= 0 && current.y < FightMain.instance.mapWidth)
                     {
                         gridRanges.Add(current);
                         current.x = current.x - 2;
@@ -389,7 +398,7 @@ public class AttackTool
                     }
                     current.x = startRc.x-1;
                     current.y = startRc.y;
-                    while (current.x >= 0 && current.x < FightMain.mapHeight && current.y >= 0 && current.y < FightMain.mapWidth)
+                    while (current.x >= 0 && current.x < FightMain.instance.mapHeight && current.y >= 0 && current.y < FightMain.instance.mapWidth)
                     {
                         gridRanges.Add(current);
                         current.x = current.x - 2;
@@ -399,7 +408,7 @@ public class AttackTool
                 else//左
                 {
                     Vector2Int current = startRc;
-                    while (current.x >= 0 && current.x < FightMain.mapHeight && current.y >= 0 && current.y < FightMain.mapWidth)
+                    while (current.x >= 0 && current.x < FightMain.instance.mapHeight && current.y >= 0 && current.y < FightMain.instance.mapWidth)
                     {
                         gridRanges.Add(current);
                         current.x = current.x - 2;
@@ -407,7 +416,7 @@ public class AttackTool
                     }
                     current.x = startRc.x-1;
                     current.y = startRc.y - 1;
-                    while (current.x >= 0 && current.x < FightMain.mapHeight && current.y >= 0 && current.y < FightMain.mapWidth)
+                    while (current.x >= 0 && current.x < FightMain.instance.mapHeight && current.y >= 0 && current.y < FightMain.instance.mapWidth)
                     {
                         gridRanges.Add(current);
                         current.x = current.x - 2;
@@ -421,7 +430,7 @@ public class AttackTool
                 {
                     Vector2Int current = startRc;
    
-                    while (current.x >= 0 && current.x < FightMain.mapHeight && current.y >= 0 && current.y < FightMain.mapWidth)
+                    while (current.x >= 0 && current.x < FightMain.instance.mapHeight && current.y >= 0 && current.y < FightMain.instance.mapWidth)
                     {
                         gridRanges.Add(current);
                         current.x = current.x + 2 ;
@@ -429,7 +438,7 @@ public class AttackTool
                     }
                     current.x = startRc.x + 1;
                     current.y = startRc.y;
-                    while (current.x >= 0 && current.x < FightMain.mapHeight && current.y >= 0 && current.y < FightMain.mapWidth)
+                    while (current.x >= 0 && current.x < FightMain.instance.mapHeight && current.y >= 0 && current.y < FightMain.instance.mapWidth)
                     {
                         gridRanges.Add(current);
                         current.x = current.x +2;
@@ -439,7 +448,7 @@ public class AttackTool
                 else//左
                 {
                     Vector2Int current = startRc;
-                    while (current.x >= 0 && current.x < FightMain.mapHeight && current.y >= 0 && current.y < FightMain.mapWidth)
+                    while (current.x >= 0 && current.x < FightMain.instance.mapHeight && current.y >= 0 && current.y < FightMain.instance.mapWidth)
                     {
                         gridRanges.Add(current);
                         current.x = current.x + 2;
@@ -448,7 +457,7 @@ public class AttackTool
                     }
                     current.x = startRc.x + 1;
                     current.y = startRc.y - 1;
-                    while (current.x >= 0 && current.x < FightMain.mapHeight && current.y >= 0 && current.y < FightMain.mapWidth)
+                    while (current.x >= 0 && current.x < FightMain.instance.mapHeight && current.y >= 0 && current.y < FightMain.instance.mapWidth)
                     {
                         gridRanges.Add(current);
                         current.x = current.x +2;
@@ -467,7 +476,7 @@ public class AttackTool
                 }
                 else
                 {
-                    for (int i = startRc.y + 1; i < FightMain.mapWidth; ++i)
+                    for (int i = startRc.y + 1; i < FightMain.instance.mapWidth; ++i)
                     {
                         gridRanges.Add(new Vector2Int(startRc.x, i));
                     }
@@ -481,7 +490,7 @@ public class AttackTool
                 if (startRc.y < endRc.y)//右
                 {
                     Vector2Int current = startRc;
-                    while (current.x >= 0 && current.x < FightMain.mapHeight && current.y >= 0 && current.y < FightMain.mapWidth - 1)
+                    while (current.x >= 0 && current.x < FightMain.instance.mapHeight && current.y >= 0 && current.y < FightMain.instance.mapWidth - 1)
                     {
                         gridRanges.Add(current);
                         current.x = current.x - 2;
@@ -489,7 +498,7 @@ public class AttackTool
                     }
                     current.x = startRc.x - 1;
                     current.y = startRc.y + 1;
-                    while (current.x >= 0 && current.x < FightMain.mapHeight && current.y >= 0 && current.y < FightMain.mapWidth - 1)
+                    while (current.x >= 0 && current.x < FightMain.instance.mapHeight && current.y >= 0 && current.y < FightMain.instance.mapWidth - 1)
                     {
                         gridRanges.Add(current);
                         current.x = current.x - 2;
@@ -499,7 +508,7 @@ public class AttackTool
                 else//左
                 {
                     Vector2Int current = startRc;
-                    while (current.x >= 0 && current.x < FightMain.mapHeight && current.y >= 0 && current.y < FightMain.mapWidth - 1)
+                    while (current.x >= 0 && current.x < FightMain.instance.mapHeight && current.y >= 0 && current.y < FightMain.instance.mapWidth - 1)
                     {
                         gridRanges.Add(current);
                         current.x = current.x - 2;
@@ -507,7 +516,7 @@ public class AttackTool
                     }
                     current.x = startRc.x - 1;
                     current.y = startRc.y;
-                    while (current.x >= 0 && current.x < FightMain.mapHeight && current.y >= 0 && current.y < FightMain.mapWidth - 1)
+                    while (current.x >= 0 && current.x < FightMain.instance.mapHeight && current.y >= 0 && current.y < FightMain.instance.mapWidth - 1)
                     {
                         gridRanges.Add(current);
                         current.x = current.x - 2;
@@ -520,7 +529,7 @@ public class AttackTool
                 if (startRc.y < endRc.y)//右
                 {
                     Vector2Int current = startRc;
-                    while (current.x >= 0 && current.x < FightMain.mapHeight && current.y >= 0 && current.y < FightMain.mapWidth - 1)
+                    while (current.x >= 0 && current.x < FightMain.instance.mapHeight && current.y >= 0 && current.y < FightMain.instance.mapWidth - 1)
                     {
                         gridRanges.Add(current);
                         current.x = current.x + 2;
@@ -528,7 +537,7 @@ public class AttackTool
                     }
                     current.x = startRc.x + 1;
                     current.y = startRc.y + 1;
-                    while (current.x >= 0 && current.x < FightMain.mapHeight && current.y >= 0 && current.y < FightMain.mapWidth - 1)
+                    while (current.x >= 0 && current.x < FightMain.instance.mapHeight && current.y >= 0 && current.y < FightMain.instance.mapWidth - 1)
                     {
                         gridRanges.Add(current);
                         current.x = current.x +2;
@@ -538,7 +547,7 @@ public class AttackTool
                 else//左
                 {
                     Vector2Int current = startRc;
-                    while (current.x >= 0 && current.x < FightMain.mapHeight && current.y >= 0 && current.y < FightMain.mapWidth - 1)
+                    while (current.x >= 0 && current.x < FightMain.instance.mapHeight && current.y >= 0 && current.y < FightMain.instance.mapWidth - 1)
                     {
                         gridRanges.Add(current);
                         current.x = current.x + 2;
@@ -547,7 +556,7 @@ public class AttackTool
                     }
                     current.x = startRc.x + 1;
                     current.y = startRc.y;
-                    while (current.x >= 0 && current.x < FightMain.mapHeight && current.y >= 0 && current.y < FightMain.mapWidth - 1)
+                    while (current.x >= 0 && current.x < FightMain.instance.mapHeight && current.y >= 0 && current.y < FightMain.instance.mapWidth - 1)
                     {
                         gridRanges.Add(current);
                         current.x = current.x +2;
@@ -566,7 +575,7 @@ public class AttackTool
                 }
                 else
                 {
-                    for (int i = startRc.y + 1; i < FightMain.mapWidth - 1; ++i)
+                    for (int i = startRc.y + 1; i < FightMain.instance.mapWidth - 1; ++i)
                     {
                         gridRanges.Add(new Vector2Int(startRc.x, i));
                     }

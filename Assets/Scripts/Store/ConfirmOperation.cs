@@ -164,6 +164,10 @@ public class ConfirmOperation : MonoBehaviour
         moneyText.text = GameRunningData.GetRunningData().money + "";
         if (GoodDisplay.storeType == "Alcohol")
         {
+            items.GetComponent<Image>().sprite = Resources.Load<Sprite>("ui/scrollBg1");
+            goodBg.sprite = Resources.Load<Sprite>("ui/scrollBg1");
+            handleBg1.sprite = Resources.Load<Sprite>("ui/handle1");
+            handleBg2.sprite = Resources.Load<Sprite>("ui/handle1");
             people.sprite = Resources.Load<Sprite>("ui/waiter");
         }
         else if (GoodDisplay.storeType == "Blacksmith")
@@ -173,6 +177,14 @@ public class ConfirmOperation : MonoBehaviour
             handleBg1.sprite = Resources.Load<Sprite>("ui/handle");
             handleBg2.sprite = Resources.Load<Sprite>("ui/handle");
             people.sprite = Resources.Load<Sprite>("ui/blacksmith");
+        }
+        else
+        {
+            items.GetComponent<Image>().sprite = Resources.Load<Sprite>("ui/scrollBg1");
+            goodBg.sprite = Resources.Load<Sprite>("ui/scrollBg1");
+            handleBg1.sprite = Resources.Load<Sprite>("ui/handle1");
+            handleBg2.sprite = Resources.Load<Sprite>("ui/handle1");
+            people.sprite = Resources.Load<Sprite>("ui/bartender");
         }
     }
 }

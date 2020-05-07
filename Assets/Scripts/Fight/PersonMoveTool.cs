@@ -15,7 +15,7 @@ public class PersonMoveTool
         for (int i = 1; i <= rank; ++i)
         {
             var rc = new Vector2Int(startPosition.x, Mathf.Min(startPosition.y + i,
-                startPosition.x % 2 == 0 ? FightMain.mapWidth - 1 : FightMain.mapWidth - 2));
+                startPosition.x % 2 == 0 ? FightMain.instance.mapWidth - 1 : FightMain.instance.mapWidth - 2));
             rangeGrids.Add(rc);
             preRange.y = startPosition.y + i;
         }
@@ -57,9 +57,9 @@ public class PersonMoveTool
             preRange = currentRange;
             for (int j = currentRange.x; j <= currentRange.y; ++j)
             {
-                if (startPosition.x + i <= FightMain.mapHeight - 1)
+                if (startPosition.x + i <= FightMain.instance.mapHeight - 1)
                 {
-                    int maxWidth = (startPosition.x + i) % 2 == 0 ? FightMain.mapWidth - 1 : FightMain.mapWidth - 2;
+                    int maxWidth = (startPosition.x + i) % 2 == 0 ? FightMain.instance.mapWidth - 1 : FightMain.instance.mapWidth - 2;
                     if (j >= 0 && j <= maxWidth)
                     {
                         var rc = new Vector2Int(startPosition.x + i, j);
@@ -68,7 +68,7 @@ public class PersonMoveTool
                 }
                 if (startPosition.x - i >= 0)
                 {
-                    int maxWidth = (startPosition.x - i) % 2 == 0 ? FightMain.mapWidth - 1 : FightMain.mapWidth - 2;
+                    int maxWidth = (startPosition.x - i) % 2 == 0 ? FightMain.instance.mapWidth - 1 : FightMain.instance.mapWidth - 2;
                     if (j >= 0 && j <= maxWidth)
                     {
                         var rc = new Vector2Int(startPosition.x - i, j);
@@ -87,7 +87,7 @@ public class PersonMoveTool
         HashSet<Vector2Int> obstacles = GetObstacles();
         foreach(var rc in rangeGrids)
         {
-            if (!obstacles.Contains(rc) && FindPath(startPosition, rc, FightMain.GetGrids(), obstacles, true).Count <= rank)
+            if (!obstacles.Contains(rc) && FindPath(startPosition, rc, FightMain.instance.GetGrids(), obstacles, true).Count <= rank)
             {
                 moveRangeGrids.Add(rc);
             }
@@ -104,11 +104,13 @@ public class PersonMoveTool
 
     static public void MovePerson(List<Vector2Int> movePath, Person person, float speed, Action<Person> finishAction)
     {
+        FightMain.instance.positionToPerson.Remove(person.RowCol);
+        
         List<Vector3> realPath = new List<Vector3>();
         Vector2Int preRc = person.RowCol;
         foreach (var point in movePath)
         {
-            var gridObject = FightMain.gridDataToObject[point];
+            var gridObject = FightMain.instance.gridDataToObject[point];
             realPath.Add(gridObject.transform.position);
         }
         person.PersonObject.GetComponent<Animator>().SetBool("IsWalk", true);
@@ -116,6 +118,7 @@ public class PersonMoveTool
         Move(person, realPath, speed, finishAction);
         if(movePath.Count > 0)
         {
+            FightMain.instance.positionToPerson.Add(movePath[movePath.Count - 1], person);
             person.RowCol = movePath[movePath.Count - 1];
             GongBuffTool.HaloPersonMoveListener(person, preRc, person.RowCol);
         }
@@ -182,11 +185,11 @@ public class PersonMoveTool
     public static HashSet<Vector2Int> GetObstacles()
     {
         HashSet<Vector2Int> obstacles = new HashSet<Vector2Int>();
-        foreach (Person person in FightMain.friendQueue)
+        foreach (Person person in FightMain.instance.friendQueue)
         {
             obstacles.Add(person.RowCol);
         }
-        foreach (Person person in FightMain.enemyQueue)
+        foreach (Person person in FightMain.instance.enemyQueue)
         {
             obstacles.Add(person.RowCol);
         }

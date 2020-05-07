@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -101,6 +102,7 @@ public class FightGUI : MonoBehaviour
             rectTransform.localRotation = Quaternion.identity;
             rectTransform.localScale = Vector3.one;
             iconObject.name = "buff_"+i;
+            iconObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("buff/"+buff.StyleEffect.Id);
         }
     }
 
@@ -190,8 +192,8 @@ public class FightGUI : MonoBehaviour
     {
         attackButton.GetComponent<Button>().onClick.AddListener(delegate {
             SoundEffectControl.instance.PlaySoundEffect(9);
-            AttackTool.CountAttackDistance(FightPersonClick.currentPerson, FightMain.friendQueue);
-            AttackTool.ShowAttackDistance();
+            AttackTool.instance.CountAttackDistance(FightPersonClick.currentPerson, FightMain.instance.friendQueue);
+            AttackTool.instance.ShowAttackDistance();
         });
         restButton.GetComponent<Button>().onClick.AddListener(delegate {
             SoundEffectControl.instance.PlaySoundEffect(9);
@@ -211,7 +213,7 @@ public class FightGUI : MonoBehaviour
             tabObject.SetActive(true);
             FightGridClick.ClearPathAndRange();
             HideBattlePane();
-            FightMain.HideAllHPSplider();
+            FightMain.instance.HideAllHPSplider();
         });
     }
 
@@ -401,16 +403,16 @@ public class FightGUI : MonoBehaviour
     {
         SoundEffectControl.instance.PlaySoundEffect(7);
         successPanel.SetActive(true);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         StartEndConversation(true);
     }
 
     public static IEnumerator ShowFailPanel()
     {
-        SoundEffectControl.instance.PlaySoundEffect(8);
+        //SoundEffectControl.instance.PlaySoundEffect(8);
         failPanel.SetActive(true);
-        yield return new WaitForSeconds(2f);
-        StartEndConversation(true);
+        yield return new WaitForSeconds(1f);
+        StartEndConversation(false);
     }
 
     private static void StartEndConversation(bool isSuccess)
@@ -450,7 +452,9 @@ public class FightGUI : MonoBehaviour
         }
         else if (FightMain.source == FightSource.Contest)
         {
-            List<Conversation> contestConversation = new List<Conversation>
+            if (isSuccess)
+            {
+                List<Conversation> contestConversation = new List<Conversation>
             {
                 new Conversation()
                 {
@@ -459,13 +463,21 @@ public class FightGUI : MonoBehaviour
                     IsLeft = false
                 }
             };
-            ControlDialogue.instance.StartConversation(contestConversation, () =>
+                ControlDialogue.instance.StartConversation(contestConversation, () =>
+                {
+                    if (!FightMain.contestEnemy.BaseData.Interactions.Contains(GlobalData.Interactions[10]))
+                    {
+                        FightMain.contestEnemy.BaseData.Interactions.RemoveAt(FightMain.contestEnemy.BaseData.Interactions.Count - 1);
+                        FightMain.contestEnemy.BaseData.Interactions.Add(GlobalData.Interactions[10]);
+                        FightMain.contestEnemy.BaseData.Interactions.Add(GlobalData.Interactions[11]);
+                    }
+                    EndFight();
+                });
+            }
+            else
             {
-                FightMain.contestEnemy.BaseData.Interactions.RemoveAt(FightMain.contestEnemy.BaseData.Interactions.Count - 1);
-                FightMain.contestEnemy.BaseData.Interactions.Add(GlobalData.Interactions[10]);
-                FightMain.contestEnemy.BaseData.Interactions.Add(GlobalData.Interactions[11]);
                 EndFight();
-            });
+            }
         }
         else
         {
