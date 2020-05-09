@@ -64,7 +64,7 @@ public class GoodDisplay : MonoBehaviour
             oneLineTransform.localScale = Vector3.one;
             for (int j = 0; j < count; ++j)
             {
-                SetItem(oneLineTransform.GetChild(j).gameObject, goods[lines + j]);
+                SetItem(oneLineTransform.GetChild(j).gameObject, goods[4 * lines + j]);
             }
             for (int i = count; i < 4; ++i)
             {

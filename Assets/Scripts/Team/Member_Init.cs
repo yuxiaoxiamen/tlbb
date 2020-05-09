@@ -44,17 +44,15 @@ public class Member_Init : MonoBehaviour
             pageCount = memberCount / 4 + 1;
 
 
-            for (int i = 0; i < memberCount; ++i)
-            {
-                var newMem = Instantiate(MemberInfo).transform;
-                newMem.position = new Vector3(M_INTERVAL * i + M_ORIGIN, -1, 0);
-                GameObject memName = newMem.Find("Member_Name").gameObject;
-                memName.transform.GetComponent<TextMesh>().text = Members[i].BaseData.Name;
-
+        for (int i = 0; i < memberCount; ++i)
+        {
+            var newMem = Instantiate(MemberInfo).transform;
+            newMem.position = new Vector3(M_INTERVAL * i + M_ORIGIN, -1, 0);
+            GameObject memName = newMem.Find("Member_Name").gameObject;
+            memName.transform.GetComponent<TextMesh>().text = Members[i].BaseData.Name;
+            newMem.Find("Member_Image").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("head/" + Members[i].BaseData.HeadPortrait);
             newMem.Find("Mem_Oper").GetComponent<Mouse>().Id = Members[i].BaseData.Id;
-            Debug.Log("输出"+newMem.Find("Mem_Oper").GetComponent<Mouse>().Id);
-
-            }
+        }
 
         
 

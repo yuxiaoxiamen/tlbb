@@ -8,7 +8,6 @@ public class CameraFollow : MonoBehaviour
     private Transform target;
     public Transform initTransform;
     private Vector3 offset;
-    public float speed = 0.1f;
     public static CameraFollow cameraFollowInstance;
     private Quaternion defaultQuaternion;
 
@@ -40,7 +39,7 @@ public class CameraFollow : MonoBehaviour
         {
             target = person.PersonObject.transform;
             transform.rotation = defaultQuaternion;
-            transform.DOMove(target.position - offset, speed);
+            transform.DOMove(target.position - offset, FightMain.instance.speed);
             //transform.position = target.position - offset;
         }
     }

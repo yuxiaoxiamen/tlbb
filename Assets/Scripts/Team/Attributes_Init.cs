@@ -15,7 +15,7 @@ public class Attributes_Init : MonoBehaviour
         var label = gameObject.transform;
         int memIndex = Member_Init.MembersName.IndexOf(label.parent.transform.Find("Member_Name").GetComponent<TextMesh>().text);
         label.parent.transform.Find("Member_Name").GetComponent<TextMesh>().text = Member_Init.Members[memIndex].BaseData.Name;
-        label.parent.transform.Find("Member_Image").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("head/"+Member_Init.Members[memIndex].BaseData.HeadPortrait);
+        
         //switch (gameObject.name)
         //{
         //    case "BiLi":

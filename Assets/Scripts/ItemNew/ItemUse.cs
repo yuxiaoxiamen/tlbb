@@ -6,18 +6,13 @@ using UnityEngine.UI;
 public class ItemUse : MonoBehaviour
 {
     private Button button;
-    private static GameObject dialog;
-    private static bool isFirst = true;
+    private GameObject dialog;
 
     // Start is called before the first frame update
     void Start()
     {
         button = GetComponent<Button>();
-        if (isFirst)
-        {
-            dialog = GameObject.Find("Dialog").gameObject;
-            isFirst = false;
-        }
+        dialog = GameObject.Find("Dialog").gameObject;
         button.onClick.AddListener(() =>
         {
             StopAllCoroutines();

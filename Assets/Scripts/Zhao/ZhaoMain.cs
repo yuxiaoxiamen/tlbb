@@ -57,23 +57,41 @@ public class ZhaoMain : MonoBehaviour
     void SetConsultButton()
     {
         consultTransform = GameObject.Find("Consult").transform;
+        consultTransform.gameObject.SetActive(false);
         var player = GameRunningData.GetRunningData().player;
         if (preScene != "map" && person != player)
         {
             consultTransform.GetComponent<Button>().onClick.AddListener(() =>
             {
-                if (player.BaseData.AttackStyles.Contains(zhao))
+                AttackStyle style = player.IsContainStyle(zhao.Id);
+                if (style != null)
                 {
+                    if (GameRunningData.GetRunningData().experspance < GameConfig.ConsultCost[3])
+                    {
+                        TipControl.instance.SetTip("江湖阅历不足，无法提升招式");
+                    }
+                    else
+                    {
+                        style.AddExperience(player.CountStyleExperience());
+                        GameRunningData.GetRunningData().experspance -= GameConfig.ConsultCost[3];
+                        TipControl.instance.SetTip(style.FixData.Name + "熟练度上升");
+                    }
                     TipControl.instance.SetTip("已拥有该招式");
                 }
-                else if (GameRunningData.GetRunningData().experspance < GameConfig.ConsultCost[zhao.GetGrade()])
+                else if (GameRunningData.GetRunningData().experspance < GameConfig.ConsultCost[style.GetGrade()])
                 {
                     TipControl.instance.SetTip("江湖阅历不足");
                 }
                 else
                 {
+                    style = new AttackStyle()
+                    {
+                        Id = zhao.Id,
+                        FixData = zhao.FixData
+                    };
+                    TipControl.instance.SetTip(style.FixData.Name+"学习成功");
                     player.BaseData.AttackStyles.Add(zhao);
-                    GameRunningData.GetRunningData().experspance -= GameConfig.ConsultCost[zhao.GetGrade()];
+                    GameRunningData.GetRunningData().experspance -= GameConfig.ConsultCost[style.GetGrade()];
                 }
             });
         }

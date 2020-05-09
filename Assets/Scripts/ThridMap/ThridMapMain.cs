@@ -102,25 +102,30 @@ public class ThridMapMain : MonoBehaviour
 
     List<Person> FindPerson()
     {
-        int randomCount = Random.Range(1, 4);
-        for (int i = 0; i < randomCount; ++i)
+
+        if (!IsShaoLin())
         {
-            Person p = GlobalData.Persons[Random.Range(89, 95)];
-            if (!persons.Contains(p))
+            int randomCount = Random.Range(1, 4);
+            for (int i = 0; i < randomCount; ++i)
             {
-                if (!GameRunningData.GetRunningData().teammates.Contains(p))
+                Person p = GlobalData.Persons[Random.Range(89, 95)];
+                if (!persons.Contains(p))
                 {
-                    persons.Add(p);
+                    if (!GameRunningData.GetRunningData().teammates.Contains(p))
+                    {
+                        persons.Add(p);
+                    }
                 }
-            }
-            else
-            {
-                --i;
+                else
+                {
+                    --i;
+                }
             }
         }
         foreach (Person person in GlobalData.Persons)
         {
-            if (!GameRunningData.GetRunningData().teammates.Contains(person))
+            if (!GameRunningData.GetRunningData().teammates.Contains(person)  
+                && person != GameRunningData.GetRunningData().player)
             {
                 if (person.CurrentPlaceString == GameRunningData.GetRunningData().currentPlace.GetPlaceString())
                 {
@@ -129,6 +134,20 @@ public class ThridMapMain : MonoBehaviour
             }
         }
         return persons;
+    }
+
+    bool IsShaoLin()
+    {
+        var place = GameRunningData.GetRunningData().currentPlace;
+        if(place is SecondPlace)
+        {
+            var splace = (SecondPlace)place;
+            if(splace.PrePlace.Id == 1)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     void SetPersonObject(Person person, GameObject headObject)

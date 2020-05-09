@@ -14,14 +14,15 @@ public class GameRunningData
     public Vector2Int playerPreRc;
     public int money;
     public int experspance;
+    public bool isFinal;
 
     private GameRunningData()
     {
         date = new GameDate(1, 1, 1, 0);
         player = GlobalData.Persons[0];
-        player.RowCol = new Vector2Int(33, 43);
-        playerPreRc = new Vector2Int(30, 39);
+        player.RowCol = new Vector2Int(46, 50);
         currentPlace = null;
+        isFinal = false;
         money = 50000;   //测试数据
         experspance = 1000;
         teammates = new List<Person>();

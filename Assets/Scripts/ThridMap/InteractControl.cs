@@ -20,9 +20,16 @@ public class InteractControl : MonoBehaviour
         ClearPane();
         ShowInterPanel();
         RectTransform rectTransform = GetComponent<RectTransform>();
+        GameObject interButtonObject = Instantiate(interButtonPrefab);
+        interButtonObject.GetComponent<RectTransform>().SetParent(rectTransform);
+        interButtonObject.transform.localScale = Vector3.one*0.7f;
+        interButtonObject.transform.localRotation = Quaternion.identity;
+        interButtonObject.transform.localPosition = Vector3.zero;
+        interButtonObject.transform.Find("Text").GetComponent<Text>().text = "好感度 "+person.Likability;
+        interButtonObject.GetComponent<Image>().color = new Color(0, 0, 0, 0);
         foreach (var interaction in person.BaseData.Interactions)
         {
-            GameObject interButtonObject = Instantiate(interButtonPrefab);
+            interButtonObject = Instantiate(interButtonPrefab);
             interButtonObject.GetComponent<RectTransform>().SetParent(rectTransform);
             interButtonObject.transform.localScale = Vector3.one;
             interButtonObject.transform.localRotation = Quaternion.identity;

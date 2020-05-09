@@ -5,13 +5,11 @@ using UnityEngine;
 public class EnemyMoveAI : MonoBehaviour
 {
     private bool[,] visited;
-    public Vector2Int end;
     private bool isFind = false;
     private bool isOnce = true;
 
     private void Start()
     {
-        end = LiquorPowerMain.instance.startRc;
         visited = new bool[LiquorPowerMain.instance.maxRow, LiquorPowerMain.instance.maxCol];
     }
 
@@ -26,7 +24,7 @@ public class EnemyMoveAI : MonoBehaviour
 
     public void Move(Vector2Int current)
     {
-        if(current == end)
+        if(current == LiquorPowerMain.instance.startRc)
         {
             isFind = true;
         }

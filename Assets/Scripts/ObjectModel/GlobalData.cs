@@ -73,6 +73,17 @@ public class GlobalData
         for (int i = 0; i < conflictJsons.Count; ++i)
         {
             var mainLineConflict = mainLineConflicts[i];
+            string[] splits = conflictJsons[i].DateString.Split('-');
+            string slot = "早晨";
+            if(splits[3] == "1")
+            {
+                slot = "中午";
+            }
+            else if(splits[3] == "2")
+            {
+                slot = "晚上";
+            }
+            mainLineConflict.Title = mainLineConflict.Title.Replace("[]", splits[1]+"月"+splits[2]+"日"+slot);
             mainLineConflict.ZFriends = RevertConflictString(conflictJsons[i].ZFriendsString);
             mainLineConflict.ZEnemys = RevertConflictString(conflictJsons[i].ZEnemysString);
             mainLineConflict.FFriends = RevertConflictString(conflictJsons[i].FFriendsString);

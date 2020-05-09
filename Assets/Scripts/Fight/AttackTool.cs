@@ -109,8 +109,10 @@ public class AttackTool : MonoBehaviour
             int mpCost = attackStyle.GetRealMPCost();
             if (mpCost > attacker.CurrentMP)
             {
+                TipControl.instance.SetTip("内力不足");
                 return false;
             }
+            StartCoroutine(attacker.PersonObject.GetComponent<PersonAnimationControl>().Action());
             PersonChangeMP(attacker, mpCost, false);
 
             PromoteStyleProficiency(attacker);

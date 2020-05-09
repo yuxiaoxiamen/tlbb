@@ -77,7 +77,39 @@ public class ControlDialogue : MonoBehaviour
             }
             else
             {
-                StartConversation(Asides, action);
+                if (GameRunningData.GetRunningData().isFinal)
+                {
+                    var key = "9/" + GameRunningData.GetRunningData().date.GetDateString();
+                    var conflict = GlobalData.MainLineConflicts[key];
+                    int like1 = 0;
+                    int like2 = 0;
+                    foreach(Person p in conflict.ZEnemys)
+                    {
+                        like1 += p.Likability;
+                    }
+                    foreach (Person p in conflict.FEnemys)
+                    {
+                        like2 += p.Likability;
+                    }
+                    if(like1 > like2)
+                    {
+                        StartConversation(Asides, () =>
+                        {
+                            StartConversation(Evils, action);
+                        });
+                    }
+                    else
+                    {
+                        StartConversation(Asides, () =>
+                        {
+                            StartConversation(Justices, action);
+                        });
+                    }
+                }
+                else
+                {
+                    StartConversation(Asides, action);
+                }
             }
             return true;
         }
@@ -192,7 +224,7 @@ public class ControlDialogue : MonoBehaviour
 
     IEnumerator SetContentText(string text)
     {
-        text.Replace("{}", GameRunningData.GetRunningData().player.BaseData.Name);
+        text = text.Replace("{}", GameRunningData.GetRunningData().player.BaseData.Name);
         isOneConversationOver = false;
         for (int i = 1; i < text.Length + 1; ++i)
         {

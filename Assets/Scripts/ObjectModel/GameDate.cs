@@ -53,21 +53,22 @@ public class GameDate
         {
             int addDay = (Slot + space) / 3;
             Slot = (Slot + space) % 3;
-            if(addDay + Day / 30 == 0)
+            if((addDay + Day) / 31 == 0)
             {
                 Day = addDay + Day;
             }
             else
             {
-                int addMonth = (addDay + Day) / 30;
+                int addMonth = (addDay + Day) / 31;
                 Day = (addDay + Day) % 30;
-                if((addMonth + Month) / 12 == 0)
+                if((addMonth + Month) / 13 == 0)
                 {
                     Month = addMonth + Month;
                 }
                 else
                 {
-                    Year = Year + (addMonth + Month) / 12;
+                    Year = Year + (addMonth + Month) / 13;
+                    Month = (addMonth + Month) % 12;
                 }
             }
         }

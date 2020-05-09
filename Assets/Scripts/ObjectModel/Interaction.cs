@@ -20,6 +20,10 @@ public class Interaction
                 ChatListener(person);
                 break;
             case 1: //切磋
+                if (JudgeFinal())
+                {
+                    return;
+                }
                 FightMain.source = FightSource.Contest;
                 FightMain.contestEnemy = person;
                 SceneManager.LoadScene("Fight");
@@ -43,13 +47,30 @@ public class Interaction
                 ThridMapMain.storeUI.SetActive(true);
                 break;
             case 3: //锻造
+                if (JudgeFinal())
+                {
+                    return;
+                }
                 ControlBottomPanel.IsBanPane = true;
                 ManualMain.instance.SetManual(false);
                 ThridMapMain.manualUI.SetActive(true);
                 break; 
             case 4: //炼丹
-                TimeGoSubject.GetTimeSubject().UpdateTime(5);
-                SceneManager.LoadScene("Alchemy");
+                if (JudgeFinal())
+                {
+                    return;
+                }
+                money = 100;
+                if (GameRunningData.GetRunningData().money >= money)
+                {
+                    GameRunningData.GetRunningData().money -= money;
+                    TimeGoSubject.GetTimeSubject().UpdateTime(5);
+                    SceneManager.LoadScene("Alchemy");
+                }
+                else
+                {
+                    TipControl.instance.SetTip("金钱不足");
+                }
                 break;
             case 5: //治疗
                 var player = GameRunningData.GetRunningData().player;
@@ -67,6 +88,10 @@ public class Interaction
                 ThridMapMain.ShowAllHeads();
                 break;
             case 6: //休息
+                if (JudgeFinal())
+                {
+                    return;
+                }
                 money = 50;
                 if (GameRunningData.GetRunningData().money >= money)
                 {
@@ -82,12 +107,44 @@ public class Interaction
                 ThridMapMain.ShowAllHeads();
                 break;
             case 7: //喝酒
-                TimeGoSubject.GetTimeSubject().UpdateTime(2);
-                SceneManager.LoadScene("LiquorPower");
+                if (JudgeFinal())
+                {
+                    return;
+                }
+                money = 100;
+                if (GameRunningData.GetRunningData().money >= money)
+                {
+                    GameRunningData.GetRunningData().money -= money;
+                    TimeGoSubject.GetTimeSubject().UpdateTime(2);
+                    SceneManager.LoadScene("LiquorPower");
+                }
+                else
+                {
+                    TipControl.instance.SetTip("金钱不足");
+                }
                 break;
             case 8: //学医
+                if (JudgeFinal())
+                {
+                    return;
+                }
+                money = 200;
+                if (GameRunningData.GetRunningData().money >= money)
+                {
+                    GameRunningData.GetRunningData().money -= money;
+                    TimeGoSubject.GetTimeSubject().UpdateTime(2);
+                    SceneManager.LoadScene("MedicalSkill");
+                }
+                else
+                {
+                    TipControl.instance.SetTip("金钱不足");
+                }
                 break;
             case 9: //下厨
+                if (JudgeFinal())
+                {
+                    return;
+                }
                 ControlBottomPanel.IsBanPane = true;
                 ManualMain.instance.SetManual(true);
                 ThridMapMain.manualUI.SetActive(true);
@@ -101,6 +158,17 @@ public class Interaction
                 ThridMapMain.ShowAllHeads();
                 break;
         }
+    }
+
+    bool JudgeFinal()
+    {
+        if (GameRunningData.GetRunningData().isFinal)
+        {
+            TipControl.instance.SetTip("全部任务终止，请立即前往塞北进行宿命之战。");
+            ThridMapMain.ShowAllHeads();
+            return true;
+        }
+        return false;
     }
 
     void ChatListener(Person person)

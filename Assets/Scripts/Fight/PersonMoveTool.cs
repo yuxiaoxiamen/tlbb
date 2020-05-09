@@ -113,7 +113,7 @@ public class PersonMoveTool
             var gridObject = FightMain.instance.gridDataToObject[point];
             realPath.Add(gridObject.transform.position);
         }
-        person.PersonObject.GetComponent<Animator>().SetBool("IsWalk", true);
+        person.PersonObject.GetComponent<PersonAnimationControl>().Move();
         SoundEffectControl.instance.PlaySoundEffect(0);
         Move(person, realPath, speed, finishAction);
         if(movePath.Count > 0)
@@ -177,8 +177,8 @@ public class PersonMoveTool
         else
         {
             pathIndex = 0;
+            person.PersonObject.GetComponent<PersonAnimationControl>().Stand();
             finishAction(person);
-            person.PersonObject.GetComponent<Animator>().SetBool("IsWalk", false);
         }
     }
 

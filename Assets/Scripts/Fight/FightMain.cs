@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class FightMain : MonoBehaviour
 {
     public GameObject gridPrefab; //格子的预制体
-    public GameObject personPrefab; //人物的预制体
     public float heightGrap = 0.85f;
     public Dictionary<GameObject, Vector2Int> gridObjectToData; //通过格子对象获取格子的行列
     public Dictionary<Vector2Int, GameObject> gridDataToObject; //通过格子的行列获取格子对象
@@ -17,7 +16,7 @@ public class FightMain : MonoBehaviour
     public List<Person> enemyQueue;//敌方战斗的人
     public int mapWidth = 19; //地图的最大列数
     public int mapHeight = 15; //地图的最大行数
-    public readonly float speed = 0.1f;
+    public readonly float speed = 0.2f;
     public int finished = 0;
     public bool isSuccess;
     public bool isFail;
@@ -76,13 +75,29 @@ public class FightMain : MonoBehaviour
             var conflict = GlobalData.MainLineConflicts[key];
             if (conflict.IsZ)
             {
-                friendQueue.AddRange(conflict.ZFriends);
-                enemyQueue.AddRange(conflict.ZEnemys);
+                foreach(Person person in conflict.ZFriends)
+                {
+                    friendQueue.Add(person);
+                    person.ChangeLikability(30, true);
+                }
+                foreach (Person person in conflict.ZEnemys)
+                {
+                    enemyQueue.Add(person);
+                    person.ChangeLikability(30, false);
+                }
             }
             else
             {
-                friendQueue.AddRange(conflict.FFriends);
-                enemyQueue.AddRange(conflict.FEnemys);
+                foreach (Person person in conflict.FFriends)
+                {
+                    friendQueue.Add(person);
+                    person.ChangeLikability(30, true);
+                }
+                foreach (Person person in conflict.FEnemys)
+                {
+                    enemyQueue.Add(person);
+                    person.ChangeLikability(30, false);
+                }
             }
             var teammates = GameRunningData.GetRunningData().teammates;
             foreach (Person teammate in teammates)
@@ -271,10 +286,8 @@ public class FightMain : MonoBehaviour
         foreach(var person in personQueue)
         {
             Vector3 personPosition = gridDataToObject[person.RowCol].transform.position;
+            GameObject personPrefab = Resources.Load<GameObject>("model/" + person.BaseData.ModelId);
             GameObject personObject = Instantiate(personPrefab, personPosition, Quaternion.identity);
-            //GameObject personObject = Resources.Load<GameObject>("persons/" + person.BaseData.Id);
-            //personObject.transform.position = personPosition;
-            //personObject.transform.localRotation = Quaternion.identity;
             personObject.name = (i++) + "";
             persons.Add(person);
             person.PersonObject = personObject;
@@ -368,6 +381,7 @@ public class FightMain : MonoBehaviour
     {
         foreach (Person enemy in enemyQueue)
         {
+            yield return new WaitForSeconds(0.2f);
             CameraFollow.cameraFollowInstance.SetCameraFollowTarget(enemy);
             FightAI.AIEnd = false;
             FightAI.NPCAI(enemy, friendQueue);
@@ -428,30 +442,34 @@ public class FightMain : MonoBehaviour
 
     void TestData()
     {
-        //source = FightSource.Encounter;
+        source = FightSource.Encounter;
         friendQueue = new List<Person>();
         enemyQueue = new List<Person>();
         Person player = GameRunningData.GetRunningData().player;
         player.RowCol = new Vector2Int(12, 3);
         Person friend1 = GlobalData.Persons[13];
         friend1.RowCol = new Vector2Int(12, 6);
-        Person enemy1 = GlobalData.Persons[92];
+        Person enemy1 = GlobalData.Persons[3];
         enemy1.RowCol = new Vector2Int(9, 3);
-        Person enemy2 = GlobalData.Persons[3];
+        Person enemy2 = GlobalData.Persons[4];
         enemy2.RowCol = new Vector2Int(0, 9);
-
+        player.BaseData.ModelId = 22;
+        friend1.BaseData.ModelId = 7;
+        enemy1.BaseData.ModelId = 14;
+        enemy2.BaseData.ModelId = 16;
         player.CurrentHP = player.BaseData.HP = 10000;
         friend1.CurrentHP = friend1.BaseData.HP = 1000;
-        enemy1.CurrentHP = enemy1.BaseData.HP = 100;
+        enemy1.CurrentHP = enemy1.BaseData.HP = 10000;
         enemy2.CurrentHP = enemy2.BaseData.HP = 1000;
 
         //player.SelectedInnerGong = player.BaseData.InnerGongs[1];
 
         friendQueue.Add(player);
         
-        //friendQueue.Add(friend1);
+        friendQueue.Add(friend1);
         enemyQueue.Add(enemy1);
-        //enemyQueue.Add(enemy2);
+        
+        enemyQueue.Add(enemy2);
     }
 }
 

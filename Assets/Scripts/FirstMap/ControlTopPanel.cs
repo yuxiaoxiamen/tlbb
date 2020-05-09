@@ -12,6 +12,8 @@ public class ControlTopPanel : MonoBehaviour
     {
         instance = this;
         UpdateTimeText();
+        Text exText = transform.Find("exText").GetComponent<Text>();
+        exText.text += GameRunningData.GetRunningData().experspance + "";
         Button returnButton = transform.Find("returnButton").GetComponent<Button>();
         Place currentPlace = GameRunningData.GetRunningData().currentPlace;
         if(currentPlace == null)
@@ -38,9 +40,9 @@ public class ControlTopPanel : MonoBehaviour
                 SceneManager.LoadScene("FirstMap");
             }
         });
-        //transform.Find("Button").GetComponent<Button>().onClick.AddListener(()=>
+        //transform.Find("Button").GetComponent<Button>().onClick.AddListener(() =>
         //{
-        //    GameRunningData.GetRunningData().date.GoByTime(40);
+        //    TimeGoSubject.GetTimeSubject().UpdateTime(100);
         //    Debug.Log(GameRunningData.GetRunningData().date.GetDateString());
         //});
     }

@@ -6,14 +6,20 @@ using UnityEngine.UI;
 
 public class ControlButtonClick : MonoBehaviour
 {
-    public Button startButton;
+    public Button newButton;
+    public Button oldButton;
     public Button quitButton;
     // Start is called before the first frame update
     void Start()
     {
-        startButton.onClick.AddListener(() =>
+        newButton.onClick.AddListener(() =>
         {
-            SceneManager.LoadScene("FirstMap");
+            SceneManager.LoadScene("RandomAttribute");
+        });
+        oldButton.onClick.AddListener(() =>
+        {
+            SaveMouseControl.isSave = false;
+            SceneManager.LoadScene("SaveAndRead");
         });
         quitButton.onClick.AddListener(() =>
         {

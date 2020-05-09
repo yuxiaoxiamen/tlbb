@@ -15,9 +15,6 @@ public class Team_Member_Attributes : MonoBehaviour
     void Start()
     {
         int memIndex = Member_Init.MembersName.IndexOf(gameObject.transform.Find("Member_Name").GetComponent<TextMesh>().text);
-
-        Debug.Log(memIndex);
-
     }
 
     // Update is called once per frame

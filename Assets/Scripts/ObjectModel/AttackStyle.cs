@@ -40,7 +40,7 @@ public class AttackStyle
 
     public void AddExperience(int e)
     {
-        if(Rank < GameConfig.MaxRank)
+        if (Rank < GameConfig.MaxRank)
         {
             Proficiency += e;
             if (Proficiency >= GetMaxProFiciency())
@@ -48,6 +48,22 @@ public class AttackStyle
                 ++Rank;
                 Proficiency = 0;
             }
+        }
+    }
+
+    public int CompareTo(AttackStyle style)
+    {
+        if (style.GetRealBasePower() > GetRealBasePower())
+        {
+            return -1;
+        }
+        else if (style.GetRealBasePower() < GetRealBasePower())
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
         }
     }
 }

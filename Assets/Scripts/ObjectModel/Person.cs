@@ -38,6 +38,7 @@ public class Person : ICloneable
     public int AttackPowerRate { get; set; } //攻击强度提升比例
     public int MoveRank { get; set; }
     public string CurrentPlaceString { get; set; }
+    public int Likability { get; set; }
     public bool IsMoved { get; set; }
     [NonSerialized]
     private Good equippedWeapon;
@@ -85,6 +86,27 @@ public class Person : ICloneable
     public int CountDefend()
     {
         return BaseData.Jin;
+    }
+
+    public void ChangeLikability(int num, bool isAdd)
+    {
+        if (isAdd)
+        {
+            Likability += num;
+        }
+        else
+        {
+            Likability -= num;
+        }
+        if (Likability >= 50)
+        {
+            if (!BaseData.Interactions.Contains(GlobalData.Interactions[10]))
+            {
+                BaseData.Interactions.RemoveAt(FightMain.contestEnemy.BaseData.Interactions.Count - 1);
+                BaseData.Interactions.Add(GlobalData.Interactions[10]);
+                BaseData.Interactions.Add(GlobalData.Interactions[11]);
+            }
+        }
     }
 
     public void UpdatePlace(string placeString)
@@ -167,16 +189,16 @@ public class Person : ICloneable
         return (int)(GameConfig.PerGongExperience * (BaseData.Wu * GameConfig.WuXingAddition * 1.0f / 100));
     }
 
-    public void PromoteGong()
+    public void PromoteGong(InnerGong gong)
     {
-        if (SelectedInnerGong.AddExperience(CountGongExperience()))
+        if (gong.AddExperience(CountGongExperience()))
         {
-            BaseAttributeIncrease(SelectedInnerGong.FixData.PerHPGain, 
-                SelectedInnerGong.FixData.PerMPGain, SelectedInnerGong.FixData.PerTalentGain);
-            if(SelectedInnerGong.Rank == GameConfig.MaxRank)
+            BaseAttributeIncrease(gong.FixData.PerHPGain,
+                gong.FixData.PerMPGain, gong.FixData.PerTalentGain);
+            if(gong.Rank == GameConfig.MaxRank)
             {
-                BaseAttributeIncrease(SelectedInnerGong.FixData.FullHPGain, 
-                    SelectedInnerGong.FixData.FullMPGain, SelectedInnerGong.FixData.FullTalentGain);
+                BaseAttributeIncrease(gong.FixData.FullHPGain,
+                    gong.FixData.FullMPGain, gong.FixData.FullTalentGain);
             }
         }
     }
@@ -244,6 +266,30 @@ public class Person : ICloneable
         value = (int)(BaseData.MP * 0.15f);
         ChangeMP(value, true);
         ChangeEnergy(5, false);
+    }
+
+    public InnerGong IsContainGong(int id)
+    {
+        foreach(InnerGong gong in BaseData.InnerGongs)
+        {
+            if(gong.Id == id)
+            {
+                return gong;
+            }
+        }
+        return null;
+    }
+
+    public AttackStyle IsContainStyle(int id)
+    {
+        foreach (AttackStyle style in BaseData.AttackStyles)
+        {
+            if (style.Id == id)
+            {
+                return style;
+            }
+        }
+        return null;
     }
 
     public object Clone()

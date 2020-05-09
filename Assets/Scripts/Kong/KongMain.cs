@@ -58,9 +58,19 @@ public class KongMain : MonoBehaviour
         {
             consultTransform.GetComponent<Button>().onClick.AddListener(() =>
             {
-                if (player.BaseData.InnerGongs.Contains(inner))
+                InnerGong gong = player.IsContainGong(inner.Id);
+                if (gong != null)
                 {
-                    TipControl.instance.SetTip("已拥有该功法");
+                    if(GameRunningData.GetRunningData().experspance < GameConfig.ConsultCost[3])
+                    {
+                        TipControl.instance.SetTip("江湖阅历不足，无法提升内功");
+                    }
+                    else
+                    {
+                        player.PromoteGong(gong);
+                        GameRunningData.GetRunningData().experspance -= GameConfig.ConsultCost[3];
+                        TipControl.instance.SetTip(gong.FixData.Name + "熟练度上升");
+                    }
                 }
                 else if (GameRunningData.GetRunningData().experspance < GameConfig.ConsultCost[inner.GetGrade() - 1])
                 {
@@ -68,8 +78,14 @@ public class KongMain : MonoBehaviour
                 }
                 else
                 {
-                    player.BaseData.InnerGongs.Add(inner);
-                    GameRunningData.GetRunningData().experspance -= GameConfig.ConsultCost[inner.GetGrade() - 1];
+                    gong = new InnerGong()
+                    {
+                        Id = inner.Id,
+                        FixData = inner.FixData
+                    };
+                    TipControl.instance.SetTip(gong.FixData.Name+"学习成功");
+                    player.BaseData.InnerGongs.Add(gong);
+                    GameRunningData.GetRunningData().experspance -= GameConfig.ConsultCost[gong.GetGrade() - 1];
                 }
             });
         }

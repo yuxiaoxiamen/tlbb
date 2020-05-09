@@ -29,7 +29,7 @@ public class LiquorPowerMain : MonoBehaviour
     private bool isShow = false;
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         instance = this;
 

@@ -20,6 +20,7 @@ public class PersonBaseData
     public int Energy { get; set; }
     public string InitPlaceString { get; set; }
     public int HeadPortrait { get; set; }
+    public int ModelId { get; set; }
     public int WeaponId { get; set; }
     public List<Interaction> Interactions { get; set; }
     [System.NonSerialized]

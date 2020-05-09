@@ -32,10 +32,19 @@ public class TimeGoSubject
 
     public void UpdateTime(int space)
     {
+        if (GameRunningData.GetRunningData().isFinal)
+        {
+            return;
+        }
         GameRunningData.GetRunningData().date.GoByTime(space);
+        if (GameRunningData.GetRunningData().date.CompareTo(mainLineTime[mainLineTime.Count - 1]) >= 0)
+        {
+            GameRunningData.GetRunningData().date = mainLineTime[mainLineTime.Count - 1];
+            GameRunningData.GetRunningData().isFinal = true;
+        }
         foreach(Person person in persons)
         {
-            person.PromoteGong();
+            person.PromoteGong(person.SelectedInnerGong);
             if(person != GameRunningData.GetRunningData().player && 
                 GameRunningData.GetRunningData().teammates.Contains(person))
             {

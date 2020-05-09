@@ -38,7 +38,7 @@ public class FightGUI : MonoBehaviour
     public static bool isTabing = false;
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         scrollPanel = GameObject.Find("scrollPanel");
         scrollPanel.SetActive(false);
@@ -153,6 +153,10 @@ public class FightGUI : MonoBehaviour
         gongText.GetComponent<Text>().text = person.SelectedInnerGong.FixData.Name;
 
         List<AttackStyle> styles = person.BaseData.AttackStyles;
+        styles.Sort(delegate (AttackStyle x, AttackStyle y)
+        {
+            return y.CompareTo(x);
+        });
         int max = 4;
         int count = Mathf.Min(max, styles.Count);
         for(int i = 0; i < count; ++i)
@@ -179,7 +183,6 @@ public class FightGUI : MonoBehaviour
     private void SetBattleControlPanel()
     {
         battleControlObject = GameObject.Find("battleControlPanel");
-        battleControlObject.SetActive(false);
         attackButton = FindButton("attackButton");
         treatButotn = FindButton("treatButton");
         itemButton = FindButton("itemButton");
@@ -232,24 +235,18 @@ public class FightGUI : MonoBehaviour
 
     public static void ShowBattlePane(Person person)
     {
-        battleControlObject.SetActive(true);
-
-        switch (person.ControlState)
+        if(battleControlObject != null)
         {
-            case BattleControlState.Moving:
-            case BattleControlState.Moved:
-                attackButton.SetActive(true);
+            battleControlObject.SetActive(true);
+            if (person == GameRunningData.GetRunningData().player)
+            {
                 itemButton.SetActive(true);
-                switchStyleButton.SetActive(true);
-                restButton.SetActive(true);
-                break;
-            case BattleControlState.End:
-                attackButton.SetActive(false);
+            }
+            else
+            {
                 itemButton.SetActive(false);
-                switchStyleButton.SetActive(false);
-                restButton.SetActive(true);
-                break;
-        }
+            }
+        }  
     }
 
     public static void HideBattlePane()
@@ -324,7 +321,7 @@ public class FightGUI : MonoBehaviour
         {
             effect += e.Name + "：" + e.Detail + System.Environment.NewLine;
         }
-        string text = style.FixData.Name + System.Environment.NewLine + "攻击强度" + style.GetRealBasePower() + System.Environment.NewLine +
+        string text = style.FixData.Name + System.Environment.NewLine + "攻击强度" + style.GetRealBasePower() +"  内力消耗"+ style.FixData.MPCost + System.Environment.NewLine +
             effect + style.FixData.DetailInfo;
         return text;
     }
@@ -419,6 +416,11 @@ public class FightGUI : MonoBehaviour
     {
         if (FightMain.source == FightSource.MainLine)
         {
+            if (GameRunningData.GetRunningData().isFinal)
+            {
+                SceneManager.LoadScene("Final");
+                return;
+            }
             var key = GameRunningData.GetRunningData().GetPlaceDateKey();
             var conflict = GlobalData.MainLineConflicts[key];
             var conversations = new List<Conversation>();
@@ -459,18 +461,13 @@ public class FightGUI : MonoBehaviour
                 new Conversation()
                 {
                     People = FightMain.contestEnemy,
-                    Content = "阁下武艺高强，在下佩服，日后若有用的上的地方尽管吩咐",
+                    Content = "阁下武艺高强，在下佩服",
                     IsLeft = false
                 }
             };
                 ControlDialogue.instance.StartConversation(contestConversation, () =>
                 {
-                    if (!FightMain.contestEnemy.BaseData.Interactions.Contains(GlobalData.Interactions[10]))
-                    {
-                        FightMain.contestEnemy.BaseData.Interactions.RemoveAt(FightMain.contestEnemy.BaseData.Interactions.Count - 1);
-                        FightMain.contestEnemy.BaseData.Interactions.Add(GlobalData.Interactions[10]);
-                        FightMain.contestEnemy.BaseData.Interactions.Add(GlobalData.Interactions[11]);
-                    }
+                    FightMain.contestEnemy.ChangeLikability(20, true);
                     EndFight();
                 });
             }
@@ -490,7 +487,7 @@ public class FightGUI : MonoBehaviour
         ItemMain.ClearItems();
         if(FightMain.source != FightSource.Encounter)
         {
-            GameRunningData.GetRunningData().date.GoByTime(1);
+            TimeGoSubject.GetTimeSubject().UpdateTime(1);
         }
         GameRunningData.GetRunningData().ReturnToMap();
     }

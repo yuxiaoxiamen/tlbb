@@ -209,7 +209,7 @@ public class FirstMapMain : MonoBehaviour
     {
         Random.InitState((int)System.DateTime.Now.Ticks);
         int x = Random.Range(1, 101);
-        if (x <= GameConfig.MapEventProbability)
+        if (!GameRunningData.GetRunningData().isFinal && x <= GameConfig.MapEventProbability)
         {
             isInConversation = true;
             GameRunningData.GetRunningData().playerPreRc = player.RowCol;

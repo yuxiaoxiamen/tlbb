@@ -114,6 +114,7 @@ public class FightAI
         var list = canAttackCounts.OrderByDescending(o => o.Value).ToList();
         if(list.Count != 0)
         {
+            person.PersonObject.GetComponent<PersonAnimationControl>().Action();
             AttackTool.instance.CountAttackRange(list[0].Key, person, FightMain.instance.enemyQueue);
             AttackTool.instance.ShowAttackRange();
             AttackTool.instance.AttackEnemys(person, Enemys);

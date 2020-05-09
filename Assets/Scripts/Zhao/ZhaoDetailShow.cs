@@ -67,7 +67,7 @@ public class ZhaoDetailShow : MonoBehaviour
 
                     var v = GameObject.Find("ProficiencyActual").transform;
 
-                    float parcent = (float)ZhaoMain.fist[num1].Proficiency/100;
+                    float parcent = (float)ZhaoMain.fist[num1].Proficiency/(float)ZhaoMain.fist[num1].GetMaxProFiciency();
                     float xlen = GameObject.Find("ProficiencyBackground").transform.localScale.x;
                     float prex = v.localScale.x;
                     float actualx = xlen * parcent;
@@ -121,7 +121,7 @@ public class ZhaoDetailShow : MonoBehaviour
                     GameObject.Find("ProficiencyActual").GetComponent<SpriteRenderer>().color = new Color32(226, 115, 110, 255);
 
                     var v = GameObject.Find("ProficiencyActual").transform;
-                    float parcent = (float)ZhaoMain.palm[num1].Proficiency/100;
+                    float parcent = (float)ZhaoMain.palm[num1].Proficiency/ (float)ZhaoMain.palm[num1].GetMaxProFiciency();
                     float xlen = GameObject.Find("ProficiencyBackground").transform.localScale.x;
                     float prex = v.localScale.x;
                     float actualx = xlen * parcent;
@@ -176,7 +176,7 @@ public class ZhaoDetailShow : MonoBehaviour
                     GameObject.Find("ProficiencyActual").GetComponent<SpriteRenderer>().color = new Color32(226, 115, 110, 255);
 
                     var v = GameObject.Find("ProficiencyActual").transform;
-                    float parcent = (float)ZhaoMain.finger[num1].Proficiency/100;
+                    float parcent = (float)ZhaoMain.finger[num1].Proficiency/ (float)ZhaoMain.finger[num1].GetMaxProFiciency();
 
                     float xlen = GameObject.Find("ProficiencyBackground").transform.localScale.x;
                     float prex = v.localScale.x;
@@ -231,7 +231,7 @@ public class ZhaoDetailShow : MonoBehaviour
                     GameObject.Find("ProficiencyActual").GetComponent<SpriteRenderer>().color = new Color32(226, 115, 110, 255);
 
                     var v = GameObject.Find("ProficiencyActual").transform;
-                    float parcent = (float)ZhaoMain.knife[num1].Proficiency/100;
+                    float parcent = (float)ZhaoMain.knife[num1].Proficiency/ (float)ZhaoMain.knife[num1].GetMaxProFiciency();
                     float xlen = GameObject.Find("ProficiencyBackground").transform.localScale.x;
                     float prex = v.localScale.x;
                     float actualx = xlen * parcent;
@@ -285,7 +285,7 @@ public class ZhaoDetailShow : MonoBehaviour
                     GameObject.Find("ProficiencyActual").GetComponent<SpriteRenderer>().color = new Color32(226, 115, 110, 255);
 
                     var v = GameObject.Find("ProficiencyActual").transform;
-                    float parcent = (float)ZhaoMain.sword[num1].Proficiency/100;
+                    float parcent = (float)ZhaoMain.sword[num1].Proficiency/ (float)ZhaoMain.sword[num1].GetMaxProFiciency();
                     float xlen = GameObject.Find("ProficiencyBackground").transform.localScale.x;
                     float prex = v.localScale.x;
                     float actualx = xlen * parcent;
@@ -339,7 +339,7 @@ public class ZhaoDetailShow : MonoBehaviour
                     GameObject.Find("ProficiencyActual").GetComponent<SpriteRenderer>().color = new Color32(226, 115, 110, 255);
 
                     var v = GameObject.Find("ProficiencyActual").transform;
-                    float parcent = (float)ZhaoMain.rod[num1].Proficiency/100;
+                    float parcent = (float)ZhaoMain.rod[num1].Proficiency/ (float)ZhaoMain.rod[num1].GetMaxProFiciency();
                     float xlen = GameObject.Find("ProficiencyBackground").transform.localScale.x;
                     float prex = v.localScale.x;
                     float actualx = xlen * parcent;
