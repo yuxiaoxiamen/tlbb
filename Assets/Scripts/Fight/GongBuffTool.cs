@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GongBuffTool
+public class GongBuffTool : MonoBehaviour
 {
-    public static HashSet<Person> FiveTenTriggers { get; set; }
-    public static Dictionary<Person, List<int>> NightSixTriggers { get; set; }
-    public static Dictionary<Person, int> FourteenSixTriggers { get; set; }
-    public static Dictionary<Person, List<int>> FourteenTenTriggers { get; set; }
-    public static bool EnemyHaveFullMapBuff { get; set; }
-    public static bool FriendHaveFullMapBuff { get; set; }
-    public static List<GongHalo> AllHalos { get; set; }
+    public HashSet<Person> FiveTenTriggers { get; set; }
+    public Dictionary<Person, List<int>> NightSixTriggers { get; set; }
+    public Dictionary<Person, int> FourteenSixTriggers { get; set; }
+    public Dictionary<Person, List<int>> FourteenTenTriggers { get; set; }
+    public bool EnemyHaveFullMapBuff { get; set; }
+    public bool FriendHaveFullMapBuff { get; set; }
+    public List<GongHalo> AllHalos { get; set; }
+    public static GongBuffTool instance;
+    private bool isInit = false;
 
-    static GongBuffTool()
+    private void Start()
     {
+        instance = this;
         FiveTenTriggers = new HashSet<Person>();
         NightSixTriggers = new Dictionary<Person, List<int>>();
         FourteenSixTriggers = new Dictionary<Person, int>();
@@ -21,7 +24,31 @@ public class GongBuffTool
         AllHalos = new List<GongHalo>();
     }
 
-    public static void CreateAllHalo(List<Person> friends, List<Person> enemys)
+    private void Update()
+    {
+        if(!isInit && FightMain.instance != null)
+        {
+            foreach (Person person in FightMain.instance.friendQueue)
+            {
+                instance.EffectValueBuff(person);
+                instance.HPBuffTrigger(person);
+                instance.SevenTen(person);
+            }
+            foreach (Person person in FightMain.instance.enemyQueue)
+            {
+                instance.EffectValueBuff(person);
+                instance.HPBuffTrigger(person);
+                instance.SevenTen(person);
+            }
+            instance.EightennTen(FightMain.instance.friendQueue, FightMain.instance.enemyQueue, false);
+            instance.EightennTen(FightMain.instance.enemyQueue, FightMain.instance.friendQueue, true);
+            instance.CreateAllHalo(FightMain.instance.friendQueue, FightMain.instance.enemyQueue);
+            instance.CreateAllHalo(FightMain.instance.enemyQueue, FightMain.instance.friendQueue);
+            isInit = true;
+        }
+    }
+
+    public void CreateAllHalo(List<Person> friends, List<Person> enemys)
     {
         foreach(Person person in friends)
         {
@@ -29,7 +56,7 @@ public class GongBuffTool
         }
     }
 
-    public static void CreateHalo(Person person, List<Person> friends, List<Person> enemys)
+    public void CreateHalo(Person person, List<Person> friends, List<Person> enemys)
     {
         GongHalo halo = null;
         switch (person.SelectedInnerGong.FixData.Id)
@@ -109,7 +136,7 @@ public class GongBuffTool
         }
     }
 
-    public static void HaloPersonMoveListener(Person person, Vector2Int preRc, Vector2Int currentRc)
+    public void HaloPersonMoveListener(Person person, Vector2Int preRc, Vector2Int currentRc)
     {
         foreach(GongHalo halo in AllHalos)
         {
@@ -134,7 +161,7 @@ public class GongBuffTool
         }
     }
 
-    public static void EffectRecoverHalo(Person person)
+    public void EffectRecoverHalo(Person person)
     {
         foreach(GongHalo halo in AllHalos)
         {
@@ -145,7 +172,7 @@ public class GongBuffTool
         }
     }
 
-    public static void HPBuffTrigger(Person person)
+    public void HPBuffTrigger(Person person)
     {
         SetFiveTen(person);
         SixTen(person);
@@ -156,7 +183,7 @@ public class GongBuffTool
         TwentytwoSix(person);
     }
 
-    public static void ResumeGongBuff(Person person)
+    public void ResumeGongBuff(Person person)
     {
         ResumeValueBuff(person);
         ResumeNightSix(person);
@@ -190,7 +217,7 @@ public class GongBuffTool
         }
     }
 
-    public static void EffectDefaultBuff(Person person)
+    public void EffectDefaultBuff(Person person)
     {
         InnerGongFixData gong = person.SelectedInnerGong.FixData;
         int changeHPValue = 0;
@@ -216,7 +243,7 @@ public class GongBuffTool
         }
     }
 
-    public static void GongBuffRevertHPMP(Person person)
+    public void GongBuffRevertHPMP(Person person)
     {
         InnerGongFixData gong = person.SelectedInnerGong.FixData;
         int changeHPValue = 0;
@@ -250,7 +277,7 @@ public class GongBuffTool
         }
     }
 
-    public static void ResumeValueBuff(Person person)
+    public void ResumeValueBuff(Person person)
     {
         InnerGong gong = person.GongBuff.Gong;
         GongBuff gongBuff = person.GongBuff;
@@ -346,7 +373,7 @@ public class GongBuffTool
         }
     }
 
-    public static void EffectValueBuff(Person person)
+    public void EffectValueBuff(Person person)
     {
         InnerGong gong = person.SelectedInnerGong;
         GongBuff gongBuff = new GongBuff
@@ -502,7 +529,7 @@ public class GongBuffTool
         }
     }
 
-    public static int ThreeGradeReduceInjury(Person person, int value)
+    public int ThreeGradeReduceInjury(Person person, int value)
     {
         if(person.SelectedInnerGong.GetGrade() == 3)
         {
@@ -511,7 +538,7 @@ public class GongBuffTool
         return value;
     }
 
-    public static void ZeroSix(Person person)
+    public void ZeroSix(Person person)
     {
         if (person.SelectedInnerGong.FixData.Id == 0 && person.SelectedInnerGong.Rank >= 6)
         {
@@ -519,7 +546,7 @@ public class GongBuffTool
         }
     }
 
-    public static int OneSix(Person person, int value)
+    public int OneSix(Person person, int value)
     {
         int v = 0;
         if(person.SelectedInnerGong.FixData.Id == 1 && person.SelectedInnerGong.Rank >= 6)
@@ -534,7 +561,7 @@ public class GongBuffTool
         return value - v;
     }
 
-    public static void OneTen(Person attacker, Person enemy)
+    public void OneTen(Person attacker, Person enemy)
     {
         if (attacker.SelectedInnerGong.FixData.Id == 1 && attacker.SelectedInnerGong.Rank >= 10)
         {
@@ -544,7 +571,7 @@ public class GongBuffTool
         }
     }
 
-    public static int TwoOne(Person person, int value)
+    public int TwoOne(Person person, int value)
     {
         if (person.SelectedInnerGong.FixData.Id == 2 && person.SelectedInnerGong.Rank >= 1)
         {
@@ -553,7 +580,7 @@ public class GongBuffTool
         return value;
     }
 
-    public static void TwoTen(Person person)
+    public void TwoTen(Person person)
     {
         if (person.SelectedInnerGong.FixData.Id == 2 && person.SelectedInnerGong.Rank >= 10)
         {
@@ -564,7 +591,7 @@ public class GongBuffTool
         }
     }
 
-    public static bool FourOne(Person person)
+    public bool FourOne(Person person)
     {
         if(person.SelectedInnerGong.FixData.Id == 4 && person.SelectedInnerGong.Rank >= 1)
         {
@@ -573,7 +600,7 @@ public class GongBuffTool
         return false;
     }
 
-    public static bool FourSix(Person person)
+    public bool FourSix(Person person)
     {
         if (person.SelectedInnerGong.FixData.Id == 4 && person.SelectedInnerGong.Rank >= 6)
         {
@@ -582,7 +609,7 @@ public class GongBuffTool
         return false;
     }
 
-    public static void FiveSix(Person person)
+    public void FiveSix(Person person)
     {
         if (person.SelectedInnerGong.FixData.Id == 5 && person.SelectedInnerGong.Rank >= 6)
         {
@@ -590,7 +617,7 @@ public class GongBuffTool
         }
     }
 
-    public static void SetFiveTen(Person person)
+    public void SetFiveTen(Person person)
     {
         if (person.SelectedInnerGong.FixData.Id == 5 && person.SelectedInnerGong.Rank >= 10)
         {
@@ -605,7 +632,7 @@ public class GongBuffTool
         }
     }
 
-    public static int TriggerFiveTen(Person person, int value)
+    public int TriggerFiveTen(Person person, int value)
     {
         if (FiveTenTriggers.Contains(person))
         {
@@ -614,7 +641,7 @@ public class GongBuffTool
         return value;
     }
 
-    public static void SixOne(Person attacker, Person enemy)
+    public void SixOne(Person attacker, Person enemy)
     {
         if (attacker.SelectedInnerGong.FixData.Id == 6 && attacker.SelectedInnerGong.Rank >= 1)
         {
@@ -622,7 +649,7 @@ public class GongBuffTool
         }
     }
 
-    public static void SixSix(Person person)
+    public void SixSix(Person person)
     {
         if (person.SelectedInnerGong.FixData.Id == 6 && person.SelectedInnerGong.Rank >= 6)
         {
@@ -630,7 +657,7 @@ public class GongBuffTool
         }
     }
 
-    public static void SixTen(Person person)
+    public void SixTen(Person person)
     {
         if (person.SelectedInnerGong.FixData.Id == 6 && person.SelectedInnerGong.Rank >= 10)
         {
@@ -641,7 +668,7 @@ public class GongBuffTool
         }
     }
 
-    public static void SevenTen(Person person)
+    public void SevenTen(Person person)
     {
         if (person.SelectedInnerGong.FixData.Id == 7 && person.SelectedInnerGong.Rank >= 10)
         {
@@ -652,7 +679,7 @@ public class GongBuffTool
         }
     }
 
-    public static void EightSix(Person attacker, Person enemy)
+    public void EightSix(Person attacker, Person enemy)
     {
         if (attacker.SelectedInnerGong.FixData.Id == 8 && attacker.SelectedInnerGong.Rank >= 6)
         {
@@ -661,7 +688,7 @@ public class GongBuffTool
         }
     }
 
-    public static void EightTen(Person attacker, Person enemy, int value)
+    public void EightTen(Person attacker, Person enemy, int value)
     {
         if (enemy.SelectedInnerGong.FixData.Id == 8 && enemy.SelectedInnerGong.Rank >= 10)
         {
@@ -670,7 +697,7 @@ public class GongBuffTool
         }
     }
 
-    public static void NightSix(Person person)
+    public void NightSix(Person person)
     {
         if (person.SelectedInnerGong.FixData.Id == 9 && person.SelectedInnerGong.Rank >= 6)
         {
@@ -696,7 +723,7 @@ public class GongBuffTool
         }
     }
 
-    public static void ResumeNightSix(Person person)
+    public void ResumeNightSix(Person person)
     {
         if (NightSixTriggers.ContainsKey(person))
         {
@@ -707,7 +734,7 @@ public class GongBuffTool
         }
     }
 
-    public static void NightTen(Person person)
+    public void NightTen(Person person)
     {
         if (person.SelectedInnerGong.FixData.Id == 9 && person.SelectedInnerGong.Rank >= 10)
         {
@@ -718,7 +745,7 @@ public class GongBuffTool
         }
     }
 
-    public static void ElevenTen(Person person)
+    public void ElevenTen(Person person)
     {
         if (person.SelectedInnerGong.FixData.Id == 11 && person.SelectedInnerGong.Rank >= 10)
         {
@@ -726,7 +753,7 @@ public class GongBuffTool
         }
     }
 
-    public static void TwelveSix(Person attacker, Person enemy)
+    public void TwelveSix(Person attacker, Person enemy)
     {
         if (attacker.SelectedInnerGong.FixData.Id == 12 && attacker.SelectedInnerGong.Rank >= 6)
         {
@@ -734,7 +761,7 @@ public class GongBuffTool
         }
     }
 
-    public static bool ThirteenOne(Person person)
+    public bool ThirteenOne(Person person)
     {
         if (person.SelectedInnerGong.FixData.Id == 13 && person.SelectedInnerGong.Rank >= 1)
         {
@@ -743,7 +770,7 @@ public class GongBuffTool
         return false;
     }
 
-    public static void FourteenSix(Person person)
+    public void FourteenSix(Person person)
     {
         if (person.SelectedInnerGong.FixData.Id == 14 && person.SelectedInnerGong.Rank >= 6)
         {
@@ -763,7 +790,7 @@ public class GongBuffTool
         }
     }
 
-    public static void ResumeFourteenSix(Person person)
+    public void ResumeFourteenSix(Person person)
     {
         if (FourteenSixTriggers.ContainsKey(person))
         {
@@ -772,7 +799,7 @@ public class GongBuffTool
         }
     }
 
-    public static void FourteenTen(Person person)
+    public void FourteenTen(Person person)
     {
         if (person.SelectedInnerGong.FixData.Id == 14 && person.SelectedInnerGong.Rank >= 10)
         {
@@ -798,7 +825,7 @@ public class GongBuffTool
         }
     }
 
-    public static void ResumeFourteenTen(Person person)
+    public void ResumeFourteenTen(Person person)
     {
         if (FourteenTenTriggers.ContainsKey(person))
         {
@@ -809,7 +836,7 @@ public class GongBuffTool
         }
     }
 
-    public static void SixteenTen(Person attacker)
+    public void SixteenTen(Person attacker)
     {
         if (attacker.SelectedInnerGong.FixData.Id == 16 && attacker.SelectedInnerGong.Rank >= 10)
         {
@@ -817,7 +844,7 @@ public class GongBuffTool
         }
     }
 
-    public static void TwentytwoSix(Person person)
+    public void TwentytwoSix(Person person)
     {
         if (person.SelectedInnerGong.FixData.Id == 22 && person.SelectedInnerGong.Rank >= 6)
         {
@@ -828,7 +855,7 @@ public class GongBuffTool
         }
     }
 
-    public static void TwentyfourSix(Person person)
+    public void TwentyfourSix(Person person)
     {
         if (person.SelectedInnerGong.FixData.Id == 24 && person.SelectedInnerGong.Rank >= 6)
         {
@@ -836,7 +863,7 @@ public class GongBuffTool
         }
     }
 
-    public static void TwentyfiveSix(Person person)
+    public void TwentyfiveSix(Person person)
     {
         if (person.SelectedInnerGong.FixData.Id == 25 && person.SelectedInnerGong.Rank >= 6)
         {
@@ -844,7 +871,7 @@ public class GongBuffTool
         }
     }
 
-    public static void EightennTen(List<Person> friends, List<Person> enemys, bool isEnemy)
+    public void EightennTen(List<Person> friends, List<Person> enemys, bool isEnemy)
     {
         if (isEnemy)
         {
@@ -882,7 +909,7 @@ public class GongBuffTool
         }
     }
 
-    public static void ResumeEighteenTen(List<Person> friends, List<Person> enemys, bool isEnemy)
+    public void ResumeEighteenTen(List<Person> friends, List<Person> enemys, bool isEnemy)
     {
         if ((isEnemy && EnemyHaveFullMapBuff) || (!isEnemy && FriendHaveFullMapBuff))
         {

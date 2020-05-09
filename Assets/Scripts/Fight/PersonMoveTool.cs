@@ -120,7 +120,7 @@ public class PersonMoveTool
         {
             FightMain.instance.positionToPerson.Add(movePath[movePath.Count - 1], person);
             person.RowCol = movePath[movePath.Count - 1];
-            GongBuffTool.HaloPersonMoveListener(person, preRc, person.RowCol);
+            GongBuffTool.instance.HaloPersonMoveListener(person, preRc, person.RowCol);
         }
     }
 

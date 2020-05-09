@@ -27,6 +27,7 @@ public class LiquorPowerMain : MonoBehaviour
     private GameObject successPanel;
     public GameObject failPanel;
     private bool isShow = false;
+    private bool isCreateSequence = false;
 
     // Start is called before the first frame update
     void Start()
@@ -55,12 +56,6 @@ public class LiquorPowerMain : MonoBehaviour
         startButton.onClick.AddListener(() =>
         {
             isGameStart = true;
-            sequence = DOTween.Sequence();
-            sequence.OnComplete(() =>
-            {
-                isGameStart = false;
-                failPanel.SetActive(true);
-            });
             StartCoroutine(ControlFlash());
             startPanel.SetActive(false);
         });
@@ -169,7 +164,22 @@ public class LiquorPowerMain : MonoBehaviour
 
     public void MoveEnemy(Vector2Int next)
     {
-        sequence.Append(enemy.PersonObject.transform.DOMove(gridDataToObject[next].transform.position, 0.2f));
+        if (!isCreateSequence)
+        {
+            sequence = DOTween.Sequence();
+            sequence.Append(enemy.PersonObject.transform.DOMove(gridDataToObject[next].transform.position, 0.2f));
+            sequence.OnComplete(() =>
+            {
+                isGameStart = false;
+                failPanel.SetActive(true);
+            });
+            isCreateSequence = true;
+        }
+        else
+        {
+            sequence.Append(enemy.PersonObject.transform.DOMove(gridDataToObject[next].transform.position, 0.2f));
+        }
+        
     }
 
     void CreateMaze()

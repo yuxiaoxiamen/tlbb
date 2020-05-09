@@ -5,6 +5,8 @@ using UnityEngine;
 public class RandomSelected : MonoBehaviour
 {
     private GameObject selectedObject;
+    public float minX;
+    public float maxX;
 
     // Start is called before the first frame update
     void Awake()

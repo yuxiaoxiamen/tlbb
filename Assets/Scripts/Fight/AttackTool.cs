@@ -121,18 +121,18 @@ public class AttackTool : MonoBehaviour
             foreach (Person enemy in canAttackEnemys)
             {
                 AttackBuffTool.EnemyGetDeBuff(attacker, enemy);
-                GongBuffTool.SixOne(attacker, enemy);
-                GongBuffTool.EightSix(attacker, enemy);
+                GongBuffTool.instance.SixOne(attacker, enemy);
+                GongBuffTool.instance.EightSix(attacker, enemy);
                 int value = CountHPLoseValue(attacker, enemy);
-                value = GongBuffTool.ThreeGradeReduceInjury(enemy, value);
-                value = GongBuffTool.OneSix(enemy, value);
-                value = GongBuffTool.TwoOne(enemy, value);
-                value = GongBuffTool.TriggerFiveTen(enemy, value);
-                GongBuffTool.OneTen(attacker, enemy);
-                GongBuffTool.EightTen(attacker, enemy, value);
+                value = GongBuffTool.instance.ThreeGradeReduceInjury(enemy, value);
+                value = GongBuffTool.instance.OneSix(enemy, value);
+                value = GongBuffTool.instance.TwoOne(enemy, value);
+                value = GongBuffTool.instance.TriggerFiveTen(enemy, value);
+                GongBuffTool.instance.OneTen(attacker, enemy);
+                GongBuffTool.instance.EightTen(attacker, enemy, value);
                 if (PersonChangeHP(enemy, value, false))
                 {
-                    GongBuffTool.TwoTen(attacker);
+                    GongBuffTool.instance.TwoTen(attacker);
                 }
                 AttackBuffTool.TriggerReboundBuff(attacker, enemy, value);
                 AttackBuffTool.TriggerAbsorbBuff(attacker, enemy);
@@ -174,13 +174,13 @@ public class AttackTool : MonoBehaviour
         int value = 0;
         if (!AttackBuffTool.IsPersonHasInvincibleBuff(enemy))
         {
-            if (!GongBuffTool.ThirteenOne(attacker) && 
-                !GongBuffTool.FourOne(attacker) && ComputeProbability(enemy.Dodge + (100 - attacker.Accuracy)))
+            if (!GongBuffTool.instance.ThirteenOne(attacker) && 
+                !GongBuffTool.instance.FourOne(attacker) && ComputeProbability(enemy.Dodge + (100 - attacker.Accuracy)))
             {
-                GongBuffTool.ZeroSix(enemy);
-                GongBuffTool.FiveSix(enemy);
-                GongBuffTool.SixSix(enemy);
-                GongBuffTool.TwentyfourSix(enemy);
+                GongBuffTool.instance.ZeroSix(enemy);
+                GongBuffTool.instance.FiveSix(enemy);
+                GongBuffTool.instance.SixSix(enemy);
+                GongBuffTool.instance.TwentyfourSix(enemy);
                 SpecialEffectTool.instance.RateEffect(enemy, "闪避");
             }
             else
@@ -201,15 +201,15 @@ public class AttackTool : MonoBehaviour
                 if (ComputeProbability(attacker.Crit))
                 {
                     value *= 2;
-                    GongBuffTool.ElevenTen(attacker);
-                    GongBuffTool.TwelveSix(attacker, enemy);
+                    GongBuffTool.instance.ElevenTen(attacker);
+                    GongBuffTool.instance.TwelveSix(attacker, enemy);
                     SpecialEffectTool.instance.RateEffect(attacker, "暴击");
                 }
 
-                if (!GongBuffTool.FourSix(attacker) && ComputeProbability(enemy.Counterattack))
+                if (!GongBuffTool.instance.FourSix(attacker) && ComputeProbability(enemy.Counterattack))
                 {
-                    GongBuffTool.SixteenTen(enemy);
-                    GongBuffTool.TwentyfiveSix(enemy);
+                    GongBuffTool.instance.SixteenTen(enemy);
+                    GongBuffTool.instance.TwentyfiveSix(enemy);
                     SpecialEffectTool.instance.RateEffect(enemy, "反击");
                 }
             }
@@ -238,14 +238,14 @@ public class AttackTool : MonoBehaviour
         }
         SpecialEffectTool.instance.HPEffect(person, realValue, isAdd);
         FightMain.SetPersonHPSplider(person);
-        GongBuffTool.HPBuffTrigger(person);
+        GongBuffTool.instance.HPBuffTrigger(person);
         return false;
     }
 
     public static void PersonChangeMP(Person person, int value, bool isAdd)
     {
         person.ChangeMP(value, isAdd);
-        GongBuffTool.SevenTen(person);
+        GongBuffTool.instance.SevenTen(person);
     }
 
     private static void PersonDead(Person person)

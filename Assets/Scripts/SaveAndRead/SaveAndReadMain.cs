@@ -133,14 +133,13 @@ public class SaveAndReadMain : MonoBehaviour
 
         nameText.text = saveData.Persons[0].BaseData.Name;
 
-        placeText.text = GetCurrentPlaceString();
+        placeText.text = GetCurrentPlaceString(saveData.GetPlace());
 
         gameTimeText.text = saveData.Date.GetDateText();
     }
 
-    public static string GetCurrentPlaceString()
+    public static string GetCurrentPlaceString(Place currentPlace)
     {
-        Place currentPlace = GameRunningData.GetRunningData().currentPlace;
         if (currentPlace != null)
         {
             if (currentPlace is SecondPlace)

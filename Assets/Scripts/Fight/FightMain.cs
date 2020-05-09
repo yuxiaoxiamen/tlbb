@@ -45,24 +45,19 @@ public class FightMain : MonoBehaviour
         positionToPerson = new Dictionary<Vector2Int, Person>();
         SetFightPerson(friendQueue, 0);
         SetFightPerson(enemyQueue, persons.Count);
+        SetEnemysHPMPEnergy();
         RotateEnemys();
         FightPersonClick.SelectAPerson(GameRunningData.GetRunningData().player);
-        foreach (Person person in friendQueue)
+    }
+
+    void SetEnemysHPMPEnergy()
+    {
+        foreach(Person enemy in enemyQueue)
         {
-            GongBuffTool.EffectValueBuff(person);
-            GongBuffTool.HPBuffTrigger(person);
-            GongBuffTool.SevenTen(person);
+            enemy.ChangeHP(enemy.BaseData.HP, true);
+            enemy.ChangeMP(enemy.BaseData.MP, true);
+            enemy.ChangeEnergy(enemy.BaseData.Energy, true);
         }
-        foreach (Person person in enemyQueue)
-        {
-            GongBuffTool.EffectValueBuff(person);
-            GongBuffTool.HPBuffTrigger(person);
-            GongBuffTool.SevenTen(person);
-        }
-        GongBuffTool.EightennTen(friendQueue, enemyQueue, false);
-        GongBuffTool.EightennTen(enemyQueue, friendQueue, true);
-        GongBuffTool.CreateAllHalo(friendQueue, enemyQueue);
-        GongBuffTool.CreateAllHalo(enemyQueue, friendQueue);
     }
 
     void GetFriendsAndEnemys()
@@ -117,7 +112,6 @@ public class FightMain : MonoBehaviour
         }
         else if(source == FightSource.Contest)
         {
-            
             enemyQueue = new List<Person>
             {
                 contestEnemy
@@ -212,9 +206,9 @@ public class FightMain : MonoBehaviour
     {
         AttackBuffTool.ReduceHPMP(person);
         AttackBuffTool.ReduceBuffDuration(person);
-        GongBuffTool.EffectDefaultBuff(person);
-        GongBuffTool.GongBuffRevertHPMP(person);
-        GongBuffTool.EffectRecoverHalo(person);
+        GongBuffTool.instance.EffectDefaultBuff(person);
+        GongBuffTool.instance.GongBuffRevertHPMP(person);
+        GongBuffTool.instance.EffectRecoverHalo(person);
     }
 
     public void PlayerFinished()
@@ -288,7 +282,7 @@ public class FightMain : MonoBehaviour
             Vector3 personPosition = gridDataToObject[person.RowCol].transform.position;
             GameObject personPrefab = Resources.Load<GameObject>("model/" + person.BaseData.ModelId);
             GameObject personObject = Instantiate(personPrefab, personPosition, Quaternion.identity);
-            personObject.name = (i++) + "";
+            personObject.name = i++ + "";
             persons.Add(person);
             person.PersonObject = personObject;
             positionToPerson.Add(person.RowCol, person);

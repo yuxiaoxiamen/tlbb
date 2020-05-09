@@ -102,21 +102,26 @@ public class SaveData
             team.Add(GlobalData.Persons[id]);
         }
         GameRunningData.GetRunningData().teammates = team;
-        if(CurrentPlace == "")
+        GameRunningData.GetRunningData().currentPlace = GetPlace();
+        GameRunningData.GetRunningData().ReturnToMap();
+    }
+
+    public Place GetPlace()
+    {
+        if (CurrentPlace == "")
         {
-            GameRunningData.GetRunningData().currentPlace = null;
+            return null;
         }
         else if (CurrentPlace.Contains("-"))
         {
             string[] splits = CurrentPlace.Split('-');
             var place = GlobalData.SecondPlaces[int.Parse(splits[1])];
             place.PrePlace = GlobalData.FirstPlaces[int.Parse(splits[0])];
-            GameRunningData.GetRunningData().currentPlace = place;
+            return place;
         }
         else
         {
-            GameRunningData.GetRunningData().currentPlace = GlobalData.FirstPlaces[int.Parse(CurrentPlace)];
+            return GlobalData.FirstPlaces[int.Parse(CurrentPlace)];
         }
-        GameRunningData.GetRunningData().ReturnToMap();
     }
 }

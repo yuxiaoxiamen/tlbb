@@ -9,7 +9,6 @@ public class MedicalCountDown : MonoBehaviour
     public Text text;
     private bool isOnce = false;
     public static bool isGameOver;
-    public static bool isSuccess;
     private GameObject successPanel;
     private GameObject failPanel;
 
@@ -17,7 +16,6 @@ public class MedicalCountDown : MonoBehaviour
     void Start()
     {
         isGameOver = false;
-        isSuccess = false;
         successPanel = GameObject.Find("successPanel");
         successPanel.SetActive(false);
         successPanel.transform.Find("Button").GetComponent<Button>().onClick.AddListener(() =>
@@ -60,7 +58,7 @@ public class MedicalCountDown : MonoBehaviour
     void GameOver()
     {
         isGameOver = true;
-        if (isSuccess)
+        if (MedicalMouseControl.Count == 15)
         {
             int promoteValue = GameRunningData.GetRunningData().player.PromoteMedicalSkill();
             successPanel.transform.Find("tipText").GetComponent<Text>().text +=

@@ -191,6 +191,21 @@ public class ControlDialogue : MonoBehaviour
                 bgTransform.rotation = Quaternion.Euler(0, 180, 0);
             }
         }
+        else
+        {
+            if (conversation.IsLeft)
+            {
+                leftHead.sprite = Resources.Load<Sprite>("head/" + 0);
+                leftName.text = "神秘人";
+                bgTransform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+            else
+            {
+                rightHead.sprite = Resources.Load<Sprite>("head/" + 0);
+                rightName.text = "神秘人";
+                bgTransform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+        }
         StartCoroutine(SetContentText(conversation.Content));
     }
 

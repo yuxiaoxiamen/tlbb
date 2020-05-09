@@ -13,10 +13,10 @@ public class FightInnerGongClick : MonoBehaviour
         button.onClick.AddListener(() =>
         {
             var person = FightPersonClick.currentPerson;
-            GongBuffTool.ResumeGongBuff(person);
+            GongBuffTool.instance.ResumeGongBuff(person);
             person.SelectedInnerGong = person.BaseData.InnerGongs[int.Parse(name)];
-            GongBuffTool.EffectValueBuff(person);
-            GongBuffTool.CreateHalo(person, FightMain.instance.friendQueue, FightMain.instance.enemyQueue);
+            GongBuffTool.instance.EffectValueBuff(person);
+            GongBuffTool.instance.CreateHalo(person, FightMain.instance.friendQueue, FightMain.instance.enemyQueue);
             FightGUI.HideScrollPane();
             FightGUI.ShowBattlePane(FightPersonClick.currentPerson);
         });
