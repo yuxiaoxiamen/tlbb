@@ -82,7 +82,8 @@ public class ItemUse : MonoBehaviour
         RealUse(items[num1]);
         if (items[num1].Number > 0)
         {
-            GameObject.Find("num" + num1.ToString()).gameObject.transform.Find("Text").GetComponent<Text>().text = ItemMain.pellet[num1].Number.ToString();
+            transform.Find("num" + num1.ToString()).gameObject.transform.Find("Text")
+                .GetComponent<Text>().text = items[num1].Number.ToString();
         }
         else
         {
