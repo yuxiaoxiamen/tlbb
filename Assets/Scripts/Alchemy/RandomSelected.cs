@@ -5,8 +5,6 @@ using UnityEngine;
 public class RandomSelected : MonoBehaviour
 {
     private GameObject selectedObject;
-    public float minX;
-    public float maxX;
 
     // Start is called before the first frame update
     void Awake()
@@ -16,16 +14,11 @@ public class RandomSelected : MonoBehaviour
 
     public void SetItem()
     {
-        int randomCount = Random.Range(1, 5);
-        float width = selectedObject.GetComponent<SpriteRenderer>().sprite.bounds.size.x;
-        float maxX = 5 - width * randomCount;
-        float randomX = Random.Range(-5, maxX);
+        float randomScale = Random.Range(0.1f, 0.3f);
+        selectedObject.transform.localScale = new Vector3(randomScale, 1, 1);
+        float maxX = 5f - randomScale * 10 / 2;
+        float minX = -maxX;
+        float randomX = Random.Range(minX, maxX);
         selectedObject.transform.localPosition = new Vector3(randomX, 0, 0);
-        for(int i = 1; i <= randomCount; ++i)
-        {
-            GameObject selectedOj = Instantiate(selectedObject);
-            selectedOj.transform.SetParent(transform);
-            selectedOj.transform.localPosition = new Vector3(randomX + width * i, 0, 0);
-        }
     }
 }
