@@ -59,7 +59,7 @@ public class ControlBottomPanel : MonoBehaviour
         transform.Find("queue").GetComponent<Button>().onClick.AddListener(() =>
         {
             GameRunningData.GetRunningData().SavePlayerMapRc();
-            SceneManager.LoadScene("Team");
+            SceneManager.LoadScene("Group");
         });
         transform.Find("system").GetComponent<Button>().onClick.AddListener(() =>
         {
@@ -90,7 +90,9 @@ public class ControlBottomPanel : MonoBehaviour
         });
         systemPanel.Find("exit").GetComponent<Button>().onClick.AddListener(() =>
         {
-           SceneManager.LoadScene("Start");
+            GlobalData.Init();
+            GameRunningData.GetRunningData().Init();
+            SceneManager.LoadScene("Start");
         });
     }
 

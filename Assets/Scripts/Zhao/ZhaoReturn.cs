@@ -26,7 +26,7 @@ public class ZhaoReturn : MonoBehaviour
             }
             else
             {
-                SceneManager.LoadScene("Team");
+                SceneManager.LoadScene("Group");
             }
         });
     }

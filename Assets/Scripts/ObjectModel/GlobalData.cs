@@ -22,6 +22,11 @@ public class GlobalData
 
     static GlobalData()
     {
+        Init();
+    }
+
+    public static void Init()
+    {
         Persons = new List<Person>();
         ReadItemData();
         ReadWeaponManualData();
@@ -37,18 +42,13 @@ public class GlobalData
         ReadMainDialogueData();
         ReadMainLineConflictData();
         ReadMapObstacle();
-        foreach(Person person in Persons)
+        foreach (Person person in Persons)
         {
-            if(person.BaseData.Id < 65)
+            if (person.BaseData.Id < 65)
             {
                 TimeGoSubject.GetTimeSubject().Attach(person);
             }
         }
-    }
-
-    public static void Init()
-    {
-
     }
 
     static void ReadMapObstacle()

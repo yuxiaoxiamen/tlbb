@@ -5,12 +5,23 @@ using UnityEngine;
 public class LoadMapBgm : MonoBehaviour
 {
     public GameObject bgm;
+    public bool isStart;
     // Start is called before the first frame update
     void Start()
     {
-        if (GameObject.FindGameObjectWithTag("MapBgm") == null)
+        if (isStart)
         {
-            Instantiate(bgm);
+            if (GameObject.FindGameObjectWithTag("StartBgm") == null)
+            {
+                Instantiate(bgm);
+            }
+        }
+        else
+        {
+            if (GameObject.FindGameObjectWithTag("MapBgm") == null)
+            {
+                Instantiate(bgm);
+            }
         }
     }
 }

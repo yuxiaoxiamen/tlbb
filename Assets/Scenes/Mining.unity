@@ -269,8 +269,8 @@ MonoBehaviour:
   startTransform: {fileID: 1274787880}
   angleSpeed: 30
   moveSpeed: 10
-  leftMaxAngle: 150
-  rightMinAngle: 30
+  leftMaxAngle: 160
+  rightMinAngle: 20
   mineralObject: {fileID: 810948269}
 --- !u!120 &150699549
 LineRenderer:

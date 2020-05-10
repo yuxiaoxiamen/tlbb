@@ -49,6 +49,7 @@ public class FightMain : MonoBehaviour
         
         RotateEnemys();
         FightPersonClick.prePerson = null;
+        FightPersonClick.currentPerson = null;
         FightPersonClick.SelectAPerson(GameRunningData.GetRunningData().player);
     }
 
@@ -97,11 +98,12 @@ public class FightMain : MonoBehaviour
                 }
             }
             var teammates = GameRunningData.GetRunningData().teammates;
+            List<Person> removeList = new List<Person>();
             foreach (Person teammate in teammates)
             {
                 if (enemyQueue.Contains(teammate))
                 {
-                    teammates.Remove(teammate);
+                    removeList.Add(teammate);
                 }
                 else
                 {
@@ -110,6 +112,10 @@ public class FightMain : MonoBehaviour
                         friendQueue.Add(teammate);
                     }
                 }
+            }
+            foreach(Person p in removeList)
+            {
+                teammates.Remove(p);
             }
         }
         else if(source == FightSource.Contest)

@@ -88,6 +88,8 @@ public class FightPersonClick : MonoBehaviour
         {
             if (p.ControlState == BattleControlState.Moving)
             {
+                prePerson = currentPerson;
+                currentPerson = p;
                 if (prePerson != null)
                 {
                     FightGridClick.SwitchGridColor(FightMain.instance.gridDataToObject[prePerson.RowCol], FightGridClick.defaultColor);
@@ -98,8 +100,6 @@ public class FightPersonClick : MonoBehaviour
                         FightMain.instance.CountPlayerOver();
                     }
                 }
-                prePerson = currentPerson;
-                currentPerson = p;
                 FightGUI.ShowBattlePane(currentPerson);
                 FightGridClick.moveRange = PersonMoveTool.GenerateMoveRange(currentPerson.RowCol, currentPerson.MoveRank);
                 FightGridClick.ChangeMoveRangeColor(currentPerson, FightGridClick.rangeColor);

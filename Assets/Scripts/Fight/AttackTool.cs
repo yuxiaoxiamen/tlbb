@@ -112,6 +112,7 @@ public class AttackTool : MonoBehaviour
                 TipControl.instance.SetTip("内力不足");
                 return false;
             }
+            PlayAttackMusic(attacker);
             StartCoroutine(attacker.PersonObject.GetComponent<PersonAnimationControl>().Action());
             PersonChangeMP(attacker, mpCost, false);
 
@@ -144,7 +145,6 @@ public class AttackTool : MonoBehaviour
 
             AttackBuffTool.TriggerDubleHitBuff(attacker, canAttackEnemys);
             FightMain.OneRoundOver(attacker);
-            PlayAttackMusic(attacker);
             return true;
         }
         else
@@ -190,14 +190,13 @@ public class AttackTool : MonoBehaviour
                 int mp = attacker.CurrentMP;
                 int energy = attacker.CurrentEnergy;
                 int attackPowerRate = attacker.AttackPowerRate;
-
                 value = (int)(
                     attackPower *
                     (1 + attackPowerRate * 1.0 / 100) *
                     (1 - defend * 0.5 / GameConfig.MaxDefend) *
                     (1 + (mp - GameConfig.StandardMP) * GameConfig.MPEffectRate) *  
                     (1 - (attacker.BaseData.Energy - energy) * 1.0 / 100));
-
+                Debug.Log(value);
                 if (ComputeProbability(attacker.Crit))
                 {
                     value *= 2;

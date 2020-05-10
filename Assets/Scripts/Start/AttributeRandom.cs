@@ -37,7 +37,7 @@ public class AttributeRandom : MonoBehaviour
             if(inputField.text != "")
             {
                 var playerBaseData = GameRunningData.GetRunningData().player.BaseData;
-                playerBaseData.Name = inputField.text;
+                playerBaseData.Name = inputField.text.Trim();
                 playerBaseData.Bi = bi;
                 playerBaseData.Gen = gen;
                 playerBaseData.Wu = wu;
@@ -45,6 +45,8 @@ public class AttributeRandom : MonoBehaviour
                 playerBaseData.Jin = jin;
                 playerBaseData.HP = hp;
                 playerBaseData.MP = mp;
+                GameRunningData.GetRunningData().player.CurrentHP = hp;
+                GameRunningData.GetRunningData().player.CurrentMP = mp;
 
                 SceneManager.LoadScene("Begin");
             }

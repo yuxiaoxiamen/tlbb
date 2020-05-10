@@ -69,7 +69,7 @@ public class KongMain : MonoBehaviour
                     {
                         player.PromoteGong(gong);
                         GameRunningData.GetRunningData().experspance -= GameConfig.ConsultCost[3];
-                        TipControl.instance.SetTip(gong.FixData.Name + "熟练度上升");
+                        TipControl.instance.SetTip("消耗" + GameConfig.ConsultCost[3] + "江湖阅历，使" + gong.FixData.Name + "熟练度上升");
                     }
                 }
                 else if (GameRunningData.GetRunningData().experspance < GameConfig.ConsultCost[inner.GetGrade() - 1])
@@ -83,7 +83,7 @@ public class KongMain : MonoBehaviour
                         Id = inner.Id,
                         FixData = inner.FixData
                     };
-                    TipControl.instance.SetTip(gong.FixData.Name+"学习成功");
+                    TipControl.instance.SetTip("消耗" + GameConfig.ConsultCost[gong.GetGrade() - 1] + "江湖阅历, 学成" + gong.FixData.Name);
                     player.BaseData.InnerGongs.Add(gong);
                     GameRunningData.GetRunningData().experspance -= GameConfig.ConsultCost[gong.GetGrade() - 1];
                 }

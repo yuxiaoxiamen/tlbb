@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TimeGoSubject
 {
-    private List<Person> persons;
+    public List<Person> persons;
     private static TimeGoSubject instance;
     private List<GameDate> mainLineTime;
     private int preUpdateIndex;
@@ -45,14 +45,17 @@ public class TimeGoSubject
         foreach(Person person in persons)
         {
             person.PromoteGong(person.SelectedInnerGong);
-            if(person != GameRunningData.GetRunningData().player && 
+            if(person == GameRunningData.GetRunningData().player || 
                 GameRunningData.GetRunningData().teammates.Contains(person))
             {
-                person.PromoteAttackStyle();
                 for(int i = 1; i <= space; ++i)
                 {
                     person.HpMpEnergyChange();
                 }
+            }
+            else
+            {
+                person.PromoteAttackStyle();
             }
         }
         UpdatePersonPlace();

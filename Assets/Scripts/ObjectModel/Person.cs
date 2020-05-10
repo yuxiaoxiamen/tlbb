@@ -98,7 +98,7 @@ public class Person : ICloneable
         {
             Likability -= num;
         }
-        if (Likability >= 50)
+        if (BaseData.Id < 65 && Likability >= 50)
         {
             if (!BaseData.Interactions.Contains(GlobalData.Interactions[10]))
             {

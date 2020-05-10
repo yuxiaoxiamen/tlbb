@@ -24,7 +24,7 @@ public class KongReturn : MonoBehaviour
             }
             else
             {
-                SceneManager.LoadScene("Team");
+                SceneManager.LoadScene("Group");
             }
         });
     }

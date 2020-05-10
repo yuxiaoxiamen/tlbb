@@ -90,6 +90,7 @@ public class ConfirmOperation : MonoBehaviour
                     }
                     GameRunningData.GetRunningData().money -= allPrice;
                     SetMoneyText();
+                    LikabilityTool.SetStoryLike(item);
                 }
             }
             else

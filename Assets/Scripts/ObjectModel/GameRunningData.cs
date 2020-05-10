@@ -18,6 +18,11 @@ public class GameRunningData
 
     private GameRunningData()
     {
+        Init();
+    }
+
+    public void Init()
+    {
         date = new GameDate(1, 1, 1, 0);
         player = GlobalData.Persons[0];
         player.RowCol = new Vector2Int(46, 50);

@@ -99,7 +99,7 @@ public class GoodDisplay : MonoBehaviour
         var allItems = GameRunningData.GetRunningData().belongings;
         if (isBuy)
         {
-            allItems = GlobalData.Items;
+            allItems = LikabilityTool.GetGoods(storeType);
         }
         foreach (Good item in allItems)
         {

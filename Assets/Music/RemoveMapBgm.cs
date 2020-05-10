@@ -4,14 +4,27 @@ using UnityEngine;
 
 public class RemoveMapBgm : MonoBehaviour
 {
+    public bool isStart;
     // Start is called before the first frame update
     void Start()
     {
-        GameObject mapBgm = GameObject.FindGameObjectWithTag("MapBgm");
-        if (mapBgm != null)
+        if (isStart)
         {
-            Destroy(mapBgm);
+            GameObject startBgm = GameObject.FindGameObjectWithTag("StartBgm");
+            if (startBgm != null)
+            {
+                Destroy(startBgm);
+            }
         }
+        else
+        {
+            GameObject mapBgm = GameObject.FindGameObjectWithTag("MapBgm");
+            if (mapBgm != null)
+            {
+                Destroy(mapBgm);
+            }
+        }
+        
     }
 
     // Update is called once per frame

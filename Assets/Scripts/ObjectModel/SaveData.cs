@@ -134,6 +134,12 @@ public class SaveData
         GameRunningData.GetRunningData().teammates = team;
         GameRunningData.GetRunningData().currentPlace = GetPlace();
         HearsayMain.says = Hearsays;
+        List<Person> persons = new List<Person>();
+        foreach(Person p in TimeGoSubject.GetTimeSubject().persons)
+        {
+            persons.Add(GlobalData.Persons[p.BaseData.Id]);
+        }
+        TimeGoSubject.GetTimeSubject().persons = persons;
         GameRunningData.GetRunningData().ReturnToMap();
     }
 

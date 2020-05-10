@@ -74,24 +74,26 @@ public class ZhaoMain : MonoBehaviour
                     {
                         style.AddExperience(player.CountStyleExperience());
                         GameRunningData.GetRunningData().experspance -= GameConfig.ConsultCost[3];
-                        TipControl.instance.SetTip(style.FixData.Name + "熟练度上升");
+                        TipControl.instance.SetTip("消耗"+ GameConfig.ConsultCost[3] + "江湖阅历，使"+style.FixData.Name + "熟练度上升");
                     }
-                    TipControl.instance.SetTip("已拥有该招式");
-                }
-                else if (GameRunningData.GetRunningData().experspance < GameConfig.ConsultCost[style.GetGrade()])
-                {
-                    TipControl.instance.SetTip("江湖阅历不足");
                 }
                 else
                 {
-                    style = new AttackStyle()
+                    if (GameRunningData.GetRunningData().experspance < GameConfig.ConsultCost[zhao.GetGrade()])
                     {
-                        Id = zhao.Id,
-                        FixData = zhao.FixData
-                    };
-                    TipControl.instance.SetTip(style.FixData.Name+"学习成功");
-                    player.BaseData.AttackStyles.Add(style);
-                    GameRunningData.GetRunningData().experspance -= GameConfig.ConsultCost[style.GetGrade()];
+                        TipControl.instance.SetTip("江湖阅历不足");
+                    }
+                    else
+                    {
+                        style = new AttackStyle()
+                        {
+                            Id = zhao.Id,
+                            FixData = zhao.FixData
+                        };
+                        TipControl.instance.SetTip("消耗" + GameConfig.ConsultCost[style.GetGrade()] + "江湖阅历, 学成"+style.FixData.Name);
+                        player.BaseData.AttackStyles.Add(style);
+                        GameRunningData.GetRunningData().experspance -= GameConfig.ConsultCost[style.GetGrade()];
+                    }
                 }
             });
         }

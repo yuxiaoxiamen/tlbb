@@ -29,19 +29,19 @@ public class Explanation : MonoBehaviour
         switch (gameObject.name.Split('_')[0])
         {
             case "BiLi":
-                text_.GetComponent<TextMesh>().text = "影响暴击率      当前暴击率为： " + GlobalData.Persons[Para_Pass.characterId].Crit*100 + "%";
+                text_.GetComponent<TextMesh>().text = "影响暴击率      当前暴击率为： " + GlobalData.Persons[Para_Pass.characterId].CountCrit() + "%";
                 break;
             case "GenGu":
-                text_.GetComponent<TextMesh>().text = "影响反击率      当前反击率为： " + GlobalData.Persons[Para_Pass.characterId].Counterattack * 100 + "%";
+                text_.GetComponent<TextMesh>().text = "影响反击率      当前反击率为： " + GlobalData.Persons[Para_Pass.characterId].CountCounterattack() + "%";
                 break;
             case "WuXing":
-                text_.GetComponent<TextMesh>().text = "影响学习武学的效率      当前为： ";
+                text_.GetComponent<TextMesh>().text = "影响学习武学的效率";
                 break;
             case "ShenFa":
-                text_.GetComponent<TextMesh>().text = "影响闪避率和移动范围      当前闪避率为： " + GlobalData.Persons[Para_Pass.characterId].Dodge * 100 + "%      当前移动范围为："  + GlobalData.Persons[Para_Pass.characterId].MoveRank;
+                text_.GetComponent<TextMesh>().text = "影响闪避率和移动范围      当前闪避率为： " + GlobalData.Persons[Para_Pass.characterId].CountDodge() + "%      当前移动范围为："  + GlobalData.Persons[Para_Pass.characterId].CountMoveRank();
                 break;
             case "JinGu":
-                text_.GetComponent<TextMesh>().text = "影响防御力      当前防御力为： " + GlobalData.Persons[Para_Pass.characterId].Defend;
+                text_.GetComponent<TextMesh>().text = "影响防御力      当前防御力为： " + GlobalData.Persons[Para_Pass.characterId].CountDefend();
                 break;
 
         }

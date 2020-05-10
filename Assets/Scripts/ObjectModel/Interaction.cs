@@ -74,11 +74,16 @@ public class Interaction
                 break;
             case 5: //治疗
                 var player = GameRunningData.GetRunningData().player;
-                money = (int)(player.CurrentHP * 1.0f / player.BaseData.HP * 100 * 10);
-                if(GameRunningData.GetRunningData().money >= money)
+                money = (int)(player.CurrentHP * 1.0f / player.BaseData.HP * 100 * 10) - LikabilityTool.GetDoctor();
+                if (money <= 0)
+                {
+                    money = 0;
+                }
+                if (GameRunningData.GetRunningData().money >= money)
                 {
                     player.ChangeHP(player.BaseData.HP, true);
                     GameRunningData.GetRunningData().money -= money;
+                    LikabilityTool.PromoteDoctor(1);
                     TipControl.instance.SetTip("花费了" + money + "钱" + "，回复全部生命值");
                 }
                 else
@@ -92,10 +97,15 @@ public class Interaction
                 {
                     return;
                 }
-                money = 50;
+                money = 50 - LikabilityTool.GetInnManager();
+                if (money <= 0)
+                {
+                    money = 0;
+                }
                 if (GameRunningData.GetRunningData().money >= money)
                 {
                     GameRunningData.GetRunningData().money -= money;
+                    LikabilityTool.PromoteInnManager(1);
                     TimeGoSubject.GetTimeSubject().UpdateTime(1);
                     ControlTopPanel.instance.UpdateTimeText();
                     TipControl.instance.SetTip("花费了" + money + "钱" + "，休息了一会儿");
@@ -111,11 +121,16 @@ public class Interaction
                 {
                     return;
                 }
-                money = 100;
+                money = 100 - LikabilityTool.GetBoiteManager();
+                if(money <= 0)
+                {
+                    money = 0;
+                }
                 if (GameRunningData.GetRunningData().money >= money)
                 {
                     GameRunningData.GetRunningData().money -= money;
                     TimeGoSubject.GetTimeSubject().UpdateTime(2);
+                    LikabilityTool.PromoteBoiteManager(1);
                     SceneManager.LoadScene("LiquorPower");
                 }
                 else
@@ -128,11 +143,16 @@ public class Interaction
                 {
                     return;
                 }
-                money = 200;
+                money = 200 - LikabilityTool.GetDoctor();
+                if (money <= 0)
+                {
+                    money = 0;
+                }
                 if (GameRunningData.GetRunningData().money >= money)
                 {
                     GameRunningData.GetRunningData().money -= money;
                     TimeGoSubject.GetTimeSubject().UpdateTime(2);
+                    LikabilityTool.PromoteDoctor(1);
                     SceneManager.LoadScene("MedicalSkill");
                 }
                 else
