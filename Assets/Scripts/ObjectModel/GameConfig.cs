@@ -38,7 +38,7 @@ public class GameConfig
                 IsLeft = true
             }
         };
-        MapEventProbability = 0;
+        MapEventProbability = 1;
         ConsultCost = new List<int>
         {
             10,50,100,1
