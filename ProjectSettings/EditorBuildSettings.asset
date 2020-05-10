@@ -6,11 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/FirstMap.unity
-    guid: 81702d3ed8c621b41a1841d3938f1e81
-  - enabled: 1
     path: Assets/Scenes/Start.unity
     guid: 83b538767c8473547aa8f2f278ecb170
+  - enabled: 1
+    path: Assets/Scenes/FirstMap.unity
+    guid: 81702d3ed8c621b41a1841d3938f1e81
   - enabled: 1
     path: Assets/Scenes/SecondMap.unity
     guid: 9e72cb52498246246a9e66eb47120759
@@ -62,4 +62,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MedicalSkill.unity
     guid: f9136e2589ef7cf488247d6019880645
+  - enabled: 1
+    path: Assets/Scenes/Begin.unity
+    guid: b0197aa2d1af256429f7dbe07791e859
   m_configObjects: {}
