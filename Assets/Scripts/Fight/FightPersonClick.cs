@@ -11,7 +11,6 @@ public class FightPersonClick : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     private void Update()
@@ -89,10 +88,6 @@ public class FightPersonClick : MonoBehaviour
         {
             if (p.ControlState == BattleControlState.Moving)
             {
-                prePerson = currentPerson;
-                currentPerson = p;
-                FightGUI.ShowBattlePane(currentPerson);
-
                 if (prePerson != null)
                 {
                     FightGridClick.SwitchGridColor(FightMain.instance.gridDataToObject[prePerson.RowCol], FightGridClick.defaultColor);
@@ -103,6 +98,9 @@ public class FightPersonClick : MonoBehaviour
                         FightMain.instance.CountPlayerOver();
                     }
                 }
+                prePerson = currentPerson;
+                currentPerson = p;
+                FightGUI.ShowBattlePane(currentPerson);
                 FightGridClick.moveRange = PersonMoveTool.GenerateMoveRange(currentPerson.RowCol, currentPerson.MoveRank);
                 FightGridClick.ChangeMoveRangeColor(currentPerson, FightGridClick.rangeColor);
                 CameraFollow.cameraFollowInstance.SetCameraFollowTarget(p);

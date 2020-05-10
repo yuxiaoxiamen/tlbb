@@ -33,6 +33,7 @@ public class Member_Init : MonoBehaviour
         //    Debug.Log(GlobalData.Persons[i].BaseData.Name);
         //}
         Members = GameRunningData.GetRunningData().teammates;
+        currentPage = 1;
 
         for (int i=0;i<Members.ToArray().Length; ++i)
         {

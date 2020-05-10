@@ -77,7 +77,12 @@ public class GoodDisplay : MonoBehaviour
     {
         itemObject.name = item.Id + "";
         itemObject.transform.Find("name").GetComponent<Text>().text = item.Name;
-        itemObject.transform.Find("price").GetComponent<Text>().text = item.SellingPrice+"钱";
+        int price = item.SellingPrice;
+        if (isBuy)
+        {
+            price = item.BuyingPrice;
+        }
+        itemObject.transform.Find("price").GetComponent<Text>().text = price+"钱";
         itemObject.transform.Find("img").GetComponent<Image>().sprite = Resources.Load<Sprite>("itemIcon/" + item.Id);
         itemObject.GetComponent<Button>().onClick.AddListener(()=>
         {

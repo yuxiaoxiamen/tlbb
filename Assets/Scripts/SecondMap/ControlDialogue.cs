@@ -195,13 +195,13 @@ public class ControlDialogue : MonoBehaviour
         {
             if (conversation.IsLeft)
             {
-                leftHead.sprite = Resources.Load<Sprite>("head/" + 0);
+                leftHead.sprite = Resources.Load<Sprite>("head/-1");
                 leftName.text = "神秘人";
                 bgTransform.rotation = Quaternion.Euler(0, 0, 0);
             }
             else
             {
-                rightHead.sprite = Resources.Load<Sprite>("head/" + 0);
+                rightHead.sprite = Resources.Load<Sprite>("head/-1");
                 rightName.text = "神秘人";
                 bgTransform.rotation = Quaternion.Euler(0, 180, 0);
             }

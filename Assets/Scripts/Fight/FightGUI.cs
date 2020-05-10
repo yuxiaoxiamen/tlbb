@@ -129,8 +129,10 @@ public class FightGUI : MonoBehaviour
         Transform attributeTexts = infoPanel.transform.Find("sx");
         Transform gongText = infoPanel.transform.Find("ng").GetChild(0);
         Transform styleTexts = infoPanel.transform.Find("zs");
+        Text nameText = infoPanel.transform.Find("nameBg").Find("nameText").GetComponent<Text>();
 
         head.GetComponent<Image>().sprite = Resources.Load<Sprite>("head/"+person.BaseData.HeadPortrait);
+        nameText.text = person.BaseData.Name;
 
         Transform hpTransform = attributeTexts.Find("hp");
         Transform mpTransform = attributeTexts.Find("mp");
@@ -406,7 +408,7 @@ public class FightGUI : MonoBehaviour
 
     public static IEnumerator ShowFailPanel()
     {
-        //SoundEffectControl.instance.PlaySoundEffect(8);
+        SoundEffectControl.instance.PlaySoundEffect(8);
         failPanel.SetActive(true);
         yield return new WaitForSeconds(1f);
         StartEndConversation(false);
@@ -418,6 +420,7 @@ public class FightGUI : MonoBehaviour
         {
             if (GameRunningData.GetRunningData().isFinal)
             {
+                FinalMain.isSuccess = isSuccess;
                 SceneManager.LoadScene("Final");
                 return;
             }

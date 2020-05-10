@@ -101,6 +101,34 @@ public class SaveData
         {
             team.Add(GlobalData.Persons[id]);
         }
+        foreach(string key in GlobalData.MainLineConflicts.Keys)
+        {
+            MainLineConflict conflict = GlobalData.MainLineConflicts[key];
+            List<Person> ps = new List<Person>();
+            foreach(Person p in conflict.ZFriends)
+            {
+                ps.Add(GlobalData.Persons[p.BaseData.Id]);
+            }
+            conflict.ZFriends = ps;
+            ps = new List<Person>();
+            foreach (Person p in conflict.ZEnemys)
+            {
+                ps.Add(GlobalData.Persons[p.BaseData.Id]);
+            }
+            conflict.ZEnemys = ps;
+            ps = new List<Person>();
+            foreach (Person p in conflict.FFriends)
+            {
+                ps.Add(GlobalData.Persons[p.BaseData.Id]);
+            }
+            conflict.FFriends = ps;
+            ps = new List<Person>();
+            foreach (Person p in conflict.FEnemys)
+            {
+                ps.Add(GlobalData.Persons[p.BaseData.Id]);
+            }
+            conflict.FEnemys = ps;
+        }
         GameRunningData.GetRunningData().teammates = team;
         GameRunningData.GetRunningData().currentPlace = GetPlace();
         GameRunningData.GetRunningData().ReturnToMap();

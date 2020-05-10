@@ -90,7 +90,7 @@ public class ZhaoMain : MonoBehaviour
                         FixData = zhao.FixData
                     };
                     TipControl.instance.SetTip(style.FixData.Name+"学习成功");
-                    player.BaseData.AttackStyles.Add(zhao);
+                    player.BaseData.AttackStyles.Add(style);
                     GameRunningData.GetRunningData().experspance -= GameConfig.ConsultCost[style.GetGrade()];
                 }
             });

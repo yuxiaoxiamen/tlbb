@@ -46,7 +46,11 @@ public class AttributeRandom : MonoBehaviour
                 playerBaseData.HP = hp;
                 playerBaseData.MP = mp;
 
-                SceneManager.LoadScene("FirstMap");
+                SceneManager.LoadScene("Begin");
+            }
+            else
+            {
+                TipControl.instance.SetTip("名字还没填写");
             }
         });
     }

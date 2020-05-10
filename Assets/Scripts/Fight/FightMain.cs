@@ -43,10 +43,12 @@ public class FightMain : MonoBehaviour
         //TestData();
         persons = new List<Person>();
         positionToPerson = new Dictionary<Vector2Int, Person>();
+        SetEnemysHPMPEnergy();
         SetFightPerson(friendQueue, 0);
         SetFightPerson(enemyQueue, persons.Count);
-        SetEnemysHPMPEnergy();
+        
         RotateEnemys();
+        FightPersonClick.prePerson = null;
         FightPersonClick.SelectAPerson(GameRunningData.GetRunningData().player);
     }
 
@@ -286,8 +288,8 @@ public class FightMain : MonoBehaviour
             persons.Add(person);
             person.PersonObject = personObject;
             positionToPerson.Add(person.RowCol, person);
-            SetPersonHPSplider(person);
             person.InitAttribute();
+            SetPersonHPSplider(person);
             SetHPSpliderColor(person);
         }
     }
@@ -441,14 +443,14 @@ public class FightMain : MonoBehaviour
         enemyQueue = new List<Person>();
         Person player = GameRunningData.GetRunningData().player;
         player.RowCol = new Vector2Int(12, 3);
-        Person friend1 = GlobalData.Persons[13];
+        Person friend1 = GlobalData.Persons[2];
         friend1.RowCol = new Vector2Int(12, 6);
         Person enemy1 = GlobalData.Persons[3];
         enemy1.RowCol = new Vector2Int(9, 3);
         Person enemy2 = GlobalData.Persons[4];
         enemy2.RowCol = new Vector2Int(0, 9);
-        player.BaseData.ModelId = 22;
-        friend1.BaseData.ModelId = 7;
+        player.BaseData.ModelId = 0;
+        friend1.BaseData.ModelId = 22;
         enemy1.BaseData.ModelId = 14;
         enemy2.BaseData.ModelId = 16;
         player.CurrentHP = player.BaseData.HP = 10000;

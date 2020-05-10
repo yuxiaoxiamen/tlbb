@@ -269,8 +269,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49073ebdbfe53534d9c6ef801f36b119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newButton: {fileID: 0}
-  oldButton: {fileID: 0}
+  newButton: {fileID: 1441565518}
+  oldButton: {fileID: 1553183241}
   quitButton: {fileID: 953764772}
 --- !u!1 &927724928
 GameObject:

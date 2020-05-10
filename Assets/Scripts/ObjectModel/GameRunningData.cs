@@ -21,6 +21,7 @@ public class GameRunningData
         date = new GameDate(1, 1, 1, 0);
         player = GlobalData.Persons[0];
         player.RowCol = new Vector2Int(46, 50);
+        playerPreRc = player.RowCol;
         currentPlace = null;
         isFinal = false;
         money = 50000;   //测试数据

@@ -11,7 +11,7 @@ public class HPSplider : MonoBehaviour
     public GameObject HPObjectClone;
     private Vector3 EnemySceenPosition;
 
-    void Awake()
+    void Start()
     {
         //获取放HP血条的父物体
         HPParent = GameObject.Find("HPParent").transform;

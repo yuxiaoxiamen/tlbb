@@ -102,7 +102,7 @@ public class Person : ICloneable
         {
             if (!BaseData.Interactions.Contains(GlobalData.Interactions[10]))
             {
-                BaseData.Interactions.RemoveAt(FightMain.contestEnemy.BaseData.Interactions.Count - 1);
+                BaseData.Interactions.RemoveAt(BaseData.Interactions.Count - 1);
                 BaseData.Interactions.Add(GlobalData.Interactions[10]);
                 BaseData.Interactions.Add(GlobalData.Interactions[11]);
             }
