@@ -77,18 +77,20 @@ public class ControlBottomPanel : MonoBehaviour
         systemPanel.Find("save").GetComponent<Button>().onClick.AddListener(() =>
         {
             GameRunningData.GetRunningData().SavePlayerMapRc();
+            SaveAndReadMain.isStartPre = false;
             SaveMouseControl.isSave = true;
             SceneManager.LoadScene("SaveAndRead");
         });
         systemPanel.Find("read").GetComponent<Button>().onClick.AddListener(() =>
         {
             GameRunningData.GetRunningData().SavePlayerMapRc();
+            SaveAndReadMain.isStartPre = false;
             SaveMouseControl.isSave = false;
             SceneManager.LoadScene("SaveAndRead");
         });
         systemPanel.Find("exit").GetComponent<Button>().onClick.AddListener(() =>
         {
-           // SceneManager.LoadScene("SaveAndRead");
+           SceneManager.LoadScene("Start");
         });
     }
 

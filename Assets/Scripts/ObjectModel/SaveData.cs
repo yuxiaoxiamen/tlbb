@@ -17,6 +17,7 @@ public class SaveData
     public List<int> PlayerRc { get; set; }
     public int Money { get; set; }
     public int Experspance { get; set; }
+    public List<string> Hearsays { get; set; }
 
     public SaveData(int number)
     {
@@ -47,6 +48,7 @@ public class SaveData
         PlayerRc = new List<int> { rData.playerPreRc.x, rData.playerPreRc.y };
         Money = rData.money;
         Experspance = rData.experspance;
+        Hearsays = HearsayMain.says;
     }
 
     public void ResumeData()
@@ -131,6 +133,7 @@ public class SaveData
         }
         GameRunningData.GetRunningData().teammates = team;
         GameRunningData.GetRunningData().currentPlace = GetPlace();
+        HearsayMain.says = Hearsays;
         GameRunningData.GetRunningData().ReturnToMap();
     }
 

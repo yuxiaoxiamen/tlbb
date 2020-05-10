@@ -19,6 +19,7 @@ public class ControlButtonClick : MonoBehaviour
         oldButton.onClick.AddListener(() =>
         {
             SaveMouseControl.isSave = false;
+            SaveAndReadMain.isStartPre = true;
             SceneManager.LoadScene("SaveAndRead");
         });
         quitButton.onClick.AddListener(() =>

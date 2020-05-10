@@ -5,6 +5,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class SaveAndReadMain : MonoBehaviour
@@ -17,6 +18,7 @@ public class SaveAndReadMain : MonoBehaviour
     public static SaveAndReadMain instance;
     private string savePath;
     public Button returnButton;
+    public static bool isStartPre;
 
     // Start is called before the first frame update
     void Start()
@@ -44,7 +46,14 @@ public class SaveAndReadMain : MonoBehaviour
         }
         returnButton.onClick.AddListener(() =>
         {
-            GameRunningData.GetRunningData().ReturnToMap();
+            if (isStartPre)
+            {
+                SceneManager.LoadScene("Start");
+            }
+            else
+            {
+                GameRunningData.GetRunningData().ReturnToMap();
+            }
         });
     }
 
