@@ -117,6 +117,7 @@ public class FightMain : MonoBehaviour
             {
                 teammates.Remove(p);
             }
+            friendQueue.Add(GameRunningData.GetRunningData().player);
         }
         else if(source == FightSource.Contest)
         {
@@ -124,18 +125,42 @@ public class FightMain : MonoBehaviour
             {
                 contestEnemy
             };
+            friendQueue.Add(GameRunningData.GetRunningData().player);
         }
         else if(source == FightSource.Encounter)
         {
             friendQueue.AddRange(GameRunningData.GetRunningData().teammates);
-            
-            for(int i = 1; i <= (friendQueue.Count + 1) * 2; ++i)
+            friendQueue.Add(GameRunningData.GetRunningData().player);
+            int biCount = 0;
+            int genCount = 0;
+            int shenCount = 0;
+            int jinCount = 0;
+            int hpCount = 0;
+            int mpCount = 0;
+            foreach (Person p in friendQueue)
             {
-                enemyQueue.Add((Person)GlobalData.Persons[94].Clone());
+                biCount += p.BaseData.Bi;
+                genCount += p.BaseData.Gen;
+                shenCount += p.BaseData.Shen;
+                jinCount += p.BaseData.Jin;
+                hpCount += p.BaseData.HP;
+                mpCount += p.BaseData.MP;
             }
+
+            for (int i = 1; i <= friendQueue.Count; ++i)
+            {
+                var enemy = (Person)GlobalData.Persons[94].Clone();
+                enemy.BaseData.Bi = (int)(biCount * 1.2f  / friendQueue.Count);
+                enemy.BaseData.Gen = (int)(genCount * 1.2f / friendQueue.Count);
+                enemy.BaseData.Shen = (int)(shenCount * 1.2f / friendQueue.Count);
+                enemy.BaseData.Jin = (int)(genCount * 1.2f / friendQueue.Count);
+                enemy.BaseData.HP = (int)(hpCount * 1.2f / friendQueue.Count);
+                enemy.BaseData.MP = (int)(mpCount * 1.2f / friendQueue.Count);
+                enemy.BaseData.AttackStyles[0].Rank = 10;
+                enemyQueue.Add(enemy);
+            }
+            
         }
-        
-        friendQueue.Add(GameRunningData.GetRunningData().player);
     }
 
     void SetPersonRowCol(List<Person> persons, bool isEnemy)
@@ -455,7 +480,7 @@ public class FightMain : MonoBehaviour
         enemy1.RowCol = new Vector2Int(9, 3);
         Person enemy2 = GlobalData.Persons[4];
         enemy2.RowCol = new Vector2Int(0, 9);
-        player.BaseData.ModelId = 0;
+        player.BaseData.ModelId = 11;
         friend1.BaseData.ModelId = 22;
         enemy1.BaseData.ModelId = 14;
         enemy2.BaseData.ModelId = 16;
@@ -468,10 +493,10 @@ public class FightMain : MonoBehaviour
 
         friendQueue.Add(player);
         
-        friendQueue.Add(friend1);
+        //friendQueue.Add(friend1);
         enemyQueue.Add(enemy1);
         
-        enemyQueue.Add(enemy2);
+        //enemyQueue.Add(enemy2);
     }
 }
 

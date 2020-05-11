@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class FightInnerGongClick : MonoBehaviour
@@ -10,8 +8,7 @@ public class FightInnerGongClick : MonoBehaviour
     void Start()
     {
         button = GetComponent<Button>();
-        button.onClick.AddListener(() =>
-        {
+        button.onClick.AddListener(() =>{
             var person = FightPersonClick.currentPerson;
             GongBuffTool.instance.ResumeGongBuff(person);
             person.SelectedInnerGong = person.BaseData.InnerGongs[int.Parse(name)];

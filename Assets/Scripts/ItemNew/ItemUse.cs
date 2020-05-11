@@ -32,19 +32,21 @@ public class ItemUse : MonoBehaviour
                 case "Alcohol":
                     if (num1 < ItemMain.alcohol.Count)
                     {
+                        SoundEffectControl.instance.PlaySoundEffect(1);
                         UseItem(num1, ItemMain.alcohol, out effect);
                     }
                     break;
                 case "Food":
                     if (num1 < ItemMain.food.Count)
                     {
+                        SoundEffectControl.instance.PlaySoundEffect(0);
                         UseItem(num1, ItemMain.food, out effect);
                     }
                     break;
                 case "Pellet":
                     if (num1 < ItemMain.pellet.Count)
                     {
-
+                        SoundEffectControl.instance.PlaySoundEffect(2);
                         UseItem(num1, ItemMain.pellet, out effect);
                     }
                     break;
@@ -166,6 +168,7 @@ public class ItemUse : MonoBehaviour
 
     void SwapWeapon(Good weapon, out string effect, out string tittle)
     {
+        SoundEffectControl.instance.PlaySoundEffect(3);
         if (weapon.Name.Equals(ItemMain.equipmentNow))
         {
             effect = "  佩戴武器已取下，切换至空手状态 ";

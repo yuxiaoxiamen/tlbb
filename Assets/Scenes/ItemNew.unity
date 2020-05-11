@@ -5625,6 +5625,100 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6d5a7f1274f8a649b053ec4cbd56854, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &1134650014
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8904976196876675598, guid: 7071f649dfaed8c46b28c3c6496ddd04,
+        type: 3}
+      propertyPath: m_Name
+      value: soundEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 936006578372052533, guid: 7071f649dfaed8c46b28c3c6496ddd04,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 936006578372052533, guid: 7071f649dfaed8c46b28c3c6496ddd04,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 936006578372052533, guid: 7071f649dfaed8c46b28c3c6496ddd04,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 936006578372052533, guid: 7071f649dfaed8c46b28c3c6496ddd04,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 936006578372052533, guid: 7071f649dfaed8c46b28c3c6496ddd04,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 936006578372052533, guid: 7071f649dfaed8c46b28c3c6496ddd04,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 936006578372052533, guid: 7071f649dfaed8c46b28c3c6496ddd04,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 936006578372052533, guid: 7071f649dfaed8c46b28c3c6496ddd04,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 936006578372052533, guid: 7071f649dfaed8c46b28c3c6496ddd04,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 936006578372052533, guid: 7071f649dfaed8c46b28c3c6496ddd04,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 936006578372052533, guid: 7071f649dfaed8c46b28c3c6496ddd04,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114877654426361944, guid: 7071f649dfaed8c46b28c3c6496ddd04,
+        type: 3}
+      propertyPath: clips.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114877654426361944, guid: 7071f649dfaed8c46b28c3c6496ddd04,
+        type: 3}
+      propertyPath: clips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: ba6ba36cc6e23774c9be526ba7cf74f7, type: 3}
+    - target: {fileID: 114877654426361944, guid: 7071f649dfaed8c46b28c3c6496ddd04,
+        type: 3}
+      propertyPath: clips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: b1daa4b1c6ad613449c45ce495ad93b3, type: 3}
+    - target: {fileID: 114877654426361944, guid: 7071f649dfaed8c46b28c3c6496ddd04,
+        type: 3}
+      propertyPath: clips.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: c00382971fa14e947b0862de05a03ed6, type: 3}
+    - target: {fileID: 114877654426361944, guid: 7071f649dfaed8c46b28c3c6496ddd04,
+        type: 3}
+      propertyPath: clips.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: bebeac9fe6568c1498f022df6830ffc2, type: 3}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7071f649dfaed8c46b28c3c6496ddd04, type: 3}
 --- !u!1 &1152049347
 GameObject:
   m_ObjectHideFlags: 0
@@ -7688,6 +7782,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 972ff51cdb7e29c4f9bc435815704b9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  item: []
 --- !u!1 &1524265625
 GameObject:
   m_ObjectHideFlags: 0

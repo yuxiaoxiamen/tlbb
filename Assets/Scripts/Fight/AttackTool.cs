@@ -196,7 +196,6 @@ public class AttackTool : MonoBehaviour
                     (1 - defend * 0.5 / GameConfig.MaxDefend) *
                     (1 + (mp - GameConfig.StandardMP) * GameConfig.MPEffectRate) *  
                     (1 - (attacker.BaseData.Energy - energy) * 1.0 / 100));
-                Debug.Log(value);
                 if (ComputeProbability(attacker.Crit))
                 {
                     value *= 2;

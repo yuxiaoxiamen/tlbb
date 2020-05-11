@@ -471,6 +471,15 @@ public class FightGUI : MonoBehaviour
                 ControlDialogue.instance.StartConversation(contestConversation, () =>
                 {
                     FightMain.contestEnemy.ChangeLikability(20, true);
+                    foreach(AttackStyle style in FightMain.contestEnemy.BaseData.AttackStyles)
+                    {
+                        style.Rank += 2;
+                        style.Proficiency = 0;
+                        if(style.Rank >= 10)
+                        {
+                            style.Rank = 10;
+                        }
+                    }
                     EndFight();
                 });
             }

@@ -74,7 +74,12 @@ public class Interaction
                 break;
             case 5: //治疗
                 var player = GameRunningData.GetRunningData().player;
-                money = (int)(player.CurrentHP * 1.0f / player.BaseData.HP * 100 * 10) - LikabilityTool.GetDoctor();
+                money = (int)(player.CurrentHP * 1.0f / player.BaseData.HP * 100 * 10);
+                foreach (Person p in GameRunningData.GetRunningData().teammates)
+                {
+                    money += (int)(p.CurrentHP * 1.0f / p.BaseData.HP * 100 * 10);
+                }
+                money -= LikabilityTool.GetDoctor();
                 if (money <= 0)
                 {
                     money = 0;
@@ -84,7 +89,7 @@ public class Interaction
                     player.ChangeHP(player.BaseData.HP, true);
                     GameRunningData.GetRunningData().money -= money;
                     LikabilityTool.PromoteDoctor(1);
-                    TipControl.instance.SetTip("花费了" + money + "钱" + "，回复全部生命值");
+                    TipControl.instance.SetTip("花费了" + money + "钱" + "，回复队伍全部生命值");
                 }
                 else
                 {
