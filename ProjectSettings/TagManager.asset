@@ -4,8 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Buff
   - Mineral
+  - Buff
   - MapBgm
   - StartBgm
   layers:
@@ -17,8 +17,8 @@ TagManager:
   - UI
   - 
   - 
-  - PostProcessing
-  - high
+  - 
+  - 
   - 
   - 
   - 
@@ -46,5 +46,5 @@ TagManager:
     uniqueID: 0
     locked: 0
   - name: foreground
-    uniqueID: 950408697
+    uniqueID: 508194427
     locked: 0

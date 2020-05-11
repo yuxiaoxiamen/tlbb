@@ -31,6 +31,7 @@ public class PersonAnimationControl : MonoBehaviour
             AnimatorOverrideController overrideController = new AnimatorOverrideController(animator.runtimeAnimatorController);
             overrideController["move"] = Resources.Load("animation/" + modelId + "move") as AnimationClip;
             overrideController["action"] = Resources.Load("animation/" + modelId + "action") as AnimationClip;
+            overrideController["stand"] = Resources.Load("animation/" + modelId + "stand") as AnimationClip;
             animator.runtimeAnimatorController = overrideController;
         }
         else

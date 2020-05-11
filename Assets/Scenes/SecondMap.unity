@@ -208,6 +208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bgm: {fileID: 5600312798163466470, guid: 4907edc669c50bc4396d426164414071, type: 3}
+  isStart: 0
 --- !u!1 &249404671
 GameObject:
   m_ObjectHideFlags: 0
@@ -970,6 +971,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2104078479045606125, guid: be9185fb03b5fb74392b4549c2725c29,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.00004749402
+      objectReference: {fileID: 0}
     - target: {fileID: 6727251054329887083, guid: be9185fb03b5fb74392b4549c2725c29,
         type: 3}
       propertyPath: m_AnchorMin.x
@@ -993,6 +999,11 @@ PrefabInstance:
     - target: {fileID: 1266787072879852732, guid: be9185fb03b5fb74392b4549c2725c29,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1266787072879852732, guid: be9185fb03b5fb74392b4549c2725c29,
+        type: 3}
+      propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5805410890121481696, guid: be9185fb03b5fb74392b4549c2725c29,

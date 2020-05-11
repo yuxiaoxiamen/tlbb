@@ -45,13 +45,20 @@ public class TimeGoSubject
         foreach(Person person in persons)
         {
             person.PromoteGong(person.SelectedInnerGong);
-            if(person == GameRunningData.GetRunningData().player || 
-                GameRunningData.GetRunningData().teammates.Contains(person))
+            if(person == GameRunningData.GetRunningData().player)
             {
                 for(int i = 1; i <= space; ++i)
                 {
                     person.HpMpEnergyChange();
                 }
+            }
+            else if (GameRunningData.GetRunningData().teammates.Contains(person))
+            {
+                for (int i = 1; i <= space; ++i)
+                {
+                    person.HpMpEnergyChange();
+                }
+                person.ChangeEnergy(100, true);
             }
             else
             {

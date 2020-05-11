@@ -76,6 +76,11 @@ public class FightMain : MonoBehaviour
                 foreach(Person person in conflict.ZFriends)
                 {
                     friendQueue.Add(person);
+                    if (!GameRunningData.GetRunningData().teammates.Contains(person))
+                    {
+                        person.CurrentHP = person.BaseData.HP;
+                        person.CurrentMP = person.BaseData.MP;
+                    }
                     person.ChangeLikability(30, true);
                 }
                 foreach (Person person in conflict.ZEnemys)
@@ -89,6 +94,11 @@ public class FightMain : MonoBehaviour
                 foreach (Person person in conflict.FFriends)
                 {
                     friendQueue.Add(person);
+                    if (!GameRunningData.GetRunningData().teammates.Contains(person))
+                    {
+                        person.CurrentHP = person.BaseData.HP;
+                        person.CurrentMP = person.BaseData.MP;
+                    }
                     person.ChangeLikability(30, true);
                 }
                 foreach (Person person in conflict.FEnemys)
@@ -480,10 +490,10 @@ public class FightMain : MonoBehaviour
         enemy1.RowCol = new Vector2Int(9, 3);
         Person enemy2 = GlobalData.Persons[4];
         enemy2.RowCol = new Vector2Int(0, 9);
-        player.BaseData.ModelId = 11;
-        friend1.BaseData.ModelId = 22;
-        enemy1.BaseData.ModelId = 14;
-        enemy2.BaseData.ModelId = 16;
+        player.BaseData.ModelId = 34;
+        friend1.BaseData.ModelId = 35;
+        enemy1.BaseData.ModelId = 31;
+        enemy2.BaseData.ModelId = 33;
         player.CurrentHP = player.BaseData.HP = 10000;
         friend1.CurrentHP = friend1.BaseData.HP = 1000;
         enemy1.CurrentHP = enemy1.BaseData.HP = 10000;
@@ -493,10 +503,10 @@ public class FightMain : MonoBehaviour
 
         friendQueue.Add(player);
         
-        //friendQueue.Add(friend1);
+        friendQueue.Add(friend1);
         enemyQueue.Add(enemy1);
         
-        //enemyQueue.Add(enemy2);
+        enemyQueue.Add(enemy2);
     }
 }
 

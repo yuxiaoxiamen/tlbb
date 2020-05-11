@@ -9,41 +9,32 @@ EditorBuildSettings:
     path: Assets/Scenes/Start.unity
     guid: 83b538767c8473547aa8f2f278ecb170
   - enabled: 1
-    path: Assets/Scenes/FirstMap.unity
-    guid: 81702d3ed8c621b41a1841d3938f1e81
-  - enabled: 1
-    path: Assets/Scenes/SecondMap.unity
-    guid: 9e72cb52498246246a9e66eb47120759
-  - enabled: 1
-    path: Assets/Scenes/Fight.unity
-    guid: b43c7efe4a3e65b46b68a314e1d6cdb2
-  - enabled: 1
-    path: Assets/Scenes/ThridMap.unity
-    guid: ff5f5d27e0075e847833a05d78e08cc3
-  - enabled: 1
-    path: Assets/Scenes/Forge.unity
-    guid: 990eba9a24c65cf43b6683b166462143
-  - enabled: 1
-    path: Assets/Scenes/CutUp.unity
-    guid: d7536a9bf0586984894c85a83b65a78b
-  - enabled: 1
-    path: Assets/Scenes/Mining.unity
-    guid: 2fd804dc2dbf9624299dc51077467c59
-  - enabled: 1
     path: Assets/Scenes/Alchemy.unity
     guid: 259ff186e8408b34c85fb6ad28034e11
   - enabled: 1
     path: Assets/Scenes/BasicAttributes.unity
     guid: 7308ce9b5cd42a440835eaab37c5bc26
   - enabled: 1
-    path: Assets/Scenes/LiquorPower.unity
-    guid: 7ac8c1ec376e1c844bf10da588308b27
+    path: Assets/Scenes/Begin.unity
+    guid: b0197aa2d1af256429f7dbe07791e859
   - enabled: 1
-    path: Assets/Scenes/RandomAttribute.unity
-    guid: fb97fd532f7585d4b9b002152966693f
+    path: Assets/Scenes/CutUp.unity
+    guid: d7536a9bf0586984894c85a83b65a78b
   - enabled: 1
-    path: Assets/Scenes/SaveAndRead.unity
-    guid: 0ac3eb9e1fc224246bdb5f62707c1f1c
+    path: Assets/Scenes/Fight.unity
+    guid: b43c7efe4a3e65b46b68a314e1d6cdb2
+  - enabled: 1
+    path: Assets/Scenes/Final.unity
+    guid: c292573b680cce549a3c39b6b202e6d3
+  - enabled: 1
+    path: Assets/Scenes/FirstMap.unity
+    guid: 81702d3ed8c621b41a1841d3938f1e81
+  - enabled: 1
+    path: Assets/Scenes/Forge.unity
+    guid: 990eba9a24c65cf43b6683b166462143
+  - enabled: 1
+    path: Assets/Scenes/Group.unity
+    guid: 58ee4ba9fe6445e4d96abc4483874a62
   - enabled: 1
     path: Assets/Scenes/ItemNew.unity
     guid: bf081bc68543c88489f64f8a4c7c4e01
@@ -51,18 +42,27 @@ EditorBuildSettings:
     path: Assets/Scenes/Kong.unity
     guid: 3e3ef5b8e34143d4982ef954eb5022b1
   - enabled: 1
-    path: Assets/Scenes/Zhao.unity
-    guid: b062e8d8c7f81884cb858fe97e9ce4a4
-  - enabled: 1
-    path: Assets/Scenes/Final.unity
-    guid: c292573b680cce549a3c39b6b202e6d3
+    path: Assets/Scenes/LiquorPower.unity
+    guid: 7ac8c1ec376e1c844bf10da588308b27
   - enabled: 1
     path: Assets/Scenes/MedicalSkill.unity
     guid: f9136e2589ef7cf488247d6019880645
   - enabled: 1
-    path: Assets/Scenes/Begin.unity
-    guid: b0197aa2d1af256429f7dbe07791e859
+    path: Assets/Scenes/Mining.unity
+    guid: 2fd804dc2dbf9624299dc51077467c59
   - enabled: 1
-    path: Assets/Scenes/Group.unity
-    guid: 58ee4ba9fe6445e4d96abc4483874a62
+    path: Assets/Scenes/RandomAttribute.unity
+    guid: fb97fd532f7585d4b9b002152966693f
+  - enabled: 1
+    path: Assets/Scenes/SaveAndRead.unity
+    guid: 0ac3eb9e1fc224246bdb5f62707c1f1c
+  - enabled: 1
+    path: Assets/Scenes/SecondMap.unity
+    guid: 9e72cb52498246246a9e66eb47120759
+  - enabled: 1
+    path: Assets/Scenes/ThridMap.unity
+    guid: ff5f5d27e0075e847833a05d78e08cc3
+  - enabled: 1
+    path: Assets/Scenes/Zhao.unity
+    guid: b062e8d8c7f81884cb858fe97e9ce4a4
   m_configObjects: {}

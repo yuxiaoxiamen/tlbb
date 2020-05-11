@@ -114,7 +114,7 @@ public class PersonMoveTool
             realPath.Add(gridObject.transform.position);
         }
         person.PersonObject.GetComponent<PersonAnimationControl>().Move();
-        SoundEffectControl.instance.PlaySoundEffect(0);
+        SoundEffectControl.instance.PlaySoundEffect(10);
         Move(person, realPath, speed, finishAction);
         if(movePath.Count > 0)
         {

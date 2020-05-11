@@ -82,81 +82,81 @@ public class LikabilityTool
         return GlobalData.Persons[85].Likability;
     }
 
-    public static void SetStoryLike(Good item)
+    public static void SetStoryLike(Good item, int number)
     {
         if(item.Type == ItemKind.Alcohol)
         {
             if (item.Id <= 4)
             {
-                PromoteBartender(1);
+                PromoteBartender(1 * number);
             }
             else if (item.Id <= 7)
             {
-                PromoteBartender(2);
+                PromoteBartender(2 * number);
             }
             else
             {
-                PromoteBartender(3);
+                PromoteBartender(3 * number);
             }
         }
         else if(item.Type == ItemKind.Food)
         {
             if (item.Id <= 14)
             {
-                PromoteWaiter(1);
+                PromoteWaiter(1 * number);
             }
             else if (item.Id <= 17)
             {
-                PromoteWaiter(2);
+                PromoteWaiter(2 * number);
             }
             else
             {
-                PromoteWaiter(3);
+                PromoteWaiter(3 * number);
             }
         }
         else if(item.Type == ItemKind.Sword)
         {
             if (item.Id <= 30)
             {
-                PromoteBlacksmith(1);
+                PromoteBlacksmith(1 * number);
             }
             else if (item.Id <= 34)
             {
-                PromoteBlacksmith(2);
+                PromoteBlacksmith(2 * number);
             }
             else
             {
-                PromoteBlacksmith(3);
+                PromoteBlacksmith(3 * number);
             }
         }
         else if (item.Type == ItemKind.Knife)
         {
             if (item.Id <= 46)
             {
-                PromoteBlacksmith(1);
+                PromoteBlacksmith(1 * number);
             }
             else if (item.Id <= 50)
             {
-                PromoteBlacksmith(2);
+                PromoteBlacksmith(2 * number);
             }
             else
             {
-                PromoteBlacksmith(3);
+                PromoteBlacksmith(3 * number);
             }
         }
         else
         {
             if (item.Id <= 58)
             {
-                PromoteBlacksmith(1);
+                PromoteBlacksmith(1 * number);
             }
             else if (item.Id <= 61)
             {
-                PromoteBlacksmith(2);
+                PromoteBlacksmith(2 * number);
             }
             else
             {
-                PromoteBlacksmith(3);
+                PromoteBlacksmith(3 * number);
             }
         }
     }

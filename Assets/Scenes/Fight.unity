@@ -3208,7 +3208,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1446271937}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -11751,28 +11751,28 @@ PrefabInstance:
     - target: {fileID: 114877654426361944, guid: 7071f649dfaed8c46b28c3c6496ddd04,
         type: 3}
       propertyPath: clips.Array.size
-      value: 10
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 114877654426361944, guid: 7071f649dfaed8c46b28c3c6496ddd04,
         type: 3}
       propertyPath: clips.Array.data[0]
       value: 
-      objectReference: {fileID: 8300000, guid: a30efe18800b77c4cace86793a33ff8f, type: 3}
+      objectReference: {fileID: 8300000, guid: ba6ba36cc6e23774c9be526ba7cf74f7, type: 3}
     - target: {fileID: 114877654426361944, guid: 7071f649dfaed8c46b28c3c6496ddd04,
         type: 3}
       propertyPath: clips.Array.data[1]
       value: 
-      objectReference: {fileID: 8300000, guid: d0894b1baebf61b42b30b7a5781e0961, type: 3}
+      objectReference: {fileID: 8300000, guid: b1daa4b1c6ad613449c45ce495ad93b3, type: 3}
     - target: {fileID: 114877654426361944, guid: 7071f649dfaed8c46b28c3c6496ddd04,
         type: 3}
       propertyPath: clips.Array.data[2]
       value: 
-      objectReference: {fileID: 8300000, guid: ffd3bc9a4a0251045b558bcd3af27813, type: 3}
+      objectReference: {fileID: 8300000, guid: c00382971fa14e947b0862de05a03ed6, type: 3}
     - target: {fileID: 114877654426361944, guid: 7071f649dfaed8c46b28c3c6496ddd04,
         type: 3}
       propertyPath: clips.Array.data[3]
       value: 
-      objectReference: {fileID: 8300000, guid: 47fe63ca26b48744387629b85aacd1b1, type: 3}
+      objectReference: {fileID: 8300000, guid: bebeac9fe6568c1498f022df6830ffc2, type: 3}
     - target: {fileID: 114877654426361944, guid: 7071f649dfaed8c46b28c3c6496ddd04,
         type: 3}
       propertyPath: clips.Array.data[4]
@@ -11803,6 +11803,26 @@ PrefabInstance:
       propertyPath: clips.Array.data[9]
       value: 
       objectReference: {fileID: 8300000, guid: de57f401bf0295943a3d0f6a9d6e6d06, type: 3}
+    - target: {fileID: 114877654426361944, guid: 7071f649dfaed8c46b28c3c6496ddd04,
+        type: 3}
+      propertyPath: clips.Array.data[10]
+      value: 
+      objectReference: {fileID: 8300000, guid: a30efe18800b77c4cace86793a33ff8f, type: 3}
+    - target: {fileID: 114877654426361944, guid: 7071f649dfaed8c46b28c3c6496ddd04,
+        type: 3}
+      propertyPath: clips.Array.data[11]
+      value: 
+      objectReference: {fileID: 8300000, guid: d0894b1baebf61b42b30b7a5781e0961, type: 3}
+    - target: {fileID: 114877654426361944, guid: 7071f649dfaed8c46b28c3c6496ddd04,
+        type: 3}
+      propertyPath: clips.Array.data[12]
+      value: 
+      objectReference: {fileID: 8300000, guid: ffd3bc9a4a0251045b558bcd3af27813, type: 3}
+    - target: {fileID: 114877654426361944, guid: 7071f649dfaed8c46b28c3c6496ddd04,
+        type: 3}
+      propertyPath: clips.Array.data[13]
+      value: 
+      objectReference: {fileID: 8300000, guid: 47fe63ca26b48744387629b85aacd1b1, type: 3}
     - target: {fileID: 5055071211031273067, guid: 7071f649dfaed8c46b28c3c6496ddd04,
         type: 3}
       propertyPath: m_Pitch
@@ -16985,7 +17005,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000005403749, y: -0.000017189901}
+  m_AnchoredPosition: {x: 0.000005403749, y: 0.0000031250963}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2135269277

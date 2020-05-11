@@ -67,13 +67,13 @@ public class AttackTool : MonoBehaviour
         switch (person.SelectedAttackStyle.FixData.WeaponKind)
         {
             case AttackWeaponKind.Knife:
-                SoundEffectControl.instance.PlaySoundEffect(1);
+                SoundEffectControl.instance.PlaySoundEffect(11);
                 break;
             case AttackWeaponKind.Sword:
-                SoundEffectControl.instance.PlaySoundEffect(2);
+                SoundEffectControl.instance.PlaySoundEffect(12);
                 break;
             case AttackWeaponKind.Rod:
-                SoundEffectControl.instance.PlaySoundEffect(3);
+                SoundEffectControl.instance.PlaySoundEffect(13);
                 break;
             case AttackWeaponKind.Fist:
                 SoundEffectControl.instance.PlaySoundEffect(4);

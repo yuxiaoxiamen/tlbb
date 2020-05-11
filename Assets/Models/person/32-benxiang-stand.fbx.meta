@@ -1,0 +1,278 @@
+fileFormatVersion: 2
+guid: 925c8a38a7dca384198fdad9ff21985c
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: eyeDig26:pSphere1
+    100004: group
+    100006: group12
+    100008: group13
+    100010: group14
+    100012: group4
+    100014: group5
+    100016: group6
+    100018: huzi
+    100020: nurbsToPoly1
+    100022: nurbsToPoly16
+    100024: nurbsToPoly17
+    100026: nurbsToPoly2
+    100028: nurbsToPoly28
+    100030: nurbsToPoly29
+    100032: nurbsToPoly3
+    100034: nurbsToPoly30
+    100036: pasted__body_Grp
+    100038: pasted__body_Grp 1
+    100040: pasted__Ebrow
+    100042: pasted__Elash
+    100044: pasted__EyeGrp_L
+    100046: pasted__EyeGrp_R
+    100048: pasted__Face
+    100050: pasted__Face 1
+    100052: pasted__ffd19Base
+    100054: pasted__ffd19Lattice
+    100056: pasted__ffd1Base
+    100058: pasted__ffd1Lattice
+    100060: pasted__group6
+    100062: pasted__group6 1
+    100064: pasted__group6 2
+    100066: pasted__Gum_D
+    100068: pasted__head_Grp1
+    100070: pasted__huzi
+    100072: pasted__pasted__Son50_Belt_01_OBJ
+    100074: pasted__pasted__Son50_pant_OBJ
+    100076: pasted__pasted__Son50_shoe_L_OBJ
+    100078: pasted__pasted__Son50_shoe_R_OBJ
+    100080: pasted__pSphere1
+    100082: pasted__Son50_L_arm_OBJ
+    100084: pasted__Son50_R_arm_OBJ
+    100086: pasted__Son_All_Grp
+    100088: pasted__Son_All_Grp 1
+    100090: pasted__Son_All_Grp 2
+    100092: pasted__Son_OBJ
+    100094: pasted__Son_OBJ 1
+    100096: pasted__Son_OBJ 2
+    100098: pasted__Tth_D
+    100100: pasted__Tth_D 1
+    100102: pasted__Tth_U
+    100104: yaodai
+    100106: yifu
+    400000: //RootNode
+    400002: eyeDig26:pSphere1
+    400004: group
+    400006: group12
+    400008: group13
+    400010: group14
+    400012: group4
+    400014: group5
+    400016: group6
+    400018: huzi
+    400020: nurbsToPoly1
+    400022: nurbsToPoly16
+    400024: nurbsToPoly17
+    400026: nurbsToPoly2
+    400028: nurbsToPoly28
+    400030: nurbsToPoly29
+    400032: nurbsToPoly3
+    400034: nurbsToPoly30
+    400036: pasted__body_Grp
+    400038: pasted__body_Grp 1
+    400040: pasted__Ebrow
+    400042: pasted__Elash
+    400044: pasted__EyeGrp_L
+    400046: pasted__EyeGrp_R
+    400048: pasted__Face
+    400050: pasted__Face 1
+    400052: pasted__ffd19Base
+    400054: pasted__ffd19Lattice
+    400056: pasted__ffd1Base
+    400058: pasted__ffd1Lattice
+    400060: pasted__group6
+    400062: pasted__group6 1
+    400064: pasted__group6 2
+    400066: pasted__Gum_D
+    400068: pasted__head_Grp1
+    400070: pasted__huzi
+    400072: pasted__pasted__Son50_Belt_01_OBJ
+    400074: pasted__pasted__Son50_pant_OBJ
+    400076: pasted__pasted__Son50_shoe_L_OBJ
+    400078: pasted__pasted__Son50_shoe_R_OBJ
+    400080: pasted__pSphere1
+    400082: pasted__Son50_L_arm_OBJ
+    400084: pasted__Son50_R_arm_OBJ
+    400086: pasted__Son_All_Grp
+    400088: pasted__Son_All_Grp 1
+    400090: pasted__Son_All_Grp 2
+    400092: pasted__Son_OBJ
+    400094: pasted__Son_OBJ 1
+    400096: pasted__Son_OBJ 2
+    400098: pasted__Tth_D
+    400100: pasted__Tth_D 1
+    400102: pasted__Tth_U
+    400104: yaodai
+    400106: yifu
+    2100000: pasted__pasted__lambert30
+    2100002: pasted__lambert11
+    2100004: pasted__lambert31
+    2100006: pasted__pasted__lambert31
+    2100008: pasted__lambert30
+    2100010: lambert10
+    2100012: lambert1
+    2100014: lambert9
+    2100016: Son50_mt13_blinn7
+    2100018: lambert8
+    2100020: lambert3
+    2100022: lambert14
+    2100024: lambert13
+    2300000: eyeDig26:pSphere1
+    2300002: nurbsToPoly1
+    2300004: nurbsToPoly16
+    2300006: nurbsToPoly17
+    2300008: nurbsToPoly2
+    2300010: nurbsToPoly28
+    2300012: nurbsToPoly29
+    2300014: nurbsToPoly3
+    2300016: nurbsToPoly30
+    2300018: pasted__Ebrow
+    2300020: pasted__Elash
+    2300022: pasted__Face
+    2300024: pasted__Gum_D
+    2300026: pasted__pasted__Son50_Belt_01_OBJ
+    2300028: pasted__pasted__Son50_pant_OBJ
+    2300030: pasted__pasted__Son50_shoe_L_OBJ
+    2300032: pasted__pasted__Son50_shoe_R_OBJ
+    2300034: pasted__pSphere1
+    2300036: pasted__Son50_L_arm_OBJ
+    2300038: pasted__Son50_R_arm_OBJ
+    2300040: pasted__Tth_D 1
+    2300042: yifu
+    3300000: eyeDig26:pSphere1
+    3300002: nurbsToPoly1
+    3300004: nurbsToPoly16
+    3300006: nurbsToPoly17
+    3300008: nurbsToPoly2
+    3300010: nurbsToPoly28
+    3300012: nurbsToPoly29
+    3300014: nurbsToPoly3
+    3300016: nurbsToPoly30
+    3300018: pasted__Ebrow
+    3300020: pasted__Elash
+    3300022: pasted__Face
+    3300024: pasted__Gum_D
+    3300026: pasted__pasted__Son50_Belt_01_OBJ
+    3300028: pasted__pasted__Son50_pant_OBJ
+    3300030: pasted__pasted__Son50_shoe_L_OBJ
+    3300032: pasted__pasted__Son50_shoe_R_OBJ
+    3300034: pasted__pSphere1
+    3300036: pasted__Son50_L_arm_OBJ
+    3300038: pasted__Son50_R_arm_OBJ
+    3300040: pasted__Tth_D 1
+    3300042: yifu
+    4300000: nurbsToPoly29
+    4300002: nurbsToPoly28
+    4300004: nurbsToPoly16
+    4300006: nurbsToPoly30
+    4300008: nurbsToPoly17
+    4300010: nurbsToPoly2
+    4300012: yifu
+    4300014: nurbsToPoly3
+    4300016: nurbsToPoly1
+    4300018: pasted__pasted__Son50_shoe_L_OBJ
+    4300020: pasted__pasted__Son50_shoe_R_OBJ
+    4300022: pasted__pasted__Son50_Belt_01_OBJ
+    4300024: pasted__pasted__Son50_pant_OBJ
+    4300026: pasted__Face
+    4300028: pasted__Son50_R_arm_OBJ
+    4300030: pasted__Son50_L_arm_OBJ
+    4300032: eyeDig26:pSphere1
+    4300034: pasted__pSphere1
+    4300036: pasted__Ebrow
+    4300038: pasted__Elash
+    4300040: pasted__Tth_D
+    4300042: pasted__Gum_D
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
