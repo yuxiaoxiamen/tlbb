@@ -209,7 +209,7 @@ public class FirstMapMain : MonoBehaviour
     {
         Random.InitState((int)System.DateTime.Now.Ticks);
         int x = Random.Range(1, 101);
-        if (!GameRunningData.GetRunningData().isFinal && x <= GameConfig.MapEventProbability)
+        if (x <= GameConfig.MapEventProbability)
         {
             isInConversation = true;
             GameRunningData.GetRunningData().playerPreRc = player.RowCol;
@@ -221,7 +221,50 @@ public class FirstMapMain : MonoBehaviour
         }
         else
         {
-            lastMoveOver = true;
+            x = Random.Range(1, 101);
+            if (x <= 0.5)
+            {
+                isInConversation = true;
+                GameRunningData.GetRunningData().playerPreRc = player.RowCol;
+                int randomI = Random.Range(1, 6);
+                switch (randomI)
+                {
+                    case 1:
+                        ControlDialogue.instance.StartConversation(GameConfig.JiuEventConversation, () =>
+                        {
+                            SceneManager.LoadScene("LiquorPower");
+                        });
+                        break;
+                    case 2:
+                        ControlDialogue.instance.StartConversation(GameConfig.YiEventConversation, () =>
+                        {
+                            SceneManager.LoadScene("MedicalSkill");
+                        });
+                        break;
+                    case 3:
+                        ControlDialogue.instance.StartConversation(GameConfig.DanEventConversation, () =>
+                        {
+                            SceneManager.LoadScene("Alchemy");
+                        });
+                        break;
+                    case 4:
+                        ControlDialogue.instance.StartConversation(GameConfig.QieEventConversation, () =>
+                        {
+                            SceneManager.LoadScene("CutUp");
+                        });
+                        break;
+                    case 5:
+                        ControlDialogue.instance.StartConversation(GameConfig.DuanEventConversation, () =>
+                        {
+                            SceneManager.LoadScene("Mining");
+                        });
+                        break;
+                }
+            }
+            else
+            {
+                lastMoveOver = true;
+            }
         }
     }
 

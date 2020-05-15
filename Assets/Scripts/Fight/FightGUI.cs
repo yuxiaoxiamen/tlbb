@@ -215,6 +215,7 @@ public class FightGUI : MonoBehaviour
         {
             SoundEffectControl.instance.PlaySoundEffect(9);
             isTabing = true;
+            ItemUse.user = FightPersonClick.currentPerson;
             tabObject.SetActive(true);
             FightGridClick.ClearPathAndRange();
             HideBattlePane();
@@ -240,14 +241,6 @@ public class FightGUI : MonoBehaviour
         if(battleControlObject != null)
         {
             battleControlObject.SetActive(true);
-            if (person == GameRunningData.GetRunningData().player)
-            {
-                itemButton.SetActive(true);
-            }
-            else
-            {
-                itemButton.SetActive(false);
-            }
         }  
     }
 

@@ -77,7 +77,7 @@ public class Interaction
                 money = (int)((1 - player.CurrentHP * 1.0f / player.BaseData.HP) * 100);
                 foreach (Person p in GameRunningData.GetRunningData().teammates)
                 {
-                    money += (int)(1 - p.CurrentHP * 1.0f / p.BaseData.HP * 100);
+                    money += (int)((1 - p.CurrentHP * 1.0f / p.BaseData.HP) * 100);
                 }
                 money -= LikabilityTool.GetDoctor();
                 if (money <= 0)
@@ -179,6 +179,8 @@ public class Interaction
                 ThridMapMain.manualUI.SetActive(true);
                 break;
             case 10: //招募
+                person.CurrentHP = person.BaseData.HP;
+                person.CurrentMP = person.BaseData.MP;
                 GameRunningData.GetRunningData().teammates.Add(person);
                 ThridMapMain.instance.persons.Remove(person);
                 ThridMapMain.instance.ReAddHead();

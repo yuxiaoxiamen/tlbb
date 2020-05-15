@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class ItemNewreturn : MonoBehaviour
 {
     private Button button;
+    public static string preScene;
 
     // Start is called before the first frame update
     void Start()
@@ -15,7 +16,14 @@ public class ItemNewreturn : MonoBehaviour
         button.onClick.AddListener(() =>
         {
             ItemMain.ClearItems();
-            GameRunningData.GetRunningData().ReturnToMap();
+            if (KongMain.preScene == "map")
+            {
+                GameRunningData.GetRunningData().ReturnToMap();
+            }
+            else
+            {
+                SceneManager.LoadScene("Group");
+            }
         });
     }
 

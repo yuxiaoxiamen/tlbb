@@ -55,6 +55,12 @@ public class GroupMain : MonoBehaviour
                 ZhaoMain.person = p;
                 SceneManager.LoadScene("Zhao");
             });
+            op.Find("item").GetComponent<Button>().onClick.AddListener(() =>
+            {
+                ItemUse.user = p;
+                ItemNewreturn.preScene = "team";
+                SceneManager.LoadScene("ItemNew");
+            });
             op.Find("quit").GetComponent<Button>().onClick.AddListener(() =>
             {
                 GameRunningData.GetRunningData().teammates.Remove(p);

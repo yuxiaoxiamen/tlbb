@@ -7,6 +7,7 @@ public class ItemUse : MonoBehaviour
 {
     private Button button;
     private GameObject dialog;
+    public static Person user;
 
     // Start is called before the first frame update
     void Start()
@@ -53,19 +54,19 @@ public class ItemUse : MonoBehaviour
                 case "Knife":
                     if (num1 < ItemMain.knife.Count)
                     {
-                        SwapWeapon(ItemMain.knife[num1], out effect, out tittle);
+                        UseWeapon(num1, ItemMain.knife, out effect, out tittle);
                     }
                     break;
                 case "Sword":
                     if (num1 < ItemMain.sword.Count)
                     {
-                        SwapWeapon(ItemMain.sword[num1], out effect, out tittle);
+                        UseWeapon(num1, ItemMain.sword, out effect, out tittle);
                     }
                     break;
                 case "Rod":
                     if (num1 < ItemMain.rod.Count)
                     {
-                        SwapWeapon(ItemMain.rod[num1], out effect, out tittle);
+                        UseWeapon(num1, ItemMain.rod, out effect, out tittle);
                     }
                     break;
                 default:
@@ -85,18 +86,19 @@ public class ItemUse : MonoBehaviour
         if (items[num1].Number > 0)
         {
             transform.Find("num" + num1.ToString()).gameObject.transform.Find("Text")
-                .GetComponent<Text>().text = items[num1].Number.ToString();
+            .GetComponent<Text>().text = items[num1].Number.ToString();
         }
         else
         {
-            foreach (var belonging in GameRunningData.GetRunningData().belongings)
-            {
-                if (items[num1].Name.Equals(belonging.Name))
-                {
-                    GameRunningData.GetRunningData().belongings.Remove(belonging);
-                    break;
-                }
-            }
+            //foreach (var belonging in GameRunningData.GetRunningData().belongings)
+            //{
+            //    if (items[num1].Name.Equals(belonging.Name))
+            //    {
+            //        GameRunningData.GetRunningData().belongings.Remove(belonging);
+            //        break;
+            //    }
+            //}
+            GameRunningData.GetRunningData().belongings.Remove(items[num1]);
             items.Remove(items[num1]);
             //清空物品栏
 
@@ -110,80 +112,127 @@ public class ItemUse : MonoBehaviour
 
     void RealUse(Good item)
     {
-        var player = GameRunningData.GetRunningData().player;
         int value = 0;
         switch (item.Type)
         {
             case ItemKind.Alcohol:
-                value = (int)(player.BaseData.MP * (item.ResumeValue * 1.0f / 100));
-                value = (int)(value * (1 + player.BaseData.LiquorSkill * 0.01f));
-                player.ChangeMP(value, true);
+                value = (int)(user.BaseData.MP * (item.ResumeValue * 1.0f / 100));
+                value = (int)(value * (1 + user.BaseData.LiquorSkill * 0.01f));
+                user.ChangeMP(value, true);
                 switch (item.Id)
                 {
                     case 0:
-                        player.AttackPowerRate += item.AttrValue;
+                        user.AttackPowerRate += item.AttrValue;
                         break;
                     case 1:
-                        value = (int)(player.Defend * (item.AttrValue * 1.0f / 100));
-                        player.Defend += value;
+                        value = (int)(user.Defend * (item.AttrValue * 1.0f / 100));
+                        user.Defend += value;
                         break;
                     case 2:
-                        player.Crit += item.AttrValue;
+                        user.Crit += item.AttrValue;
                         break;
                     case 3:
-                        player.Dodge += item.AttrValue;
+                        user.Dodge += item.AttrValue;
                         break;
                     case 4:
-                        player.Counterattack += item.AttrValue;
+                        user.Counterattack += item.AttrValue;
                         break;
                 }
                 break;
             case ItemKind.Food:
-                value = (int)(player.BaseData.Energy * (item.ResumeValue * 1.0f / 100));
-                value = (int)(value * (1 + player.BaseData.CookingSkill * 0.01f));
-                player.ChangeEnergy(value, true);
+                value = (int)(user.BaseData.Energy * (item.ResumeValue * 1.0f / 100));
+                value = (int)(value * (1 + user.BaseData.CookingSkill * 0.01f));
+                user.ChangeEnergy(value, true);
                 break;
             case ItemKind.Pellet:
                 switch (item.Id)
                 {
                     case 63:
-                        player.BaseData.Bi += 1;
+                        user.BaseData.Bi += 1;
                         break;
                     case 64:
-                        player.BaseData.Gen += 1;
+                        user.BaseData.Gen += 1;
                         break;
                     case 65:
-                        player.BaseData.Wu += 1;
+                        user.BaseData.Wu += 1;
                         break;
                     case 66:
-                        player.BaseData.Shen += 1;
+                        user.BaseData.Shen += 1;
                         break;
                     case 67:
-                        player.BaseData.Jin += 1;
+                        user.BaseData.Jin += 1;
                         break;
                 }
                 break;
         }
     }
 
-    void SwapWeapon(Good weapon, out string effect, out string tittle)
+    void UseWeapon(int num1, List<Good> items, out string effect, out string tittle)
     {
         SoundEffectControl.instance.PlaySoundEffect(3);
-        if (weapon.Name.Equals(ItemMain.equipmentNow))
+        if(user.EquippedWeapon.Type == items[num1].Type)
         {
-            effect = "  佩戴武器已取下，切换至空手状态 ";
-            tittle = "武器已取下";
-            GameRunningData.GetRunningData().player.EquippedWeapon = null;
-            ItemMain.equipmentNow = "无";
-            transform.parent.Find("EquipmentValue").GetComponent<Text>().text = ItemMain.equipmentNow;
+            SwapWeapon(num1, items, out effect, out tittle);
         }
         else
         {
-            effect = "  佩戴武器已切换至: " + weapon.Name;
-            tittle = "武器切换成功";
-            GameRunningData.GetRunningData().player.EquippedWeapon = weapon;
-            ItemMain.equipmentNow = weapon.Name;
-            transform.parent.Find("EquipmentValue").GetComponent<Text>().text = ItemMain.equipmentNow;
+            if(user == GameRunningData.GetRunningData().player)
+            {
+                SwapWeapon(num1, items, out effect, out tittle);
+            }
+            else
+            {
+                effect = "  人物不可以佩戴该类型的武器";
+                tittle = "武器切换失败";
+            }
+        }
+
+        ItemSwitch.ClearGrid(transform.parent);
+        for (int n = 0; n < items.Count; n++)
+        {
+            ItemMain.SetItem(n, transform.parent.Find(n.ToString()).gameObject, items);
+        }
+    }
+
+    void SwapWeapon(int num1, List<Good> items, out string effect, out string tittle)
+    {
+        effect = "  佩戴武器已切换至: " + items[num1].Name;
+        tittle = "武器切换成功";
+        items[num1].Number--;
+        if (user.EquippedWeapon != null)
+        {
+            GameRunningData.GetRunningData().AddItem(user.EquippedWeapon);
+            switch (user.EquippedWeapon.Type)
+            {
+                case ItemKind.Knife:
+                    if (!ItemMain.knife.Contains(user.EquippedWeapon))
+                    {
+                        ItemMain.knife.Add(user.EquippedWeapon);
+                    }
+                    break;
+                case ItemKind.Sword:
+                    if (!ItemMain.sword.Contains(user.EquippedWeapon))
+                    {
+                        ItemMain.sword.Add(user.EquippedWeapon);
+                    }
+                    break;
+                case ItemKind.Rod:
+                    if (!ItemMain.rod.Contains(user.EquippedWeapon))
+                    {
+                        ItemMain.rod.Add(user.EquippedWeapon);
+                    }
+                    break;
+            }
+        }
+        if (items[num1].Number > 0)
+        {
+            transform.Find("num" + num1.ToString()).gameObject.transform.Find("Text")
+            .GetComponent<Text>().text = items[num1].Number.ToString();
+        }
+        else
+        {
+            GameRunningData.GetRunningData().belongings.Remove(items[num1]);
+            items.Remove(items[num1]);
         }
     }
 

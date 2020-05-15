@@ -40,6 +40,8 @@ public class ControlBottomPanel : MonoBehaviour
         transform.Find("item").GetComponent<Button>().onClick.AddListener(() =>
         {
             GameRunningData.GetRunningData().SavePlayerMapRc();
+            ItemNewreturn.preScene = "map";
+            ItemUse.user = GameRunningData.GetRunningData().player;
             SceneManager.LoadScene("ItemNew");
         });
         transform.Find("gong").GetComponent<Button>().onClick.AddListener(() =>

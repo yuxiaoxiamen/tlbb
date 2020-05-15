@@ -57,6 +57,6 @@ public class MainAttributes : MonoBehaviour
                 mesh.triangles = new int[] { 0, 1, 2 };
                 break;
         }
-        GetComponent<MeshRenderer>().material.color = Color.cyan;
+        gameObject.GetComponent<MeshRenderer>().material.color = new Color((float)0.6,(float)0.25, (float)0.25);
     }
 }

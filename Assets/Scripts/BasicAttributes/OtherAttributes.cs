@@ -31,7 +31,7 @@ public class OtherAttributes : MonoBehaviour
                 y.GetComponent<TextMesh>().text = GlobalData.Persons[characterId].CurrentMP + " / " + GlobalData.Persons[characterId].BaseData.MP;
                 break;
 
-            case "Baoshi_Current":
+            case "BaoShi_Current":
                 percent = (float)GlobalData.Persons[characterId].CurrentEnergy / GlobalData.Persons[characterId].BaseData.Energy;
                 y.localScale = new Vector3(y.localScale.x * percent, y.localScale.y, y.localScale.z);
                 y.localPosition = new Vector3(3*(percent - 1) / 2, y.localPosition.y, y.localPosition.z);
