@@ -4,113 +4,409 @@ ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
-    100002: eyeDig26:pSphere1
-    100004: group
-    100006: group12
-    100008: group13
-    100010: group14
-    100012: group4
-    100014: group5
-    100016: group6
-    100018: huzi
-    100020: nurbsToPoly1
-    100022: nurbsToPoly16
-    100024: nurbsToPoly17
-    100026: nurbsToPoly2
-    100028: nurbsToPoly28
-    100030: nurbsToPoly29
-    100032: nurbsToPoly3
-    100034: nurbsToPoly30
-    100036: pasted__body_Grp
-    100038: pasted__body_Grp 1
-    100040: pasted__Ebrow
-    100042: pasted__Elash
-    100044: pasted__EyeGrp_L
-    100046: pasted__EyeGrp_R
-    100048: pasted__Face
-    100050: pasted__Face 1
-    100052: pasted__ffd19Base
-    100054: pasted__ffd19Lattice
-    100056: pasted__ffd1Base
-    100058: pasted__ffd1Lattice
-    100060: pasted__group6
-    100062: pasted__group6 1
-    100064: pasted__group6 2
-    100066: pasted__Gum_D
-    100068: pasted__head_Grp1
-    100070: pasted__huzi
-    100072: pasted__pasted__Son50_Belt_01_OBJ
-    100074: pasted__pasted__Son50_pant_OBJ
-    100076: pasted__pasted__Son50_shoe_L_OBJ
-    100078: pasted__pasted__Son50_shoe_R_OBJ
-    100080: pasted__pSphere1
-    100082: pasted__Son50_L_arm_OBJ
-    100084: pasted__Son50_R_arm_OBJ
-    100086: pasted__Son_All_Grp
-    100088: pasted__Son_All_Grp 1
-    100090: pasted__Son_All_Grp 2
-    100092: pasted__Son_OBJ
-    100094: pasted__Son_OBJ 1
-    100096: pasted__Son_OBJ 2
-    100098: pasted__Tth_D
-    100100: pasted__Tth_D 1
-    100102: pasted__Tth_U
-    100104: yaodai
-    100106: yifu
+    100002: Ankle_L
+    100004: Ankle_R
+    100006: Chest_M
+    100008: Cup_L
+    100010: Cup_R
+    100012: DeformationSystem
+    100014: Elbow_L
+    100016: Elbow_R
+    100018: ElbowPart1_L
+    100020: ElbowPart1_R
+    100022: ElbowPart2_L
+    100024: ElbowPart2_R
+    100026: Eye_L
+    100028: Eye_R
+    100030: eyeDig26:pSphere1
+    100032: EyeEnd_L
+    100034: EyeEnd_R
+    100036: FKExtraRoot_M
+    100038: FKIKParentConstraintSpine_M
+    100040: FKIKSpine_M
+    100042: FKIKSystem
+    100044: FKOffsetRoot_M
+    100046: FKRoot_M
+    100048: FKSystem
+    100050: FKXRoot_M
+    100052: Group
+    100054: group
+    100056: group12
+    100058: group13
+    100060: group14
+    100062: group15
+    100064: group4
+    100066: group5
+    100068: group6
+    100070: Head_M
+    100072: HeadEnd_M
+    100074: Hip_L
+    100076: Hip_R
+    100078: HipPart1_L
+    100080: HipPart1_R
+    100082: HipPart2_L
+    100084: HipPart2_R
+    100086: HipSwinger_M
+    100088: HipSwingerOffset_M
+    100090: HipSwingerStabilizerTarget
+    100092: HipSwingReverse
+    100094: HipSwingReversePart1
+    100096: HipSwingReversePart2
+    100098: HipSwingReverseRoot
+    100100: HipSwingReverseXPart2
+    100102: huzi
+    100104: IKAcRootFollowOffset_M
+    100106: IKExtraSpine1_M
+    100108: IKExtraSpine2_M
+    100110: IKExtraSpine3_M
+    100112: IKfake0Spine_M
+    100114: IKFixedOrientRoot_M
+    100116: IKHandle
+    100118: IKhybridExtraSpine1_M
+    100120: IKhybridExtraSpine2_M
+    100122: IKhybridExtraSpine3_M
+    100124: IKhybridFollowSpine1_M
+    100126: IKhybridOffsetSpine1_M
+    100128: IKhybridOffsetSpine2_M
+    100130: IKhybridOffsetSpine3_M
+    100132: IKhybridSpine1_M
+    100134: IKhybridSpine2_M
+    100136: IKhybridSpine3_M
+    100138: IKJoints
+    100140: IKOffsetConstrainedSpine1_M
+    100142: IKOffsetSpine1_M
+    100144: IKOffsetSpine2_M
+    100146: IKOffsetSpine3_M
+    100148: IKParentConstraintRoot_M
+    100150: IKScalerRoot_M
+    100152: IKSpine1_M
+    100154: IKSpine1LocalOrient1_M
+    100156: IKSpine1LocalOrient2_M
+    100158: IKSpine2_M
+    100160: IKSpine2LocalOrient1_M
+    100162: IKSpine2LocalOrient2_M
+    100164: IKSpine3_M
+    100166: IKSpine3LocalOrient1_M
+    100168: IKSpine3LocalOrient2_M
+    100170: IKSpRootFollowOffset_M
+    100172: IKSystem
+    100174: IKXOffsetRoot_M
+    100176: IKXRoot_M
+    100178: IndexFinger1_L
+    100180: IndexFinger1_R
+    100182: IndexFinger2_L
+    100184: IndexFinger2_R
+    100186: IndexFinger3_L
+    100188: IndexFinger3_R
+    100190: IndexFinger4_L
+    100192: IndexFinger4_R
+    100194: Jaw_M
+    100196: JawEnd_M
+    100198: Knee_L
+    100200: Knee_R
+    100202: Main
+    100204: MiddleFinger1_L
+    100206: MiddleFinger1_R
+    100208: MiddleFinger2_L
+    100210: MiddleFinger2_R
+    100212: MiddleFinger3_L
+    100214: MiddleFinger3_R
+    100216: MiddleFinger4_L
+    100218: MiddleFinger4_R
+    100220: MotionSystem
+    100222: Neck_M
+    100224: NeckPart1_M
+    100226: NeckPart2_M
+    100228: nurbsToPoly1
+    100230: nurbsToPoly16
+    100232: nurbsToPoly17
+    100234: nurbsToPoly2
+    100236: nurbsToPoly28
+    100238: nurbsToPoly29
+    100240: nurbsToPoly3
+    100242: nurbsToPoly30
+    100244: pasted__body_Grp
+    100246: pasted__body_Grp 1
+    100248: pasted__Ebrow
+    100250: pasted__Elash
+    100252: pasted__EyeGrp_L
+    100254: pasted__EyeGrp_R
+    100256: pasted__Face
+    100258: pasted__Face 1
+    100260: pasted__ffd19Base
+    100262: pasted__ffd19Lattice
+    100264: pasted__ffd1Base
+    100266: pasted__ffd1Lattice
+    100268: pasted__group6
+    100270: pasted__group6 1
+    100272: pasted__group6 2
+    100274: pasted__Gum_D
+    100276: pasted__head_Grp1
+    100278: pasted__huzi
+    100280: pasted__pasted__Son50_Belt_01_OBJ
+    100282: pasted__pasted__Son50_pant_OBJ
+    100284: pasted__pasted__Son50_shoe_L_OBJ
+    100286: pasted__pasted__Son50_shoe_R_OBJ
+    100288: pasted__pSphere1
+    100290: pasted__Son50_L_arm_OBJ
+    100292: pasted__Son50_R_arm_OBJ
+    100294: pasted__Son_All_Grp
+    100296: pasted__Son_All_Grp 1
+    100298: pasted__Son_All_Grp 2
+    100300: pasted__Son_OBJ
+    100302: pasted__Son_OBJ 1
+    100304: pasted__Son_OBJ 2
+    100306: pasted__Tth_D
+    100308: pasted__Tth_D 1
+    100310: pasted__Tth_U
+    100312: PinkyFinger1_L
+    100314: PinkyFinger1_R
+    100316: PinkyFinger2_L
+    100318: PinkyFinger2_R
+    100320: PinkyFinger3_L
+    100322: PinkyFinger3_R
+    100324: PinkyFinger4_L
+    100326: PinkyFinger4_R
+    100328: RingFinger1_L
+    100330: RingFinger1_R
+    100332: RingFinger2_L
+    100334: RingFinger2_R
+    100336: RingFinger3_L
+    100338: RingFinger3_R
+    100340: RingFinger4_L
+    100342: RingFinger4_R
+    100344: Root_M
+    100346: RootPart1_M
+    100348: RootPart2_M
+    100350: Scapula_L
+    100352: Scapula_R
+    100354: Shoulder_L
+    100356: Shoulder_R
+    100358: ShoulderPart1_L
+    100360: ShoulderPart1_R
+    100362: ShoulderPart2_L
+    100364: ShoulderPart2_R
+    100366: Spine1_M
+    100368: Spine1Part1_M
+    100370: Spine1Part2_M
+    100372: ThumbFinger1_L
+    100374: ThumbFinger1_R
+    100376: ThumbFinger2_L
+    100378: ThumbFinger2_R
+    100380: ThumbFinger3_L
+    100382: ThumbFinger3_R
+    100384: ThumbFinger4_L
+    100386: ThumbFinger4_R
+    100388: Toes_L
+    100390: Toes_R
+    100392: ToesEnd_L
+    100394: ToesEnd_R
+    100396: Wrist_L
+    100398: Wrist_R
+    100400: yaodai
+    100402: yifu
     400000: //RootNode
-    400002: eyeDig26:pSphere1
-    400004: group
-    400006: group12
-    400008: group13
-    400010: group14
-    400012: group4
-    400014: group5
-    400016: group6
-    400018: huzi
-    400020: nurbsToPoly1
-    400022: nurbsToPoly16
-    400024: nurbsToPoly17
-    400026: nurbsToPoly2
-    400028: nurbsToPoly28
-    400030: nurbsToPoly29
-    400032: nurbsToPoly3
-    400034: nurbsToPoly30
-    400036: pasted__body_Grp
-    400038: pasted__body_Grp 1
-    400040: pasted__Ebrow
-    400042: pasted__Elash
-    400044: pasted__EyeGrp_L
-    400046: pasted__EyeGrp_R
-    400048: pasted__Face
-    400050: pasted__Face 1
-    400052: pasted__ffd19Base
-    400054: pasted__ffd19Lattice
-    400056: pasted__ffd1Base
-    400058: pasted__ffd1Lattice
-    400060: pasted__group6
-    400062: pasted__group6 1
-    400064: pasted__group6 2
-    400066: pasted__Gum_D
-    400068: pasted__head_Grp1
-    400070: pasted__huzi
-    400072: pasted__pasted__Son50_Belt_01_OBJ
-    400074: pasted__pasted__Son50_pant_OBJ
-    400076: pasted__pasted__Son50_shoe_L_OBJ
-    400078: pasted__pasted__Son50_shoe_R_OBJ
-    400080: pasted__pSphere1
-    400082: pasted__Son50_L_arm_OBJ
-    400084: pasted__Son50_R_arm_OBJ
-    400086: pasted__Son_All_Grp
-    400088: pasted__Son_All_Grp 1
-    400090: pasted__Son_All_Grp 2
-    400092: pasted__Son_OBJ
-    400094: pasted__Son_OBJ 1
-    400096: pasted__Son_OBJ 2
-    400098: pasted__Tth_D
-    400100: pasted__Tth_D 1
-    400102: pasted__Tth_U
-    400104: yaodai
-    400106: yifu
+    400002: Ankle_L
+    400004: Ankle_R
+    400006: Chest_M
+    400008: Cup_L
+    400010: Cup_R
+    400012: DeformationSystem
+    400014: Elbow_L
+    400016: Elbow_R
+    400018: ElbowPart1_L
+    400020: ElbowPart1_R
+    400022: ElbowPart2_L
+    400024: ElbowPart2_R
+    400026: Eye_L
+    400028: Eye_R
+    400030: eyeDig26:pSphere1
+    400032: EyeEnd_L
+    400034: EyeEnd_R
+    400036: FKExtraRoot_M
+    400038: FKIKParentConstraintSpine_M
+    400040: FKIKSpine_M
+    400042: FKIKSystem
+    400044: FKOffsetRoot_M
+    400046: FKRoot_M
+    400048: FKSystem
+    400050: FKXRoot_M
+    400052: Group
+    400054: group
+    400056: group12
+    400058: group13
+    400060: group14
+    400062: group15
+    400064: group4
+    400066: group5
+    400068: group6
+    400070: Head_M
+    400072: HeadEnd_M
+    400074: Hip_L
+    400076: Hip_R
+    400078: HipPart1_L
+    400080: HipPart1_R
+    400082: HipPart2_L
+    400084: HipPart2_R
+    400086: HipSwinger_M
+    400088: HipSwingerOffset_M
+    400090: HipSwingerStabilizerTarget
+    400092: HipSwingReverse
+    400094: HipSwingReversePart1
+    400096: HipSwingReversePart2
+    400098: HipSwingReverseRoot
+    400100: HipSwingReverseXPart2
+    400102: huzi
+    400104: IKAcRootFollowOffset_M
+    400106: IKExtraSpine1_M
+    400108: IKExtraSpine2_M
+    400110: IKExtraSpine3_M
+    400112: IKfake0Spine_M
+    400114: IKFixedOrientRoot_M
+    400116: IKHandle
+    400118: IKhybridExtraSpine1_M
+    400120: IKhybridExtraSpine2_M
+    400122: IKhybridExtraSpine3_M
+    400124: IKhybridFollowSpine1_M
+    400126: IKhybridOffsetSpine1_M
+    400128: IKhybridOffsetSpine2_M
+    400130: IKhybridOffsetSpine3_M
+    400132: IKhybridSpine1_M
+    400134: IKhybridSpine2_M
+    400136: IKhybridSpine3_M
+    400138: IKJoints
+    400140: IKOffsetConstrainedSpine1_M
+    400142: IKOffsetSpine1_M
+    400144: IKOffsetSpine2_M
+    400146: IKOffsetSpine3_M
+    400148: IKParentConstraintRoot_M
+    400150: IKScalerRoot_M
+    400152: IKSpine1_M
+    400154: IKSpine1LocalOrient1_M
+    400156: IKSpine1LocalOrient2_M
+    400158: IKSpine2_M
+    400160: IKSpine2LocalOrient1_M
+    400162: IKSpine2LocalOrient2_M
+    400164: IKSpine3_M
+    400166: IKSpine3LocalOrient1_M
+    400168: IKSpine3LocalOrient2_M
+    400170: IKSpRootFollowOffset_M
+    400172: IKSystem
+    400174: IKXOffsetRoot_M
+    400176: IKXRoot_M
+    400178: IndexFinger1_L
+    400180: IndexFinger1_R
+    400182: IndexFinger2_L
+    400184: IndexFinger2_R
+    400186: IndexFinger3_L
+    400188: IndexFinger3_R
+    400190: IndexFinger4_L
+    400192: IndexFinger4_R
+    400194: Jaw_M
+    400196: JawEnd_M
+    400198: Knee_L
+    400200: Knee_R
+    400202: Main
+    400204: MiddleFinger1_L
+    400206: MiddleFinger1_R
+    400208: MiddleFinger2_L
+    400210: MiddleFinger2_R
+    400212: MiddleFinger3_L
+    400214: MiddleFinger3_R
+    400216: MiddleFinger4_L
+    400218: MiddleFinger4_R
+    400220: MotionSystem
+    400222: Neck_M
+    400224: NeckPart1_M
+    400226: NeckPart2_M
+    400228: nurbsToPoly1
+    400230: nurbsToPoly16
+    400232: nurbsToPoly17
+    400234: nurbsToPoly2
+    400236: nurbsToPoly28
+    400238: nurbsToPoly29
+    400240: nurbsToPoly3
+    400242: nurbsToPoly30
+    400244: pasted__body_Grp
+    400246: pasted__body_Grp 1
+    400248: pasted__Ebrow
+    400250: pasted__Elash
+    400252: pasted__EyeGrp_L
+    400254: pasted__EyeGrp_R
+    400256: pasted__Face
+    400258: pasted__Face 1
+    400260: pasted__ffd19Base
+    400262: pasted__ffd19Lattice
+    400264: pasted__ffd1Base
+    400266: pasted__ffd1Lattice
+    400268: pasted__group6
+    400270: pasted__group6 1
+    400272: pasted__group6 2
+    400274: pasted__Gum_D
+    400276: pasted__head_Grp1
+    400278: pasted__huzi
+    400280: pasted__pasted__Son50_Belt_01_OBJ
+    400282: pasted__pasted__Son50_pant_OBJ
+    400284: pasted__pasted__Son50_shoe_L_OBJ
+    400286: pasted__pasted__Son50_shoe_R_OBJ
+    400288: pasted__pSphere1
+    400290: pasted__Son50_L_arm_OBJ
+    400292: pasted__Son50_R_arm_OBJ
+    400294: pasted__Son_All_Grp
+    400296: pasted__Son_All_Grp 1
+    400298: pasted__Son_All_Grp 2
+    400300: pasted__Son_OBJ
+    400302: pasted__Son_OBJ 1
+    400304: pasted__Son_OBJ 2
+    400306: pasted__Tth_D
+    400308: pasted__Tth_D 1
+    400310: pasted__Tth_U
+    400312: PinkyFinger1_L
+    400314: PinkyFinger1_R
+    400316: PinkyFinger2_L
+    400318: PinkyFinger2_R
+    400320: PinkyFinger3_L
+    400322: PinkyFinger3_R
+    400324: PinkyFinger4_L
+    400326: PinkyFinger4_R
+    400328: RingFinger1_L
+    400330: RingFinger1_R
+    400332: RingFinger2_L
+    400334: RingFinger2_R
+    400336: RingFinger3_L
+    400338: RingFinger3_R
+    400340: RingFinger4_L
+    400342: RingFinger4_R
+    400344: Root_M
+    400346: RootPart1_M
+    400348: RootPart2_M
+    400350: Scapula_L
+    400352: Scapula_R
+    400354: Shoulder_L
+    400356: Shoulder_R
+    400358: ShoulderPart1_L
+    400360: ShoulderPart1_R
+    400362: ShoulderPart2_L
+    400364: ShoulderPart2_R
+    400366: Spine1_M
+    400368: Spine1Part1_M
+    400370: Spine1Part2_M
+    400372: ThumbFinger1_L
+    400374: ThumbFinger1_R
+    400376: ThumbFinger2_L
+    400378: ThumbFinger2_R
+    400380: ThumbFinger3_L
+    400382: ThumbFinger3_R
+    400384: ThumbFinger4_L
+    400386: ThumbFinger4_R
+    400388: Toes_L
+    400390: Toes_R
+    400392: ToesEnd_L
+    400394: ToesEnd_R
+    400396: Wrist_L
+    400398: Wrist_R
+    400400: yaodai
+    400402: yifu
     2100000: pasted__pasted__lambert30
     2100002: pasted__lambert11
     2100004: pasted__lambert31
@@ -124,50 +420,6 @@ ModelImporter:
     2100020: lambert3
     2100022: lambert14
     2100024: lambert13
-    2300000: eyeDig26:pSphere1
-    2300002: nurbsToPoly1
-    2300004: nurbsToPoly16
-    2300006: nurbsToPoly17
-    2300008: nurbsToPoly2
-    2300010: nurbsToPoly28
-    2300012: nurbsToPoly29
-    2300014: nurbsToPoly3
-    2300016: nurbsToPoly30
-    2300018: pasted__Ebrow
-    2300020: pasted__Elash
-    2300022: pasted__Face
-    2300024: pasted__Gum_D
-    2300026: pasted__pasted__Son50_Belt_01_OBJ
-    2300028: pasted__pasted__Son50_pant_OBJ
-    2300030: pasted__pasted__Son50_shoe_L_OBJ
-    2300032: pasted__pasted__Son50_shoe_R_OBJ
-    2300034: pasted__pSphere1
-    2300036: pasted__Son50_L_arm_OBJ
-    2300038: pasted__Son50_R_arm_OBJ
-    2300040: pasted__Tth_D 1
-    2300042: yifu
-    3300000: eyeDig26:pSphere1
-    3300002: nurbsToPoly1
-    3300004: nurbsToPoly16
-    3300006: nurbsToPoly17
-    3300008: nurbsToPoly2
-    3300010: nurbsToPoly28
-    3300012: nurbsToPoly29
-    3300014: nurbsToPoly3
-    3300016: nurbsToPoly30
-    3300018: pasted__Ebrow
-    3300020: pasted__Elash
-    3300022: pasted__Face
-    3300024: pasted__Gum_D
-    3300026: pasted__pasted__Son50_Belt_01_OBJ
-    3300028: pasted__pasted__Son50_pant_OBJ
-    3300030: pasted__pasted__Son50_shoe_L_OBJ
-    3300032: pasted__pasted__Son50_shoe_R_OBJ
-    3300034: pasted__pSphere1
-    3300036: pasted__Son50_L_arm_OBJ
-    3300038: pasted__Son50_R_arm_OBJ
-    3300040: pasted__Tth_D 1
-    3300042: yifu
     4300000: nurbsToPoly29
     4300002: nurbsToPoly28
     4300004: nurbsToPoly16
@@ -190,6 +442,30 @@ ModelImporter:
     4300038: pasted__Elash
     4300040: pasted__Tth_D
     4300042: pasted__Gum_D
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: eyeDig26:pSphere1
+    13700002: nurbsToPoly1
+    13700004: nurbsToPoly16
+    13700006: nurbsToPoly17
+    13700008: nurbsToPoly2
+    13700010: nurbsToPoly28
+    13700012: nurbsToPoly29
+    13700014: nurbsToPoly3
+    13700016: nurbsToPoly30
+    13700018: pasted__Ebrow
+    13700020: pasted__Elash
+    13700022: pasted__Face
+    13700024: pasted__Gum_D
+    13700026: pasted__pasted__Son50_Belt_01_OBJ
+    13700028: pasted__pasted__Son50_pant_OBJ
+    13700030: pasted__pasted__Son50_shoe_L_OBJ
+    13700032: pasted__pasted__Son50_shoe_R_OBJ
+    13700034: pasted__pSphere1
+    13700036: pasted__Son50_L_arm_OBJ
+    13700038: pasted__Son50_R_arm_OBJ
+    13700040: pasted__Tth_D 1
+    13700042: yifu
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -242,8 +518,8 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 0
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -270,7 +546,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

@@ -222,7 +222,7 @@ public class FirstMapMain : MonoBehaviour
         else
         {
             x = Random.Range(1, 101);
-            if (x <= 0.5)
+            if (x <= 50)
             {
                 isInConversation = true;
                 GameRunningData.GetRunningData().playerPreRc = player.RowCol;

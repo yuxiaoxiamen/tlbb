@@ -316,7 +316,7 @@ public class FightGUI : MonoBehaviour
         {
             effect += e.Name + "：" + e.Detail + System.Environment.NewLine;
         }
-        string text = style.FixData.Name + System.Environment.NewLine + "攻击强度" + style.GetRealBasePower() +"  内力消耗"+ style.FixData.MPCost + System.Environment.NewLine +
+        string text = style.FixData.Name + System.Environment.NewLine + "攻击强度" + style.GetRealBasePower() +"  内力消耗"+ style.GetRealMPCost() + System.Environment.NewLine +
             effect + style.FixData.DetailInfo;
         return text;
     }

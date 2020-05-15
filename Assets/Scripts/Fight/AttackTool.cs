@@ -208,6 +208,7 @@ public class AttackTool : MonoBehaviour
                 {
                     GongBuffTool.instance.SixteenTen(enemy);
                     GongBuffTool.instance.TwentyfiveSix(enemy);
+                    PersonChangeHP(attacker, enemy.SelectedAttackStyle.GetRealBasePower(), false);
                     SpecialEffectTool.instance.RateEffect(enemy, "反击");
                 }
             }

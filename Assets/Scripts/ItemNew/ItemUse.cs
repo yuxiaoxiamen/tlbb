@@ -170,13 +170,9 @@ public class ItemUse : MonoBehaviour
     void UseWeapon(int num1, List<Good> items, out string effect, out string tittle)
     {
         SoundEffectControl.instance.PlaySoundEffect(3);
-        if(user.EquippedWeapon.Type == items[num1].Type)
+        if(user.EquippedWeapon == null)
         {
-            SwapWeapon(num1, items, out effect, out tittle);
-        }
-        else
-        {
-            if(user == GameRunningData.GetRunningData().player)
+            if (user == GameRunningData.GetRunningData().player)
             {
                 SwapWeapon(num1, items, out effect, out tittle);
             }
@@ -186,7 +182,25 @@ public class ItemUse : MonoBehaviour
                 tittle = "武器切换失败";
             }
         }
-
+        else
+        {
+            if (user.EquippedWeapon.Type == items[num1].Type)
+            {
+                SwapWeapon(num1, items, out effect, out tittle);
+            }
+            else
+            {
+                if (user == GameRunningData.GetRunningData().player)
+                {
+                    SwapWeapon(num1, items, out effect, out tittle);
+                }
+                else
+                {
+                    effect = "  人物不可以佩戴该类型的武器";
+                    tittle = "武器切换失败";
+                }
+            }
+        }
         ItemSwitch.ClearGrid(transform.parent);
         for (int n = 0; n < items.Count; n++)
         {
@@ -198,6 +212,7 @@ public class ItemUse : MonoBehaviour
     {
         effect = "  佩戴武器已切换至: " + items[num1].Name;
         tittle = "武器切换成功";
+        transform.parent.Find("EquipmentValue").GetComponent<Text>().text = items[num1].Name;
         items[num1].Number--;
         if (user.EquippedWeapon != null)
         {
@@ -224,6 +239,7 @@ public class ItemUse : MonoBehaviour
                     break;
             }
         }
+        user.EquippedWeapon = items[num1];
         if (items[num1].Number > 0)
         {
             transform.Find("num" + num1.ToString()).gameObject.transform.Find("Text")

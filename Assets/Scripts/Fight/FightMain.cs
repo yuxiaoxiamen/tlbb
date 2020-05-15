@@ -490,7 +490,7 @@ public class FightMain : MonoBehaviour
         enemy1.RowCol = new Vector2Int(9, 3);
         Person enemy2 = GlobalData.Persons[4];
         enemy2.RowCol = new Vector2Int(0, 9);
-        player.BaseData.ModelId = 34;
+        player.BaseData.ModelId = 32;
         friend1.BaseData.ModelId = 35;
         enemy1.BaseData.ModelId = 31;
         enemy2.BaseData.ModelId = 33;

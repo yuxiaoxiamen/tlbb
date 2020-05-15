@@ -84,8 +84,10 @@ public class ZhaoDetailShow : MonoBehaviour
                         effect = effect + "\n"+"持续时间： "+ ZhaoMain.fist[num1].FixData.Effects[n].TimeValue+"\n";
                     }
 
-                    GameObject.Find("ZhaoDetail").GetComponent<TextMesh>().text = "真气消耗量： "+ZhaoMain.fist[num1].FixData.MPCost.ToString()+"\n"
-                        +"攻击范围： "+ZhaoMain.fist[num1].FixData.DetailInfo + "\n\n"+effect;
+                    GameObject.Find("ZhaoDetail").GetComponent<TextMesh>().text = "内力消耗量： "+ZhaoMain.fist[num1].GetRealMPCost().ToString()+"\n"
+                        +"攻击范围： "+ZhaoMain.fist[num1].FixData.DetailInfo
+                        + "\n"
+                        + "攻击强度： " + ZhaoMain.fist[num1].GetRealBasePower() + "\n\n"+effect;
 
                 }
                 else
@@ -138,8 +140,10 @@ public class ZhaoDetailShow : MonoBehaviour
                         effect = effect + "\n" + "持续时间： " + ZhaoMain.palm[num1].FixData.Effects[n].TimeValue + "\n";
                     }
 
-                    GameObject.Find("ZhaoDetail").GetComponent<TextMesh>().text = "真气消耗量： " + ZhaoMain.palm[num1].FixData.MPCost.ToString() + "\n" 
-                        + "攻击范围： " + ZhaoMain.palm[num1].FixData.DetailInfo + "\n\n" + effect;
+                    GameObject.Find("ZhaoDetail").GetComponent<TextMesh>().text = "内力消耗量： " + ZhaoMain.palm[num1].GetRealMPCost().ToString() + "\n"
+    + "攻击范围： " + ZhaoMain.palm[num1].FixData.DetailInfo
+    + "\n"
+    + "攻击强度： " + ZhaoMain.palm[num1].GetRealBasePower() + "\n\n" + effect;
 
                 }
                 else
@@ -194,8 +198,10 @@ public class ZhaoDetailShow : MonoBehaviour
                         effect = effect + "\n" + "持续时间： " + ZhaoMain.finger[num1].FixData.Effects[n].TimeValue + "\n";
                     }
 
-                    GameObject.Find("ZhaoDetail").GetComponent<TextMesh>().text = "真气消耗量： " + ZhaoMain.finger[num1].FixData.MPCost.ToString() + "\n"
-                        + "攻击范围： " + ZhaoMain.finger[num1].FixData.DetailInfo + "\n\n" + effect;
+                    GameObject.Find("ZhaoDetail").GetComponent<TextMesh>().text = "内力消耗量： " + ZhaoMain.finger[num1].GetRealMPCost().ToString() + "\n"
+    + "攻击范围： " + ZhaoMain.finger[num1].FixData.DetailInfo
+    + "\n"
+    + "攻击强度： " + ZhaoMain.finger[num1].GetRealBasePower() + "\n\n" + effect;
 
                 }
                 else
@@ -248,8 +254,10 @@ public class ZhaoDetailShow : MonoBehaviour
                         effect = effect + "\n" + "持续时间： " + ZhaoMain.knife[num1].FixData.Effects[n].TimeValue + "\n";
                     }
 
-                    GameObject.Find("ZhaoDetail").GetComponent<TextMesh>().text = "真气消耗量： " + ZhaoMain.knife[num1].FixData.MPCost.ToString() + "\n" 
-                        + "攻击范围： " + ZhaoMain.knife[num1].FixData.DetailInfo + "\n\n" + effect;
+                    GameObject.Find("ZhaoDetail").GetComponent<TextMesh>().text = "内力消耗量： " + ZhaoMain.knife[num1].GetRealMPCost().ToString() + "\n"
+    + "攻击范围： " + ZhaoMain.knife[num1].FixData.DetailInfo
+    + "\n"
+    + "攻击强度： " + ZhaoMain.knife[num1].GetRealBasePower() + "\n\n" + effect;
 
                 }
                 else
@@ -302,8 +310,10 @@ public class ZhaoDetailShow : MonoBehaviour
                         effect = effect + "\n" + "持续时间： " + ZhaoMain.sword[num1].FixData.Effects[n].TimeValue + "\n";
                     }
 
-                    GameObject.Find("ZhaoDetail").GetComponent<TextMesh>().text = "真气消耗量： " + ZhaoMain.sword[num1].FixData.MPCost.ToString() + "\n" 
-                        + "攻击范围： " + ZhaoMain.sword[num1].FixData.DetailInfo + "\n\n" + effect;
+                    GameObject.Find("ZhaoDetail").GetComponent<TextMesh>().text = "内力消耗量： " + ZhaoMain.sword[num1].GetRealMPCost().ToString() + "\n"
+    + "攻击范围： " + ZhaoMain.sword[num1].FixData.DetailInfo
+    + "\n"
+    + "攻击强度： " + ZhaoMain.sword[num1].GetRealBasePower() + "\n\n" + effect;
 
                 }
                 else
@@ -356,8 +366,10 @@ public class ZhaoDetailShow : MonoBehaviour
                         effect = effect + "\n" + "持续时间： " + ZhaoMain.rod[num1].FixData.Effects[n].TimeValue + "\n";
                     }
 
-                    GameObject.Find("ZhaoDetail").GetComponent<TextMesh>().text = "真气消耗量： " + ZhaoMain.rod[num1].FixData.MPCost.ToString() + "\n" 
-                        + "攻击范围： " + ZhaoMain.rod[num1].FixData.DetailInfo + "\n\n" + effect;
+                    GameObject.Find("ZhaoDetail").GetComponent<TextMesh>().text = "内力消耗量： " + ZhaoMain.rod[num1].GetRealMPCost().ToString() + "\n"
+    + "攻击范围： " + ZhaoMain.rod[num1].FixData.DetailInfo
+    + "\n"
+    + "攻击强度： " + ZhaoMain.rod[num1].GetRealBasePower() + "\n\n" + effect;
 
                 }
                 else

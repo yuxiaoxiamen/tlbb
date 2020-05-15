@@ -16,7 +16,7 @@ public class ItemNewreturn : MonoBehaviour
         button.onClick.AddListener(() =>
         {
             ItemMain.ClearItems();
-            if (KongMain.preScene == "map")
+            if (preScene == "map")
             {
                 GameRunningData.GetRunningData().ReturnToMap();
             }

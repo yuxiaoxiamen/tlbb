@@ -78,7 +78,7 @@ public class ItemMain : MonoBehaviour
         if (GameRunningData.GetRunningData().player.EquippedWeapon == null)
             equipmentNow = "无";
         else
-            equipmentNow = GameRunningData.GetRunningData().player.EquippedWeapon.Name.ToString();
+            equipmentNow = ItemUse.user.EquippedWeapon.Name.ToString();
 
 
         transform.Find("MoneyValue").GetComponent<Text>().text = GameRunningData.GetRunningData().money.ToString();
