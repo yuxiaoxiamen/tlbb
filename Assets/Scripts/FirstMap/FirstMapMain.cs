@@ -222,7 +222,7 @@ public class FirstMapMain : MonoBehaviour
         else
         {
             x = Random.Range(1, 101);
-            if (x <= 50)
+            if (x <= 0.5)
             {
                 isInConversation = true;
                 GameRunningData.GetRunningData().playerPreRc = player.RowCol;
@@ -250,12 +250,16 @@ public class FirstMapMain : MonoBehaviour
                     case 4:
                         ControlDialogue.instance.StartConversation(GameConfig.QieEventConversation, () =>
                         {
+                            int index = Random.Range(0, GlobalData.FoodManuals.Count);
+                            CutUpMain.manual = GlobalData.FoodManuals[index];
                             SceneManager.LoadScene("CutUp");
                         });
                         break;
                     case 5:
                         ControlDialogue.instance.StartConversation(GameConfig.DuanEventConversation, () =>
                         {
+                            int index = Random.Range(0, GlobalData.WeaponManuals.Count);
+                            MineralControl.manual = GlobalData.WeaponManuals[index];
                             SceneManager.LoadScene("Mining");
                         });
                         break;

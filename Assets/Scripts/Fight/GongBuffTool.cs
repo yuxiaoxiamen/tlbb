@@ -591,6 +591,16 @@ public class GongBuffTool : MonoBehaviour
         }
     }
 
+    public void ThreeTen(Person attacker, Person enemy)
+    {
+        if (attacker.SelectedInnerGong.FixData.Id == 3 && attacker.SelectedInnerGong.Rank >= 10)
+        {
+            int v = (int)(enemy.CurrentHP * 0.2);
+            AttackTool.PersonChangeHP(enemy, v, false);
+            AttackTool.PersonChangeHP(attacker, v, true);
+        }
+    }
+
     public bool FourOne(Person person)
     {
         if(person.SelectedInnerGong.FixData.Id == 4 && person.SelectedInnerGong.Rank >= 1)
@@ -603,6 +613,15 @@ public class GongBuffTool : MonoBehaviour
     public bool FourSix(Person person)
     {
         if (person.SelectedInnerGong.FixData.Id == 4 && person.SelectedInnerGong.Rank >= 6)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public bool FourTen(Person person)
+    {
+        if (person.SelectedInnerGong.FixData.Id == 4 && person.SelectedInnerGong.Rank >= 10)
         {
             return true;
         }

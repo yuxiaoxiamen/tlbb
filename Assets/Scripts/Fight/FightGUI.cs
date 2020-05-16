@@ -216,6 +216,7 @@ public class FightGUI : MonoBehaviour
             SoundEffectControl.instance.PlaySoundEffect(9);
             isTabing = true;
             ItemUse.user = FightPersonClick.currentPerson;
+            ItemMain.instance.SetWeapon();
             tabObject.SetActive(true);
             FightGridClick.ClearPathAndRange();
             HideBattlePane();

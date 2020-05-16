@@ -130,6 +130,7 @@ public class AttackTool : MonoBehaviour
                 value = GongBuffTool.instance.TwoOne(enemy, value);
                 value = GongBuffTool.instance.TriggerFiveTen(enemy, value);
                 GongBuffTool.instance.OneTen(attacker, enemy);
+                GongBuffTool.instance.ThreeTen(attacker, enemy);
                 GongBuffTool.instance.EightTen(attacker, enemy, value);
                 if (PersonChangeHP(enemy, value, false))
                 {
@@ -204,7 +205,7 @@ public class AttackTool : MonoBehaviour
                     SpecialEffectTool.instance.RateEffect(attacker, "暴击");
                 }
 
-                if (!GongBuffTool.instance.FourSix(attacker) && ComputeProbability(enemy.Counterattack))
+                if (GongBuffTool.instance.FourTen(enemy) || (!GongBuffTool.instance.FourSix(attacker) && ComputeProbability(enemy.Counterattack)))
                 {
                     GongBuffTool.instance.SixteenTen(enemy);
                     GongBuffTool.instance.TwentyfiveSix(enemy);

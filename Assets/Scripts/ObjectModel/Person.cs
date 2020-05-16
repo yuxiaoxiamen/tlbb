@@ -40,9 +40,7 @@ public class Person : ICloneable
     public string CurrentPlaceString { get; set; }
     public int Likability { get; set; }
     public bool IsMoved { get; set; }
-    [NonSerialized]
-    private Good equippedWeapon;
-    public Good EquippedWeapon { get { return equippedWeapon; } set { equippedWeapon = value; } }
+    public Good EquippedWeapon { get; set; }
     public PersonBaseData BaseData { get; set; }
 
     public Person()

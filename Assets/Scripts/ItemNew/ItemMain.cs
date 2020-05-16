@@ -15,11 +15,7 @@ public class ItemMain : MonoBehaviour
     public static string itemtype;
     public static string equipmentNow = "";
     public static int dialogState = 0;
-
-    static ItemMain()
-    {
-
-    }
+    public static ItemMain instance;
 
     public static void ClearItems()
     {
@@ -34,7 +30,7 @@ public class ItemMain : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        instance = this;
         foreach(var belonging in GameRunningData.GetRunningData().belongings)
         {
             item.Add(belonging);
@@ -75,18 +71,18 @@ public class ItemMain : MonoBehaviour
             SetItem(n, transform.Find(n + "").gameObject, alcohol);
         }
 
-        if (GameRunningData.GetRunningData().player.EquippedWeapon == null)
+        SetWeapon();
+        transform.Find("MoneyValue").GetComponent<Text>().text = GameRunningData.GetRunningData().money.ToString();
+        itemtype = "Alcohol";
+    }
+
+    public void SetWeapon()
+    {
+        if (ItemUse.user.EquippedWeapon == null)
             equipmentNow = "无";
         else
             equipmentNow = ItemUse.user.EquippedWeapon.Name.ToString();
-
-
-        transform.Find("MoneyValue").GetComponent<Text>().text = GameRunningData.GetRunningData().money.ToString();
         transform.Find("EquipmentValue").GetComponent<Text>().text = equipmentNow;
-
-
-        itemtype = "Alcohol";
-
     }
 
     public static void SetItem(int n, GameObject itemObject, List<Good> items)

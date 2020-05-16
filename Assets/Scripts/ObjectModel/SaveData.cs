@@ -9,7 +9,6 @@ public class SaveData
     public int Number { get; set; }
     public string RealTime { get; set; }
     public List<Person> Persons { get; set; }
-    public int PlayerEquipWeaponId { get; set; }
     public Dictionary<int, int> Belongings { get; set; }
     public List<int> Teammates { get; set; }
     public GameDate Date { get; set; }
@@ -25,7 +24,6 @@ public class SaveData
         RealTime = DateTime.Now.ToString();
         Persons = GlobalData.Persons;
         var rData = GameRunningData.GetRunningData();
-        PlayerEquipWeaponId = rData.player.EquippedWeapon == null ? -1 : rData.player.EquippedWeapon.Id;
         Belongings = new Dictionary<int, int>();
         Teammates = new List<int>();
         foreach(Good good in rData.belongings)
@@ -57,7 +55,10 @@ public class SaveData
         {
             Person p1 = GlobalData.Persons[i];
             Person p2 = Persons[i];
-            p2.EquippedWeapon = p1.EquippedWeapon;
+            if(p2.EquippedWeapon != null)
+            {
+                p2.EquippedWeapon = GlobalData.Items[p2.EquippedWeapon.Id];
+            }
             p2.BaseData.ChatConversations = p1.BaseData.ChatConversations;
             foreach(var attackStyle in p2.BaseData.AttackStyles)
             {
@@ -84,7 +85,6 @@ public class SaveData
         }
         GlobalData.Persons = Persons;
         var player = GlobalData.Persons[0];
-        player.EquippedWeapon = PlayerEquipWeaponId == -1 ? null : GlobalData.Items[PlayerEquipWeaponId];
         GameRunningData.GetRunningData().player = player;
         GameRunningData.GetRunningData().date = Date;
         GameRunningData.GetRunningData().money = Money;

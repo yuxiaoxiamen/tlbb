@@ -206,11 +206,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CharacterName
       objectReference: {fileID: 0}
-    - target: {fileID: 8564552822907361370, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
-        type: 3}
-      propertyPath: m_Text
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 8564552822907361372, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -275,6 +270,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 1.1737297
+      objectReference: {fileID: 0}
+    - target: {fileID: 8564552822907361370, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
+        type: 3}
+      propertyPath: m_Text
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51e5ed82d42a4384cb89b8d2ed27758a, type: 3}
@@ -791,21 +791,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BaoShi_Value
       objectReference: {fileID: 0}
-    - target: {fileID: 8564552822907361370, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
-        type: 3}
-      propertyPath: m_Text
-      value: /
-      objectReference: {fileID: 0}
-    - target: {fileID: 8564552822907361370, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
-        type: 3}
-      propertyPath: m_FontSize
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 8564552822907361370, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
-        type: 3}
-      propertyPath: m_Color.rgba
-      value: 4278190080
-      objectReference: {fileID: 0}
     - target: {fileID: 8564552822907361372, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -875,6 +860,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.x
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8564552822907361370, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
+        type: 3}
+      propertyPath: m_Text
+      value: /
+      objectReference: {fileID: 0}
+    - target: {fileID: 8564552822907361370, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
+        type: 3}
+      propertyPath: m_FontSize
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8564552822907361370, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
+        type: 3}
+      propertyPath: m_Color.rgba
+      value: 4278190080
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51e5ed82d42a4384cb89b8d2ed27758a, type: 3}
@@ -1317,16 +1317,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChuYi_Text
       objectReference: {fileID: 0}
-    - target: {fileID: 8564552822907361370, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
-        type: 3}
-      propertyPath: m_Text
-      value: "\u53A8\u827A\u503C"
-      objectReference: {fileID: 0}
-    - target: {fileID: 8564552822907361370, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
-        type: 3}
-      propertyPath: m_Color.rgba
-      value: 4278190080
-      objectReference: {fileID: 0}
     - target: {fileID: 8564552822907361372, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1396,6 +1386,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1.3122
+      objectReference: {fileID: 0}
+    - target: {fileID: 8564552822907361370, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
+        type: 3}
+      propertyPath: m_Text
+      value: "\u53A8\u827A\u503C"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8564552822907361370, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
+        type: 3}
+      propertyPath: m_Color.rgba
+      value: 4278190080
       objectReference: {fileID: 0}
     - target: {fileID: 114054308392340728, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
         type: 3}
@@ -1714,21 +1714,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShengMing_Value
       objectReference: {fileID: 0}
-    - target: {fileID: 8564552822907361370, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
-        type: 3}
-      propertyPath: m_Text
-      value: /
-      objectReference: {fileID: 0}
-    - target: {fileID: 8564552822907361370, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
-        type: 3}
-      propertyPath: m_FontSize
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 8564552822907361370, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
-        type: 3}
-      propertyPath: m_Color.rgba
-      value: 4278190080
-      objectReference: {fileID: 0}
     - target: {fileID: 8564552822907361372, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1788,6 +1773,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.x
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8564552822907361370, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
+        type: 3}
+      propertyPath: m_Text
+      value: /
+      objectReference: {fileID: 0}
+    - target: {fileID: 8564552822907361370, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
+        type: 3}
+      propertyPath: m_FontSize
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8564552822907361370, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
+        type: 3}
+      propertyPath: m_Color.rgba
+      value: 4278190080
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51e5ed82d42a4384cb89b8d2ed27758a, type: 3}
@@ -2741,8 +2741,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f34ffd2f134f5c84a8fc3cdb54e2b163, type: 3}
-  m_Color: {r: 0.7607844, g: 0.7607844, b: 0.7607844, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 039e26c0b0d0fd047b15c283029b7a70, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2760,8 +2760,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 951964077}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.73, y: 4.86, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 7.75, y: 4.86, z: 0}
+  m_LocalScale: {x: 1.3206, y: 1.3206, z: 1.3206}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8
@@ -2791,18 +2791,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.008500606, y: 0.02550146}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.6, y: 0.6}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.6089806, y: 0.6089813}
   m_EdgeRadius: 0
 --- !u!1 &963810650
 GameObject:
@@ -3451,16 +3451,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: JiuLi_Text
       objectReference: {fileID: 0}
-    - target: {fileID: 8564552822907361370, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
-        type: 3}
-      propertyPath: m_Text
-      value: "\u9152\u529B\u503C"
-      objectReference: {fileID: 0}
-    - target: {fileID: 8564552822907361370, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
-        type: 3}
-      propertyPath: m_Color.rgba
-      value: 4278190080
-      objectReference: {fileID: 0}
     - target: {fileID: 8564552822907361372, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3530,6 +3520,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1.3122
+      objectReference: {fileID: 0}
+    - target: {fileID: 8564552822907361370, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
+        type: 3}
+      propertyPath: m_Text
+      value: "\u9152\u529B\u503C"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8564552822907361370, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
+        type: 3}
+      propertyPath: m_Color.rgba
+      value: 4278190080
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51e5ed82d42a4384cb89b8d2ed27758a, type: 3}
@@ -3787,21 +3787,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: NeiLi_Value
       objectReference: {fileID: 0}
-    - target: {fileID: 8564552822907361370, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
-        type: 3}
-      propertyPath: m_Text
-      value: /
-      objectReference: {fileID: 0}
-    - target: {fileID: 8564552822907361370, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
-        type: 3}
-      propertyPath: m_FontSize
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 8564552822907361370, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
-        type: 3}
-      propertyPath: m_Color.rgba
-      value: 4278190080
-      objectReference: {fileID: 0}
     - target: {fileID: 8564552822907361372, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3866,6 +3851,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.x
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8564552822907361370, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
+        type: 3}
+      propertyPath: m_Text
+      value: /
+      objectReference: {fileID: 0}
+    - target: {fileID: 8564552822907361370, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
+        type: 3}
+      propertyPath: m_FontSize
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8564552822907361370, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
+        type: 3}
+      propertyPath: m_Color.rgba
+      value: 4278190080
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51e5ed82d42a4384cb89b8d2ed27758a, type: 3}
@@ -4071,21 +4071,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Explanation_Text
       objectReference: {fileID: 0}
-    - target: {fileID: 8564552822907361370, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
-        type: 3}
-      propertyPath: m_Text
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8564552822907361370, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
-        type: 3}
-      propertyPath: m_FontSize
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 8564552822907361370, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
-        type: 3}
-      propertyPath: m_Color.rgba
-      value: 4278190080
-      objectReference: {fileID: 0}
     - target: {fileID: 8564552822907361372, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4155,6 +4140,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 3.4481
+      objectReference: {fileID: 0}
+    - target: {fileID: 8564552822907361370, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
+        type: 3}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8564552822907361370, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
+        type: 3}
+      propertyPath: m_FontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8564552822907361370, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
+        type: 3}
+      propertyPath: m_Color.rgba
+      value: 4278190080
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114054308392340728, guid: 51e5ed82d42a4384cb89b8d2ed27758a, type: 3}
@@ -4818,16 +4818,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: YiShu_Text
       objectReference: {fileID: 0}
-    - target: {fileID: 8564552822907361370, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
-        type: 3}
-      propertyPath: m_Text
-      value: "\u533B\u672F\u503C"
-      objectReference: {fileID: 0}
-    - target: {fileID: 8564552822907361370, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
-        type: 3}
-      propertyPath: m_Color.rgba
-      value: 4278190080
-      objectReference: {fileID: 0}
     - target: {fileID: 8564552822907361372, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4897,6 +4887,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1.3122
+      objectReference: {fileID: 0}
+    - target: {fileID: 8564552822907361370, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
+        type: 3}
+      propertyPath: m_Text
+      value: "\u533B\u672F\u503C"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8564552822907361370, guid: 51e5ed82d42a4384cb89b8d2ed27758a,
+        type: 3}
+      propertyPath: m_Color.rgba
+      value: 4278190080
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51e5ed82d42a4384cb89b8d2ed27758a, type: 3}
