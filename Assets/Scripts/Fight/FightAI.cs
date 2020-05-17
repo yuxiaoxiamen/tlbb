@@ -89,46 +89,59 @@ public class FightAI
 
     static void NPCFight(Person person)
     {
-        AttackTool.instance.CountAttackDistance(person, FightMain.instance.enemyQueue);
-
-        Dictionary<GameObject, int> canAttackCounts = new Dictionary<GameObject, int>();
-        foreach (GameObject gridObject in AttackTool.instance.attackDistance)
+        if (person.SelectedAttackStyle.FixData.AttackKind == AttackStyleKind.Range)
         {
-            AttackTool.instance.CountAttackRange(gridObject, person, FightMain.instance.enemyQueue);
-            foreach (GameObject rangeGridObject in AttackTool.instance.attackRange)
+            if(!AttackTool.instance.RangeAttack(person, FightMain.instance.enemyQueue, FightMain.instance.friendQueue))
             {
-                if (FightMain.instance.positionToPerson.ContainsKey(FightMain.instance.gridObjectToData[rangeGridObject]) &&
-                    Enemys.Contains(FightMain.instance.positionToPerson[FightMain.instance.gridObjectToData[rangeGridObject]]))
-                {
-                    if (canAttackCounts.ContainsKey(gridObject))
-                    {
-                        canAttackCounts[gridObject]++;
-                    }
-                    else
-                    {
-                        canAttackCounts.Add(gridObject, 1);
-                    }
-                }
+                NPCRest(person);
             }
-        }
-        var list = canAttackCounts.OrderByDescending(o => o.Value).ToList();
-        if(list.Count != 0)
-        {
-            person.PersonObject.GetComponent<PersonAnimationControl>().Action();
-            AttackTool.instance.CountAttackRange(list[0].Key, person, FightMain.instance.enemyQueue);
-            AttackTool.instance.ShowAttackRange();
-            AttackTool.instance.AttackEnemys(person, Enemys);
-            foreach (var gridObject in AttackTool.instance.attackRange)
+            else
             {
-                gridObject.GetComponent<Renderer>().material.DOColor(FightGridClick.defaultColor, 0.5f).OnComplete(()=>
-                {
-                    AIEnd = true;
-                });
+                AIEnd = true;
             }
         }
         else
         {
-            NPCRest(person);
+            AttackTool.instance.CountAttackDistance(person, FightMain.instance.enemyQueue);
+
+            Dictionary<GameObject, int> canAttackCounts = new Dictionary<GameObject, int>();
+            foreach (GameObject gridObject in AttackTool.instance.attackDistance)
+            {
+                AttackTool.instance.CountAttackRange(gridObject, person, FightMain.instance.enemyQueue);
+                foreach (GameObject rangeGridObject in AttackTool.instance.attackRange)
+                {
+                    if (FightMain.instance.positionToPerson.ContainsKey(FightMain.instance.gridObjectToData[rangeGridObject]) &&
+                        Enemys.Contains(FightMain.instance.positionToPerson[FightMain.instance.gridObjectToData[rangeGridObject]]))
+                    {
+                        if (canAttackCounts.ContainsKey(gridObject))
+                        {
+                            canAttackCounts[gridObject]++;
+                        }
+                        else
+                        {
+                            canAttackCounts.Add(gridObject, 1);
+                        }
+                    }
+                }
+            }
+            var list = canAttackCounts.OrderByDescending(o => o.Value).ToList();
+            if (list.Count != 0)
+            {
+                AttackTool.instance.CountAttackRange(list[0].Key, person, FightMain.instance.enemyQueue);
+                AttackTool.instance.ShowAttackRange();
+                AttackTool.instance.AttackEnemys(person, Enemys);
+                foreach (var gridObject in AttackTool.instance.attackRange)
+                {
+                    gridObject.GetComponent<Renderer>().material.DOColor(FightGridClick.defaultColor, 0.5f).OnComplete(() =>
+                    {
+                        AIEnd = true;
+                    });
+                }
+            }
+            else
+            {
+                NPCRest(person);
+            }
         }
     }
 

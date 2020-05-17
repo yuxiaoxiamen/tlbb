@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SecondMapMain : MonoBehaviour
 {
     public GameObject sitePrefab;
+    public Text placeNameText;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +22,9 @@ public class SecondMapMain : MonoBehaviour
                 SceneManager.LoadScene("Fight");
             }
         });
+        transform.GetComponent<SpriteRenderer>().sprite = 
+            Resources.Load<Sprite>("secondMap/" + GameRunningData.GetRunningData().currentPlace.Id);
+        placeNameText.text = GameRunningData.GetRunningData().currentPlace.Name;
         if (!hasDialogue)
         {
             SetSites();

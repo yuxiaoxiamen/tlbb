@@ -28,23 +28,14 @@ public class AttackTool : MonoBehaviour
                 FightGUI.HideBattlePane();
                 break;
             case AttackStyleKind.Range:
-                distanceRange = PersonMoveTool.CreateRange(person.RowCol, person.SelectedAttackStyle.FixData.AttackRank);
-                attackRange = RangeRemoveFriend(distanceRange, friends);
-                attackDistance.Clear();
-                HashSet<Person> canAttackEnemys = new HashSet<Person>();
-                foreach (Person enemy in FightMain.instance.enemyQueue)
+                if(RangeAttack(person, friends, FightMain.instance.enemyQueue))
                 {
-                    GameObject gridObject = FightMain.instance.gridDataToObject[enemy.RowCol];
-                    if (attackRange.Contains(gridObject))
-                    {
-                        canAttackEnemys.Add(enemy);
-                    }
-                }
-                if (canAttackEnemys.Count > 0)
-                {
-                    AttackAction(person, canAttackEnemys);
                     FightMain.instance.PlayerFinished();
                     FightGUI.HideBattlePane();
+                }
+                else
+                {
+                    TipControl.instance.SetTip("攻击范围内没有敌人");
                 }
                 break;
             case AttackStyleKind.Remote:
@@ -60,6 +51,28 @@ public class AttackTool : MonoBehaviour
                 FightGUI.HideBattlePane();
                 break;
         }
+    }
+
+    public bool RangeAttack(Person person, List<Person> friends, List<Person> enemys)
+    {
+        var distanceRange = PersonMoveTool.CreateRange(person.RowCol, person.SelectedAttackStyle.FixData.AttackRank);
+        attackRange = RangeRemoveFriend(distanceRange, friends);
+        attackDistance.Clear();
+        HashSet<Person> canAttackEnemys = new HashSet<Person>();
+        foreach (Person enemy in enemys)
+        {
+            GameObject gridObject = FightMain.instance.gridDataToObject[enemy.RowCol];
+            if (attackRange.Contains(gridObject))
+            {
+                canAttackEnemys.Add(enemy);
+            }
+        }
+        if (canAttackEnemys.Count > 0)
+        {
+            AttackAction(person, canAttackEnemys);
+            return true;
+        }
+        return false;
     }
 
     public void PlayAttackMusic(Person person)

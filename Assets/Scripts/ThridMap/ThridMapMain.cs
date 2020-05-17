@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ThridMapMain : MonoBehaviour
 {
@@ -35,7 +36,16 @@ public class ThridMapMain : MonoBehaviour
         {
             GeneratePersonHead(FindPerson());
         }
-        transform.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("mapBg/" + GameRunningData.GetRunningData().currentPlace.Id);
+        if(GameRunningData.GetRunningData().currentPlace is FirstPlace)
+        {
+            transform.GetComponent<SpriteRenderer>().sprite =
+            Resources.Load<Sprite>("secondMap/" + GameRunningData.GetRunningData().currentPlace.Id);
+        }
+        else
+        {
+            transform.GetComponent<SpriteRenderer>().sprite =
+                        Resources.Load<Sprite>("mapBg/" + GameRunningData.GetRunningData().currentPlace.Id);
+        }
         manualUI = GameObject.Find("manualUI");
         manualUI.SetActive(false);
         storeUI = GameObject.Find("store");

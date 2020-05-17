@@ -78,11 +78,14 @@ public class ItemMain : MonoBehaviour
 
     public void SetWeapon()
     {
-        if (ItemUse.user.EquippedWeapon == null)
-            equipmentNow = "无";
-        else
-            equipmentNow = ItemUse.user.EquippedWeapon.Name.ToString();
-        transform.Find("EquipmentValue").GetComponent<Text>().text = equipmentNow;
+        if(ItemUse.user != null)
+        {
+            if (ItemUse.user.EquippedWeapon == null)
+                equipmentNow = "无";
+            else
+                equipmentNow = ItemUse.user.EquippedWeapon.Name.ToString();
+            transform.Find("EquipmentValue").GetComponent<Text>().text = equipmentNow;
+        }
     }
 
     public static void SetItem(int n, GameObject itemObject, List<Good> items)

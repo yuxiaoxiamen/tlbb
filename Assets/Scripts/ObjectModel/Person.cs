@@ -78,7 +78,7 @@ public class Person : ICloneable
 
     public int CountMoveRank()
     {
-        return BaseData.Shen / 15;
+        return 1 + BaseData.Shen / 20;
     }
 
     public int CountDefend()
