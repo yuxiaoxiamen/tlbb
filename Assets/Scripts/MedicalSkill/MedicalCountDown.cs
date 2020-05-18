@@ -58,7 +58,7 @@ public class MedicalCountDown : MonoBehaviour
     void GameOver()
     {
         isGameOver = true;
-        if (MedicalMouseControl.Count == 15)
+        if (MedicalMouseControl.count == 15)
         {
             int promoteValue = GameRunningData.GetRunningData().player.PromoteMedicalSkill();
             successPanel.transform.Find("tipText").GetComponent<Text>().text +=

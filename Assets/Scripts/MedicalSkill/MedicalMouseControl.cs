@@ -14,7 +14,7 @@ public class MedicalMouseControl : MonoBehaviour, IPointerEnterHandler, IPointer
     private Vector3 defaultScale;
     public bool isOver;
     public static bool isJudgeOver;
-    public static int Count;
+    public static int count;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +23,9 @@ public class MedicalMouseControl : MonoBehaviour, IPointerEnterHandler, IPointer
         frontObject.transform.eulerAngles = new Vector3(0, 90, 0);
         defaultScale = transform.localScale;
         isJudgeOver = true;
+        count = 0;
+        preCard = null;
+        currentCard = null;
     }
 
     // Update is called once per frame
@@ -90,8 +93,8 @@ public class MedicalMouseControl : MonoBehaviour, IPointerEnterHandler, IPointer
         {
             preCard.SetActive(false);
             currentCard.SetActive(false);
-            ++Count;
-            if (Count == 15)
+            ++count;
+            if (count == 15)
             {
                 MedicalCountDown.isGameOver = true;
             }

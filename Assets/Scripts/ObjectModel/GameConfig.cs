@@ -62,7 +62,7 @@ public class GameConfig
         {
             new Conversation()
             {
-                People = GlobalData.Persons[93],
+                People = GlobalData.Persons[73],
                 Content = "在下赤脚医，孤身游四海。你我相逢便是缘，我来传授你些医术，能否掌握就看你啦！",
                 IsLeft = false
             },
@@ -77,7 +77,7 @@ public class GameConfig
         {
             new Conversation()
             {
-                People = GlobalData.Persons[93],
+                People = GlobalData.Persons[73],
                 Content = "小兄弟，你听说过炼丹师么！算你走运，今日本炼丹师就指导你一下，看看你能练出什么丹药。",
                 IsLeft = false
             },
@@ -118,7 +118,7 @@ public class GameConfig
                 IsLeft = true
             }
         };
-        MapEventProbability = 1;
+        MapEventProbability = 2;
         ConsultCost = new List<int>
         {
             10,50,100,1

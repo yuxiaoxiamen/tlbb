@@ -92,6 +92,7 @@ public class ControlBottomPanel : MonoBehaviour
         });
         systemPanel.Find("exit").GetComponent<Button>().onClick.AddListener(() =>
         {
+            HearsayMain.says = new List<string>();
             GlobalData.Init();
             GameRunningData.GetRunningData().Init();
             SceneManager.LoadScene("Start");

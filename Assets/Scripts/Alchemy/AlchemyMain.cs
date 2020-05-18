@@ -48,27 +48,30 @@ public class AlchemyMain : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !AlchemyCountDown.isGameOver)
+        if (isGameStart)
         {
-            SoundEffectControl.instance.PlaySoundEffect(0);
-            if (scripts[currentIndex].isStay)
+            if (Input.GetKeyDown(KeyCode.Space) && !AlchemyCountDown.isGameOver)
             {
-                ++count;
-                Debug.Log(count);
+                SoundEffectControl.instance.PlaySoundEffect(0);
+                if (scripts[currentIndex].isStay)
+                {
+                    ++count;
+                    Debug.Log(count);
+                }
+                scripts[currentIndex].Stop();
+                if (++currentIndex < scripts.Count)
+                {
+                    scripts[currentIndex].Move(false);
+                }
             }
-            scripts[currentIndex].Stop();
-            if (++currentIndex < scripts.Count)
+            if (currentIndex == scripts.Count)
             {
-                scripts[currentIndex].Move(false);
+                if (count == scripts.Count)
+                {
+                    AlchemyCountDown.isSuccess = true;
+                }
+                AlchemyCountDown.isGameOver = true;
             }
-        }
-        if(currentIndex == scripts.Count)
-        {
-            if(count == scripts.Count)
-            {
-                AlchemyCountDown.isSuccess = true;
-            }
-            AlchemyCountDown.isGameOver = true;
         }
     }
 }

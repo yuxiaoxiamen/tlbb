@@ -286,7 +286,8 @@ public class ZhaoDetailShow : MonoBehaviour
 
                     GameObject.Find("RankValue").GetComponent<TextMesh>().text = ZhaoMain.sword[num1].Rank.ToString();
                     //GameObject.Find("RankValue").GetComponent<TextMesh>().text = "没找到这个数据";
-                    GameObject.Find("ProficiencyValue").GetComponent<TextMesh>().text = ZhaoMain.sword[num1].Proficiency.ToString() + "/100";
+                    GameObject.Find("ProficiencyValue").GetComponent<TextMesh>().text = ZhaoMain.sword[num1].Proficiency.ToString() + "/"
+                        + ZhaoMain.sword[num1].GetMaxProFiciency();
 
                     //进度条
                     GameObject.Find("ProficiencyBackground").GetComponent<SpriteRenderer>().color = new Color32(108, 153, 192, 255);

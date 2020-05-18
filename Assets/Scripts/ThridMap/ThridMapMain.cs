@@ -16,6 +16,7 @@ public class ThridMapMain : MonoBehaviour
     private static List<GameObject> headObjects = new List<GameObject>();
     public static ThridMapMain instance;
     public List<Person> persons;
+    public Text placeNameText;
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +47,7 @@ public class ThridMapMain : MonoBehaviour
             transform.GetComponent<SpriteRenderer>().sprite =
                         Resources.Load<Sprite>("mapBg/" + GameRunningData.GetRunningData().currentPlace.Id);
         }
+        placeNameText.text = GameRunningData.GetRunningData().currentPlace.Name;
         manualUI = GameObject.Find("manualUI");
         manualUI.SetActive(false);
         storeUI = GameObject.Find("store");

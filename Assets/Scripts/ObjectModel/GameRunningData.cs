@@ -29,8 +29,8 @@ public class GameRunningData
         playerPreRc = player.RowCol;
         currentPlace = null;
         isFinal = false;
-        //money = 50000;   //测试数据
-        //experspance = 1000;
+        money = 1000;   //测试数据
+        experspance = 20;
         teammates = new List<Person>();
         belongings = new List<Good>();
         //teammates.Add(GlobalData.Persons[2]);
