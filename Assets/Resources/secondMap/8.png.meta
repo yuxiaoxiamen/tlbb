@@ -32,7 +32,7 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: -1
-    aniso: 1
+    aniso: -1
     mipBias: -100
     wrapU: 1
     wrapV: 1
@@ -86,7 +86,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: cd8485a769c5610499df20a1afd7cc49
+    spriteID: 76a9709d0a8b0344bb790eb6cd9c70e5
     vertices: []
     indices: 
     edges: []
