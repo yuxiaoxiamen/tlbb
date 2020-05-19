@@ -10,25 +10,27 @@ public class CameraFollow : MonoBehaviour
     private Vector3 offset;
     public static CameraFollow cameraFollowInstance;
     private Quaternion defaultQuaternion;
+    public bool isMove;
 
     void Awake()
     {
         offset = initTransform.position - transform.position;
         cameraFollowInstance = this;
-        defaultQuaternion = transform.rotation;
     }
 
     void Update()
     {
-        if(target != null)
+        if (target != null && !isMove)
         {
             if (Input.GetKey(KeyCode.Q))
             {
                 transform.RotateAround(target.transform.position, target.transform.up, 60 * Time.deltaTime);
+                offset = target.position - transform.position;
             }
             if (Input.GetKey(KeyCode.E))
             {
                 transform.RotateAround(target.transform.position, target.transform.up, -60 * Time.deltaTime);
+                offset = target.position - transform.position;
             }
         }
     }
@@ -38,9 +40,7 @@ public class CameraFollow : MonoBehaviour
         if(person != null)
         {
             target = person.PersonObject.transform;
-            transform.rotation = defaultQuaternion;
             transform.DOMove(target.position - offset, FightMain.instance.speed);
-            //transform.position = target.position - offset;
         }
     }
 }

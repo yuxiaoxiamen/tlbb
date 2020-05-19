@@ -32,6 +32,7 @@ public class SpecialEffectTool : MonoBehaviour
         }
         Vector3 position = person.PersonObject.transform.position + offset;
         GameObject hpEffectObject = Instantiate(hpEffectPrefab, position, Quaternion.identity);
+        hpEffectObject.transform.rotation = Camera.main.transform.rotation;
         hpEffectObject.transform.localScale *= 0.5f;
         hpEffectObject.transform.SetParent(specialEffectParent);
         Text text = hpEffectObject.GetComponent<Text>();
@@ -51,6 +52,7 @@ public class SpecialEffectTool : MonoBehaviour
     {
         Vector3 position = person.PersonObject.transform.position + new Vector3(10, 30, 0);
         GameObject rateEffectObject = Instantiate(rateEffectPrefab, position, Quaternion.identity);
+        rateEffectObject.transform.rotation = Camera.main.transform.rotation;
         rateEffectObject.transform.SetParent(specialEffectParent);
         Text text = rateEffectObject.GetComponent<Text>();
         text.text = name;

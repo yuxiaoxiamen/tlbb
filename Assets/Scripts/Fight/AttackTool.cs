@@ -186,10 +186,12 @@ public class AttackTool : MonoBehaviour
     public static int CountHPLoseValue(Person attacker, Person enemy)
     {
         int value = 0;
+        float rate = 1 - CountAngle(attacker, enemy);
+        
         if (!AttackBuffTool.IsPersonHasInvincibleBuff(enemy))
         {
             if (!GongBuffTool.instance.ThirteenOne(attacker) && 
-                !GongBuffTool.instance.FourOne(attacker) && ComputeProbability(enemy.Dodge + (100 - attacker.Accuracy)))
+                !GongBuffTool.instance.FourOne(attacker) && ComputeProbability((int)(enemy.Dodge * rate) + (100 - attacker.Accuracy)))
             {
                 GongBuffTool.instance.ZeroSix(enemy);
                 GongBuffTool.instance.FiveSix(enemy);
@@ -218,7 +220,7 @@ public class AttackTool : MonoBehaviour
                     SpecialEffectTool.instance.RateEffect(attacker, "暴击");
                 }
 
-                if (GongBuffTool.instance.FourTen(enemy) || (!GongBuffTool.instance.FourSix(attacker) && ComputeProbability(enemy.Counterattack)))
+                if (GongBuffTool.instance.FourTen(enemy) || (!GongBuffTool.instance.FourSix(attacker) && ComputeProbability((int)(enemy.Counterattack * rate))))
                 {
                     GongBuffTool.instance.SixteenTen(enemy);
                     GongBuffTool.instance.TwentyfiveSix(enemy);
@@ -228,6 +230,29 @@ public class AttackTool : MonoBehaviour
             }
         }
         return value;
+    }
+
+    static float CountAngle(Person attacker, Person enemy)
+    {
+        Vector3 a = attacker.PersonObject.transform.position - enemy.PersonObject.transform.position;
+        Vector3 b = enemy.PersonObject.transform.forward;
+        float angle = Vector3.Angle(a, b);
+        if (angle >= 0 && angle < 30)
+        {
+            return 0.2f;
+        }
+        else if(angle >= 30 && angle < 90)
+        {
+            return 0.3f;
+        }
+        else if (angle >= 90 && angle < 150)
+        {
+            return 0.4f;
+        }
+        else
+        {
+            return 0.5f;
+        }
     }
 
     public static bool PersonChangeHP(Person person, int value, bool isAdd)

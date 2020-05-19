@@ -36,11 +36,11 @@ public class FightMain : MonoBehaviour
 
         CreateMap();
 
-        GetFriendsAndEnemys();
-        SetPersonRowCol(friendQueue, false);
-        SetPersonRowCol(enemyQueue, true);
+        //GetFriendsAndEnemys();
+        //SetPersonRowCol(friendQueue, false);
+        //SetPersonRowCol(enemyQueue, true);
 
-        //TestData();
+        TestData();
         persons = new List<Person>();
         positionToPerson = new Dictionary<Vector2Int, Person>();
         SetEnemysHPMPEnergy();

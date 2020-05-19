@@ -115,6 +115,7 @@ public class PersonMoveTool
         }
         person.PersonObject.GetComponent<PersonAnimationControl>().Move();
         SoundEffectControl.instance.PlaySoundEffect(10);
+        CameraFollow.cameraFollowInstance.isMove = true;
         Move(person, realPath, speed, finishAction);
         if(movePath.Count > 0)
         {
@@ -178,6 +179,7 @@ public class PersonMoveTool
         {
             pathIndex = 0;
             person.PersonObject.GetComponent<PersonAnimationControl>().Stand();
+            CameraFollow.cameraFollowInstance.isMove = false;
             finishAction(person);
         }
     }
